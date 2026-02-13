@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "LivSpan: Longevity-App mit Startscreen/Dashboard im Look eines menschlichen Genoms (vertikale DNA-Doppelhelix), mit Hauptfaktoren Ernährung, Schlaf, Bewegung und Intervallfasten als Marker entlang der Helix.",
+  "architectural_notes": [
+    "Dashboard/Startscreen nutzt vertikale DNA-Doppelhelix als zentrales Layout-Gerüst; Faktoren werden als Marker entlang der Helix platziert.",
+    "Visueller Stil: filigran und wissenschaftlich (dezente Marker, clean/biologisch wirkendes Layout)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-new-livspan-start-screen-dashboard-that-prominently-displays-the-four-main-factors-nutrition-sleep-movement-and-intermittent-fasting",
+      "title": "Create a new LivSpan start screen/dashboard that prominently displays the four main factors: Nutrition, Sleep, Movement, and Intermittent Fasting.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-coherent-genome-inspired-visual-theme-for-the-start-screen-a-vertical-dna-double-helix-as-the-central-layout-spine-with-the-4-factors-positioned-as-subtle-markers-along-the-helix",
+      "title": "Implement a coherent genome-inspired visual theme for the start screen: a vertical DNA double helix as the central layout spine, with the 4 factors positioned as subtle markers along the helix.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-lightweight-ui-states-for-each-factor-marker-default-hover-focus-selected-to-make-the-dashboard-feel-interactive-while-keeping-the-genome-aesthetic",
+      "title": "Add lightweight UI states for each factor marker (default, hover/focus, selected) to make the dashboard feel interactive while keeping the genome aesthetic.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-consistent-visual-system-for-the-genome-theme-across-the-start-screen-colors-typography-spacing-and-components-avoiding-a-blue-purple-palette-unless-explicitly-required",
+      "title": "Define and apply a consistent visual system for the genome theme across the start screen (colors, typography, spacing, and components), avoiding a blue/purple palette unless explicitly required.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-the-generated-genome-themed-static-images-from-frontend-public-assets-generated-and-use-them-in-the-start-screen-composition-background-helix-texture-as-appropriate-without-routing-image-loading-through-the-backend",
+      "title": "Render the generated genome-themed static images from frontend/public/assets/generated and use them in the start screen composition (background/helix/texture as appropriate) without routing image loading through the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-subtle-continuous-scientific-helix-motion-to-the-dna-helix-spine-on-the-start-dashboard-so-the-helix-appears-to-gently-breathe-drift-without-distracting-from-the-factor-markers",
+      "title": "Add a subtle, continuous “scientific” helix motion to the DNA helix spine on the Start Dashboard so the helix appears to gently breathe/drift without distracting from the factor markers.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-respect-reduced-motion-preferences-for-the-helix-motion-animation",
+      "title": "Respect reduced-motion preferences for the helix motion animation.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-helix-motion-using-the-existing-tailwind-setup-keyframes-animation-utilities-and-apply-it-only-to-the-helix-visuals-svg-strands-base-pairs-and-or-the-helix-background-layers-keeping-the-genome-theme-consistent",
+      "title": "Implement the helix motion using the existing Tailwind setup (keyframes/animation utilities) and apply it only to the helix visuals (SVG strands/base pairs and/or the helix background layers), keeping the genome theme consistent.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Startscreen/Dashboard für LivSpan mit 4 Hauptfaktoren: Ernährung, Schlaf, Bewegung, Intervallfasten",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "UI-Design im menschlichen Genom-Stil: vertikale DNA-Doppelhelix als Grundstruktur",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Filigraner, wissenschaftlicher DNA-Helix-Look (dezente Marker/biologisches Layout)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Sanfte, wissenschaftliche Animation/Bewegung der DNA-Doppelhelix (subtiles „Atmen“/Driften) für lebendigeren Startscreen",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "LivSpan",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

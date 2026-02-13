@@ -1,0 +1,59 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Gentle DNA helix motion on Start Dashboard (Tailwind + reduced-motion aware)",
+  "requirements": [
+    {
+      "id": "REQ-6",
+      "summary": "Add a subtle continuous helix “breathing/drift” motion to the HelixSpine visuals without impacting factor marker readability or layout.",
+      "acceptanceCriteria": [
+        "The helix spine in `frontend/src/components/genome/HelixSpine.tsx` visibly animates with a subtle motion (e.g., slow drift/phase or breathing) while the factor markers remain readable and do not jitter.",
+        "The animation is continuous and smooth (no abrupt looping) and feels “scientific” (low amplitude, slow tempo).",
+        "The animation does not change layout flow (no reflow that moves the markers’ vertical spacing/positions)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/genome/HelixSpine.tsx",
+          "operation": "modify",
+          "description": "Scope the new helix motion to only the SVG visuals (strands/base-pairs) by grouping them into motion layers (e.g., <g> wrappers) and applying low-amplitude Tailwind animation utilities; ensure the factor markers container remains unaffected and z-index layering remains intact (no layout-affecting changes)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Respect reduced-motion preferences by disabling (or making imperceptible) the helix motion while keeping marker interactions unchanged.",
+      "acceptanceCriteria": [
+        "If the user has `prefers-reduced-motion: reduce`, the helix motion is disabled (or reduced to an imperceptible/static state).",
+        "All other dashboard interactions (hover/focus/selection on factor markers) continue to work normally with reduced motion enabled."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/genome/HelixSpine.tsx",
+          "operation": "modify",
+          "description": "Apply Tailwind motion variants so helix animation runs only under motion-safe (e.g., motion-safe:animate-...) and is disabled under reduced motion (e.g., motion-reduce:animate-none / motion-reduce:transform-none), without changing any FactorMarker interaction handlers or focus styles."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Implement the helix motion via existing Tailwind setup (keyframes/animation utilities) and keep it strictly scoped to helix visuals and the genome theme.",
+      "acceptanceCriteria": [
+        "Tailwind animation utilities/keyframes are added/extended in `frontend/tailwind.config.js` and/or `frontend/src/index.css` (consistent with the project’s current Tailwind + OKLCH theming).",
+        "The animation is applied in a scoped way (helix visuals only), without affecting the header/footer or overall page background color theme.",
+        "No changes are made to files listed as immutable by the system context (e.g., `frontend/src/main.tsx`, Internet Identity hooks, or `frontend/src/components/ui/*`)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind with helix-specific keyframes/animation utilities (slow tempo, low amplitude drift/breathing; optionally include a phased variant via delay) intended for SVG transforms/opacity only; keep additions consistent with the existing OKLCH genome theme tokens."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add small, helix-scoped utility helpers (in @layer utilities) to ensure SVG transform behavior is stable and non-jittery (e.g., consistent transform-origin/transform-box and will-change) for the helix motion classes only, without affecting global page background/header/footer styling."
+        }
+      ]
+    }
+  ]
+}

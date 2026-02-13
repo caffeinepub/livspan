@@ -1,0 +1,10 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps the StartDashboard with ThemeProvider and Toaster for dark mode support and notifications.",
+  "frontend/src/pages/StartDashboard.tsx": "Primary dashboard page displaying the four health factors (Nutrition, Sleep, Movement, Intermittent Fasting) along a vertical DNA helix with selection state management and genome-themed layout.",
+  "frontend/src/components/genome/HelixSpine.tsx": "Layout component that renders the vertical DNA double-helix structure with SVG strands, gradients, base pair connectors, and gentle breathing/pulsing animations that respect reduced-motion preferences while keeping factor markers stable.",
+  "frontend/src/components/dashboard/FactorMarker.tsx": "Interactive card component for each health factor with icon, label, description, connection line to helix, and accessible hover/focus/selected states.",
+  "frontend/src/index.css": "Global styles defining the genome-themed OKLCH color system with scientific teal/cyan palette, custom helix utilities, helix-motion-layer transform helpers, and reduced-motion media query support for accessibility.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with genome-specific colors, scientific typography, and new helix animation keyframes (helix-breathe, helix-breathe-alt, helix-pulse) for gentle, continuous DNA strand motion.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for future React Query hooks when backend data fetching is implemented.",
+  "frontend/src/lib/utils.ts": "Utility functions including cn() for merging Tailwind classes with clsx and tailwind-merge."
+}

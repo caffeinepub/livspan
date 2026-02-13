@@ -1,0 +1,60 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-subtle-continuous-scientific-helix-motion-to-the-dna-helix-spine-on-the-start-dashboard-so-the-helix-appears-to-gently-breathe-drift-without-distracting-from-the-factor-markers",
+      "featureTitle": "Add a subtle, continuous “scientific” helix motion to the DNA helix spine on the Start Dashboard so the helix appears to gently breathe/drift without distracting from the factor markers.",
+      "files": [
+        "frontend/src/components/genome/HelixSpine.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-respect-reduced-motion-preferences-for-the-helix-motion-animation",
+      "featureTitle": "Respect reduced-motion preferences for the helix motion animation.",
+      "files": [
+        "frontend/src/components/genome/HelixSpine.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-helix-motion-using-the-existing-tailwind-setup-keyframes-animation-utilities-and-apply-it-only-to-the-helix-visuals-svg-strands-base-pairs-and-or-the-helix-background-layers-keeping-the-genome-theme-consistent",
+      "featureTitle": "Implement the helix motion using the existing Tailwind setup (keyframes/animation utilities) and apply it only to the helix visuals (SVG strands/base pairs and/or the helix background layers), keeping the genome theme consistent.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

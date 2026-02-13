@@ -1,0 +1,19 @@
+{
+  "backend/main.mo": "Empty Motoko actor with no methods.",
+  "feature_evidence.json": "Feature evidence report mapping helix‑motion related features to affected frontend files and components.",
+  "frontend-file-summaries.txt": "Prewritten summaries describing major frontend components, styles, and utilities.",
+  "frontend/index.css": "Global Tailwind base styles defining theme variables and dark‑mode overrides for layout and colors.",
+  "frontend/index.html": "Basic HTML entry point mounting the React app and loading main.tsx.",
+  "frontend/src/App.tsx": "Root React component wrapping StartDashboard with theme and toast providers.",
+  "frontend/src/components/dashboard/FactorMarker.tsx": "Interactive factor card with icon, description, and helix connection line supporting selection and accessibility states.",
+  "frontend/src/components/genome/HelixSpine.tsx": "Renders animated DNA helix SVG strands and base pairs with reduced‑motion handling and a container for factor markers.",
+  "frontend/src/hooks/useActor.ts": "React Query hook that creates and updates an authenticated or anonymous backend actor and invalidates dependent queries.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Provider and hooks for managing Internet Identity login, identity state, and AuthClient lifecycle.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder for future backend‑related React Query hooks.",
+  "frontend/src/index.css": "Global genome‑themed styling with scientific color palette, typography, and helix utility classes.",
+  "frontend/src/lib/utils.ts": "Utility function cn() merging class names with clsx and tailwind‑merge.",
+  "frontend/src/main.tsx": "Initializes React app, sets up React Query client and wraps App in InternetIdentityProvider.",
+  "frontend/src/pages/StartDashboard.tsx": "Renders the longevity dashboard with a DNA-helix layout and interactive factor markers for nutrition, sleep, movement, and fasting.",
+  "frontend/tailwind.config.js": "Configures Tailwind theme, custom colors, fonts, animations, and plugin usage for the genome‑styled UI.",
+  "project_state.json": "Stores project metadata, feature list, and architectural notes describing the genome‑themed LivSpan dashboard."
+}

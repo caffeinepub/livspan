@@ -1,0 +1,74 @@
+{
+  "kind": "build_request",
+  "title": "Add gentle, scientific DNA helix motion on the Start Dashboard",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-6",
+      "text": "Add a subtle, continuous “scientific” helix motion to the DNA helix spine on the Start Dashboard so the helix appears to gently breathe/drift without distracting from the factor markers.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "eine sanfte, wissenschaftliche Helix‑Bewegung einbauen"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The helix spine in `frontend/src/components/genome/HelixSpine.tsx` visibly animates with a subtle motion (e.g., slow drift/phase or breathing) while the factor markers remain readable and do not jitter.",
+        "The animation is continuous and smooth (no abrupt looping) and feels “scientific” (low amplitude, slow tempo).",
+        "The animation does not change layout flow (no reflow that moves the markers’ vertical spacing/positions)."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Respect reduced-motion preferences for the helix motion animation.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "eine sanfte, wissenschaftliche Helix‑Bewegung einbauen"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If the user has `prefers-reduced-motion: reduce`, the helix motion is disabled (or reduced to an imperceptible/static state).",
+        "All other dashboard interactions (hover/focus/selection on factor markers) continue to work normally with reduced motion enabled."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement the helix motion using the existing Tailwind setup (keyframes/animation utilities) and apply it only to the helix visuals (SVG strands/base pairs and/or the helix background layers), keeping the genome theme consistent.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "eine sanfte, wissenschaftliche Helix‑Bewegung einbauen"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Tailwind animation utilities/keyframes are added/extended in `frontend/tailwind.config.js` and/or `frontend/src/index.css` (consistent with the project’s current Tailwind + OKLCH theming).",
+        "The animation is applied in a scoped way (helix visuals only), without affecting the header/footer or overall page background color theme.",
+        "No changes are made to files listed as immutable by the system context (e.g., `frontend/src/main.tsx`, Internet Identity hooks, or `frontend/src/components/ui/*`)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Frontend must remain React + TypeScript + Tailwind + React Query (no new frameworks).",
+    "Do not edit any paths listed in `frontend.immutablePaths` in the system context.",
+    "Do not route any image loading through the backend; keep static assets served from `frontend/public`."
+  ],
+  "nonGoals": [
+    "Adding new factor-marker animations (scroll/click marker animations) beyond what already exists.",
+    "Changing the four factor set, labels, or dashboard information architecture.",
+    "Implementing backend features or persistence related to the helix animation."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
