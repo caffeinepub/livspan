@@ -1,14 +1,15 @@
-import StartDashboard from './pages/StartDashboard';
-import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from '@/components/ui/sonner';
+import { LanguageProvider } from '@/i18n/LanguageProvider';
+import StartDashboard from '@/pages/StartDashboard';
 
-function App() {
+export default function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <StartDashboard />
-      <Toaster />
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
+      <LanguageProvider>
+        <StartDashboard />
+        <Toaster />
+      </LanguageProvider>
     </ThemeProvider>
   );
 }
-
-export default App;

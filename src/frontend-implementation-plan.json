@@ -1,57 +1,89 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Gentle DNA helix motion on Start Dashboard (Tailwind + reduced-motion aware)",
+  "title": "Data-oriented Intermittent Fasting dashboard panel",
   "requirements": [
     {
-      "id": "REQ-6",
-      "summary": "Add a subtle continuous helix “breathing/drift” motion to the HelixSpine visuals without impacting factor marker readability or layout.",
+      "id": "REQ-1",
+      "summary": "Show a quantitative Intermittent Fasting detail panel on the dashboard when the fasting factor is selected, and hide it when de-selected.",
       "acceptanceCriteria": [
-        "The helix spine in `frontend/src/components/genome/HelixSpine.tsx` visibly animates with a subtle motion (e.g., slow drift/phase or breathing) while the factor markers remain readable and do not jitter.",
-        "The animation is continuous and smooth (no abrupt looping) and feels “scientific” (low amplitude, slow tempo).",
-        "The animation does not change layout flow (no reflow that moves the markers’ vertical spacing/positions)."
+        "When the user selects the fasting factor marker, a fasting-focused panel/section becomes visible in the dashboard.",
+        "The fasting panel uses a clearly data-forward layout (e.g., KPI tiles, small tables/lists, and timeline-style blocks) and uses legible numeric typography (e.g., monospace for time/metrics) consistent with the existing dark theme.",
+        "The fasting panel can be dismissed/hidden by de-selecting the fasting marker (clicking it again), consistent with the current selectedFactor toggle behavior."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/genome/HelixSpine.tsx",
+          "path": "frontend/src/pages/StartDashboard.tsx",
           "operation": "modify",
-          "description": "Scope the new helix motion to only the SVG visuals (strands/base-pairs) by grouping them into motion layers (e.g., <g> wrappers) and applying low-amplitude Tailwind animation utilities; ensure the factor markers container remains unaffected and z-index layering remains intact (no layout-affecting changes)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "summary": "Respect reduced-motion preferences by disabling (or making imperceptible) the helix motion while keeping marker interactions unchanged.",
-      "acceptanceCriteria": [
-        "If the user has `prefers-reduced-motion: reduce`, the helix motion is disabled (or reduced to an imperceptible/static state).",
-        "All other dashboard interactions (hover/focus/selection on factor markers) continue to work normally with reduced motion enabled."
-      ],
-      "file_operations": [
+          "description": "Wire the Intermittent Fasting panel into the existing dashboard render tree so it conditionally appears only when selectedFactor === 'fasting' and disappears when toggled off; keep it in normal document flow (no overlay) to avoid blocking helix visuals/marker interactions."
+        },
         {
-          "path": "frontend/src/components/genome/HelixSpine.tsx",
-          "operation": "modify",
-          "description": "Apply Tailwind motion variants so helix animation runs only under motion-safe (e.g., motion-safe:animate-...) and is disabled under reduced motion (e.g., motion-reduce:animate-none / motion-reduce:transform-none), without changing any FactorMarker interaction handlers or focus styles."
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Implement the helix motion via existing Tailwind setup (keyframes/animation utilities) and keep it strictly scoped to helix visuals and the genome theme.",
-      "acceptanceCriteria": [
-        "Tailwind animation utilities/keyframes are added/extended in `frontend/tailwind.config.js` and/or `frontend/src/index.css` (consistent with the project’s current Tailwind + OKLCH theming).",
-        "The animation is applied in a scoped way (helix visuals only), without affecting the header/footer or overall page background color theme.",
-        "No changes are made to files listed as immutable by the system context (e.g., `frontend/src/main.tsx`, Internet Identity hooks, or `frontend/src/components/ui/*`)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Extend Tailwind with helix-specific keyframes/animation utilities (slow tempo, low amplitude drift/breathing; optionally include a phased variant via delay) intended for SVG transforms/opacity only; keep additions consistent with the existing OKLCH genome theme tokens."
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "operation": "create",
+          "description": "Create a data-forward Intermittent Fasting panel component (KPIs, structured blocks, compact lists, timeline-style sections) styled for the existing dark theme and readable numeric presentation. Use shadcn-ui components (e.g., Card primitives already used in the app) where appropriate to match existing visuals; verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Add small, helix-scoped utility helpers (in @layer utilities) to ensure SVG transform behavior is stable and non-jittery (e.g., consistent transform-origin/transform-box and will-change) for the helix motion classes only, without affecting global page background/header/footer styling."
+          "description": "Add a small global utility for metric typography (e.g., tabular numbers) to improve legibility of numeric KPIs/timers while remaining consistent with the existing dark theme and monospace usage."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement the fasting panel’s six content groups (status, live timer, progress, daily/weekly summary, streak, insights/tips) with i18n in EN/DE.",
+      "acceptanceCriteria": [
+        "The fasting panel shows all six content groups (status, timer, progress, daily/weekly summary, streak, insights/tips).",
+        "The timer readout updates while visible (at least once per second) and remains performant (no UI jank).",
+        "Daily/weekly stats and streak are displayed as numeric values in a consistent unit format.",
+        "All new labels/messages in the fasting panel are translated via the existing translations dictionary and switch correctly with the language toggle."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "operation": "modify",
+          "description": "Implement the panel contents: (1) current status block, (2) timer-style readout, (3) current-window progress indicator, (4) daily+weekly summary KPIs (sessions count/total hours), (5) streak metric, and (6) phase-based insights/tips area; use the existing i18n hook for all user-facing strings and apply monospace/tabular numeric styling for time/metrics. Use shadcn-ui components (e.g., Card primitives) for structured KPI tiles/blocks; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useFastingWindowTimer.ts",
+          "operation": "create",
+          "description": "Create a lightweight hook that computes the current fasting/eating phase, elapsed/remaining time, and progress for the current window; update at least once per second only while the panel is mounted/visible (cleanup on unmount) to prevent unnecessary work and UI jank."
+        },
+        {
+          "path": "frontend/src/lib/fastingMetrics.ts",
+          "operation": "create",
+          "description": "Add frontend-only helpers to derive display-ready daily/weekly summaries and streak from a local (non-persisted) model (per non-goals), returning consistent units (hours, sessions) and stable formatting inputs for the panel."
+        },
+        {
+          "path": "frontend/src/lib/timeFormat.ts",
+          "operation": "create",
+          "description": "Add shared duration/time formatting utilities for timer and KPI display (e.g., HH:MM:SS, hours with one consistent rounding rule) used by the fasting panel to keep numeric outputs consistent."
+        },
+        {
+          "path": "frontend/src/i18n/translations.ts",
+          "operation": "modify",
+          "description": "Extend the existing Translations type and EN/DE dictionaries with a new fastingPanel namespace containing all labels, unit strings, status phrases (Fasting/Eating/Starts in), summary labels, streak label, and phase-based insights/tips text; ensure no hardcoded user-facing strings remain in the panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Ensure the fasting panel integrates responsively into StartDashboard without overlapping/obscuring helix visuals or breaking factor marker interactions and accessibility.",
+      "acceptanceCriteria": [
+        "On small screens, the fasting panel content remains readable without horizontal overflow and stacks appropriately.",
+        "On larger screens, the fasting panel does not overlap the factor marker cards; spacing and z-indexing keep the helix/markers usable.",
+        "All existing factor markers remain clickable and keyboard-accessible as before."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/StartDashboard.tsx",
+          "operation": "modify",
+          "description": "Adjust the dashboard layout to allocate space for the fasting panel below (or adjacent with responsive stacking) the helix markers, ensuring spacing/z-index keep the helix and factor marker cards unobstructed and fully interactive across breakpoints."
+        },
+        {
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "operation": "modify",
+          "description": "Implement responsive layout rules (grid/stacking, compact KPI tiles, no horizontal overflow) and ensure the panel does not introduce absolute-position overlays; verify that all interactive elements within the panel are keyboard reachable without affecting existing marker keyboard behavior. Use shadcn-ui components where helpful for consistent spacing/structure; verify the component's usage instructions before implementing."
         }
       ]
     }

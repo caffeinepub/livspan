@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T14:38:44.343Z",
+  "generatedAt": "2026-02-15T08:49:20.664Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,51 +11,66 @@
     "implemented": 3,
     "items": [
       {
-        "id": "REQ-6",
-        "summary": "Add a subtle, continuous “scientific” helix motion to the DNA helix spine on the Start Dashboard so the helix appears to gently breathe/drift without distracting from the factor markers.",
+        "id": "REQ-1",
+        "summary": "Add a data-oriented Intermittent Fasting detail view that appears on the dashboard when the “Intermittent Fasting” factor is selected, emphasizing quantitative metrics and structured data (KPIs, timelines, and summaries) rather than a minimal/abstract presentation.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/genome/HelixSpine.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/genome/HelixSpine.tsx"
-        ]
-      },
-      {
-        "id": "REQ-7",
-        "summary": "Respect reduced-motion preferences for the helix motion animation.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/genome/HelixSpine.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/genome/HelixSpine.tsx"
-        ]
-      },
-      {
-        "id": "REQ-8",
-        "summary": "Implement the helix motion using the existing Tailwind setup (keyframes/animation utilities) and apply it only to the helix visuals (SVG strands/base pairs and/or the helix background layers), keeping the genome theme consistent.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/tailwind.config.js",
+          "frontend/src/pages/StartDashboard.tsx",
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
           "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/tailwind.config.js",
+          "frontend/src/pages/StartDashboard.tsx",
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
           "frontend/src/index.css"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Implement the Intermittent Fasting panel contents to include: (1) a current status block (Fasting / Eating Window / Starts In…), (2) a timer-style time readout for time remaining or time elapsed, (3) a progress indicator for the current window, (4) a daily + weekly summary (e.g., fasting sessions count, total fasting hours), (5) a streak metric, and (6) a small “insights/tips” area based on the current phase; all user-facing strings must be in English (and German when DE is selected) using the existing i18n structure.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "frontend/src/hooks/useFastingWindowTimer.ts",
+          "frontend/src/lib/fastingMetrics.ts",
+          "frontend/src/lib/timeFormat.ts",
+          "frontend/src/i18n/translations.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "frontend/src/hooks/useFastingWindowTimer.ts",
+          "frontend/src/lib/fastingMetrics.ts",
+          "frontend/src/lib/timeFormat.ts",
+          "frontend/src/i18n/translations.ts"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Ensure the fasting panel integrates cleanly into the existing StartDashboard layout with responsive behavior (mobile through desktop), without obscuring the helix visuals or breaking existing factor marker interactions.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/StartDashboard.tsx",
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/StartDashboard.tsx",
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/genome/HelixSpine.tsx",
+    "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+    "frontend/src/hooks/useFastingWindowTimer.ts",
+    "frontend/src/i18n/translations.ts",
     "frontend/src/index.css",
-    "frontend/tailwind.config.js",
+    "frontend/src/lib/fastingMetrics.ts",
+    "frontend/src/lib/timeFormat.ts",
+    "frontend/src/pages/StartDashboard.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,8 +1,13 @@
-<html lang='en'>
+<!DOCTYPE html>
+<html lang='en' class='dark'>
     <head>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>LivSpan</title>
+        <script>
+            // Force dark mode on first paint to prevent flash
+            document.documentElement.classList.add('dark');
+        </script>
     </head>
     <body>
         <div id='root'></div>

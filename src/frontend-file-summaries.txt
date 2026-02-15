@@ -1,10 +1,20 @@
 {
-  "frontend/src/App.tsx": "Main application component that wraps the StartDashboard with ThemeProvider and Toaster for dark mode support and notifications.",
-  "frontend/src/pages/StartDashboard.tsx": "Primary dashboard page displaying the four health factors (Nutrition, Sleep, Movement, Intermittent Fasting) along a vertical DNA helix with selection state management and genome-themed layout.",
-  "frontend/src/components/genome/HelixSpine.tsx": "Layout component that renders the vertical DNA double-helix structure with SVG strands, gradients, base pair connectors, and gentle breathing/pulsing animations that respect reduced-motion preferences while keeping factor markers stable.",
-  "frontend/src/components/dashboard/FactorMarker.tsx": "Interactive card component for each health factor with icon, label, description, connection line to helix, and accessible hover/focus/selected states.",
-  "frontend/src/index.css": "Global styles defining the genome-themed OKLCH color system with scientific teal/cyan palette, custom helix utilities, helix-motion-layer transform helpers, and reduced-motion media query support for accessibility.",
-  "frontend/tailwind.config.js": "Tailwind configuration extended with genome-specific colors, scientific typography, and new helix animation keyframes (helix-breathe, helix-breathe-alt, helix-pulse) for gentle, continuous DNA strand motion.",
+  "frontend/src/App.tsx": "Main application component wrapping StartDashboard with ThemeProvider forced to dark mode (no system detection), LanguageProvider, and Toaster.",
+  "frontend/src/pages/StartDashboard.tsx": "Primary dashboard page displaying five health factors along a vertical DNA helix with conditional rendering of the IntermittentFastingPanel when the fasting factor is selected, including layered background and i18n support.",
+  "frontend/src/components/genome/HelixSpine.tsx": "Layout component rendering a more filigree vertical DNA double-helix with thinner strands (0.75px), 16 evenly spaced base-pair connectors for scientific appearance, and adjusted spacing for five markers.",
+  "frontend/src/components/dashboard/FactorMarker.tsx": "Interactive card component for each health factor with icon mapping including Brain icon for Stress, label, description, connection line to helix, and accessible hover/focus/selected states.",
+  "frontend/src/index.css": "Global styles with OKLCH color system, genome-themed scientific palette, helix animation utilities, comprehensive reduced-motion support, and new tabular-nums utility for improved numeric legibility in metrics and timers.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with genome colors, scientific typography, and gentler background helix animation keyframes with slower durations (6-8s) for subtle breathing effects.",
   "frontend/src/hooks/useQueries.ts": "Placeholder file for future React Query hooks when backend data fetching is implemented.",
-  "frontend/src/lib/utils.ts": "Utility functions including cn() for merging Tailwind classes with clsx and tailwind-merge."
+  "frontend/src/lib/utils.ts": "Utility functions including cn() for merging Tailwind classes with clsx and tailwind-merge.",
+  "frontend/src/i18n/translations.ts": "Translation dictionary containing English and German strings for all user-facing text including the new fastingPanel namespace with status labels, timer descriptions, metric labels, and phase-based insights/tips.",
+  "frontend/src/i18n/LanguageProvider.tsx": "React context provider managing language state (EN/DE), persisting selection to localStorage, and providing translation helper with browser language detection fallback.",
+  "frontend/src/i18n/useI18n.ts": "Hook to access current language, language setter, and translation object from LanguageProvider context.",
+  "frontend/src/components/i18n/LanguageSwitcher.tsx": "Toggle button component displaying EN/DE language options with active state highlighting and accessible keyboard support.",
+  "frontend/src/components/genome/AnimatedHelixBackground.tsx": "Full-viewport SVG background component rendering animated DNA helix with gentle green-to-blue gradient (hue 150-210), slower breathing animation (6-6.5s), subtle glow effects, and bokeh orbs respecting reduced-motion preferences.",
+  "frontend/index.html": "HTML entry point with forced dark mode class on root element and inline script to prevent light flash on first paint.",
+  "frontend/src/components/dashboard/IntermittentFastingPanel.tsx": "Data-oriented intermittent fasting panel component displaying real-time status, live timer, progress bar, daily/weekly KPI metrics, streak counter, and phase-based insights using Card components and monospace typography for numeric readability.",
+  "frontend/src/hooks/useFastingWindowTimer.ts": "React hook that computes and updates the current fasting/eating phase, elapsed/remaining time, and progress percentage once per second using a demo 16:8 schedule (fasting 20:00-12:00, eating 12:00-20:00).",
+  "frontend/src/lib/fastingMetrics.ts": "Frontend-only helper functions providing display-ready daily/weekly fasting summaries (sessions count, total hours) and streak data using mock values for demo purposes.",
+  "frontend/src/lib/timeFormat.ts": "Shared time formatting utilities for converting seconds to HH:MM:SS duration format and hours to decimal format with unit suffix for consistent numeric display across the fasting panel."
 }

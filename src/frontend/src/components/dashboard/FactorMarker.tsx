@@ -1,9 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Apple, Moon, Activity, Clock } from 'lucide-react';
+import { Apple, Moon, Activity, Clock, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface FactorMarkerProps {
-  id: 'nutrition' | 'sleep' | 'movement' | 'fasting';
+  id: 'nutrition' | 'sleep' | 'movement' | 'stress' | 'fasting';
   label: string;
   description: string;
   position: number;
@@ -15,6 +15,7 @@ const iconMap = {
   nutrition: Apple,
   sleep: Moon,
   movement: Activity,
+  stress: Brain,
   fasting: Clock,
 };
 

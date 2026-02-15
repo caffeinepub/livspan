@@ -1,74 +1,87 @@
 {
   "kind": "build_request",
-  "title": "Add gentle, scientific DNA helix motion on the Start Dashboard",
+  "title": "Add a data-oriented Intermittent Fasting dashboard section",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-6",
-      "text": "Add a subtle, continuous “scientific” helix motion to the DNA helix spine on the Start Dashboard so the helix appears to gently breathe/drift without distracting from the factor markers.",
+      "id": "REQ-1",
+      "text": "Add a data-oriented Intermittent Fasting detail view that appears on the dashboard when the “Intermittent Fasting” factor is selected, emphasizing quantitative metrics and structured data (KPIs, timelines, and summaries) rather than a minimal/abstract presentation.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-6"
         ],
         "quotes": [
-          "eine sanfte, wissenschaftliche Helix‑Bewegung einbauen"
+          "Eher stärker datenorientiert wirken"
         ]
       },
       "acceptanceCriteria": [
-        "The helix spine in `frontend/src/components/genome/HelixSpine.tsx` visibly animates with a subtle motion (e.g., slow drift/phase or breathing) while the factor markers remain readable and do not jitter.",
-        "The animation is continuous and smooth (no abrupt looping) and feels “scientific” (low amplitude, slow tempo).",
-        "The animation does not change layout flow (no reflow that moves the markers’ vertical spacing/positions)."
+        "When the user selects the fasting factor marker, a fasting-focused panel/section becomes visible in the dashboard.",
+        "The fasting panel uses a clearly data-forward layout (e.g., KPI tiles, small tables/lists, and timeline-style blocks) and uses legible numeric typography (e.g., monospace for time/metrics) consistent with the existing dark theme.",
+        "The fasting panel can be dismissed/hidden by de-selecting the fasting marker (clicking it again), consistent with the current selectedFactor toggle behavior."
       ]
     },
     {
-      "id": "REQ-7",
-      "text": "Respect reduced-motion preferences for the helix motion animation.",
+      "id": "REQ-2",
+      "text": "Implement the Intermittent Fasting panel contents to include: (1) a current status block (Fasting / Eating Window / Starts In…), (2) a timer-style time readout for time remaining or time elapsed, (3) a progress indicator for the current window, (4) a daily + weekly summary (e.g., fasting sessions count, total fasting hours), (5) a streak metric, and (6) a small “insights/tips” area based on the current phase; all user-facing strings must be in English (and German when DE is selected) using the existing i18n structure.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-6"
         ],
         "quotes": [
-          "eine sanfte, wissenschaftliche Helix‑Bewegung einbauen"
+          "Eher stärker datenorientiert wirken"
         ]
       },
       "acceptanceCriteria": [
-        "If the user has `prefers-reduced-motion: reduce`, the helix motion is disabled (or reduced to an imperceptible/static state).",
-        "All other dashboard interactions (hover/focus/selection on factor markers) continue to work normally with reduced motion enabled."
+        "The fasting panel shows all six content groups (status, timer, progress, daily/weekly summary, streak, insights/tips).",
+        "The timer readout updates while visible (at least once per second) and remains performant (no UI jank).",
+        "Daily/weekly stats and streak are displayed as numeric values in a consistent unit format.",
+        "All new labels/messages in the fasting panel are translated via the existing translations dictionary and switch correctly with the language toggle."
       ]
     },
     {
-      "id": "REQ-8",
-      "text": "Implement the helix motion using the existing Tailwind setup (keyframes/animation utilities) and apply it only to the helix visuals (SVG strands/base pairs and/or the helix background layers), keeping the genome theme consistent.",
+      "id": "REQ-3",
+      "text": "Ensure the fasting panel integrates cleanly into the existing StartDashboard layout with responsive behavior (mobile through desktop), without obscuring the helix visuals or breaking existing factor marker interactions.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-6"
         ],
         "quotes": [
-          "eine sanfte, wissenschaftliche Helix‑Bewegung einbauen"
+          "Eher stärker datenorientiert wirken"
         ]
       },
       "acceptanceCriteria": [
-        "Tailwind animation utilities/keyframes are added/extended in `frontend/tailwind.config.js` and/or `frontend/src/index.css` (consistent with the project’s current Tailwind + OKLCH theming).",
-        "The animation is applied in a scoped way (helix visuals only), without affecting the header/footer or overall page background color theme.",
-        "No changes are made to files listed as immutable by the system context (e.g., `frontend/src/main.tsx`, Internet Identity hooks, or `frontend/src/components/ui/*`)."
+        "On small screens, the fasting panel content remains readable without horizontal overflow and stacks appropriately.",
+        "On larger screens, the fasting panel does not overlap the factor marker cards; spacing and z-indexing keep the helix/markers usable.",
+        "All existing factor markers remain clickable and keyboard-accessible as before."
       ]
     }
   ],
   "constraints": [
-    "Frontend must remain React + TypeScript + Tailwind + React Query (no new frameworks).",
-    "Do not edit any paths listed in `frontend.immutablePaths` in the system context.",
-    "Do not route any image loading through the backend; keep static assets served from `frontend/public`."
+    "Do not edit files under frontend/src/components/ui (compose existing components instead).",
+    "Do not modify frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
+    "Keep all user-facing text in English in EN mode and German in DE mode via the existing i18n mechanism."
   ],
   "nonGoals": [
-    "Adding new factor-marker animations (scroll/click marker animations) beyond what already exists.",
-    "Changing the four factor set, labels, or dashboard information architecture.",
-    "Implementing backend features or persistence related to the helix animation."
+    "Persisting fasting schedules/logs to the Motoko backend.",
+    "Adding notifications, reminders, push, email, or SMS features.",
+    "Adding real-time collaboration or chat.",
+    "Integrating external health APIs or device data."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

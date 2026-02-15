@@ -161,6 +161,12 @@
         stroke-width: 1px;
     }
     
+    /* Tabular numbers for metrics and timers */
+    .tabular-nums {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: 'tnum' 1;
+    }
+    
     /* Helix animation utilities - scoped to SVG transforms */
     .helix-motion-layer {
         transform-origin: center center;
@@ -174,6 +180,32 @@
             animation: none !important;
             transform: none !important;
             will-change: auto;
+        }
+        
+        /* Disable all SVG animations */
+        svg animate {
+            display: none;
+        }
+        
+        /* Fallback for background helix */
+        .motion-reduce\:opacity-50 {
+            opacity: 0.5 !important;
+        }
+        
+        .motion-reduce\:opacity-40 {
+            opacity: 0.4 !important;
+        }
+        
+        .motion-reduce\:opacity-30 {
+            opacity: 0.3 !important;
+        }
+        
+        .motion-reduce\:opacity-20 {
+            opacity: 0.2 !important;
+        }
+        
+        .motion-reduce\:hidden {
+            display: none !important;
         }
     }
 }
