@@ -4,27 +4,54 @@
   "summary": "New project",
   "architectural_notes": [],
   "known_issues": [],
-  "isFixRequest": true,
+  "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-replace-the-current-logo-on-the-login-page-with-the-uploaded-token-image-img-8398-1-png-displayed-without-any-frame-border-or-modifications",
-      "title": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+      "id": "feature-display-the-livspan-logo-img-8398-1-png-in-the-top-left-corner-of-the-dashboard-page-matching-the-styling-and-placement-used-on-the-login-page",
+      "title": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-replace-the-current-logo-on-the-dashboard-with-the-uploaded-token-image-img-8398-1-png-displayed-without-any-frame-border-or-modifications",
-      "title": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+      "id": "feature-apply-a-bright-green-gradient-effect-to-all-page-headings-across-the-application",
+      "title": "Apply a bright green gradient effect to all page headings across the application",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-style-the-fasting-timer-number-line-display-with-a-green-to-blue-gradient-effect",
+      "title": "Style the fasting timer number line display with a green-to-blue gradient effect",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
     }
   ],
-  "new_feature_requests": [],
-  "projectName": "Replace logo with uploaded token image without modifications",
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add login page logo to dashboard top left",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Apply bright green gradient to page headings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Display number line in green-blue gradient",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Add logo to dashboard and apply gradient styling",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

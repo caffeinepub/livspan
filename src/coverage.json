@@ -1,35 +1,48 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-20T09:06:10.120Z",
+  "generatedAt": "2026-02-21T13:25:49.337Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+        "summary": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/profile/ProfileOnboardingGate.tsx"
+          "frontend/src/pages/StartDashboard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/profile/ProfileOnboardingGate.tsx"
+          "frontend/src/pages/StartDashboard.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+        "summary": "Apply a bright green gradient effect to all page headings across the application",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/index.css",
+          "frontend/src/pages/StartDashboard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/index.css",
+          "frontend/src/pages/StartDashboard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Style the fasting timer number line display with a green-to-blue gradient effect",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
         ]
       }
     ]
@@ -39,8 +52,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/components/profile/ProfileOnboardingGate.tsx",
+    "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/StartDashboard.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

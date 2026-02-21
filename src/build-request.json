@@ -1,53 +1,73 @@
 {
   "kind": "build_request",
-  "title": "Replace logo with uploaded token image without modifications",
+  "title": "Add logo to dashboard and apply gradient styling",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+      "text": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-5"
+          "msg-last"
         ],
         "quotes": [
-          "Bitte nur das Foto den Token als Logo ohne Rahmen und Veränderungen einbinden"
+          "Das Logo von der Anmeldeseite jetzt auch auf dem Dashboard oben links anbringen"
         ]
       },
       "acceptanceCriteria": [
-        "The uploaded token image is displayed as the logo on the login page",
-        "No frame, border, background, or visual modifications are applied to the token image",
-        "The token image is properly sized and positioned where the logo appears"
+        "Logo appears in top left corner of StartDashboard page",
+        "Logo uses the same IMG_8398-1.png asset as the login page",
+        "Logo styling matches the login page implementation"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+      "text": "Apply a bright green gradient effect to all page headings across the application",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-5"
+          "msg-last"
         ],
         "quotes": [
-          "Bitte nur das Foto den Token als Logo ohne Rahmen und Veränderungen einbinden"
+          "Überschriften der Seiten im leuchtenden grünen Farbverlauf"
         ]
       },
       "acceptanceCriteria": [
-        "The uploaded token image is displayed as the logo on the dashboard",
-        "No frame, border, background, or visual modifications are applied to the token image",
-        "The token image is properly sized and positioned where the logo appears"
+        "All page headings use a luminous green gradient",
+        "Gradient is consistent across all pages",
+        "Text remains readable against the background"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Style the fasting timer number line display with a green-to-blue gradient effect",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Zahlenstrahl im grün - blauen Farbverlauf darstellen"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The fasting timer number display uses a green-to-blue gradient",
+        "Gradient transitions smoothly from green to blue",
+        "Numbers remain clearly legible"
       ]
     }
   ],
   "constraints": [
-    "Use the exact uploaded image without any modifications, frames, or borders",
-    "Preserve all existing backgrounds and design elements"
+    "Use the existing IMG_8398-1.png logo asset without modifications",
+    "Maintain existing DNA helix theme and color scheme",
+    "Do not modify immutable frontend paths including UI components, hooks, and main.tsx"
   ],
   "nonGoals": [
-    "Creating variations or edited versions of the token image",
-    "Adding decorative frames or borders around the logo",
-    "Modifying the existing page backgrounds or themes"
+    "Changing the backend logic or data structures",
+    "Modifying the logo image itself",
+    "Redesigning the overall page layout",
+    "Adding new features beyond the specified visual updates"
   ],
   "imageRequirements": {
     "required": [],

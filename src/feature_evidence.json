@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-current-logo-on-the-login-page-with-the-uploaded-token-image-img-8398-1-png-displayed-without-any-frame-border-or-modifications",
-      "featureTitle": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+      "featureId": "feature-display-the-livspan-logo-img-8398-1-png-in-the-top-left-corner-of-the-dashboard-page-matching-the-styling-and-placement-used-on-the-login-page",
+      "featureTitle": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
       "files": [
-        "frontend/src/components/profile/ProfileOnboardingGate.tsx"
+        "frontend/src/pages/StartDashboard.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -21,10 +21,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-replace-the-current-logo-on-the-dashboard-with-the-uploaded-token-image-img-8398-1-png-displayed-without-any-frame-border-or-modifications",
-      "featureTitle": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
+      "featureId": "feature-apply-a-bright-green-gradient-effect-to-all-page-headings-across-the-application",
+      "featureTitle": "Apply a bright green gradient effect to all page headings across the application",
       "files": [
-        "frontend/src/App.tsx"
+        "frontend/src/index.css",
+        "frontend/src/pages/StartDashboard.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -36,6 +37,25 @@
       ],
       "testIds": [
         "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-style-the-fasting-timer-number-line-display-with-a-green-to-blue-gradient-effect",
+      "featureTitle": "Style the fasting timer number line display with a green-to-blue gradient effect",
+      "files": [
+        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
       ],
       "confidence": "high"
     }

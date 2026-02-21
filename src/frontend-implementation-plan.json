@@ -1,37 +1,58 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace logo with uploaded token image without modifications",
+  "title": "Add logo to dashboard and apply gradient styling",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Replace current logo on login page with token image without modifications",
+      "summary": "Display the LivSpan logo in the top left corner of the dashboard page, matching the styling and placement used on the login page",
       "acceptanceCriteria": [
-        "The uploaded token image is displayed as the logo on the login page",
-        "No frame, border, background, or visual modifications are applied to the token image",
-        "The token image is properly sized and positioned where the logo appears"
+        "Logo appears in top left corner of StartDashboard page",
+        "Logo uses the same IMG_8398-1.png asset as the login page",
+        "Logo styling matches the login page implementation"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/profile/ProfileOnboardingGate.tsx",
+          "path": "frontend/src/pages/StartDashboard.tsx",
           "operation": "modify",
-          "description": "Replace the LivSpan logo reference with the uploaded token image (frontend/public/assets/IMG_8398-1.png). Remove any surrounding frames, borders, backgrounds, or styling that would modify the token's appearance. Ensure the image is displayed cleanly where the current logo appears on the login card for unauthenticated users."
+          "description": "Add the LivSpan logo (IMG_8398-1.png) to the top left corner of the dashboard page. Position it absolutely or within a header container matching the login page styling. Ensure the logo is properly sized and aligned consistent with its usage elsewhere in the application."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Replace current logo on dashboard with token image without modifications",
+      "summary": "Apply a bright green gradient effect to all page headings across the application",
       "acceptanceCriteria": [
-        "The uploaded token image is displayed as the logo on the dashboard",
-        "No frame, border, background, or visual modifications are applied to the token image",
-        "The token image is properly sized and positioned where the logo appears"
+        "All page headings use a luminous green gradient",
+        "Gradient is consistent across all pages",
+        "Text remains readable against the background"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Replace the LivSpan logo reference in the loading screen with the uploaded token image (frontend/public/assets/IMG_8398-1.png). Remove any surrounding frames, borders, backgrounds, or styling that would modify the token's appearance. Ensure the image is displayed cleanly during the loading state before the dashboard renders."
+          "description": "Add a utility class for bright green gradient text effect using CSS background-clip and text-fill-color properties. Define the gradient with luminous green color stops that maintain readability and align with the existing DNA helix theme."
+        },
+        {
+          "path": "frontend/src/pages/StartDashboard.tsx",
+          "operation": "modify",
+          "description": "Apply the bright green gradient utility class to the main page heading ('Your LivSpan Factors' or equivalent). Ensure the gradient is visible and the text remains readable against the dark background."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Style the fasting timer number line display with a green-to-blue gradient effect",
+      "acceptanceCriteria": [
+        "The fasting timer number display uses a green-to-blue gradient",
+        "Gradient transitions smoothly from green to blue",
+        "Numbers remain clearly legible"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "operation": "modify",
+          "description": "Apply a green-to-blue gradient effect to the fasting timer number display. Use CSS background-clip technique or inline gradient styles to create a smooth transition from green to blue across the timer digits. Ensure the gradient complements the existing helix theme colors and maintains number legibility."
         }
       ]
     }

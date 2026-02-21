@@ -69,14 +69,14 @@ export default function StartDashboard() {
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                {/* Logo */}
+                {/* Logo - matching login page */}
                 <img 
-                  src="/assets/generated/livspan-logo.dim_400x400.png" 
+                  src="/assets/IMG_8398-1.png" 
                   alt="LivSpan Logo" 
                   className="w-12 h-12"
                 />
                 <div>
-                  <h1 className="text-2xl font-light tracking-wide bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-light tracking-wide gradient-green-glow">
                     {t.header.title}
                   </h1>
                   <p className="text-xs text-muted-foreground font-light">
@@ -127,7 +127,7 @@ export default function StartDashboard() {
           {selectedFactor === 'sleep' && (
             <section className="max-w-4xl mx-auto">
               <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
-                <h2 className="text-xl font-light mb-2 bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">{t.factors.sleep.label}</h2>
+                <h2 className="text-xl font-light mb-2 gradient-green-glow">{t.factors.sleep.label}</h2>
                 <p className="text-sm text-muted-foreground">
                   {t.factors.sleep.description}
                 </p>
@@ -141,7 +141,7 @@ export default function StartDashboard() {
           {selectedFactor === 'movement' && (
             <section className="max-w-4xl mx-auto">
               <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
-                <h2 className="text-xl font-light mb-2 bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">{t.factors.movement.label}</h2>
+                <h2 className="text-xl font-light mb-2 gradient-green-glow">{t.factors.movement.label}</h2>
                 <p className="text-sm text-muted-foreground">
                   {t.factors.movement.description}
                 </p>
@@ -155,7 +155,7 @@ export default function StartDashboard() {
           {selectedFactor === 'stress' && (
             <section className="max-w-4xl mx-auto">
               <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
-                <h2 className="text-xl font-light mb-2 bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">{t.factors.stress.label}</h2>
+                <h2 className="text-xl font-light mb-2 gradient-green-glow">{t.factors.stress.label}</h2>
                 <p className="text-sm text-muted-foreground">
                   {t.factors.stress.description}
                 </p>

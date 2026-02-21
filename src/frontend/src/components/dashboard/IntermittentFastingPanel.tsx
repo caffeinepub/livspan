@@ -45,7 +45,7 @@ export default function IntermittentFastingPanel() {
           <Clock className="w-5 h-5 text-helix-accent" strokeWidth={1.5} />
         </div>
         <div>
-          <h3 className="text-xl font-light tracking-wide bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">
+          <h3 className="text-xl font-light tracking-wide gradient-green-glow">
             {t.fastingPanel.title}
           </h3>
           <p className="text-xs text-muted-foreground font-mono">
@@ -85,7 +85,7 @@ export default function IntermittentFastingPanel() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <div className="text-3xl font-light tabular-nums text-foreground">
+            <div className="text-3xl font-light tabular-nums gradient-green-blue">
               {formatDuration(remaining)}
             </div>
             <div className="text-xs text-muted-foreground">
