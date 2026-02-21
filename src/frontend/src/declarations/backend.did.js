@@ -8,10 +8,130 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const idlService = IDL.Service({});
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const Time = IDL.Int;
+export const FastingSchedule = IDL.Record({
+  'endHour' : IDL.Nat8,
+  'startHour' : IDL.Nat8,
+});
+export const Gender = IDL.Variant({
+  'female' : IDL.Null,
+  'male' : IDL.Null,
+  'diverse' : IDL.Null,
+});
+export const UserProfile = IDL.Record({
+  'heightCm' : IDL.Nat,
+  'birthYear' : IDL.Nat,
+  'name' : IDL.Text,
+  'gender' : Gender,
+});
+export const NutritionDay = IDL.Record({
+  'fat' : IDL.Float64,
+  'caloriesConsumed' : IDL.Nat,
+  'waterMl' : IDL.Nat,
+  'carbs' : IDL.Float64,
+  'bodyWeightKg' : IDL.Opt(IDL.Float64),
+  'vegetableGrams' : IDL.Opt(IDL.Nat),
+  'caloriesBurned' : IDL.Nat,
+  'proteinGrams' : IDL.Opt(IDL.Nat),
+  'protein' : IDL.Float64,
+});
+
+export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'clearNutritionDay' : IDL.Func([Time], [], []),
+  'getCallerFastingSchedule' : IDL.Func(
+      [],
+      [IDL.Opt(FastingSchedule)],
+      ['query'],
+    ),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getNutritionEntry' : IDL.Func(
+      [IDL.Principal, Time],
+      [IDL.Opt(NutritionDay)],
+      ['query'],
+    ),
+  'getTodayNutritionEntry' : IDL.Func([], [IDL.Opt(NutritionDay)], ['query']),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'saveCallerFastingSchedule' : IDL.Func([FastingSchedule], [], []),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
+});
 
 export const idlInitArgs = [];
 
-export const idlFactory = ({ IDL }) => { return IDL.Service({}); };
+export const idlFactory = ({ IDL }) => {
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const Time = IDL.Int;
+  const FastingSchedule = IDL.Record({
+    'endHour' : IDL.Nat8,
+    'startHour' : IDL.Nat8,
+  });
+  const Gender = IDL.Variant({
+    'female' : IDL.Null,
+    'male' : IDL.Null,
+    'diverse' : IDL.Null,
+  });
+  const UserProfile = IDL.Record({
+    'heightCm' : IDL.Nat,
+    'birthYear' : IDL.Nat,
+    'name' : IDL.Text,
+    'gender' : Gender,
+  });
+  const NutritionDay = IDL.Record({
+    'fat' : IDL.Float64,
+    'caloriesConsumed' : IDL.Nat,
+    'waterMl' : IDL.Nat,
+    'carbs' : IDL.Float64,
+    'bodyWeightKg' : IDL.Opt(IDL.Float64),
+    'vegetableGrams' : IDL.Opt(IDL.Nat),
+    'caloriesBurned' : IDL.Nat,
+    'proteinGrams' : IDL.Opt(IDL.Nat),
+    'protein' : IDL.Float64,
+  });
+  
+  return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'clearNutritionDay' : IDL.Func([Time], [], []),
+    'getCallerFastingSchedule' : IDL.Func(
+        [],
+        [IDL.Opt(FastingSchedule)],
+        ['query'],
+      ),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getNutritionEntry' : IDL.Func(
+        [IDL.Principal, Time],
+        [IDL.Opt(NutritionDay)],
+        ['query'],
+      ),
+    'getTodayNutritionEntry' : IDL.Func([], [IDL.Opt(NutritionDay)], ['query']),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'saveCallerFastingSchedule' : IDL.Func([FastingSchedule], [], []),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
+  });
+};
 
 export const init = ({ IDL }) => { return []; };

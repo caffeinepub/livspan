@@ -3,9 +3,11 @@ import HelixSpine from '@/components/genome/HelixSpine';
 import FactorMarker from '@/components/dashboard/FactorMarker';
 import AnimatedHelixBackground from '@/components/genome/AnimatedHelixBackground';
 import LanguageSwitcher from '@/components/i18n/LanguageSwitcher';
+import LoginButton from '@/components/auth/LoginButton';
+import ProfileOnboardingGate from '@/components/profile/ProfileOnboardingGate';
 import IntermittentFastingPanel from '@/components/dashboard/IntermittentFastingPanel';
+import NutritionPanel from '@/components/dashboard/NutritionPanel';
 import { useI18n } from '@/i18n/useI18n';
-import { Dna } from 'lucide-react';
 
 type FactorType = 'nutrition' | 'sleep' | 'movement' | 'stress' | 'fasting';
 
@@ -31,113 +33,162 @@ export default function StartDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Static generated DNA helix background image */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-30 blur-sm"
-        style={{
-          backgroundImage: 'url(/assets/generated/dna-helix-dashboard-bokeh.dim_1440x2560.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          mixBlendMode: 'screen',
-        }}
-      />
+    <ProfileOnboardingGate>
+      <div className="min-h-screen relative overflow-hidden">
+        {/* DNA helix background image - lowest layer */}
+        <div
+          className="fixed inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/assets/generated/dna-helix-bg.dim_1440x2560.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
 
-      {/* Animated SVG helix background */}
-      <AnimatedHelixBackground />
+        {/* Dark gradient overlay for depth and contrast */}
+        <div className="fixed inset-0 z-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
 
-      {/* Background texture overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: 'url(/assets/generated/livspan-bio-texture.dim_1440x2560.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+        {/* Animated SVG helix background - reduced opacity to not compete with photo */}
+        <div className="fixed inset-0 z-0 opacity-20">
+          <AnimatedHelixBackground />
+        </div>
 
-      {/* Header */}
-      <header className="relative z-10 border-b border-helix-strand/20 backdrop-blur-sm bg-background/80">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-helix-glow/10 border border-helix-strand/30">
-                <Dna className="w-6 h-6 text-helix-accent" strokeWidth={1.5} />
+        {/* Subtle static background texture - very low opacity */}
+        <div
+          className="fixed inset-0 z-0 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage: 'url(/assets/generated/livspan-bio-texture.dim_1440x2560.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+
+        {/* Header */}
+        <header className="relative z-10 border-b border-helix-strand/30 backdrop-blur-md bg-background/70">
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {/* Logo */}
+                <img 
+                  src="/assets/generated/livspan-logo.dim_400x400.png" 
+                  alt="LivSpan Logo" 
+                  className="w-12 h-12"
+                />
+                <div>
+                  <h1 className="text-2xl font-light tracking-wide bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">
+                    {t.header.title}
+                  </h1>
+                  <p className="text-xs text-muted-foreground font-light">
+                    {t.header.subtitle}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-light tracking-wide text-foreground">
-                  {t.header.title}
-                </h1>
-                <p className="text-xs text-muted-foreground font-mono tracking-wider">
-                  {t.header.subtitle}
+              <div className="flex items-center gap-4">
+                <LanguageSwitcher />
+                <LoginButton />
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main content */}
+        <main className="relative z-10 container mx-auto px-4 py-8">
+          {/* Factor selection with helix spine */}
+          <section className="mb-12">
+            <HelixSpine>
+              {factors.map((factor) => (
+                <FactorMarker
+                  key={factor.id}
+                  id={factor.id}
+                  label={t.factors[factor.id].label}
+                  description={t.factors[factor.id].description}
+                  position={factor.position}
+                  isSelected={selectedFactor === factor.id}
+                  onClick={() => handleFactorClick(factor.id)}
+                />
+              ))}
+            </HelixSpine>
+          </section>
+
+          {/* Factor-specific panels */}
+          {selectedFactor === 'fasting' && (
+            <section className="max-w-4xl mx-auto">
+              <IntermittentFastingPanel />
+            </section>
+          )}
+
+          {selectedFactor === 'nutrition' && (
+            <section className="max-w-4xl mx-auto">
+              <NutritionPanel />
+            </section>
+          )}
+
+          {selectedFactor === 'sleep' && (
+            <section className="max-w-4xl mx-auto">
+              <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
+                <h2 className="text-xl font-light mb-2 bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">{t.factors.sleep.label}</h2>
+                <p className="text-sm text-muted-foreground">
+                  {t.factors.sleep.description}
+                </p>
+                <p className="text-xs text-muted-foreground mt-4 italic">
+                  Coming soon...
                 </p>
               </div>
-            </div>
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </header>
-
-      {/* Main content */}
-      <main className="relative z-10 container mx-auto px-4 py-12">
-        <div className="max-w-5xl mx-auto">
-          {/* Introduction */}
-          <div className="text-center mb-16 space-y-3">
-            <h2 className="text-3xl font-light tracking-wide text-foreground">
-              {t.intro.heading}
-            </h2>
-            <p className="text-sm text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
-              {t.intro.description}
-            </p>
-          </div>
-
-          {/* Helix spine with factor markers */}
-          <HelixSpine>
-            {factors.map((factor) => (
-              <FactorMarker
-                key={factor.id}
-                id={factor.id}
-                label={t.factors[factor.id].label}
-                description={t.factors[factor.id].description}
-                position={factor.position}
-                isSelected={selectedFactor === factor.id}
-                onClick={() => handleFactorClick(factor.id)}
-              />
-            ))}
-          </HelixSpine>
-
-          {/* Intermittent Fasting Panel - conditionally rendered */}
-          {selectedFactor === 'fasting' && (
-            <div className="mt-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <IntermittentFastingPanel />
-            </div>
+            </section>
           )}
-        </div>
-      </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-helix-strand/20 backdrop-blur-sm bg-background/80 mt-20">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col items-center gap-2 text-center">
-            <p className="text-xs text-muted-foreground font-light">
-              {t.footer.builtWith}{' '}
-              <a
-                href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
-                  typeof window !== 'undefined' ? window.location.hostname : 'livspan-app'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-helix-accent hover:text-helix-accent/80 transition-colors underline-offset-4 hover:underline"
-              >
-                caffeine.ai
-              </a>
-            </p>
-            <p className="text-xs text-muted-foreground/60 font-mono">
-              © {new Date().getFullYear()} {t.footer.copyright}
-            </p>
+          {selectedFactor === 'movement' && (
+            <section className="max-w-4xl mx-auto">
+              <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
+                <h2 className="text-xl font-light mb-2 bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">{t.factors.movement.label}</h2>
+                <p className="text-sm text-muted-foreground">
+                  {t.factors.movement.description}
+                </p>
+                <p className="text-xs text-muted-foreground mt-4 italic">
+                  Coming soon...
+                </p>
+              </div>
+            </section>
+          )}
+
+          {selectedFactor === 'stress' && (
+            <section className="max-w-4xl mx-auto">
+              <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
+                <h2 className="text-xl font-light mb-2 bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">{t.factors.stress.label}</h2>
+                <p className="text-sm text-muted-foreground">
+                  {t.factors.stress.description}
+                </p>
+                <p className="text-xs text-muted-foreground mt-4 italic">
+                  Coming soon...
+                </p>
+              </div>
+            </section>
+          )}
+        </main>
+
+        {/* Footer */}
+        <footer className="relative z-10 border-t border-helix-strand/30 backdrop-blur-md bg-background/70 mt-16">
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+              <p>© {new Date().getFullYear()} LivSpan. {t.footer.copyright}</p>
+              <p>
+                {t.footer.builtWith}{' '}
+                <a
+                  href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
+                    typeof window !== 'undefined' ? window.location.hostname : 'livspan-app'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-helix-accent transition-colors"
+                >
+                  caffeine.ai
+                </a>
+              </p>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </ProfileOnboardingGate>
   );
 }

@@ -1,87 +1,56 @@
 {
   "kind": "build_request",
-  "title": "Add a data-oriented Intermittent Fasting dashboard section",
+  "title": "Replace logo with uploaded token image without modifications",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add a data-oriented Intermittent Fasting detail view that appears on the dashboard when the “Intermittent Fasting” factor is selected, emphasizing quantitative metrics and structured data (KPIs, timelines, and summaries) rather than a minimal/abstract presentation.",
+      "text": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-5"
         ],
         "quotes": [
-          "Eher stärker datenorientiert wirken"
+          "Bitte nur das Foto den Token als Logo ohne Rahmen und Veränderungen einbinden"
         ]
       },
       "acceptanceCriteria": [
-        "When the user selects the fasting factor marker, a fasting-focused panel/section becomes visible in the dashboard.",
-        "The fasting panel uses a clearly data-forward layout (e.g., KPI tiles, small tables/lists, and timeline-style blocks) and uses legible numeric typography (e.g., monospace for time/metrics) consistent with the existing dark theme.",
-        "The fasting panel can be dismissed/hidden by de-selecting the fasting marker (clicking it again), consistent with the current selectedFactor toggle behavior."
+        "The uploaded token image is displayed as the logo on the login page",
+        "No frame, border, background, or visual modifications are applied to the token image",
+        "The token image is properly sized and positioned where the logo appears"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Implement the Intermittent Fasting panel contents to include: (1) a current status block (Fasting / Eating Window / Starts In…), (2) a timer-style time readout for time remaining or time elapsed, (3) a progress indicator for the current window, (4) a daily + weekly summary (e.g., fasting sessions count, total fasting hours), (5) a streak metric, and (6) a small “insights/tips” area based on the current phase; all user-facing strings must be in English (and German when DE is selected) using the existing i18n structure.",
+      "text": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-5"
         ],
         "quotes": [
-          "Eher stärker datenorientiert wirken"
+          "Bitte nur das Foto den Token als Logo ohne Rahmen und Veränderungen einbinden"
         ]
       },
       "acceptanceCriteria": [
-        "The fasting panel shows all six content groups (status, timer, progress, daily/weekly summary, streak, insights/tips).",
-        "The timer readout updates while visible (at least once per second) and remains performant (no UI jank).",
-        "Daily/weekly stats and streak are displayed as numeric values in a consistent unit format.",
-        "All new labels/messages in the fasting panel are translated via the existing translations dictionary and switch correctly with the language toggle."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Ensure the fasting panel integrates cleanly into the existing StartDashboard layout with responsive behavior (mobile through desktop), without obscuring the helix visuals or breaking existing factor marker interactions.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "Eher stärker datenorientiert wirken"
-        ]
-      },
-      "acceptanceCriteria": [
-        "On small screens, the fasting panel content remains readable without horizontal overflow and stacks appropriately.",
-        "On larger screens, the fasting panel does not overlap the factor marker cards; spacing and z-indexing keep the helix/markers usable.",
-        "All existing factor markers remain clickable and keyboard-accessible as before."
+        "The uploaded token image is displayed as the logo on the dashboard",
+        "No frame, border, background, or visual modifications are applied to the token image",
+        "The token image is properly sized and positioned where the logo appears"
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (compose existing components instead).",
-    "Do not modify frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
-    "Keep all user-facing text in English in EN mode and German in DE mode via the existing i18n mechanism."
+    "Use the exact uploaded image without any modifications, frames, or borders",
+    "Preserve all existing backgrounds and design elements"
   ],
   "nonGoals": [
-    "Persisting fasting schedules/logs to the Motoko backend.",
-    "Adding notifications, reminders, push, email, or SMS features.",
-    "Adding real-time collaboration or chat.",
-    "Integrating external health APIs or device data."
+    "Creating variations or edited versions of the token image",
+    "Adding decorative frames or borders around the logo",
+    "Modifying the existing page backgrounds or themes"
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

@@ -18,14 +18,14 @@ export default function HelixSpine({ children }: HelixSpineProps) {
       >
         <defs>
           <linearGradient id="helixGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.12" />
-            <stop offset="50%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.20" />
-            <stop offset="100%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.12" />
+            <stop offset="0%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.15" />
+            <stop offset="50%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.15" />
           </linearGradient>
           <linearGradient id="helixGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.10" />
-            <stop offset="50%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.10" />
+            <stop offset="0%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.12" />
+            <stop offset="50%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.12" />
           </linearGradient>
         </defs>
 
@@ -51,11 +51,11 @@ export default function HelixSpine({ children }: HelixSpineProps) {
           />
         </g>
 
-        {/* Connecting base pairs - more frequent, evenly spaced for scientific look */}
+        {/* Connecting base pairs - evenly distributed along helix for scientific appearance */}
         <g className="motion-safe:animate-helix-pulse motion-reduce:animate-none">
-          {Array.from({ length: 16 }).map((_, i) => {
-            const y = (i / 15) * 100;
-            const phase = (i / 15) * Math.PI * 2;
+          {Array.from({ length: 20 }).map((_, i) => {
+            const y = (i / 19) * 100;
+            const phase = (i / 19) * Math.PI * 2;
             const leftX = 30 + Math.sin(phase) * 10;
             const rightX = 70 - Math.sin(phase) * 10;
             
@@ -68,7 +68,7 @@ export default function HelixSpine({ children }: HelixSpineProps) {
                 y2={`${y}%`}
                 stroke="oklch(var(--helix-strand))"
                 strokeWidth="0.4"
-                strokeOpacity="0.12"
+                strokeOpacity="0.15"
                 vectorEffect="non-scaling-stroke"
               />
             );
@@ -76,8 +76,8 @@ export default function HelixSpine({ children }: HelixSpineProps) {
         </g>
       </svg>
 
-      {/* Factor markers container - adjusted spacing for 5 markers */}
-      <div className="relative space-y-20" style={{ zIndex: 1 }}>
+      {/* Factor markers container - evenly distributed for 5 markers along helix */}
+      <div className="relative space-y-24" style={{ zIndex: 1 }}>
         {children}
       </div>
     </div>

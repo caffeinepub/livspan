@@ -10,7 +10,46 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface _SERVICE {}
+export interface FastingSchedule { 'endHour' : number, 'startHour' : number }
+export type Gender = { 'female' : null } |
+  { 'male' : null } |
+  { 'diverse' : null };
+export interface NutritionDay {
+  'fat' : number,
+  'caloriesConsumed' : bigint,
+  'waterMl' : bigint,
+  'carbs' : number,
+  'bodyWeightKg' : [] | [number],
+  'vegetableGrams' : [] | [bigint],
+  'caloriesBurned' : bigint,
+  'proteinGrams' : [] | [bigint],
+  'protein' : number,
+}
+export type Time = bigint;
+export interface UserProfile {
+  'heightCm' : bigint,
+  'birthYear' : bigint,
+  'name' : string,
+  'gender' : Gender,
+}
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
+export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'clearNutritionDay' : ActorMethod<[Time], undefined>,
+  'getCallerFastingSchedule' : ActorMethod<[], [] | [FastingSchedule]>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getNutritionEntry' : ActorMethod<[Principal, Time], [] | [NutritionDay]>,
+  'getTodayNutritionEntry' : ActorMethod<[], [] | [NutritionDay]>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'saveCallerFastingSchedule' : ActorMethod<[FastingSchedule], undefined>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'saveNutritionDayEntry' : ActorMethod<[Time, NutritionDay], undefined>,
+}
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
 export declare const idlFactory: IDL.InterfaceFactory;

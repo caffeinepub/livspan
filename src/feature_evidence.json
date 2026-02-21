@@ -2,19 +2,18 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-data-oriented-intermittent-fasting-detail-view-that-appears-on-the-dashboard-when-the-intermittent-fasting-factor-is-selected-emphasizing-quantitative-metrics-and-structured-data-kpis-timelines-and-summaries-rather-than-a-minimal-abstract-presentation",
-      "featureTitle": "Add a data-oriented Intermittent Fasting detail view that appears on the dashboard when the “Intermittent Fasting” factor is selected, emphasizing quantitative metrics and structured data (KPIs, timelines, and summaries) rather than a minimal/abstract presentation.",
+      "featureId": "feature-replace-the-current-logo-on-the-login-page-with-the-uploaded-token-image-img-8398-1-png-displayed-without-any-frame-border-or-modifications",
+      "featureTitle": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
       "files": [
-        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-        "frontend/src/index.css",
-        "frontend/src/pages/StartDashboard.tsx"
+        "frontend/src/components/profile/ProfileOnboardingGate.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
         "REQ-1"
@@ -22,43 +21,21 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-the-intermittent-fasting-panel-contents-to-include-1-a-current-status-block-fasting-eating-window-starts-in-2-a-timer-style-time-readout-for-time-remaining-or-time-elapsed-3-a-progress-indicator-for-the-current-window-4-a-daily-weekly-summary-e-g-fasting-sessions-count-total-fasting-hours-5-a-streak-metric-and-6-a-small-insights-tips-area-based-on-the-current-phase-all-user-facing-strings-must-be-in-english-and-german-when-de-is-selected-using-the-existing-i18n-structure",
-      "featureTitle": "Implement the Intermittent Fasting panel contents to include: (1) a current status block (Fasting / Eating Window / Starts In…), (2) a timer-style time readout for time remaining or time elapsed, (3) a progress indicator for the current window, (4) a daily + weekly summary (e.g., fasting sessions count, total fasting hours), (5) a streak metric, and (6) a small “insights/tips” area based on the current phase; all user-facing strings must be in English (and German when DE is selected) using the existing i18n structure.",
+      "featureId": "feature-replace-the-current-logo-on-the-dashboard-with-the-uploaded-token-image-img-8398-1-png-displayed-without-any-frame-border-or-modifications",
+      "featureTitle": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
       "files": [
-        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-        "frontend/src/hooks/useFastingWindowTimer.ts",
-        "frontend/src/i18n/translations.ts",
-        "frontend/src/lib/fastingMetrics.ts",
-        "frontend/src/lib/timeFormat.ts"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
         "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-the-fasting-panel-integrates-cleanly-into-the-existing-startdashboard-layout-with-responsive-behavior-mobile-through-desktop-without-obscuring-the-helix-visuals-or-breaking-existing-factor-marker-interactions",
-      "featureTitle": "Ensure the fasting panel integrates cleanly into the existing StartDashboard layout with responsive behavior (mobile through desktop), without obscuring the helix visuals or breaking existing factor marker interactions.",
-      "files": [
-        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-        "frontend/src/pages/StartDashboard.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
       ],
       "confidence": "high"
     }

@@ -89,10 +89,427 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface backendInterface {
+export interface NutritionDay {
+    fat: number;
+    caloriesConsumed: bigint;
+    waterMl: bigint;
+    carbs: number;
+    bodyWeightKg?: number;
+    vegetableGrams?: bigint;
+    caloriesBurned: bigint;
+    proteinGrams?: bigint;
+    protein: number;
 }
+export interface FastingSchedule {
+    endHour: number;
+    startHour: number;
+}
+export type Time = bigint;
+export interface UserProfile {
+    heightCm: bigint;
+    birthYear: bigint;
+    name: string;
+    gender: Gender;
+}
+export enum Gender {
+    female = "female",
+    male = "male",
+    diverse = "diverse"
+}
+export enum UserRole {
+    admin = "admin",
+    user = "user",
+    guest = "guest"
+}
+export interface backendInterface {
+    _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
+    assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    clearNutritionDay(dayTimestamp: Time): Promise<void>;
+    getCallerFastingSchedule(): Promise<FastingSchedule | null>;
+    getCallerUserProfile(): Promise<UserProfile | null>;
+    getCallerUserRole(): Promise<UserRole>;
+    getNutritionEntry(user: Principal, dayTimestamp: Time): Promise<NutritionDay | null>;
+    getTodayNutritionEntry(): Promise<NutritionDay | null>;
+    getUserProfile(user: Principal): Promise<UserProfile | null>;
+    isCallerAdmin(): Promise<boolean>;
+    saveCallerFastingSchedule(fastingSchedule: FastingSchedule): Promise<void>;
+    saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    saveNutritionDayEntry(dayTimestamp: Time, entry: NutritionDay): Promise<void>;
+}
+import type { FastingSchedule as _FastingSchedule, Gender as _Gender, NutritionDay as _NutritionDay, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async _initializeAccessControlWithSecret(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor._initializeAccessControlWithSecret(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor._initializeAccessControlWithSecret(arg0);
+            return result;
+        }
+    }
+    async assignCallerUserRole(arg0: Principal, arg1: UserRole): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
+    async clearNutritionDay(arg0: Time): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.clearNutritionDay(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.clearNutritionDay(arg0);
+            return result;
+        }
+    }
+    async getCallerFastingSchedule(): Promise<FastingSchedule | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getCallerFastingSchedule();
+                return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerFastingSchedule();
+            return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getCallerUserProfile(): Promise<UserProfile | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getCallerUserProfile();
+                return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerUserProfile();
+            return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getCallerUserRole(): Promise<UserRole> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getCallerUserRole();
+                return from_candid_UserRole_n9(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerUserRole();
+            return from_candid_UserRole_n9(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getNutritionEntry(arg0: Principal, arg1: Time): Promise<NutritionDay | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getNutritionEntry(arg0, arg1);
+                return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getNutritionEntry(arg0, arg1);
+            return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getTodayNutritionEntry(): Promise<NutritionDay | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getTodayNutritionEntry();
+                return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getTodayNutritionEntry();
+            return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getUserProfile(arg0: Principal): Promise<UserProfile | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getUserProfile(arg0);
+                return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getUserProfile(arg0);
+            return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async isCallerAdmin(): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.isCallerAdmin();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.isCallerAdmin();
+            return result;
+        }
+    }
+    async saveCallerFastingSchedule(arg0: FastingSchedule): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveCallerFastingSchedule(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveCallerFastingSchedule(arg0);
+            return result;
+        }
+    }
+    async saveCallerUserProfile(arg0: UserProfile): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveCallerUserProfile(to_candid_UserProfile_n16(this._uploadFile, this._downloadFile, arg0));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveCallerUserProfile(to_candid_UserProfile_n16(this._uploadFile, this._downloadFile, arg0));
+            return result;
+        }
+    }
+    async saveNutritionDayEntry(arg0: Time, arg1: NutritionDay): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveNutritionDayEntry(arg0, to_candid_NutritionDay_n20(this._uploadFile, this._downloadFile, arg1));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveNutritionDayEntry(arg0, to_candid_NutritionDay_n20(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
+}
+function from_candid_Gender_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Gender): Gender {
+    return from_candid_variant_n8(_uploadFile, _downloadFile, value);
+}
+function from_candid_NutritionDay_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _NutritionDay): NutritionDay {
+    return from_candid_record_n13(_uploadFile, _downloadFile, value);
+}
+function from_candid_UserProfile_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserProfile): UserProfile {
+    return from_candid_record_n6(_uploadFile, _downloadFile, value);
+}
+function from_candid_UserRole_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
+    return from_candid_variant_n10(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_NutritionDay]): NutritionDay | null {
+    return value.length === 0 ? null : from_candid_NutritionDay_n12(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [number]): number | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [bigint]): bigint | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_FastingSchedule]): FastingSchedule | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
+    return value.length === 0 ? null : from_candid_UserProfile_n5(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_record_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    fat: number;
+    caloriesConsumed: bigint;
+    waterMl: bigint;
+    carbs: number;
+    bodyWeightKg: [] | [number];
+    vegetableGrams: [] | [bigint];
+    caloriesBurned: bigint;
+    proteinGrams: [] | [bigint];
+    protein: number;
+}): {
+    fat: number;
+    caloriesConsumed: bigint;
+    waterMl: bigint;
+    carbs: number;
+    bodyWeightKg?: number;
+    vegetableGrams?: bigint;
+    caloriesBurned: bigint;
+    proteinGrams?: bigint;
+    protein: number;
+} {
+    return {
+        fat: value.fat,
+        caloriesConsumed: value.caloriesConsumed,
+        waterMl: value.waterMl,
+        carbs: value.carbs,
+        bodyWeightKg: record_opt_to_undefined(from_candid_opt_n14(_uploadFile, _downloadFile, value.bodyWeightKg)),
+        vegetableGrams: record_opt_to_undefined(from_candid_opt_n15(_uploadFile, _downloadFile, value.vegetableGrams)),
+        caloriesBurned: value.caloriesBurned,
+        proteinGrams: record_opt_to_undefined(from_candid_opt_n15(_uploadFile, _downloadFile, value.proteinGrams)),
+        protein: value.protein
+    };
+}
+function from_candid_record_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    heightCm: bigint;
+    birthYear: bigint;
+    name: string;
+    gender: _Gender;
+}): {
+    heightCm: bigint;
+    birthYear: bigint;
+    name: string;
+    gender: Gender;
+} {
+    return {
+        heightCm: value.heightCm,
+        birthYear: value.birthYear,
+        name: value.name,
+        gender: from_candid_Gender_n7(_uploadFile, _downloadFile, value.gender)
+    };
+}
+function from_candid_variant_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+}): UserRole {
+    return "admin" in value ? UserRole.admin : "user" in value ? UserRole.user : "guest" in value ? UserRole.guest : value;
+}
+function from_candid_variant_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    female: null;
+} | {
+    male: null;
+} | {
+    diverse: null;
+}): Gender {
+    return "female" in value ? Gender.female : "male" in value ? Gender.male : "diverse" in value ? Gender.diverse : value;
+}
+function to_candid_Gender_n18(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Gender): _Gender {
+    return to_candid_variant_n19(_uploadFile, _downloadFile, value);
+}
+function to_candid_NutritionDay_n20(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: NutritionDay): _NutritionDay {
+    return to_candid_record_n21(_uploadFile, _downloadFile, value);
+}
+function to_candid_UserProfile_n16(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserProfile): _UserProfile {
+    return to_candid_record_n17(_uploadFile, _downloadFile, value);
+}
+function to_candid_UserRole_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
+    return to_candid_variant_n2(_uploadFile, _downloadFile, value);
+}
+function to_candid_record_n17(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    heightCm: bigint;
+    birthYear: bigint;
+    name: string;
+    gender: Gender;
+}): {
+    heightCm: bigint;
+    birthYear: bigint;
+    name: string;
+    gender: _Gender;
+} {
+    return {
+        heightCm: value.heightCm,
+        birthYear: value.birthYear,
+        name: value.name,
+        gender: to_candid_Gender_n18(_uploadFile, _downloadFile, value.gender)
+    };
+}
+function to_candid_record_n21(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    fat: number;
+    caloriesConsumed: bigint;
+    waterMl: bigint;
+    carbs: number;
+    bodyWeightKg?: number;
+    vegetableGrams?: bigint;
+    caloriesBurned: bigint;
+    proteinGrams?: bigint;
+    protein: number;
+}): {
+    fat: number;
+    caloriesConsumed: bigint;
+    waterMl: bigint;
+    carbs: number;
+    bodyWeightKg: [] | [number];
+    vegetableGrams: [] | [bigint];
+    caloriesBurned: bigint;
+    proteinGrams: [] | [bigint];
+    protein: number;
+} {
+    return {
+        fat: value.fat,
+        caloriesConsumed: value.caloriesConsumed,
+        waterMl: value.waterMl,
+        carbs: value.carbs,
+        bodyWeightKg: value.bodyWeightKg ? candid_some(value.bodyWeightKg) : candid_none(),
+        vegetableGrams: value.vegetableGrams ? candid_some(value.vegetableGrams) : candid_none(),
+        caloriesBurned: value.caloriesBurned,
+        proteinGrams: value.proteinGrams ? candid_some(value.proteinGrams) : candid_none(),
+        protein: value.protein
+    };
+}
+function to_candid_variant_n19(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Gender): {
+    female: null;
+} | {
+    male: null;
+} | {
+    diverse: null;
+} {
+    return value == Gender.female ? {
+        female: null
+    } : value == Gender.male ? {
+        male: null
+    } : value == Gender.diverse ? {
+        diverse: null
+    } : value;
+}
+function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+} {
+    return value == UserRole.admin ? {
+        admin: null
+    } : value == UserRole.user ? {
+        user: null
+    } : value == UserRole.guest ? {
+        guest: null
+    } : value;
 }
 export interface CreateActorOptions {
     agent?: Agent;

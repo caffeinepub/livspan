@@ -7,39 +7,49 @@ interface FastingWindowState {
   progress: number;
 }
 
+interface FastingSchedule {
+  startHour: number;
+  endHour: number;
+}
+
 /**
  * Hook that computes the current fasting/eating phase, elapsed/remaining time,
  * and progress for the current window. Updates once per second while mounted.
  * 
- * This is a demo implementation using a 16:8 schedule (16h fasting, 8h eating)
- * with fasting window from 20:00 to 12:00 (next day).
+ * @param schedule Optional custom schedule. If not provided, defaults to 16:8 (20:00-12:00)
  */
-export function useFastingWindowTimer(): FastingWindowState {
-  const [state, setState] = useState<FastingWindowState>(() => calculateState());
+export function useFastingWindowTimer(schedule?: FastingSchedule | null): FastingWindowState {
+  const [state, setState] = useState<FastingWindowState>(() => calculateState(schedule));
 
   useEffect(() => {
     // Update every second
     const interval = setInterval(() => {
-      setState(calculateState());
+      setState(calculateState(schedule));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [schedule]);
 
   return state;
 }
 
-function calculateState(): FastingWindowState {
+function calculateState(schedule?: FastingSchedule | null): FastingWindowState {
   const now = new Date();
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
   const currentSecond = now.getSeconds();
 
-  // 16:8 schedule: Fasting from 20:00 to 12:00 (next day), Eating from 12:00 to 20:00
-  const fastingStartHour = 20; // 8 PM
-  const fastingEndHour = 12;   // 12 PM (next day)
-  const fastingDurationHours = 16;
-  const eatingDurationHours = 8;
+  // Use provided schedule or default to 16:8 (20:00-12:00)
+  const fastingStartHour = schedule?.startHour ?? 20;
+  const fastingEndHour = schedule?.endHour ?? 12;
+
+  // Calculate fasting duration (handles cross-midnight windows)
+  const fastingDurationHours =
+    fastingEndHour > fastingStartHour
+      ? fastingEndHour - fastingStartHour
+      : (24 - fastingStartHour) + fastingEndHour;
+  
+  const eatingDurationHours = 24 - fastingDurationHours;
 
   let phase: 'fasting' | 'eating';
   let elapsed: number;
@@ -47,28 +57,52 @@ function calculateState(): FastingWindowState {
   let progress: number;
 
   // Determine current phase
-  if (currentHour >= fastingStartHour || currentHour < fastingEndHour) {
+  const isInFastingWindow =
+    fastingStartHour < fastingEndHour
+      ? currentHour >= fastingStartHour && currentHour < fastingEndHour
+      : currentHour >= fastingStartHour || currentHour < fastingEndHour;
+
+  if (isInFastingWindow) {
     // Fasting phase
     phase = 'fasting';
     
     // Calculate elapsed time in fasting window
     let elapsedHours: number;
-    if (currentHour >= fastingStartHour) {
-      // Same day (after 20:00)
+    if (fastingStartHour < fastingEndHour) {
+      // Same-day window
       elapsedHours = currentHour - fastingStartHour;
     } else {
-      // Next day (before 12:00)
-      elapsedHours = (24 - fastingStartHour) + currentHour;
+      // Cross-midnight window
+      if (currentHour >= fastingStartHour) {
+        elapsedHours = currentHour - fastingStartHour;
+      } else {
+        elapsedHours = (24 - fastingStartHour) + currentHour;
+      }
     }
     
     elapsed = (elapsedHours * 3600) + (currentMinute * 60) + currentSecond;
     remaining = (fastingDurationHours * 3600) - elapsed;
     progress = (elapsed / (fastingDurationHours * 3600)) * 100;
   } else {
-    // Eating phase (12:00 to 20:00)
+    // Eating phase
     phase = 'eating';
     
-    const elapsedHours = currentHour - fastingEndHour;
+    // Calculate elapsed time in eating window
+    let elapsedHours: number;
+    if (fastingStartHour < fastingEndHour) {
+      // Eating window wraps midnight
+      if (currentHour >= fastingEndHour && currentHour < fastingStartHour) {
+        elapsedHours = currentHour - fastingEndHour;
+      } else if (currentHour >= fastingEndHour) {
+        elapsedHours = currentHour - fastingEndHour;
+      } else {
+        elapsedHours = (24 - fastingEndHour) + currentHour;
+      }
+    } else {
+      // Eating window is same-day
+      elapsedHours = currentHour - fastingEndHour;
+    }
+    
     elapsed = (elapsedHours * 3600) + (currentMinute * 60) + currentSecond;
     remaining = (eatingDurationHours * 3600) - elapsed;
     progress = (elapsed / (eatingDurationHours * 3600)) * 100;

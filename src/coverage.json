@@ -1,60 +1,35 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T08:49:20.664Z",
+  "generatedAt": "2026-02-20T09:06:10.120Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add a data-oriented Intermittent Fasting detail view that appears on the dashboard when the “Intermittent Fasting” factor is selected, emphasizing quantitative metrics and structured data (KPIs, timelines, and summaries) rather than a minimal/abstract presentation.",
+        "summary": "Replace the current logo on the login page with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/StartDashboard.tsx",
-          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/profile/ProfileOnboardingGate.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/StartDashboard.tsx",
-          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/profile/ProfileOnboardingGate.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Implement the Intermittent Fasting panel contents to include: (1) a current status block (Fasting / Eating Window / Starts In…), (2) a timer-style time readout for time remaining or time elapsed, (3) a progress indicator for the current window, (4) a daily + weekly summary (e.g., fasting sessions count, total fasting hours), (5) a streak metric, and (6) a small “insights/tips” area based on the current phase; all user-facing strings must be in English (and German when DE is selected) using the existing i18n structure.",
+        "summary": "Replace the current logo on the dashboard with the uploaded token image (IMG_8398-1.png) displayed without any frame, border, or modifications",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-          "frontend/src/hooks/useFastingWindowTimer.ts",
-          "frontend/src/lib/fastingMetrics.ts",
-          "frontend/src/lib/timeFormat.ts",
-          "frontend/src/i18n/translations.ts"
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-          "frontend/src/hooks/useFastingWindowTimer.ts",
-          "frontend/src/lib/fastingMetrics.ts",
-          "frontend/src/lib/timeFormat.ts",
-          "frontend/src/i18n/translations.ts"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Ensure the fasting panel integrates cleanly into the existing StartDashboard layout with responsive behavior (mobile through desktop), without obscuring the helix visuals or breaking existing factor marker interactions.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/StartDashboard.tsx",
-          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/StartDashboard.tsx",
-          "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
+          "frontend/src/App.tsx"
         ]
       }
     ]
@@ -64,13 +39,8 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-    "frontend/src/hooks/useFastingWindowTimer.ts",
-    "frontend/src/i18n/translations.ts",
-    "frontend/src/index.css",
-    "frontend/src/lib/fastingMetrics.ts",
-    "frontend/src/lib/timeFormat.ts",
-    "frontend/src/pages/StartDashboard.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/components/profile/ProfileOnboardingGate.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

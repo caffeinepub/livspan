@@ -38,6 +38,68 @@ export interface Translations {
   languageSwitcher: {
     label: string;
   };
+  auth: {
+    login: string;
+    logout: string;
+    loggingIn: string;
+  };
+  profile: {
+    loginRequired: {
+      title: string;
+      description: string;
+    };
+    setup: {
+      title: string;
+      description: string;
+    };
+    fields: {
+      name: string;
+      birthYear: string;
+      heightCm: string;
+      gender: string;
+    };
+    placeholders: {
+      name: string;
+      birthYear: string;
+      heightCm: string;
+    };
+    genderOptions: {
+      male: string;
+      female: string;
+      diverse: string;
+    };
+    validation: {
+      nameRequired: string;
+      birthYearInvalid: string;
+      heightInvalid: string;
+    };
+    actions: {
+      save: string;
+      saving: string;
+    };
+  };
+  fastingSchedule: {
+    title: string;
+    description: string;
+    current: {
+      label: string;
+      protocol: string;
+    };
+    fields: {
+      startHour: string;
+      endHour: string;
+    };
+    help: {
+      crossMidnight: string;
+      protocol: string;
+    };
+    actions: {
+      edit: string;
+      save: string;
+      saving: string;
+      cancel: string;
+    };
+  };
   fastingPanel: {
     title: string;
     subtitle: string;
@@ -78,6 +140,50 @@ export interface Translations {
       eatingTip: string;
     };
   };
+  nutritionPanel: {
+    title: string;
+    subtitle: string;
+    authRequired: string;
+    fastingPhase: {
+      label: string;
+      fasting: string;
+      eating: string;
+      fastingTip: string;
+      eatingTip: string;
+    };
+    weight: {
+      label: string;
+      unit: string;
+    };
+    bmi: {
+      label: string;
+      unit: string;
+      heightMissing: string;
+    };
+    protein: {
+      label: string;
+      target: string;
+      targetUnavailable: string;
+      consumed: string;
+      progress: string;
+      targetReached: string;
+      remaining: string;
+    };
+    vegetables: {
+      label: string;
+      goal: string;
+      consumed: string;
+      progress: string;
+      goalReached: string;
+      remaining: string;
+    };
+    actions: {
+      save: string;
+      saving: string;
+      saveSuccess: string;
+      saveError: string;
+    };
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -98,66 +204,172 @@ export const translations: Record<Language, Translations> = {
       },
       sleep: {
         label: 'Sleep',
-        description: 'Monitor sleep quality and duration',
+        description: 'Monitor your sleep quality and duration',
       },
       movement: {
         label: 'Movement',
-        description: 'Record physical activity and exercise',
+        description: 'Track your physical activity and exercise',
       },
       stress: {
         label: 'Stress',
         description: 'Manage stress levels and mental well-being',
       },
       fasting: {
-        label: 'Intermittent Fasting',
-        description: 'Manage your fasting windows and schedules',
+        label: 'Fasting',
+        description: 'Monitor your intermittent fasting schedule',
       },
     },
     footer: {
       builtWith: 'Built with love using',
-      copyright: 'LivSpan',
+      copyright: 'All rights reserved',
     },
     languageSwitcher: {
-      label: 'Language',
+      label: 'Switch language',
+    },
+    auth: {
+      login: 'Login',
+      logout: 'Logout',
+      loggingIn: 'Logging in...',
+    },
+    profile: {
+      loginRequired: {
+        title: 'Welcome to LivSpan',
+        description: 'Please log in to access your personalized longevity dashboard and track your health data.',
+      },
+      setup: {
+        title: 'Complete Your Profile',
+        description: 'Tell us a bit about yourself to personalize your health tracking experience.',
+      },
+      fields: {
+        name: 'Name',
+        birthYear: 'Birth Year',
+        heightCm: 'Height (cm)',
+        gender: 'Gender',
+      },
+      placeholders: {
+        name: 'Enter your name',
+        birthYear: '1990',
+        heightCm: '170',
+      },
+      genderOptions: {
+        male: 'Male',
+        female: 'Female',
+        diverse: 'Diverse',
+      },
+      validation: {
+        nameRequired: 'Name is required',
+        birthYearInvalid: 'Please enter a valid birth year (1900-present)',
+        heightInvalid: 'Please enter a valid height (50-300 cm)',
+      },
+      actions: {
+        save: 'Save Profile',
+        saving: 'Saving...',
+      },
+    },
+    fastingSchedule: {
+      title: 'Fasting Schedule',
+      description: 'Customize your daily fasting window',
+      current: {
+        label: 'Current Schedule',
+        protocol: 'Protocol',
+      },
+      fields: {
+        startHour: 'Fasting Start',
+        endHour: 'Fasting End',
+      },
+      help: {
+        crossMidnight: 'Your fasting window can cross midnight (e.g., 20:00 to 12:00 next day).',
+        protocol: 'Protocol',
+      },
+      actions: {
+        edit: 'Edit Schedule',
+        save: 'Save',
+        saving: 'Saving...',
+        cancel: 'Cancel',
+      },
     },
     fastingPanel: {
       title: 'Intermittent Fasting',
-      subtitle: 'REAL-TIME METRICS & INSIGHTS',
+      subtitle: '16:8 PROTOCOL',
       status: {
         label: 'Current Status',
         fasting: 'Fasting',
         eating: 'Eating Window',
         fastingDesc: 'Your body is in fat-burning mode',
-        eatingDesc: 'Nutrient intake window active',
+        eatingDesc: 'Time to nourish your body',
       },
       timer: {
         elapsed: 'Time Elapsed',
         remaining: 'Time Remaining',
-        elapsedDesc: 'Current window duration',
-        remainingDesc: 'Until window closes',
+        elapsedDesc: 'in current phase',
+        remainingDesc: 'until phase ends',
       },
       progress: {
-        label: 'Current Window Progress',
+        label: 'Phase Progress',
         complete: 'Complete',
       },
       daily: {
         label: 'Today',
         sessions: 'Sessions',
-        hours: 'Total Hours',
+        hours: 'Hours',
       },
       weekly: {
         label: 'This Week',
         sessions: 'Sessions',
-        hours: 'Total Hours',
+        hours: 'Hours',
       },
       streak: {
         label: 'Current Streak',
-        days: 'Consecutive Days',
+        days: 'Days',
       },
       insights: {
-        label: 'Insights & Tips',
-        fastingTip: 'Stay hydrated during your fasting window. Water, black coffee, and unsweetened tea are excellent choices to maintain hydration and support autophagy.',
-        eatingTip: 'Focus on nutrient-dense whole foods during your eating window. Prioritize protein, healthy fats, and fiber-rich vegetables for optimal satiety and metabolic health.',
+        label: 'Insights',
+        fastingTip: 'Stay hydrated during your fasting window. Water, black coffee, and unsweetened tea are allowed.',
+        eatingTip: 'Focus on nutrient-dense whole foods. Prioritize protein and vegetables for optimal health.',
+      },
+    },
+    nutritionPanel: {
+      title: 'Nutrition',
+      subtitle: 'NATURELL PROTOCOL',
+      authRequired: 'Please log in to track your daily nutrition.',
+      fastingPhase: {
+        label: 'Fasting Phase',
+        fasting: 'Fasting',
+        eating: 'Eating Window',
+        fastingTip: 'Stay hydrated during your fasting window. Water, black coffee, and unsweetened tea are allowed.',
+        eatingTip: 'Focus on protein and vegetables. Aim for 1.8g protein per kg body weight and 400g vegetables daily.',
+      },
+      weight: {
+        label: 'Body Weight',
+        unit: 'Weight (kg)',
+      },
+      bmi: {
+        label: 'Body Mass Index',
+        unit: 'BMI',
+        heightMissing: 'Please complete your profile with height to calculate BMI.',
+      },
+      protein: {
+        label: 'Protein Intake',
+        target: 'Daily Target (1.8 g/kg)',
+        targetUnavailable: 'Enter weight to see target',
+        consumed: 'Consumed',
+        progress: 'Progress',
+        targetReached: '✓ Daily protein target reached!',
+        remaining: '{amount} g remaining to reach target',
+      },
+      vegetables: {
+        label: 'Vegetable Intake',
+        goal: 'Daily Goal',
+        consumed: 'Consumed',
+        progress: 'Progress',
+        goalReached: '✓ Daily vegetable goal reached!',
+        remaining: '{amount} g remaining to reach goal',
+      },
+      actions: {
+        save: 'Save Today\'s Nutrition',
+        saving: 'Saving...',
+        saveSuccess: 'Nutrition data saved successfully',
+        saveError: 'Failed to save nutrition data',
       },
     },
   },
@@ -167,77 +379,188 @@ export const translations: Record<Language, Translations> = {
       subtitle: 'LANGLEBIGKEITS-DASHBOARD',
     },
     intro: {
-      heading: 'Ihr Gesundheitsgenom',
+      heading: 'Dein Gesundheitsgenom',
       description:
-        'Überwachen Sie die fünf grundlegenden Faktoren, die Langlebigkeit und Wohlbefinden beeinflussen. Jedes Element verbindet sich zu Ihrem einzigartigen Gesundheitsprofil.',
+        'Überwache die fünf grundlegenden Faktoren, die Langlebigkeit und Wohlbefinden beeinflussen. Jedes Element verbindet sich zu deinem einzigartigen Gesundheitsprofil.',
     },
     factors: {
       nutrition: {
         label: 'Ernährung',
-        description: 'Verfolgen Sie Ihre tägliche Nährstoffaufnahme und Balance',
+        description: 'Verfolge deine tägliche Nahrungsaufnahme und Balance',
       },
       sleep: {
         label: 'Schlaf',
-        description: 'Überwachen Sie Schlafqualität und -dauer',
+        description: 'Überwache deine Schlafqualität und -dauer',
       },
       movement: {
         label: 'Bewegung',
-        description: 'Erfassen Sie körperliche Aktivität und Training',
+        description: 'Verfolge deine körperliche Aktivität und Übungen',
       },
       stress: {
         label: 'Stress',
-        description: 'Verwalten Sie Stresslevel und mentales Wohlbefinden',
+        description: 'Manage Stresslevel und mentales Wohlbefinden',
       },
       fasting: {
-        label: 'Intervallfasten',
-        description: 'Verwalten Sie Ihre Fastenfenster und Zeitpläne',
+        label: 'Fasten',
+        description: 'Überwache deinen Intervallfasten-Zeitplan',
       },
     },
     footer: {
       builtWith: 'Mit Liebe erstellt mit',
-      copyright: 'LivSpan',
+      copyright: 'Alle Rechte vorbehalten',
     },
     languageSwitcher: {
-      label: 'Sprache',
+      label: 'Sprache wechseln',
+    },
+    auth: {
+      login: 'Anmelden',
+      logout: 'Abmelden',
+      loggingIn: 'Anmeldung läuft...',
+    },
+    profile: {
+      loginRequired: {
+        title: 'Willkommen bei LivSpan',
+        description:
+          'Bitte melde dich an, um auf dein personalisiertes Langlebigkeits-Dashboard zuzugreifen und deine Gesundheitsdaten zu verfolgen.',
+      },
+      setup: {
+        title: 'Vervollständige dein Profil',
+        description: 'Erzähle uns ein wenig über dich, um deine Gesundheitsverfolgung zu personalisieren.',
+      },
+      fields: {
+        name: 'Name',
+        birthYear: 'Geburtsjahr',
+        heightCm: 'Größe (cm)',
+        gender: 'Geschlecht',
+      },
+      placeholders: {
+        name: 'Gib deinen Namen ein',
+        birthYear: '1990',
+        heightCm: '170',
+      },
+      genderOptions: {
+        male: 'Männlich',
+        female: 'Weiblich',
+        diverse: 'Divers',
+      },
+      validation: {
+        nameRequired: 'Name ist erforderlich',
+        birthYearInvalid: 'Bitte gib ein gültiges Geburtsjahr ein (1900-heute)',
+        heightInvalid: 'Bitte gib eine gültige Größe ein (50-300 cm)',
+      },
+      actions: {
+        save: 'Profil speichern',
+        saving: 'Speichern...',
+      },
+    },
+    fastingSchedule: {
+      title: 'Fastenplan',
+      description: 'Passe dein tägliches Fastenfenster an',
+      current: {
+        label: 'Aktueller Plan',
+        protocol: 'Protokoll',
+      },
+      fields: {
+        startHour: 'Fastenbeginn',
+        endHour: 'Fastenende',
+      },
+      help: {
+        crossMidnight: 'Dein Fastenfenster kann über Mitternacht gehen (z.B. 20:00 bis 12:00 am nächsten Tag).',
+        protocol: 'Protokoll',
+      },
+      actions: {
+        edit: 'Plan bearbeiten',
+        save: 'Speichern',
+        saving: 'Speichern...',
+        cancel: 'Abbrechen',
+      },
     },
     fastingPanel: {
       title: 'Intervallfasten',
-      subtitle: 'ECHTZEIT-METRIKEN & EINBLICKE',
+      subtitle: '16:8 PROTOKOLL',
       status: {
         label: 'Aktueller Status',
         fasting: 'Fastenphase',
         eating: 'Essensfenster',
-        fastingDesc: 'Ihr Körper ist im Fettverbrennungsmodus',
-        eatingDesc: 'Nährstoffaufnahme-Fenster aktiv',
+        fastingDesc: 'Dein Körper ist im Fettverbrennungsmodus',
+        eatingDesc: 'Zeit, deinen Körper zu nähren',
       },
       timer: {
         elapsed: 'Verstrichene Zeit',
         remaining: 'Verbleibende Zeit',
-        elapsedDesc: 'Aktuelle Fensterdauer',
-        remainingDesc: 'Bis Fenster schließt',
+        elapsedDesc: 'in aktueller Phase',
+        remainingDesc: 'bis Phasenende',
       },
       progress: {
-        label: 'Fortschritt Aktuelles Fenster',
+        label: 'Phasenfortschritt',
         complete: 'Abgeschlossen',
       },
       daily: {
         label: 'Heute',
         sessions: 'Sitzungen',
-        hours: 'Gesamtstunden',
+        hours: 'Stunden',
       },
       weekly: {
         label: 'Diese Woche',
         sessions: 'Sitzungen',
-        hours: 'Gesamtstunden',
+        hours: 'Stunden',
       },
       streak: {
         label: 'Aktuelle Serie',
-        days: 'Aufeinanderfolgende Tage',
+        days: 'Tage',
       },
       insights: {
-        label: 'Einblicke & Tipps',
-        fastingTip: 'Bleiben Sie während Ihres Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind ausgezeichnete Optionen zur Aufrechterhaltung der Hydratation und Unterstützung der Autophagie.',
-        eatingTip: 'Konzentrieren Sie sich während Ihres Essensfensters auf nährstoffreiche Vollwertkost. Priorisieren Sie Protein, gesunde Fette und ballaststoffreiches Gemüse für optimale Sättigung und Stoffwechselgesundheit.',
+        label: 'Einblicke',
+        fastingTip:
+          'Bleib während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
+        eatingTip:
+          'Konzentriere dich auf nährstoffreiche Vollwertkost. Priorisiere Protein und Gemüse für optimale Gesundheit.',
+      },
+    },
+    nutritionPanel: {
+      title: 'Ernährung',
+      subtitle: 'NATURELL PROTOKOLL',
+      authRequired: 'Bitte melde dich an, um deine tägliche Ernährung zu verfolgen.',
+      fastingPhase: {
+        label: 'Fastenphase',
+        fasting: 'Fastenphase',
+        eating: 'Essensfenster',
+        fastingTip:
+          'Bleib während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
+        eatingTip:
+          'Konzentriere dich auf Protein und Gemüse. Ziel: 1,8g Protein pro kg Körpergewicht und 400g Gemüse täglich.',
+      },
+      weight: {
+        label: 'Körpergewicht',
+        unit: 'Gewicht (kg)',
+      },
+      bmi: {
+        label: 'Body-Mass-Index',
+        unit: 'BMI',
+        heightMissing: 'Bitte vervollständige dein Profil mit der Körpergröße, um den BMI zu berechnen.',
+      },
+      protein: {
+        label: 'Proteinzufuhr',
+        target: 'Tagesziel (1,8 g/kg)',
+        targetUnavailable: 'Gewicht eingeben für Ziel',
+        consumed: 'Aufgenommen',
+        progress: 'Fortschritt',
+        targetReached: '✓ Tägliches Proteinziel erreicht!',
+        remaining: '{amount} g verbleibend bis zum Ziel',
+      },
+      vegetables: {
+        label: 'Gemüsezufuhr',
+        goal: 'Tagesziel',
+        consumed: 'Aufgenommen',
+        progress: 'Fortschritt',
+        goalReached: '✓ Tägliches Gemüseziel erreicht!',
+        remaining: '{amount} g verbleibend bis zum Ziel',
+      },
+      actions: {
+        save: 'Heutige Ernährung speichern',
+        saving: 'Speichern...',
+        saveSuccess: 'Ernährungsdaten erfolgreich gespeichert',
+        saveError: 'Fehler beim Speichern der Ernährungsdaten',
       },
     },
   },

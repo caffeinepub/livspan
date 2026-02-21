@@ -1,24 +1,26 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import type { NutritionDay } from '@/backend';
+import type { UserProfile } from '@/backend';
 import { queryKeys } from './queryKeys';
 
 /**
- * Hook to fetch today's nutrition entry for the authenticated user
+ * Hook to fetch the current user's profile
+ * Implements actor-dependent loading to prevent onboarding UI flash
  */
-export function useGetTodayNutrition() {
+export function useGetCallerUserProfile() {
   const { actor, isFetching: actorFetching } = useActor();
 
-  const query = useQuery<NutritionDay | null>({
-    queryKey: queryKeys.nutrition.today,
+  const query = useQuery<UserProfile | null>({
+    queryKey: queryKeys.userProfile,
     queryFn: async () => {
       if (!actor) throw new Error('Actor not available');
-      return actor.getTodayNutritionEntry();
+      return actor.getCallerUserProfile();
     },
     enabled: !!actor && !actorFetching,
     retry: false,
   });
 
+  // Return custom state that properly reflects actor dependency
   return {
     ...query,
     isLoading: actorFetching || query.isLoading,
@@ -27,25 +29,20 @@ export function useGetTodayNutrition() {
 }
 
 /**
- * Hook to save/update today's nutrition entry
+ * Hook to save the current user's profile
  * Returns mutation object so caller can handle success/error notifications
  */
-export function useSaveNutritionEntry() {
+export function useSaveCallerUserProfile() {
   const { actor } = useActor();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (entry: NutritionDay) => {
+    mutationFn: async (profile: UserProfile) => {
       if (!actor) throw new Error('Actor not available');
-      
-      // Calculate today's timestamp (in days since epoch)
-      const today = BigInt(Math.floor(Date.now() / 86400000));
-      
-      await actor.saveNutritionDayEntry(today, entry);
+      await actor.saveCallerUserProfile(profile);
     },
     onSuccess: () => {
-      // Invalidate and refetch today's nutrition data
-      queryClient.invalidateQueries({ queryKey: queryKeys.nutrition.today });
+      queryClient.invalidateQueries({ queryKey: queryKeys.userProfile });
     },
   });
 }
