@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Add LivSpan logo to dashboard and apply gradient styling to headings and fasting timer.
+**Goal:** Update the application's color scheme to match the LivSpan logo and harmonize tile colors with the DNA helix background.
 
 **Planned changes:**
-- Display IMG_8398-1.png logo in top left corner of dashboard page
-- Apply bright green gradient effect to all page headings
-- Style fasting timer number line with green-to-blue gradient
+- Change all heading colors from green to match the LivSpan logo color tone
+- Update gradient utilities in frontend/index.css to use the logo's color palette
+- Adjust FactorMarker tile colors to harmonize with the DNA helix background while maintaining proper contrast
 
-**User-visible outcome:** Users will see the LivSpan logo on the dashboard matching the login page, vibrant green gradient headings throughout the app, and a visually enhanced fasting timer with green-to-blue gradient numbers.
+**User-visible outcome:** The application will have a more cohesive visual design with headings matching the logo colors and tiles that blend harmoniously with the background, creating a unified brand experience.

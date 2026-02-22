@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-display-the-livspan-logo-img-8398-1-png-in-the-top-left-corner-of-the-dashboard-page-matching-the-styling-and-placement-used-on-the-login-page",
-      "featureTitle": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
+      "featureId": "feature-change-all-heading-colors-from-green-to-match-the-livspan-logo-color-tone-update-the-gradient-utilities-in-frontend-index-css-to-use-the-logo-s-color-palette-instead-of-the-current-green-gradient-and-ensure-all-headings-throughout-the-application-use-this-new-color-scheme",
+      "featureTitle": "Change all heading colors from green to match the LivSpan logo color tone. Update the gradient utilities in frontend/index.css to use the logo's color palette instead of the current green gradient, and ensure all headings throughout the application use this new color scheme.",
       "files": [
-        "frontend/src/pages/StartDashboard.tsx"
+        "frontend/src/index.css"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -21,11 +21,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-apply-a-bright-green-gradient-effect-to-all-page-headings-across-the-application",
-      "featureTitle": "Apply a bright green gradient effect to all page headings across the application",
+      "featureId": "feature-adjust-tile-factormarker-cards-colors-to-harmonize-with-the-background-update-the-factormarker-component-styling-to-use-colors-that-complement-the-dna-helix-background-ensuring-proper-contrast-while-maintaining-visual-cohesion-with-the-overall-theme",
+      "featureTitle": "Adjust tile (FactorMarker cards) colors to harmonize with the background. Update the FactorMarker component styling to use colors that complement the DNA helix background, ensuring proper contrast while maintaining visual cohesion with the overall theme.",
       "files": [
-        "frontend/src/index.css",
-        "frontend/src/pages/StartDashboard.tsx"
+        "frontend/src/components/dashboard/FactorMarker.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -37,25 +36,6 @@
       ],
       "testIds": [
         "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-style-the-fasting-timer-number-line-display-with-a-green-to-blue-gradient-effect",
-      "featureTitle": "Style the fasting timer number line display with a green-to-blue gradient effect",
-      "files": [
-        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
       ],
       "confidence": "high"
     }

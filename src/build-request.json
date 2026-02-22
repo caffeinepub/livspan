@@ -1,73 +1,56 @@
 {
   "kind": "build_request",
-  "title": "Add logo to dashboard and apply gradient styling",
+  "title": "Update heading and tile colors to match logo and background",
+  "projectName": "LivSpan",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
+      "text": "Change all heading colors from green to match the LivSpan logo color tone. Update the gradient utilities in frontend/index.css to use the logo's color palette instead of the current green gradient, and ensure all headings throughout the application use this new color scheme.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-user-final"
         ],
         "quotes": [
-          "Das Logo von der Anmeldeseite jetzt auch auf dem Dashboard oben links anbringen"
+          "Überschriften nicht in grün sondern im gleichen Farbton wie das Logo gestalten"
         ]
       },
       "acceptanceCriteria": [
-        "Logo appears in top left corner of StartDashboard page",
-        "Logo uses the same IMG_8398-1.png asset as the login page",
-        "Logo styling matches the login page implementation"
+        "All headings use the logo's color tone instead of green",
+        "Gradient utilities in CSS are updated to reflect logo colors",
+        "Visual consistency is maintained across all dashboard panels and components"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Apply a bright green gradient effect to all page headings across the application",
+      "text": "Adjust tile (FactorMarker cards) colors to harmonize with the background. Update the FactorMarker component styling to use colors that complement the DNA helix background, ensuring proper contrast while maintaining visual cohesion with the overall theme.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-user-final"
         ],
         "quotes": [
-          "Überschriften der Seiten im leuchtenden grünen Farbverlauf"
+          "Kacheln passend zum Hintergrund farblich gestalten"
         ]
       },
       "acceptanceCriteria": [
-        "All page headings use a luminous green gradient",
-        "Gradient is consistent across all pages",
-        "Text remains readable against the background"
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Style the fasting timer number line display with a green-to-blue gradient effect",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "Zahlenstrahl im grün - blauen Farbverlauf darstellen"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The fasting timer number display uses a green-to-blue gradient",
-        "Gradient transitions smoothly from green to blue",
-        "Numbers remain clearly legible"
+        "FactorMarker tiles have colors that harmonize with the DNA helix background",
+        "Sufficient contrast is maintained for readability",
+        "Hover and selection states remain visually clear"
       ]
     }
   ],
   "constraints": [
-    "Use the existing IMG_8398-1.png logo asset without modifications",
-    "Maintain existing DNA helix theme and color scheme",
-    "Do not modify immutable frontend paths including UI components, hooks, and main.tsx"
+    "Do not modify frontend/src/hooks/useInternetIdentity.ts or frontend/src/components/ui components",
+    "Maintain the existing dark mode theme structure",
+    "Preserve the OKLCH color system already in use"
   ],
   "nonGoals": [
-    "Changing the backend logic or data structures",
-    "Modifying the logo image itself",
-    "Redesigning the overall page layout",
-    "Adding new features beyond the specified visual updates"
+    "Changing the logo itself",
+    "Modifying the DNA helix animation or structure",
+    "Altering backend functionality",
+    "Changing the overall layout or component structure"
   ],
   "imageRequirements": {
     "required": [],

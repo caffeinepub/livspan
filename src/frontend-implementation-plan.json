@@ -1,58 +1,62 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add logo to dashboard and apply gradient styling",
+  "title": "Update heading and tile colors to match logo and background",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Display the LivSpan logo in the top left corner of the dashboard page, matching the styling and placement used on the login page",
+      "summary": "Change all heading colors from green to match the LivSpan logo color tone",
       "acceptanceCriteria": [
-        "Logo appears in top left corner of StartDashboard page",
-        "Logo uses the same IMG_8398-1.png asset as the login page",
-        "Logo styling matches the login page implementation"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/StartDashboard.tsx",
-          "operation": "modify",
-          "description": "Add the LivSpan logo (IMG_8398-1.png) to the top left corner of the dashboard page. Position it absolutely or within a header container matching the login page styling. Ensure the logo is properly sized and aligned consistent with its usage elsewhere in the application."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Apply a bright green gradient effect to all page headings across the application",
-      "acceptanceCriteria": [
-        "All page headings use a luminous green gradient",
-        "Gradient is consistent across all pages",
-        "Text remains readable against the background"
+        "All headings use the logo's color tone instead of green",
+        "Gradient utilities in CSS are updated to reflect logo colors",
+        "Visual consistency is maintained across all dashboard panels and components"
       ],
       "file_operations": [
         {
           "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Add a utility class for bright green gradient text effect using CSS background-clip and text-fill-color properties. Define the gradient with luminous green color stops that maintain readability and align with the existing DNA helix theme."
+          "description": "Extract the dominant color palette from the LivSpan logo assets (frontend/public/assets/generated/livspan-logo.dim_512x512.png) and replace the current green gradient utilities (.text-gradient-glow, .text-gradient-timer) with new gradient definitions using the logo's color tone. Update the OKLCH color values in the gradient-from and gradient-to properties to match the logo palette while maintaining the existing dark mode structure and OKLCH color system."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Update the custom helix-themed color palette in the Tailwind config to use colors derived from the LivSpan logo instead of the current green tones. Replace color values in the extend.colors section that are currently green-based with the logo's color palette, ensuring the sage palette and other theme colors harmonize with the new heading colors."
+        },
+        {
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "operation": "modify",
+          "description": "Update heading text classes that currently use text-gradient-timer or text-gradient-glow to ensure they use the newly defined logo-based gradient utilities from index.css. Verify visual consistency with the updated color scheme."
+        },
+        {
+          "path": "frontend/src/components/dashboard/NutritionPanel.tsx",
+          "operation": "modify",
+          "description": "Update heading text classes that currently use text-gradient-glow or other green-based gradient classes to use the newly defined logo-based gradient utilities. Ensure headings are visually consistent with the updated color scheme."
         },
         {
           "path": "frontend/src/pages/StartDashboard.tsx",
           "operation": "modify",
-          "description": "Apply the bright green gradient utility class to the main page heading ('Your LivSpan Factors' or equivalent). Ensure the gradient is visible and the text remains readable against the dark background."
+          "description": "Update any heading or title elements that use green-based gradient classes to use the newly defined logo-based gradient utilities from index.css. Ensure the main dashboard headings reflect the logo color tone."
         }
       ]
     },
     {
-      "id": "REQ-3",
-      "summary": "Style the fasting timer number line display with a green-to-blue gradient effect",
+      "id": "REQ-2",
+      "summary": "Adjust tile colors to harmonize with the DNA helix background",
       "acceptanceCriteria": [
-        "The fasting timer number display uses a green-to-blue gradient",
-        "Gradient transitions smoothly from green to blue",
-        "Numbers remain clearly legible"
+        "FactorMarker tiles have colors that harmonize with the DNA helix background",
+        "Sufficient contrast is maintained for readability",
+        "Hover and selection states remain visually clear"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "path": "frontend/src/components/dashboard/FactorMarker.tsx",
           "operation": "modify",
-          "description": "Apply a green-to-blue gradient effect to the fasting timer number display. Use CSS background-clip technique or inline gradient styles to create a smooth transition from green to blue across the timer digits. Ensure the gradient complements the existing helix theme colors and maintains number legibility."
+          "description": "Update the FactorMarker card styling to use colors that harmonize with the DNA helix background (frontend/public/assets/generated/dna-helix-dashboard-bokeh.dim_1440x2560.png and livspan-dna-helix-bg.dim_1440x2560.png). Adjust the base card background, border colors, and opacity values to complement the background while maintaining sufficient contrast for readability. Update hover and selection state colors (currently using green-blue gradients) to align with the new logo-based palette. Ensure the selected state gradient and hover effects remain visually distinct."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Add or update custom color definitions that support the FactorMarker component's new harmonized color scheme. Define background, border, and accent colors that complement the DNA helix background assets while maintaining the OKLCH color system and dark mode structure."
         }
       ]
     }

@@ -7,26 +7,18 @@
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-display-the-livspan-logo-img-8398-1-png-in-the-top-left-corner-of-the-dashboard-page-matching-the-styling-and-placement-used-on-the-login-page",
-      "title": "Display the LivSpan logo (IMG_8398-1.png) in the top left corner of the dashboard page, matching the styling and placement used on the login page",
+      "id": "feature-change-all-heading-colors-from-green-to-match-the-livspan-logo-color-tone-update-the-gradient-utilities-in-frontend-index-css-to-use-the-logo-s-color-palette-instead-of-the-current-green-gradient-and-ensure-all-headings-throughout-the-application-use-this-new-color-scheme",
+      "title": "Change all heading colors from green to match the LivSpan logo color tone. Update the gradient utilities in frontend/index.css to use the logo's color palette instead of the current green gradient, and ensure all headings throughout the application use this new color scheme.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-apply-a-bright-green-gradient-effect-to-all-page-headings-across-the-application",
-      "title": "Apply a bright green gradient effect to all page headings across the application",
+      "id": "feature-adjust-tile-factormarker-cards-colors-to-harmonize-with-the-background-update-the-factormarker-component-styling-to-use-colors-that-complement-the-dna-helix-background-ensuring-proper-contrast-while-maintaining-visual-cohesion-with-the-overall-theme",
+      "title": "Adjust tile (FactorMarker cards) colors to harmonize with the background. Update the FactorMarker component styling to use colors that complement the DNA helix background, ensuring proper contrast while maintaining visual cohesion with the overall theme.",
       "reqIds": [
         "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-style-the-fasting-timer-number-line-display-with-a-green-to-blue-gradient-effect",
-      "title": "Style the fasting timer number line display with a green-to-blue gradient effect",
-      "reqIds": [
-        "REQ-3"
       ],
       "version": 1
     }
@@ -34,24 +26,18 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add login page logo to dashboard top left",
+      "summary": "Change heading colors to match logo color instead of green",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Apply bright green gradient to page headings",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Display number line in green-blue gradient",
+      "summary": "Adjust tile colors to match background",
       "reqIds": [],
       "status": "pending"
     }
   ],
-  "projectName": "Add logo to dashboard and apply gradient styling",
+  "projectName": "LivSpan",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

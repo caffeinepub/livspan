@@ -35,11 +35,11 @@
 
     --radius: 0.5rem;
 
-    /* Genome-themed scientific palette */
-    --helix-strand: oklch(55% 0.12 150);
-    --helix-glow: oklch(65% 0.15 160);
-    --helix-accent: oklch(50% 0.18 145);
-    --helix-base: oklch(45% 0.10 140);
+    /* Logo-inspired golden/amber palette */
+    --helix-strand: oklch(60% 0.15 70);
+    --helix-glow: oklch(70% 0.18 65);
+    --helix-accent: oklch(55% 0.16 75);
+    --helix-base: oklch(50% 0.14 80);
 
     /* Sage/Earth tones for natural theme */
     --sage-50: oklch(97% 0.01 140);
@@ -91,11 +91,11 @@
     --input: oklch(28% 0.02 120);
     --ring: oklch(60% 0.18 150);
 
-    /* Genome-themed scientific palette - Dark mode */
-    --helix-strand: oklch(55% 0.15 150);
-    --helix-glow: oklch(70% 0.18 160);
-    --helix-accent: oklch(65% 0.20 145);
-    --helix-base: oklch(50% 0.12 140);
+    /* Logo-inspired golden/amber palette - Dark mode */
+    --helix-strand: oklch(65% 0.18 70);
+    --helix-glow: oklch(75% 0.20 65);
+    --helix-accent: oklch(70% 0.19 75);
+    --helix-base: oklch(60% 0.16 80);
 
     /* Sage/Earth tones for natural theme - Dark mode */
     --sage-50: oklch(22% 0.05 150);
@@ -127,35 +127,49 @@
   }
 }
 
-/* Gradient text utilities */
+/* Gradient text utilities - Logo-inspired golden/amber tones */
 @layer utilities {
+  .text-gradient-glow {
+    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(75% 0.20 65));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-timer {
+    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .gradient-green-glow {
-    background: linear-gradient(135deg, oklch(65% 0.20 145), oklch(75% 0.22 155));
+    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(75% 0.20 65));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .gradient-green-blue {
-    background: linear-gradient(135deg, oklch(65% 0.20 145), oklch(70% 0.18 200));
+    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }
 
-/* Custom slider styling with green-blue gradient */
+/* Custom slider styling with golden gradient */
 .slider-helix input[type='range']::-webkit-slider-thumb {
-  background: linear-gradient(135deg, oklch(65% 0.20 145), oklch(70% 0.18 200));
+  background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
 }
 
 .slider-helix input[type='range']::-moz-range-thumb {
-  background: linear-gradient(135deg, oklch(65% 0.20 145), oklch(70% 0.18 200));
+  background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
 }
 
-/* Progress bar with green-blue gradient */
+/* Progress bar with golden gradient */
 .progress-helix [data-state='complete'] {
-  background: linear-gradient(90deg, oklch(65% 0.20 145), oklch(70% 0.18 200));
+  background: linear-gradient(90deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
 }
 
 /* DNA Helix Animation Keyframes */

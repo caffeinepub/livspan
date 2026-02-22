@@ -22,7 +22,7 @@ export default function FactorMarker({
       <div
         className={cn(
           'absolute left-1/2 top-1/2 -translate-y-1/2 w-8 h-px transition-all duration-300',
-          isSelected ? 'bg-helix-strand/40' : 'bg-helix-strand/15'
+          isSelected ? 'bg-helix-strand/50' : 'bg-helix-strand/20'
         )}
       />
 
@@ -31,10 +31,10 @@ export default function FactorMarker({
         onClick={onClick}
         className={cn(
           'ml-12 cursor-pointer transition-all duration-300 hover:scale-105',
-          'border-helix-strand/40 backdrop-blur-md shadow-lg',
+          'backdrop-blur-md shadow-lg',
           isSelected
-            ? 'bg-card/90 shadow-helix-accent/50 shadow-xl scale-105 border-helix-accent/60'
-            : 'bg-card/80 hover:bg-card/90 hover:shadow-helix-glow/30'
+            ? 'bg-card/95 shadow-helix-accent/40 shadow-xl scale-105 border-helix-accent/70'
+            : 'bg-card/85 hover:bg-card/95 hover:shadow-helix-glow/25 border-helix-strand/30'
         )}
       >
         <CardContent className="p-4">
