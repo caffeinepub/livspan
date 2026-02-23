@@ -2,9 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-change-all-heading-colors-from-green-to-match-the-livspan-logo-color-tone-update-the-gradient-utilities-in-frontend-index-css-to-use-the-logo-s-color-palette-instead-of-the-current-green-gradient-and-ensure-all-headings-throughout-the-application-use-this-new-color-scheme",
-      "featureTitle": "Change all heading colors from green to match the LivSpan logo color tone. Update the gradient utilities in frontend/index.css to use the logo's color palette instead of the current green gradient, and ensure all headings throughout the application use this new color scheme.",
+      "featureId": "feature-apply-modern-color-gradients-to-dashboard-elements-including-factormarker-cards-intermittentfastingpanel-and-nutritionpanel-while-preserving-the-existing-dna-helix-background-animatedhelixbackground-tsx",
+      "featureTitle": "Apply modern color gradients to dashboard elements including FactorMarker cards, IntermittentFastingPanel, and NutritionPanel while preserving the existing DNA helix background (AnimatedHelixBackground.tsx)",
       "files": [
+        "frontend/src/components/dashboard/FactorMarker.tsx",
+        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+        "frontend/src/components/dashboard/NutritionPanel.tsx",
         "frontend/src/index.css"
       ],
       "components": [
@@ -21,10 +24,12 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-adjust-tile-factormarker-cards-colors-to-harmonize-with-the-background-update-the-factormarker-component-styling-to-use-colors-that-complement-the-dna-helix-background-ensuring-proper-contrast-while-maintaining-visual-cohesion-with-the-overall-theme",
-      "featureTitle": "Adjust tile (FactorMarker cards) colors to harmonize with the background. Update the FactorMarker component styling to use colors that complement the DNA helix background, ensuring proper contrast while maintaining visual cohesion with the overall theme.",
+      "featureId": "feature-ensure-gradient-styling-maintains-readability-and-accessibility-with-sufficient-contrast-for-text-overlays-and-interactive-elements",
+      "featureTitle": "Ensure gradient styling maintains readability and accessibility with sufficient contrast for text overlays and interactive elements",
       "files": [
-        "frontend/src/components/dashboard/FactorMarker.tsx"
+        "frontend/src/components/dashboard/FactorMarker.tsx",
+        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+        "frontend/src/components/dashboard/NutritionPanel.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",

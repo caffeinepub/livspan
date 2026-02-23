@@ -1,62 +1,65 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update heading and tile colors to match logo and background",
+  "title": "Apply modern gradient styling to dashboard",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Change all heading colors from green to match the LivSpan logo color tone",
+      "summary": "Apply modern gradient backgrounds to FactorMarker cards, IntermittentFastingPanel, and NutritionPanel using OKLCH colors while preserving the DNA helix background",
       "acceptanceCriteria": [
-        "All headings use the logo's color tone instead of green",
-        "Gradient utilities in CSS are updated to reflect logo colors",
-        "Visual consistency is maintained across all dashboard panels and components"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Extract the dominant color palette from the LivSpan logo assets (frontend/public/assets/generated/livspan-logo.dim_512x512.png) and replace the current green gradient utilities (.text-gradient-glow, .text-gradient-timer) with new gradient definitions using the logo's color tone. Update the OKLCH color values in the gradient-from and gradient-to properties to match the logo palette while maintaining the existing dark mode structure and OKLCH color system."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Update the custom helix-themed color palette in the Tailwind config to use colors derived from the LivSpan logo instead of the current green tones. Replace color values in the extend.colors section that are currently green-based with the logo's color palette, ensuring the sage palette and other theme colors harmonize with the new heading colors."
-        },
-        {
-          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-          "operation": "modify",
-          "description": "Update heading text classes that currently use text-gradient-timer or text-gradient-glow to ensure they use the newly defined logo-based gradient utilities from index.css. Verify visual consistency with the updated color scheme."
-        },
-        {
-          "path": "frontend/src/components/dashboard/NutritionPanel.tsx",
-          "operation": "modify",
-          "description": "Update heading text classes that currently use text-gradient-glow or other green-based gradient classes to use the newly defined logo-based gradient utilities. Ensure headings are visually consistent with the updated color scheme."
-        },
-        {
-          "path": "frontend/src/pages/StartDashboard.tsx",
-          "operation": "modify",
-          "description": "Update any heading or title elements that use green-based gradient classes to use the newly defined logo-based gradient utilities from index.css. Ensure the main dashboard headings reflect the logo color tone."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Adjust tile colors to harmonize with the DNA helix background",
-      "acceptanceCriteria": [
-        "FactorMarker tiles have colors that harmonize with the DNA helix background",
-        "Sufficient contrast is maintained for readability",
-        "Hover and selection states remain visually clear"
+        "FactorMarker cards display modern gradient backgrounds instead of solid colors",
+        "IntermittentFastingPanel uses gradient styling for visual appeal",
+        "NutritionPanel incorporates gradient design elements",
+        "DNA helix background (AnimatedHelixBackground.tsx) remains completely unchanged",
+        "Gradients use colors from the existing OKLCH color system (golden/amber, sage/earth tones)",
+        "Dark mode gradients remain visually cohesive with the DNA helix theme"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/dashboard/FactorMarker.tsx",
           "operation": "modify",
-          "description": "Update the FactorMarker card styling to use colors that harmonize with the DNA helix background (frontend/public/assets/generated/dna-helix-dashboard-bokeh.dim_1440x2560.png and livspan-dna-helix-bg.dim_1440x2560.png). Adjust the base card background, border colors, and opacity values to complement the background while maintaining sufficient contrast for readability. Update hover and selection state colors (currently using green-blue gradients) to align with the new logo-based palette. Ensure the selected state gradient and hover effects remain visually distinct."
+          "description": "Replace solid background colors with modern gradient backgrounds using OKLCH golden/amber and sage tones from the existing color system. Apply gradients to card backgrounds while maintaining hover effects, selection states, and visual connection indicators. Ensure gradient directions and color stops create depth without overwhelming the helix connection lines."
         },
         {
-          "path": "frontend/tailwind.config.js",
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
           "operation": "modify",
-          "description": "Add or update custom color definitions that support the FactorMarker component's new harmonized color scheme. Define background, border, and accent colors that complement the DNA helix background assets while maintaining the OKLCH color system and dark mode structure."
+          "description": "Apply gradient styling to the panel background and visual elements such as the timer display, progress indicators, and metric cards. Use subtle gradients that complement the existing golden/amber accent colors and maintain readability of fasting status, protocol labels, and metrics. Ensure gradients work in both light and dark modes."
+        },
+        {
+          "path": "frontend/src/components/dashboard/NutritionPanel.tsx",
+          "operation": "modify",
+          "description": "Incorporate gradient design elements into the panel background, progress bars, and metric display sections (BMI, protein, vegetables). Apply gradients that enhance visual hierarchy while preserving the readability of nutrition data, form inputs, and guidance messages. Use sage/earth tones for health-related metrics and golden accents for highlights."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add reusable CSS custom properties or utility classes for gradient definitions using existing OKLCH color variables. Define gradient presets for cards, panels, and interactive elements that can be referenced throughout the dashboard. Ensure gradient definitions work seamlessly in both light and dark mode contexts without modifying existing color variables."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Ensure gradient styling maintains readability and accessibility with sufficient contrast for all interactive elements and text overlays",
+      "acceptanceCriteria": [
+        "Text remains readable against gradient backgrounds in both light and dark modes",
+        "Interactive elements (buttons, inputs) maintain clear visual states on gradient backgrounds",
+        "Hover and active states work effectively with gradient styling"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/dashboard/FactorMarker.tsx",
+          "operation": "modify",
+          "description": "Verify text contrast ratios on gradient backgrounds and add semi-transparent overlays or text shadows if needed to ensure factor names and descriptions remain readable. Test and adjust hover state gradients to provide clear visual feedback. Ensure selection state remains visually distinct with gradient backgrounds."
+        },
+        {
+          "path": "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
+          "operation": "modify",
+          "description": "Ensure timer text, protocol labels, and metric values maintain sufficient contrast against gradient backgrounds. Add text shadows or adjust gradient opacity where necessary. Verify that buttons and interactive elements (save/cancel in settings) have clear visual states on gradient surfaces."
+        },
+        {
+          "path": "frontend/src/components/dashboard/NutritionPanel.tsx",
+          "operation": "modify",
+          "description": "Verify that form inputs, labels, BMI values, protein targets, and progress percentages remain readable on gradient backgrounds. Ensure input fields have clear focus states and that save button states are visually distinct. Test guidance messages for readability against panel gradients in both theme modes."
         }
       ]
     }

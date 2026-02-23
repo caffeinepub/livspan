@@ -57,17 +57,18 @@ export default function IntermittentFastingPanel() {
       {/* Fasting Schedule Settings (authenticated users only) */}
       {isAuthenticated && <FastingScheduleSettings />}
 
-      {/* Status & Timer Section */}
+      {/* Status & Timer Section with gradients */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Current Status */}
-        <Card className="border-helix-strand/30">
-          <CardHeader className="pb-3">
+        <Card className="border-helix-strand/30 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-panel-amber opacity-60" />
+          <CardHeader className="pb-3 relative z-10">
             <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
               <div className={cn('w-2 h-2 rounded-full', phase === 'fasting' ? 'bg-helix-accent' : 'bg-chart-2')} />
               {t.fastingPanel.status.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-3 relative z-10">
             <div className={cn('inline-flex items-center gap-2 px-3 py-1.5 rounded-md border text-sm font-mono', statusBg, statusBorder, statusColor)}>
               {phase === 'fasting' ? t.fastingPanel.status.fasting : t.fastingPanel.status.eating}
             </div>
@@ -78,13 +79,14 @@ export default function IntermittentFastingPanel() {
         </Card>
 
         {/* Live Timer */}
-        <Card className="border-helix-strand/30">
-          <CardHeader className="pb-3">
+        <Card className="border-helix-strand/30 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-panel-sage opacity-70" />
+          <CardHeader className="pb-3 relative z-10">
             <CardTitle className="text-sm font-light tracking-wide text-helix-accent">
               {t.fastingPanel.timer.remaining}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-3 relative z-10">
             <div className="text-3xl font-light tabular-nums gradient-green-blue">
               {formatDuration(remaining)}
             </div>
@@ -95,14 +97,15 @@ export default function IntermittentFastingPanel() {
         </Card>
       </div>
 
-      {/* Progress Bar */}
-      <Card className="border-helix-strand/30">
-        <CardHeader className="pb-3">
+      {/* Progress Bar with gradient */}
+      <Card className="border-helix-strand/30 relative overflow-hidden">
+        <div className="absolute inset-0 gradient-card-amber-subtle opacity-50" />
+        <CardHeader className="pb-3 relative z-10">
           <CardTitle className="text-sm font-light tracking-wide text-helix-accent">
             {t.fastingPanel.progress.label}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-3 relative z-10">
           <Progress value={progress} className="h-3 progress-helix" />
           <div className="flex items-center justify-between text-xs">
             <span className="text-muted-foreground">{t.fastingPanel.timer.elapsed}</span>
@@ -113,17 +116,18 @@ export default function IntermittentFastingPanel() {
 
       <Separator className="bg-helix-strand/20" />
 
-      {/* Metrics Grid */}
+      {/* Metrics Grid with gradients */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Daily Summary */}
-        <Card className="border-helix-strand/30">
-          <CardHeader className="pb-3">
+        <Card className="border-helix-strand/30 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
+          <CardHeader className="pb-3 relative z-10">
             <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
               <Calendar className="w-4 h-4" strokeWidth={1.5} />
               {t.fastingPanel.daily.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 relative z-10">
             <div className="text-2xl font-light tabular-nums text-foreground">
               {dailySummary.sessions}
             </div>
@@ -140,14 +144,15 @@ export default function IntermittentFastingPanel() {
         </Card>
 
         {/* Weekly Summary */}
-        <Card className="border-helix-strand/30">
-          <CardHeader className="pb-3">
+        <Card className="border-helix-strand/30 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-card-amber-subtle opacity-60" />
+          <CardHeader className="pb-3 relative z-10">
             <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
               <TrendingUp className="w-4 h-4" strokeWidth={1.5} />
               {t.fastingPanel.weekly.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 relative z-10">
             <div className="text-2xl font-light tabular-nums text-foreground">
               {weeklySummary.sessions}
             </div>
@@ -164,14 +169,15 @@ export default function IntermittentFastingPanel() {
         </Card>
 
         {/* Streak */}
-        <Card className="border-helix-strand/30">
-          <CardHeader className="pb-3">
+        <Card className="border-helix-strand/30 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-panel-amber opacity-50" />
+          <CardHeader className="pb-3 relative z-10">
             <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
               <Flame className="w-4 h-4" strokeWidth={1.5} />
               {t.fastingPanel.streak.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 relative z-10">
             <div className="text-2xl font-light tabular-nums text-foreground">
               {streak}
             </div>
@@ -182,15 +188,16 @@ export default function IntermittentFastingPanel() {
         </Card>
       </div>
 
-      {/* Insights Section */}
-      <Card className="border-helix-strand/30 bg-helix-glow/5">
-        <CardHeader className="pb-3">
+      {/* Insights Section with gradient */}
+      <Card className="border-helix-strand/30 relative overflow-hidden">
+        <div className="absolute inset-0 gradient-panel-sage opacity-40" />
+        <CardHeader className="pb-3 relative z-10">
           <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
             <Lightbulb className="w-4 h-4" strokeWidth={1.5} />
             {t.fastingPanel.insights.label}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative z-10">
           <p className="text-xs text-muted-foreground leading-relaxed">
             {phase === 'fasting' ? t.fastingPanel.insights.fastingTip : t.fastingPanel.insights.eatingTip}
           </p>

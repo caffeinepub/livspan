@@ -59,6 +59,13 @@
     --chart-3: oklch(70% 0.10 210);
     --chart-4: oklch(55% 0.08 240);
     --chart-5: oklch(50% 0.12 270);
+
+    /* Gradient color stops for modern gradients */
+    --gradient-amber-start: oklch(75% 0.20 65);
+    --gradient-amber-mid: oklch(70% 0.19 75);
+    --gradient-amber-end: oklch(65% 0.16 80);
+    --gradient-sage-start: oklch(70% 0.10 145);
+    --gradient-sage-end: oklch(60% 0.12 150);
   }
 
   .dark {
@@ -115,6 +122,13 @@
     --chart-3: oklch(75% 0.12 210);
     --chart-4: oklch(60% 0.10 240);
     --chart-5: oklch(55% 0.15 270);
+
+    /* Gradient color stops for modern gradients - Dark mode */
+    --gradient-amber-start: oklch(45% 0.16 65);
+    --gradient-amber-mid: oklch(40% 0.15 75);
+    --gradient-amber-end: oklch(35% 0.12 80);
+    --gradient-sage-start: oklch(40% 0.12 145);
+    --gradient-sage-end: oklch(30% 0.10 150);
   }
 }
 
@@ -155,6 +169,66 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Modern gradient backgrounds */
+  .gradient-card-amber {
+    background: linear-gradient(135deg, 
+      var(--gradient-amber-start) 0%, 
+      var(--gradient-amber-mid) 50%, 
+      var(--gradient-amber-end) 100%);
+  }
+
+  .gradient-card-amber-subtle {
+    background: linear-gradient(135deg, 
+      color-mix(in oklch, var(--gradient-amber-start), transparent 85%) 0%, 
+      color-mix(in oklch, var(--gradient-amber-mid), transparent 90%) 50%, 
+      color-mix(in oklch, var(--gradient-amber-end), transparent 92%) 100%);
+  }
+
+  .gradient-card-sage {
+    background: linear-gradient(135deg, 
+      var(--gradient-sage-start) 0%, 
+      var(--gradient-sage-end) 100%);
+  }
+
+  .gradient-card-sage-subtle {
+    background: linear-gradient(135deg, 
+      color-mix(in oklch, var(--gradient-sage-start), transparent 85%) 0%, 
+      color-mix(in oklch, var(--gradient-sage-end), transparent 90%) 100%);
+  }
+
+  .gradient-card-radial-amber {
+    background: radial-gradient(ellipse at top left, 
+      color-mix(in oklch, var(--gradient-amber-start), transparent 80%) 0%, 
+      color-mix(in oklch, var(--gradient-amber-mid), transparent 90%) 50%, 
+      transparent 100%);
+  }
+
+  .gradient-card-radial-sage {
+    background: radial-gradient(ellipse at bottom right, 
+      color-mix(in oklch, var(--gradient-sage-start), transparent 85%) 0%, 
+      color-mix(in oklch, var(--gradient-sage-end), transparent 92%) 50%, 
+      transparent 100%);
+  }
+
+  .gradient-panel-amber {
+    background: linear-gradient(to bottom right, 
+      color-mix(in oklch, var(--gradient-amber-start), transparent 75%) 0%, 
+      color-mix(in oklch, var(--gradient-amber-end), transparent 85%) 100%);
+  }
+
+  .gradient-panel-sage {
+    background: linear-gradient(to bottom right, 
+      color-mix(in oklch, var(--gradient-sage-start), transparent 80%) 0%, 
+      color-mix(in oklch, var(--gradient-sage-end), transparent 88%) 100%);
+  }
+
+  .gradient-hover-amber {
+    background: linear-gradient(135deg, 
+      color-mix(in oklch, var(--gradient-amber-start), transparent 70%) 0%, 
+      color-mix(in oklch, var(--gradient-amber-mid), transparent 80%) 50%, 
+      color-mix(in oklch, var(--gradient-amber-end), transparent 85%) 100%);
   }
 }
 

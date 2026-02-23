@@ -126,16 +126,17 @@ export default function NutritionPanel() {
         </Alert>
       )}
 
-      {/* Fasting Phase Status */}
+      {/* Fasting Phase Status with gradient */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 bg-helix-glow/5">
-          <CardHeader className="pb-3">
+        <Card className="border-helix-strand/30 relative overflow-hidden">
+          <div className="absolute inset-0 gradient-panel-sage opacity-40" />
+          <CardHeader className="pb-3 relative z-10">
             <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
               <Clock className="w-4 h-4" strokeWidth={1.5} />
               {t.nutritionPanel.fastingPhase.label}
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
               <div
                 className={cn('w-2 h-2 rounded-full', phase === 'fasting' ? 'bg-helix-accent' : 'bg-amber-500')}
@@ -156,15 +157,16 @@ export default function NutritionPanel() {
       {/* Daily Tracking Form */}
       {isAuthenticated && (
         <>
-          {/* Body Weight Input */}
-          <Card className="border-helix-strand/30 bg-white/50 dark:bg-stone-900/50">
-            <CardHeader className="pb-3">
+          {/* Body Weight Input with gradient */}
+          <Card className="border-helix-strand/30 relative overflow-hidden">
+            <div className="absolute inset-0 gradient-card-amber-subtle opacity-50" />
+            <CardHeader className="pb-3 relative z-10">
               <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
                 <Scale className="w-4 h-4" strokeWidth={1.5} />
                 {t.nutritionPanel.weight.label}
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
               <div className="space-y-2">
                 <Label htmlFor="bodyWeight" className="text-xs text-muted-foreground">
                   {t.nutritionPanel.weight.unit}
@@ -177,152 +179,112 @@ export default function NutritionPanel() {
                   value={bodyWeight}
                   onChange={(e) => setBodyWeight(e.target.value)}
                   placeholder="0.0"
-                  className="font-mono tabular-nums"
+                  className="font-mono tabular-nums bg-background/80"
                   disabled={isLoadingData || isSaving}
                 />
               </div>
             </CardContent>
           </Card>
 
-          {/* BMI Display */}
-          <Card className="border-helix-strand/30 bg-white/50 dark:bg-stone-900/50">
-            <CardHeader className="pb-3">
+          {/* BMI Display with gradient */}
+          <Card className="border-helix-strand/30 relative overflow-hidden">
+            <div className="absolute inset-0 gradient-panel-amber opacity-40" />
+            <CardHeader className="pb-3 relative z-10">
               <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
                 <TrendingUp className="w-4 h-4" strokeWidth={1.5} />
                 {t.nutritionPanel.bmi.label}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              {!heightCm ? (
-                <p className="text-sm text-muted-foreground">{t.nutritionPanel.bmi.heightMissing}</p>
-              ) : (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-light tabular-nums text-foreground">{formatBMI(bmi)}</span>
-                  {bmi && <span className="text-xs text-muted-foreground">{t.nutritionPanel.bmi.unit}</span>}
-                </div>
+            <CardContent className="relative z-10">
+              <div className="text-2xl font-light tabular-nums text-foreground">
+                {bmi ? formatBMI(bmi) : '—'}
+              </div>
+              {!heightCm && (
+                <div className="text-xs text-muted-foreground mt-1">{t.nutritionPanel.bmi.heightMissing}</div>
               )}
             </CardContent>
           </Card>
 
           <Separator className="bg-helix-strand/20" />
 
-          {/* Protein Target & Slider */}
-          <Card className="border-helix-strand/30 bg-white/50 dark:bg-stone-900/50">
-            <CardHeader className="pb-3">
+          {/* Protein Tracking with gradient */}
+          <Card className="border-helix-strand/30 relative overflow-hidden">
+            <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
+            <CardHeader className="pb-3 relative z-10">
               <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
                 <Activity className="w-4 h-4" strokeWidth={1.5} />
                 {t.nutritionPanel.protein.label}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Target Display */}
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{t.nutritionPanel.protein.target}</span>
-                <span className="text-sm font-mono tabular-nums text-foreground">
-                  {proteinTarget ? formatProteinTarget(proteinTarget) : t.nutritionPanel.protein.targetUnavailable}
-                </span>
-              </div>
-
-              {/* Slider */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="proteinSlider" className="text-xs text-muted-foreground">
-                    {t.nutritionPanel.protein.consumed}
-                  </Label>
-                  <span className="text-sm font-mono tabular-nums text-foreground">{proteinGrams} g</span>
+            <CardContent className="space-y-4 relative z-10">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <Label className="text-muted-foreground">{t.nutritionPanel.protein.consumed}</Label>
+                  <span className="font-mono tabular-nums text-foreground">
+                    {proteinGrams}g / {proteinTarget ? formatProteinTarget(proteinTarget) : '—'}
+                  </span>
                 </div>
                 <Slider
-                  id="proteinSlider"
-                  min={0}
-                  max={300}
-                  step={5}
                   value={[proteinGrams]}
                   onValueChange={(value) => setProteinGrams(value[0])}
+                  max={proteinTarget ? proteinTarget * 1.5 : 200}
+                  step={5}
+                  className="slider-helix"
                   disabled={isLoadingData || isSaving}
-                  className="cursor-pointer slider-helix"
                 />
               </div>
-
-              {/* Progress */}
-              {proteinTarget && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">{t.nutritionPanel.protein.progress}</span>
-                    <span className="font-mono tabular-nums text-foreground">{proteinProgress}%</span>
-                  </div>
-                  <Progress value={proteinProgress} className="h-2 progress-helix" />
-                  {proteinGrams >= (proteinTarget || 0) && (
-                    <p className="text-xs text-helix-accent">{t.nutritionPanel.protein.targetReached}</p>
-                  )}
-                  {proteinGrams < (proteinTarget || 0) && proteinTarget && (
-                    <p className="text-xs text-muted-foreground">
-                      {t.nutritionPanel.protein.remaining.replace(
-                        '{amount}',
-                        (proteinTarget - proteinGrams).toString()
-                      )}
-                    </p>
-                  )}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-muted-foreground">{t.nutritionPanel.protein.progress}</span>
+                  <span className="font-mono tabular-nums text-foreground">{proteinProgress}%</span>
                 </div>
-              )}
+                <Progress value={proteinProgress} className="h-2 progress-helix" />
+              </div>
             </CardContent>
           </Card>
 
-          {/* Vegetable Goal & Slider */}
-          <Card className="border-helix-strand/30 bg-white/50 dark:bg-stone-900/50">
-            <CardHeader className="pb-3">
+          {/* Vegetable Tracking with gradient */}
+          <Card className="border-helix-strand/30 relative overflow-hidden">
+            <div className="absolute inset-0 gradient-panel-sage opacity-50" />
+            <CardHeader className="pb-3 relative z-10">
               <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
                 <Leaf className="w-4 h-4" strokeWidth={1.5} />
                 {t.nutritionPanel.vegetables.label}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Goal Display */}
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{t.nutritionPanel.vegetables.goal}</span>
-                <span className="text-sm font-mono tabular-nums text-foreground">400 g</span>
-              </div>
-
-              {/* Slider */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="vegetableSlider" className="text-xs text-muted-foreground">
-                    {t.nutritionPanel.vegetables.consumed}
-                  </Label>
-                  <span className="text-sm font-mono tabular-nums text-foreground">{vegetableGrams} g</span>
+            <CardContent className="space-y-4 relative z-10">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <Label className="text-muted-foreground">{t.nutritionPanel.vegetables.consumed}</Label>
+                  <span className="font-mono tabular-nums text-foreground">
+                    {vegetableGrams}g / {vegetableGoal}g
+                  </span>
                 </div>
                 <Slider
-                  id="vegetableSlider"
-                  min={0}
-                  max={800}
-                  step={10}
                   value={[vegetableGrams]}
                   onValueChange={(value) => setVegetableGrams(value[0])}
+                  max={600}
+                  step={10}
+                  className="slider-helix"
                   disabled={isLoadingData || isSaving}
-                  className="cursor-pointer slider-helix"
                 />
               </div>
-
-              {/* Progress */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">{t.nutritionPanel.vegetables.progress}</span>
                   <span className="font-mono tabular-nums text-foreground">{vegetableProgress}%</span>
                 </div>
                 <Progress value={vegetableProgress} className="h-2 progress-helix" />
-                {vegetableGrams >= vegetableGoal && (
-                  <p className="text-xs text-helix-accent">{t.nutritionPanel.vegetables.goalReached}</p>
-                )}
-                {vegetableGrams < vegetableGoal && (
-                  <p className="text-xs text-muted-foreground">
-                    {t.nutritionPanel.vegetables.remaining.replace('{amount}', (vegetableGoal - vegetableGrams).toString())}
-                  </p>
-                )}
               </div>
             </CardContent>
           </Card>
 
           {/* Save Button */}
-          <Button onClick={handleSave} disabled={!hasChanges || isSaving} className="w-full bg-gradient-to-r from-helix-accent to-helix-glow hover:from-helix-glow hover:to-helix-accent">
+          <Button
+            onClick={handleSave}
+            disabled={!hasChanges || isSaving}
+            className="w-full bg-helix-accent hover:bg-helix-glow text-white transition-colors"
+          >
             {isSaving ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />

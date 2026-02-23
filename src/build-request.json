@@ -1,56 +1,56 @@
 {
   "kind": "build_request",
-  "title": "Update heading and tile colors to match logo and background",
+  "title": "Apply modern gradient styling to dashboard",
   "projectName": "LivSpan",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Change all heading colors from green to match the LivSpan logo color tone. Update the gradient utilities in frontend/index.css to use the logo's color palette instead of the current green gradient, and ensure all headings throughout the application use this new color scheme.",
+      "text": "Apply modern color gradients to dashboard elements including FactorMarker cards, IntermittentFastingPanel, and NutritionPanel while preserving the existing DNA helix background (AnimatedHelixBackground.tsx)",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-final"
+          "msg-latest"
         ],
         "quotes": [
-          "Überschriften nicht in grün sondern im gleichen Farbton wie das Logo gestalten"
+          "Lass uns das Dashboard noch moderner gestalten. Moderne Farbverläufe. Der Hintergrund bleibt unverändert"
         ]
       },
       "acceptanceCriteria": [
-        "All headings use the logo's color tone instead of green",
-        "Gradient utilities in CSS are updated to reflect logo colors",
-        "Visual consistency is maintained across all dashboard panels and components"
+        "FactorMarker cards display modern gradient backgrounds instead of solid colors",
+        "IntermittentFastingPanel uses gradient styling for visual appeal",
+        "NutritionPanel incorporates gradient design elements",
+        "DNA helix background (AnimatedHelixBackground.tsx) remains completely unchanged",
+        "Gradients use colors from the existing OKLCH color system (golden/amber, sage/earth tones)",
+        "Dark mode gradients remain visually cohesive with the DNA helix theme"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Adjust tile (FactorMarker cards) colors to harmonize with the background. Update the FactorMarker component styling to use colors that complement the DNA helix background, ensuring proper contrast while maintaining visual cohesion with the overall theme.",
+      "text": "Ensure gradient styling maintains readability and accessibility with sufficient contrast for text overlays and interactive elements",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-final"
-        ],
-        "quotes": [
-          "Kacheln passend zum Hintergrund farblich gestalten"
+          "msg-latest"
         ]
       },
       "acceptanceCriteria": [
-        "FactorMarker tiles have colors that harmonize with the DNA helix background",
-        "Sufficient contrast is maintained for readability",
-        "Hover and selection states remain visually clear"
+        "Text remains readable against gradient backgrounds in both light and dark modes",
+        "Interactive elements (buttons, inputs) maintain clear visual states on gradient backgrounds",
+        "Hover and active states work effectively with gradient styling"
       ]
     }
   ],
   "constraints": [
-    "Do not modify frontend/src/hooks/useInternetIdentity.ts or frontend/src/components/ui components",
-    "Maintain the existing dark mode theme structure",
-    "Preserve the OKLCH color system already in use"
+    "Do not modify AnimatedHelixBackground.tsx or any DNA helix background components",
+    "Use only colors from the existing OKLCH color system defined in index.css and tailwind.config.js",
+    "Maintain existing dark mode theming"
   ],
   "nonGoals": [
-    "Changing the logo itself",
-    "Modifying the DNA helix animation or structure",
-    "Altering backend functionality",
-    "Changing the overall layout or component structure"
+    "Changing the DNA helix background design",
+    "Modifying color palette or adding new color variables",
+    "Restructuring dashboard layout or component hierarchy",
+    "Adding new dashboard panels or features"
   ],
   "imageRequirements": {
     "required": [],

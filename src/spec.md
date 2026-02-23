@@ -1,11 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Update the application's color scheme to match the LivSpan logo and harmonize tile colors with the DNA helix background.
+**Goal:** Apply modern gradient styling to dashboard elements while preserving the DNA helix background.
 
 **Planned changes:**
-- Change all heading colors from green to match the LivSpan logo color tone
-- Update gradient utilities in frontend/index.css to use the logo's color palette
-- Adjust FactorMarker tile colors to harmonize with the DNA helix background while maintaining proper contrast
+- Add gradient backgrounds to FactorMarker cards
+- Apply gradient styling to IntermittentFastingPanel
+- Incorporate gradient design elements in NutritionPanel
+- Ensure text readability and interactive element visibility on gradient backgrounds
+- Maintain existing OKLCH color system and dark mode theming
 
-**User-visible outcome:** The application will have a more cohesive visual design with headings matching the logo colors and tiles that blend harmoniously with the background, creating a unified brand experience.
+**User-visible outcome:** The dashboard displays modern gradient styling on cards and panels, creating a more visually appealing interface while keeping the DNA helix background unchanged.
