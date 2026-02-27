@@ -1,0 +1,123 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add Movement and Stress modules to dashboard",
+  "requirements": [
+    {
+      "id": "REQ-4",
+      "summary": "Add query keys for movement and stress following the existing pattern used for nutrition and sleep",
+      "acceptanceCriteria": [
+        "movementDay and stressDay query key factories are exported from queryKeys.ts"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/queryKeys.ts",
+          "operation": "modify",
+          "description": "Add query key factories for movementDay and stressDay following the existing pattern used for nutritionDay and sleepDay. Export movementDay(date: string) and stressDay(date: string) functions that return typed query keys for cache management."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create useMovementQueries hook providing useGetMovementDay and useSaveMovementDay with cache invalidation and toast notifications",
+      "acceptanceCriteria": [
+        "useGetMovementDay fetches today's movement entry",
+        "useSaveMovementDay persists the entry and invalidates the cache",
+        "Toast notification shown on success and error"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useMovementQueries.ts",
+          "operation": "create",
+          "description": "Create a hook file following the pattern in useSleepQueries.ts. Export useGetMovementDay that queries today's movement entry via actor.getMovementDay(date). Export useSaveMovementDay mutation that calls actor.saveMovementDay, invalidates the movement query cache, and shows toast notifications on success/error. Use the MovementDay type from backend.d.ts."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create useStressQueries hook providing useGetStressDay and useSaveStressDay with cache invalidation and toast notifications",
+      "acceptanceCriteria": [
+        "useGetStressDay fetches today's stress entry",
+        "useSaveStressDay persists the entry and invalidates the cache",
+        "Toast notification shown on success and error"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useStressQueries.ts",
+          "operation": "create",
+          "description": "Create a hook file following the pattern in useSleepQueries.ts. Export useGetStressDay that queries today's stress entry via actor.getStressDay(date). Export useSaveStressDay mutation that calls actor.saveStressDay, invalidates the stress query cache, and shows toast notifications on success/error. Use the StressDay type from backend.d.ts."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Create MovementPanel component for logging daily movement data with Active Minutes input, Activity Type selector, and Intensity toggle",
+      "acceptanceCriteria": [
+        "Active Minutes input accepts integers 0–300",
+        "Activity Type selector offers Walk, Run, Bike, Gym options",
+        "Intensity toggle offers Light, Medium, Intense options",
+        "Saved values are displayed in a summary view",
+        "Save button triggers useSaveMovementDay",
+        "Panel matches the dark gradient card style of existing panels"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/dashboard/MovementPanel.tsx",
+          "operation": "create",
+          "description": "Create a dashboard panel component following the visual design pattern of SleepPanel and NutritionPanel (dark theme with gradient accents, rounded card with backdrop blur). Include a numeric input for Active Minutes (0–300 range), a segmented selector or dropdown for Activity Type (Walk, Run, Bike, Gym mapping to Variant_gym_run_bike_walk enum from backend.d.ts), and a three-option toggle for Intensity (Light, Medium, Intense mapping to Variant_intense_light_medium). Display a summary of saved values when loaded. Include a Save button that triggers useSaveMovementDay. Use i18n for all text labels. Use today's date in the format expected by the backend."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Create StressPanel component for logging daily blood pressure and pulse with numeric inputs and formatted summary display",
+      "acceptanceCriteria": [
+        "Systolic input accepts integers (mmHg)",
+        "Diastolic input accepts integers (mmHg)",
+        "Pulse input accepts integers (bpm)",
+        "Blood pressure is displayed as 'Sys/Dia mmHg'",
+        "Save button triggers useSaveStressDay",
+        "Panel matches the dark gradient card style of existing panels"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/dashboard/StressPanel.tsx",
+          "operation": "create",
+          "description": "Create a dashboard panel component following the visual design pattern of SleepPanel and NutritionPanel (dark gradient card with backdrop blur). Include numeric inputs for Systolic (mmHg), Diastolic (mmHg), and Pulse (bpm) corresponding to the StressDay type from backend.d.ts. Display a summary of saved values with appropriate unit labels, formatting blood pressure as 'Sys/Dia mmHg'. Include a Save button that triggers useSaveStressDay. Use i18n for all text labels. Use today's date in the format expected by the backend."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add Movement and Stress as selectable factors in StartDashboard and wire up the new panel components",
+      "acceptanceCriteria": [
+        "Movement and Stress appear as clickable factor markers in the helix spine",
+        "Selecting Movement renders MovementPanel",
+        "Selecting Stress renders StressPanel",
+        "Existing panels (Fasting, Nutrition, Sleep) remain unaffected"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/StartDashboard.tsx",
+          "operation": "modify",
+          "description": "Add 'Movement' and 'Stress' to the list of selectable factors alongside Fasting, Nutrition, and Sleep. Render FactorMarker components for Movement and Stress in the HelixSpine layout. Import MovementPanel and StressPanel components. Add conditional rendering logic: when selectedFactor is 'Movement', render MovementPanel; when selectedFactor is 'Stress', render StressPanel. Follow the same pattern used for existing panels (IntermittentFastingPanel, NutritionPanel, SleepPanel). Use i18n for factor labels."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Add English and German translation strings for all Movement and Stress UI labels",
+      "acceptanceCriteria": [
+        "All new UI strings have both 'en' and 'de' entries in translations.ts",
+        "MovementPanel and StressPanel use the i18n hook for all visible text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/i18n/translations.ts",
+          "operation": "modify",
+          "description": "Add translation entries for both 'en' and 'de' languages covering all new Movement and Stress UI elements. Include keys for: Active Minutes, Activity Type, Walk, Run, Bike, Gym, Intensity, Light, Medium, Intense, Blood Pressure, Systolic, Diastolic, Pulse, and any panel headings ('Movement', 'Stress'), button labels ('Save'), and summary text. Follow the existing translation structure and naming conventions used for nutrition and sleep labels."
+        }
+      ]
+    }
+  ]
+}

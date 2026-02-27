@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Health dashboard app with sleep, movement, and stress tracking modules. Movement inputs: active minutes, activity type (walk/run/bike/gym), intensity (light/medium/intense). Stress inputs: blood pressure and pulse.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-add-query-keys-for-movement-and-stress-to-frontend-src-hooks-querykeys-ts-following-the-existing-pattern-used-for-nutrition-and-sleep",
+      "title": "Add query keys for movement and stress to frontend/src/hooks/queryKeys.ts following the existing pattern used for nutrition and sleep.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-hooks-usemovementqueries-ts-providing-usegetmovementday-and-usesavemovementday-hooks-via-the-icp-actor-with-cache-invalidation-on-save-and-toast-notifications-following-the-pattern-in-usesleepqueries-ts",
+      "title": "Create frontend/src/hooks/useMovementQueries.ts providing useGetMovementDay and useSaveMovementDay hooks via the ICP actor, with cache invalidation on save and toast notifications, following the pattern in useSleepQueries.ts.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-hooks-usestressqueries-ts-providing-usegetstressday-and-usesavestressday-hooks-via-the-icp-actor-with-cache-invalidation-on-save-and-toast-notifications-following-the-pattern-in-usesleepqueries-ts",
+      "title": "Create frontend/src/hooks/useStressQueries.ts providing useGetStressDay and useSaveStressDay hooks via the ICP actor, with cache invalidation on save and toast notifications, following the pattern in useSleepQueries.ts.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-components-dashboard-movementpanel-tsx-a-dashboard-panel-for-logging-daily-movement-data-it-must-include-a-numeric-input-for-active-minutes-0-300-a-segmented-selector-or-dropdown-for-activity-type-walk-run-bike-gym-and-a-three-option-toggle-for-intensity-light-medium-intense-show-a-summary-of-the-saved-values-and-a-save-button-use-the-visual-design-language-of-sleeppanel-and-nutritionpanel-gradient-accents-dark-theme-consistent-card-style",
+      "title": "Create frontend/src/components/dashboard/MovementPanel.tsx — a dashboard panel for logging daily movement data. It must include: a numeric input for Active Minutes (0–300), a segmented selector or dropdown for Activity Type (Walk, Run, Bike, Gym), and a three-option toggle for Intensity (Light / Medium / Intense). Show a summary of the saved values and a Save button. Use the visual design language of SleepPanel and NutritionPanel (gradient accents, dark theme, consistent card style).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-components-dashboard-stresspanel-tsx-a-dashboard-panel-for-logging-daily-blood-pressure-and-pulse-it-must-include-numeric-inputs-for-systolic-mmhg-diastolic-mmhg-and-pulse-bpm-show-a-summary-of-the-saved-values-with-appropriate-unit-labels-and-a-blood-pressure-display-formatted-as-sys-dia-mmhg-use-the-visual-design-language-of-sleeppanel-and-nutritionpanel",
+      "title": "Create frontend/src/components/dashboard/StressPanel.tsx — a dashboard panel for logging daily blood pressure and pulse. It must include: numeric inputs for Systolic (mmHg), Diastolic (mmHg), and Pulse (bpm). Show a summary of the saved values with appropriate unit labels and a blood pressure display formatted as 'Sys/Dia mmHg'. Use the visual design language of SleepPanel and NutritionPanel.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-movement-and-stress-as-selectable-factors-in-startdashboard-tsx-alongside-the-existing-factors-fasting-nutrition-sleep-wire-up-the-movementpanel-and-stresspanel-components-so-they-render-when-their-respective-factor-is-selected-following-the-same-conditional-rendering-pattern-used-for-sleeppanel-and-nutritionpanel",
+      "title": "Add 'Movement' and 'Stress' as selectable factors in StartDashboard.tsx alongside the existing factors (Fasting, Nutrition, Sleep). Wire up the MovementPanel and StressPanel components so they render when their respective factor is selected, following the same conditional rendering pattern used for SleepPanel and NutritionPanel.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-english-and-german-translation-strings-to-frontend-src-i18n-translations-ts-for-all-new-movement-and-stress-ui-labels-active-minutes-activity-type-walk-run-bike-gym-intensity-light-medium-intense-blood-pressure-systolic-diastolic-pulse-and-any-panel-headings-or-button-labels",
+      "title": "Add English and German translation strings to frontend/src/i18n/translations.ts for all new Movement and Stress UI labels: Active Minutes, Activity Type, Walk, Run, Bike, Gym, Intensity, Light, Medium, Intense, Blood Pressure, Systolic, Diastolic, Pulse, and any panel headings or button labels.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Dashboard movement module: active minutes, activity type selection (walk/run/bike/gym), intensity (light/medium/intense)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Dashboard stress module: blood pressure and pulse inputs",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add a MovementDay data type and stable storage to the backend actor that stores: date (Text), activeMinutes (Nat), activityType (variant: Walk, Run, Bike, Gym), and intensity (variant: Light, Medium, Intense). Implement CRUD endpoints: saveMovementDay and getMovementDay(date) gated by the existing role-based access control pattern.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add a StressDay data type and stable storage to the backend actor that stores: date (Text), systolic (Nat), diastolic (Nat), and pulse (Nat). Implement CRUD endpoints: saveStressDay and getStressDay(date) gated by the existing role-based access control pattern.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Create a migration.mo that upgrades actor state to include the new movementDayEntries and stressDayEntries stable maps while preserving all existing data (profile, fasting, nutrition, sleep).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "LivSpan Dashboard",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

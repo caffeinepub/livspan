@@ -1,0 +1,136 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-27T12:52:47.371Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 10,
+    "implemented": 7,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Add a MovementDay data type and stable storage to the backend actor that stores: date (Text), activeMinutes (Nat), activityType (variant: Walk, Run, Bike, Gym), and intensity (variant: Light, Medium, Intense). Implement CRUD endpoints: saveMovementDay and getMovementDay(date) gated by the existing role-based access control pattern.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-10",
+        "summary": "Add English and German translation strings to frontend/src/i18n/translations.ts for all new Movement and Stress UI labels: Active Minutes, Activity Type, Walk, Run, Bike, Gym, Intensity, Light, Medium, Intense, Blood Pressure, Systolic, Diastolic, Pulse, and any panel headings or button labels.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/i18n/translations.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/i18n/translations.ts"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Add a StressDay data type and stable storage to the backend actor that stores: date (Text), systolic (Nat), diastolic (Nat), and pulse (Nat). Implement CRUD endpoints: saveStressDay and getStressDay(date) gated by the existing role-based access control pattern.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Create a migration.mo that upgrades actor state to include the new movementDayEntries and stressDayEntries stable maps while preserving all existing data (profile, fasting, nutrition, sleep).",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Add query keys for movement and stress to frontend/src/hooks/queryKeys.ts following the existing pattern used for nutrition and sleep.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/queryKeys.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/queryKeys.ts"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Create frontend/src/hooks/useMovementQueries.ts providing useGetMovementDay and useSaveMovementDay hooks via the ICP actor, with cache invalidation on save and toast notifications, following the pattern in useSleepQueries.ts.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useMovementQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useMovementQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Create frontend/src/hooks/useStressQueries.ts providing useGetStressDay and useSaveStressDay hooks via the ICP actor, with cache invalidation on save and toast notifications, following the pattern in useSleepQueries.ts.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useStressQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useStressQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Create frontend/src/components/dashboard/MovementPanel.tsx — a dashboard panel for logging daily movement data. It must include: a numeric input for Active Minutes (0–300), a segmented selector or dropdown for Activity Type (Walk, Run, Bike, Gym), and a three-option toggle for Intensity (Light / Medium / Intense). Show a summary of the saved values and a Save button. Use the visual design language of SleepPanel and NutritionPanel (gradient accents, dark theme, consistent card style).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/dashboard/MovementPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/dashboard/MovementPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Create frontend/src/components/dashboard/StressPanel.tsx — a dashboard panel for logging daily blood pressure and pulse. It must include: numeric inputs for Systolic (mmHg), Diastolic (mmHg), and Pulse (bpm). Show a summary of the saved values with appropriate unit labels and a blood pressure display formatted as 'Sys/Dia mmHg'. Use the visual design language of SleepPanel and NutritionPanel.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/dashboard/StressPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/dashboard/StressPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add 'Movement' and 'Stress' as selectable factors in StartDashboard.tsx alongside the existing factors (Fasting, Nutrition, Sleep). Wire up the MovementPanel and StressPanel components so they render when their respective factor is selected, following the same conditional rendering pattern used for SleepPanel and NutritionPanel.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/StartDashboard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/StartDashboard.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/dashboard/MovementPanel.tsx",
+    "frontend/src/components/dashboard/StressPanel.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/queryKeys.ts",
+    "frontend/src/hooks/useMovementQueries.ts",
+    "frontend/src/hooks/useStressQueries.ts",
+    "frontend/src/i18n/translations.ts",
+    "frontend/src/pages/StartDashboard.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

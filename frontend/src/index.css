@@ -1,0 +1,389 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* OKLCH color system - Light mode */
+    --background: oklch(98% 0.01 120);
+    --foreground: oklch(20% 0.02 120);
+
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(20% 0.02 120);
+
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(20% 0.02 120);
+
+    --primary: oklch(50% 0.18 185);
+    --primary-foreground: oklch(98% 0.01 185);
+
+    --secondary: oklch(92% 0.02 185);
+    --secondary-foreground: oklch(25% 0.02 185);
+
+    --muted: oklch(94% 0.01 185);
+    --muted-foreground: oklch(50% 0.02 185);
+
+    --accent: oklch(92% 0.02 185);
+    --accent-foreground: oklch(25% 0.02 185);
+
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(98% 0.01 25);
+
+    --border: oklch(88% 0.01 185);
+    --input: oklch(88% 0.01 185);
+    --ring: oklch(50% 0.18 185);
+
+    --radius: 0.5rem;
+
+    /* Green-blue gradient palette (emerald → teal → cyan → sky) */
+    --helix-strand: oklch(62% 0.17 175);
+    --helix-glow: oklch(72% 0.18 195);
+    --helix-accent: oklch(58% 0.19 180);
+    --helix-base: oklch(52% 0.16 185);
+
+    /* Teal/cyan tones for natural theme */
+    --sage-50: oklch(97% 0.01 185);
+    --sage-100: oklch(94% 0.02 185);
+    --sage-200: oklch(88% 0.04 185);
+    --sage-300: oklch(78% 0.07 185);
+    --sage-400: oklch(65% 0.11 185);
+    --sage-500: oklch(55% 0.14 185);
+    --sage-600: oklch(48% 0.17 185);
+    --sage-700: oklch(40% 0.14 185);
+    --sage-800: oklch(32% 0.10 185);
+    --sage-900: oklch(24% 0.06 185);
+
+    /* Chart colors */
+    --chart-1: oklch(60% 0.18 165);
+    --chart-2: oklch(65% 0.16 195);
+    --chart-3: oklch(70% 0.14 215);
+    --chart-4: oklch(55% 0.12 240);
+    --chart-5: oklch(50% 0.14 155);
+
+    /* Gradient color stops - green-blue palette */
+    --gradient-gb-start: oklch(68% 0.20 160);
+    --gradient-gb-mid: oklch(62% 0.20 180);
+    --gradient-gb-end: oklch(58% 0.18 205);
+    --gradient-teal-start: oklch(65% 0.17 175);
+    --gradient-teal-end: oklch(58% 0.19 195);
+  }
+
+  .dark {
+    /* OKLCH color system - Dark mode */
+    --background: oklch(15% 0.02 185);
+    --foreground: oklch(95% 0.01 185);
+
+    --card: oklch(18% 0.02 185);
+    --card-foreground: oklch(95% 0.01 185);
+
+    --popover: oklch(18% 0.02 185);
+    --popover-foreground: oklch(95% 0.01 185);
+
+    --primary: oklch(62% 0.20 175);
+    --primary-foreground: oklch(15% 0.02 175);
+
+    --secondary: oklch(25% 0.03 185);
+    --secondary-foreground: oklch(95% 0.01 185);
+
+    --muted: oklch(25% 0.03 185);
+    --muted-foreground: oklch(65% 0.03 185);
+
+    --accent: oklch(25% 0.03 185);
+    --accent-foreground: oklch(95% 0.01 185);
+
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(98% 0.01 25);
+
+    --border: oklch(28% 0.03 185);
+    --input: oklch(28% 0.03 185);
+    --ring: oklch(62% 0.20 175);
+
+    /* Green-blue gradient palette - Dark mode */
+    --helix-strand: oklch(68% 0.20 175);
+    --helix-glow: oklch(76% 0.20 195);
+    --helix-accent: oklch(72% 0.21 180);
+    --helix-base: oklch(62% 0.18 185);
+
+    /* Teal/cyan tones - Dark mode */
+    --sage-50: oklch(24% 0.06 185);
+    --sage-100: oklch(28% 0.07 185);
+    --sage-200: oklch(33% 0.09 185);
+    --sage-300: oklch(40% 0.12 185);
+    --sage-400: oklch(48% 0.15 185);
+    --sage-500: oklch(56% 0.17 185);
+    --sage-600: oklch(64% 0.18 185);
+    --sage-700: oklch(72% 0.17 185);
+    --sage-800: oklch(82% 0.12 185);
+    --sage-900: oklch(92% 0.06 185);
+
+    /* Chart colors - Dark mode */
+    --chart-1: oklch(65% 0.20 165);
+    --chart-2: oklch(70% 0.18 195);
+    --chart-3: oklch(75% 0.15 215);
+    --chart-4: oklch(60% 0.13 240);
+    --chart-5: oklch(55% 0.17 155);
+
+    /* Gradient color stops - green-blue palette - Dark mode */
+    --gradient-gb-start: oklch(42% 0.18 160);
+    --gradient-gb-mid: oklch(36% 0.17 180);
+    --gradient-gb-end: oklch(30% 0.14 205);
+    --gradient-teal-start: oklch(38% 0.15 175);
+    --gradient-teal-end: oklch(30% 0.16 195);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Gradient text utilities - Green-blue tones */
+@layer utilities {
+  .text-gradient-glow {
+    background: linear-gradient(135deg, oklch(72% 0.21 165), oklch(76% 0.20 200));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-timer {
+    background: linear-gradient(135deg, oklch(72% 0.21 165), oklch(74% 0.19 205));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Green-blue gradient text - used for headings */
+  .gradient-green-glow {
+    background: linear-gradient(135deg, oklch(72% 0.21 155), oklch(76% 0.20 200));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-green-blue {
+    background: linear-gradient(135deg, oklch(72% 0.21 165), oklch(74% 0.19 205));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Modern gradient backgrounds - green-blue palette */
+  .gradient-card-amber {
+    background: linear-gradient(135deg,
+      var(--gradient-gb-start) 0%,
+      var(--gradient-gb-mid) 50%,
+      var(--gradient-gb-end) 100%);
+  }
+
+  .gradient-card-amber-subtle {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 85%) 0%,
+      color-mix(in oklch, var(--gradient-gb-mid), transparent 90%) 50%,
+      color-mix(in oklch, var(--gradient-gb-end), transparent 92%) 100%);
+  }
+
+  .gradient-card-sage {
+    background: linear-gradient(135deg,
+      var(--gradient-teal-start) 0%,
+      var(--gradient-teal-end) 100%);
+  }
+
+  .gradient-card-sage-subtle {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--gradient-teal-start), transparent 85%) 0%,
+      color-mix(in oklch, var(--gradient-teal-end), transparent 90%) 100%);
+  }
+
+  .gradient-card-radial-amber {
+    background: radial-gradient(ellipse at top left,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 78%) 0%,
+      color-mix(in oklch, var(--gradient-gb-mid), transparent 88%) 50%,
+      transparent 100%);
+  }
+
+  .gradient-card-radial-sage {
+    background: radial-gradient(ellipse at bottom right,
+      color-mix(in oklch, var(--gradient-teal-start), transparent 82%) 0%,
+      color-mix(in oklch, var(--gradient-teal-end), transparent 90%) 50%,
+      transparent 100%);
+  }
+
+  .gradient-panel-amber {
+    background: linear-gradient(to bottom right,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 72%) 0%,
+      color-mix(in oklch, var(--gradient-gb-end), transparent 84%) 100%);
+  }
+
+  .gradient-panel-sage {
+    background: linear-gradient(to bottom right,
+      color-mix(in oklch, var(--gradient-teal-start), transparent 78%) 0%,
+      color-mix(in oklch, var(--gradient-teal-end), transparent 86%) 100%);
+  }
+
+  .gradient-hover-amber {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 68%) 0%,
+      color-mix(in oklch, var(--gradient-gb-mid), transparent 78%) 50%,
+      color-mix(in oklch, var(--gradient-gb-end), transparent 83%) 100%);
+  }
+
+  /* Green-blue card gradient for selected state */
+  .gradient-card-gb-selected {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, oklch(68% 0.20 160), transparent 70%) 0%,
+      color-mix(in oklch, oklch(62% 0.20 180), transparent 78%) 50%,
+      color-mix(in oklch, oklch(58% 0.18 205), transparent 82%) 100%);
+  }
+
+  /* Green-blue card gradient for unselected/hover state */
+  .gradient-card-gb-muted {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, oklch(68% 0.20 160), transparent 88%) 0%,
+      color-mix(in oklch, oklch(62% 0.20 180), transparent 92%) 50%,
+      color-mix(in oklch, oklch(58% 0.18 205), transparent 94%) 100%);
+  }
+
+  /* Radial overlay for selected green-blue */
+  .gradient-card-radial-gb {
+    background: radial-gradient(ellipse at top left,
+      color-mix(in oklch, oklch(72% 0.21 165), transparent 75%) 0%,
+      color-mix(in oklch, oklch(62% 0.20 185), transparent 87%) 50%,
+      transparent 100%);
+  }
+
+  /* Radial overlay for muted green-blue */
+  .gradient-card-radial-gb-muted {
+    background: radial-gradient(ellipse at bottom right,
+      color-mix(in oklch, oklch(65% 0.17 175), transparent 85%) 0%,
+      color-mix(in oklch, oklch(58% 0.19 195), transparent 92%) 50%,
+      transparent 100%);
+  }
+}
+
+/* ── Custom Slider Styling — green-blue gradient thumb ── */
+
+/* Webkit thumb */
+.slider-helix::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, oklch(72% 0.17 160), oklch(58% 0.18 210));
+  border: 2px solid oklch(95% 0.01 185 / 0.9);
+  box-shadow: 0 0 6px oklch(65% 0.15 185 / 0.6);
+  cursor: pointer;
+  margin-top: -8px;
+  transition: box-shadow 0.15s ease;
+}
+
+.slider-helix::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 10px oklch(65% 0.15 185 / 0.85);
+}
+
+/* Firefox thumb */
+.slider-helix::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, oklch(72% 0.17 160), oklch(58% 0.18 210));
+  border: 2px solid oklch(95% 0.01 185 / 0.9);
+  box-shadow: 0 0 6px oklch(65% 0.15 185 / 0.6);
+  cursor: pointer;
+}
+
+/* Webkit track — transparent so the custom gradient div shows through */
+.slider-helix::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+  border-radius: 9999px;
+}
+
+/* Firefox track */
+.slider-helix::-moz-range-track {
+  height: 2px;
+  background: transparent;
+  border-radius: 9999px;
+}
+
+/* Focus ring */
+.slider-helix:focus-visible {
+  outline: none;
+}
+
+.slider-helix:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px oklch(65% 0.15 185 / 0.4);
+}
+
+/* Progress bar with green-blue gradient */
+.progress-helix [data-state='complete'] {
+  background: linear-gradient(90deg, oklch(68% 0.20 160), oklch(62% 0.20 180), oklch(58% 0.18 205));
+}
+
+/* DNA Helix Animation Keyframes */
+@keyframes bg-breathe {
+  0%, 100% {
+    opacity: 0.3;
+    filter: blur(40px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(60px);
+  }
+}
+
+@keyframes bg-pulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bg-glow {
+  0%, 100% {
+    filter: brightness(1) blur(30px);
+  }
+  50% {
+    filter: brightness(1.3) blur(50px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

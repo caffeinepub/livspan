@@ -1,0 +1,138 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-query-keys-for-movement-and-stress-to-frontend-src-hooks-querykeys-ts-following-the-existing-pattern-used-for-nutrition-and-sleep",
+      "featureTitle": "Add query keys for movement and stress to frontend/src/hooks/queryKeys.ts following the existing pattern used for nutrition and sleep.",
+      "files": [
+        "frontend/src/hooks/queryKeys.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-frontend-src-hooks-usemovementqueries-ts-providing-usegetmovementday-and-usesavemovementday-hooks-via-the-icp-actor-with-cache-invalidation-on-save-and-toast-notifications-following-the-pattern-in-usesleepqueries-ts",
+      "featureTitle": "Create frontend/src/hooks/useMovementQueries.ts providing useGetMovementDay and useSaveMovementDay hooks via the ICP actor, with cache invalidation on save and toast notifications, following the pattern in useSleepQueries.ts.",
+      "files": [
+        "frontend/src/hooks/useMovementQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-frontend-src-hooks-usestressqueries-ts-providing-usegetstressday-and-usesavestressday-hooks-via-the-icp-actor-with-cache-invalidation-on-save-and-toast-notifications-following-the-pattern-in-usesleepqueries-ts",
+      "featureTitle": "Create frontend/src/hooks/useStressQueries.ts providing useGetStressDay and useSaveStressDay hooks via the ICP actor, with cache invalidation on save and toast notifications, following the pattern in useSleepQueries.ts.",
+      "files": [
+        "frontend/src/hooks/useStressQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-frontend-src-components-dashboard-movementpanel-tsx-a-dashboard-panel-for-logging-daily-movement-data-it-must-include-a-numeric-input-for-active-minutes-0-300-a-segmented-selector-or-dropdown-for-activity-type-walk-run-bike-gym-and-a-three-option-toggle-for-intensity-light-medium-intense-show-a-summary-of-the-saved-values-and-a-save-button-use-the-visual-design-language-of-sleeppanel-and-nutritionpanel-gradient-accents-dark-theme-consistent-card-style",
+      "featureTitle": "Create frontend/src/components/dashboard/MovementPanel.tsx — a dashboard panel for logging daily movement data. It must include: a numeric input for Active Minutes (0–300), a segmented selector or dropdown for Activity Type (Walk, Run, Bike, Gym), and a three-option toggle for Intensity (Light / Medium / Intense). Show a summary of the saved values and a Save button. Use the visual design language of SleepPanel and NutritionPanel (gradient accents, dark theme, consistent card style).",
+      "files": [
+        "frontend/src/components/dashboard/MovementPanel.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-frontend-src-components-dashboard-stresspanel-tsx-a-dashboard-panel-for-logging-daily-blood-pressure-and-pulse-it-must-include-numeric-inputs-for-systolic-mmhg-diastolic-mmhg-and-pulse-bpm-show-a-summary-of-the-saved-values-with-appropriate-unit-labels-and-a-blood-pressure-display-formatted-as-sys-dia-mmhg-use-the-visual-design-language-of-sleeppanel-and-nutritionpanel",
+      "featureTitle": "Create frontend/src/components/dashboard/StressPanel.tsx — a dashboard panel for logging daily blood pressure and pulse. It must include: numeric inputs for Systolic (mmHg), Diastolic (mmHg), and Pulse (bpm). Show a summary of the saved values with appropriate unit labels and a blood pressure display formatted as 'Sys/Dia mmHg'. Use the visual design language of SleepPanel and NutritionPanel.",
+      "files": [
+        "frontend/src/components/dashboard/StressPanel.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-movement-and-stress-as-selectable-factors-in-startdashboard-tsx-alongside-the-existing-factors-fasting-nutrition-sleep-wire-up-the-movementpanel-and-stresspanel-components-so-they-render-when-their-respective-factor-is-selected-following-the-same-conditional-rendering-pattern-used-for-sleeppanel-and-nutritionpanel",
+      "featureTitle": "Add 'Movement' and 'Stress' as selectable factors in StartDashboard.tsx alongside the existing factors (Fasting, Nutrition, Sleep). Wire up the MovementPanel and StressPanel components so they render when their respective factor is selected, following the same conditional rendering pattern used for SleepPanel and NutritionPanel.",
+      "files": [
+        "frontend/src/pages/StartDashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-english-and-german-translation-strings-to-frontend-src-i18n-translations-ts-for-all-new-movement-and-stress-ui-labels-active-minutes-activity-type-walk-run-bike-gym-intensity-light-medium-intense-blood-pressure-systolic-diastolic-pulse-and-any-panel-headings-or-button-labels",
+      "featureTitle": "Add English and German translation strings to frontend/src/i18n/translations.ts for all new Movement and Stress UI labels: Active Minutes, Activity Type, Walk, Run, Bike, Gym, Intensity, Light, Medium, Intense, Blood Pressure, Systolic, Diastolic, Pulse, and any panel headings or button labels.",
+      "files": [
+        "frontend/src/i18n/translations.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
