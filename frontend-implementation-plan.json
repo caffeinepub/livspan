@@ -1,61 +1,28 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "One-time ICP payment gate for app access",
+  "title": "Configure ICP payment address on the registration/login page",
   "requirements": [
     {
-      "id": "REQ-4",
-      "summary": "Add a payment gate screen to the frontend that displays the owner's ICP address, payment instructions, and periodically checks activation status until the user is granted access",
+      "id": "REQ-2",
+      "summary": "Add an admin configuration panel on the PaymentGate screen that allows the canister owner to view and update the ICP payment wallet address, with appropriate access controls and validation",
       "acceptanceCriteria": [
-        "Authenticated but non-activated users see the payment gate screen instead of StartDashboard.",
-        "The gate displays the owner ICP address from the backend.",
-        "A copy-to-clipboard button is present for the ICP address.",
-        "The gate clearly states the required amount (1 ICP) and explains the manual confirmation process.",
-        "The frontend polls the backend activation status (e.g., every 30 seconds) and automatically redirects to the dashboard upon activation.",
-        "Unauthenticated users see the normal login screen and are not shown the payment gate.",
-        "Already-activated users bypass the gate entirely and see StartDashboard."
+        "The admin configuration UI is only visible to the canister owner when authenticated.",
+        "The current ICP payment address is pre-filled in the input field on load.",
+        "Saving a new address calls the backend `setIcpAddress` function and shows a success/error toast notification.",
+        "The PaymentGate screen immediately reflects the updated address after a successful save.",
+        "Non-owner users do not see the configuration UI on the PaymentGate screen."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/auth/PaymentGate.tsx",
-          "operation": "create",
-          "description": "Create a full-screen payment gate component that displays a centered card with DNA helix background styling. The card should show: (1) a heading explaining the one-time 1 ICP fee requirement, (2) the owner's ICP account identifier fetched via getIcpAddress(), (3) a copyable text field with a copy-to-clipboard button using shadcn/ui components, (4) clear instructions to send exactly 1 ICP and wait for manual confirmation, and (5) a loading spinner or status message during polling. Use the helix gradient classes and OKLCH design tokens from the existing theme. The component should use useQuery to fetch the payment address and useEffect with setInterval to poll isUserActivated() every 30 seconds, automatically redirecting to StartDashboard once activated."
+          "operation": "modify",
+          "description": "Add an admin-only configuration section to the PaymentGate component that displays when the authenticated user is an admin (using isCallerAdmin hook). The section should include a collapsible or inline panel with an input field pre-filled with the current ICP address from useIcpAddress hook, a save button that calls the setIcpAddress mutation, and success/error toast notifications using the shadcn-ui toast component. Position this admin UI visually distinct from the public payment display, using appropriate styling to indicate it's an administrative control. Ensure the component refetches the ICP address after a successful save to reflect the updated value immediately."
         },
         {
           "path": "frontend/src/hooks/useActivationQueries.ts",
-          "operation": "create",
-          "description": "Create React Query hooks for activation status management. Provide useIsUserActivated(user: Principal) that queries isUserActivated() from the backend actor and caches the result with queryKey ['userActivation', user.toString()]. Also provide useGetIcpAddress() that queries getIcpAddress() with queryKey ['icpAddress'] and no authentication requirement. Both hooks should handle actor dependency and loading states consistently with existing query hooks in the project."
-        },
-        {
-          "path": "frontend/src/hooks/queryKeys.ts",
           "operation": "modify",
-          "description": "Add new query key constants for activation-related queries: USER_ACTIVATION and ICP_ADDRESS, following the existing pattern of exported string constants."
-        },
-        {
-          "path": "frontend/src/i18n/translations.ts",
-          "operation": "modify",
-          "description": "Add translation keys for the payment gate UI in both English and German translation objects. Include keys for: payment gate heading, 1 ICP fee explanation, payment address label, copy button text, copy success message, payment instructions (send exactly 1 ICP, manual confirmation process), waiting message, and any error states. Follow the existing translation structure and naming conventions."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Integrate the activation check into the existing App-level auth flow so that the payment gate is enforced before allowing access to any dashboard content",
-      "acceptanceCriteria": [
-        "The activation state is fetched once after login and cached via React Query.",
-        "Any attempt to access dashboard content while non-activated redirects to the payment gate.",
-        "The payment gate is styled consistently with the existing DNA helix / LivSpan design system."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Modify the App component to check activation status after authentication. After the existing profile loading logic, add a useIsUserActivated() query that checks the current user's activation status. Update the conditional rendering logic: (1) if not authenticated, show LoadingScreen or normal flow, (2) if authenticated but activation query is loading, show LoadingScreen, (3) if authenticated and activation query returns false, render PaymentGate instead of StartDashboard, (4) if authenticated and activated (or activation check returns true), proceed to the existing ProfileOnboardingGate and StartDashboard flow. Ensure the activation query is enabled only when identity is available. Import PaymentGate component."
-        },
-        {
-          "path": "frontend/src/components/profile/ProfileOnboardingGate.tsx",
-          "operation": "modify",
-          "description": "Update ProfileOnboardingGate to assume activation has already been checked at the App level. Add a comment at the top of the component explaining that this gate only handles profile setup and that activation is verified upstream in App.tsx. No functional changes needed, but clarify the component's scope in comments."
+          "description": "Add a new React Query mutation hook `useSetIcpAddress` that calls the backend actor's `setIcpAddress(address: string)` method. Include error handling for authorization failures (admin-only restriction) and network errors. On successful mutation, invalidate the ICP address query cache to trigger a refetch. Return the mutation state including loading, error, and success states for UI feedback. Also add a query hook `useIsCallerAdmin` that calls `isCallerAdmin()` on the backend actor to check if the current user is an admin, with appropriate caching strategy."
         }
       ]
     }

@@ -1,85 +1,45 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T08:51:13.789Z",
+  "generatedAt": "2026-02-28T09:02:29.510Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 5,
-    "implemented": 2,
+    "total": 2,
+    "implemented": 1,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add an owner ICP account address field to the backend. The canister owner must be able to configure a target ICP wallet address (account identifier) to which users must send their payment. Store this address in stable state.",
+        "summary": "Add a backend function that allows the canister owner/admin to set and update the ICP payment address (ownerIcpAddress) used for payment gating. This function should be restricted to the canister owner and persist the address in stable storage.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-2",
-        "summary": "Add a per-user activation status to the backend. Track whether each user (by their Internet Identity principal) has been granted access (activated). Provide an update function that allows the owner to manually mark a user as activated after confirming their 1 ICP payment.",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Add a query function to the backend that returns the owner's ICP payment address so the frontend can display it to users awaiting activation.",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-4",
-        "summary": "Add a payment gate screen to the frontend. When an authenticated user is not yet activated, show a dedicated full-screen payment gate (instead of the normal dashboard) that displays: (1) a clear message that a one-time fee of 1 ICP is required, (2) the owner's ICP wallet address fetched from the backend, (3) a copyable address field for easy transfer, and (4) instructions to send exactly 1 ICP and then wait for manual confirmation. The gate should re-check activation status periodically so access is granted automatically once the owner activates the account.",
+        "summary": "Add an admin configuration panel or modal accessible from the PaymentGate screen (or a separate admin-only route) that allows the owner to view and update the ICP payment wallet address. The panel should display the current configured address and provide an input field plus save button to update it. Only show this UI when the authenticated user is the canister owner.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/auth/PaymentGate.tsx",
-          "frontend/src/hooks/useActivationQueries.ts",
-          "frontend/src/hooks/queryKeys.ts",
-          "frontend/src/i18n/translations.ts"
+          "frontend/src/hooks/useActivationQueries.ts"
         ],
         "matchedFiles": [
           "frontend/src/components/auth/PaymentGate.tsx",
-          "frontend/src/hooks/useActivationQueries.ts",
-          "frontend/src/hooks/queryKeys.ts",
-          "frontend/src/i18n/translations.ts"
-        ]
-      },
-      {
-        "id": "REQ-5",
-        "summary": "Integrate the activation check into the existing ProfileOnboardingGate and App-level auth flow so that the payment gate is consistently enforced across the entire app. Non-activated users must not be able to navigate to any dashboard panel.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/components/profile/ProfileOnboardingGate.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/components/profile/ProfileOnboardingGate.tsx"
+          "frontend/src/hooks/useActivationQueries.ts"
         ]
       }
     ]
   },
   "changedFiles": [
     "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
     "frontend/src/components/auth/PaymentGate.tsx",
-    "frontend/src/components/profile/ProfileOnboardingGate.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/queryKeys.ts",
     "frontend/src/hooks/useActivationQueries.ts",
-    "frontend/src/i18n/translations.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

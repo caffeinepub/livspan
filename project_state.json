@@ -1,26 +1,16 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Fasten-Dashboard app with ICP cryptocurrency payment-gated access. Users must pay a one-time fee of 1 ICP to an owner wallet address to gain access to the app.",
-  "architectural_notes": [
-    "ICP blockchain integration needed: app must verify incoming ICP transactions to a designated wallet address and grant access upon 1 ICP payment confirmation."
-  ],
+  "summary": "Project with payment flow functionality. User wants to configure a payment address on the registration/login page.",
+  "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-add-a-payment-gate-screen-to-the-frontend-when-an-authenticated-user-is-not-yet-activated-show-a-dedicated-full-screen-payment-gate-instead-of-the-normal-dashboard-that-displays-1-a-clear-message-that-a-one-time-fee-of-1-icp-is-required-2-the-owner-s-icp-wallet-address-fetched-from-the-backend-3-a-copyable-address-field-for-easy-transfer-and-4-instructions-to-send-exactly-1-icp-and-then-wait-for-manual-confirmation-the-gate-should-re-check-activation-status-periodically-so-access-is-granted-automatically-once-the-owner-activates-the-account",
-      "title": "Add a payment gate screen to the frontend. When an authenticated user is not yet activated, show a dedicated full-screen payment gate (instead of the normal dashboard) that displays: (1) a clear message that a one-time fee of 1 ICP is required, (2) the owner's ICP wallet address fetched from the backend, (3) a copyable address field for easy transfer, and (4) instructions to send exactly 1 ICP and then wait for manual confirmation. The gate should re-check activation status periodically so access is granted automatically once the owner activates the account.",
+      "id": "feature-add-an-admin-configuration-panel-or-modal-accessible-from-the-paymentgate-screen-or-a-separate-admin-only-route-that-allows-the-owner-to-view-and-update-the-icp-payment-wallet-address-the-panel-should-display-the-current-configured-address-and-provide-an-input-field-plus-save-button-to-update-it-only-show-this-ui-when-the-authenticated-user-is-the-canister-owner",
+      "title": "Add an admin configuration panel or modal accessible from the PaymentGate screen (or a separate admin-only route) that allows the owner to view and update the ICP payment wallet address. The panel should display the current configured address and provide an input field plus save button to update it. Only show this UI when the authenticated user is the canister owner.",
       "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-integrate-the-activation-check-into-the-existing-profileonboardinggate-and-app-level-auth-flow-so-that-the-payment-gate-is-consistently-enforced-across-the-entire-app-non-activated-users-must-not-be-able-to-navigate-to-any-dashboard-panel",
-      "title": "Integrate the activation check into the existing ProfileOnboardingGate and App-level auth flow so that the payment gate is consistently enforced across the entire app. Non-activated users must not be able to navigate to any dashboard panel.",
-      "reqIds": [
-        "REQ-5"
+        "REQ-2"
       ],
       "version": 1
     }
@@ -28,36 +18,19 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "One-time ICP payment (1 ICP) required for app access: user pays to owner's ICP wallet address, and upon confirmed receipt the account is unlocked/activated.",
+      "summary": "Configure payment address on the registration/sign-up page",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Add an owner ICP account address field to the backend. The canister owner must be able to configure a target ICP wallet address (account identifier) to which users must send their payment. Store this address in stable state.",
+      "summary": "Add a backend function that allows the canister owner/admin to set and update the ICP payment address (ownerIcpAddress) used for payment gating. This function should be restricted to the canister owner and persist the address in stable storage.",
       "reqIds": [
         "REQ-1"
       ],
       "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Add a per-user activation status to the backend. Track whether each user (by their Internet Identity principal) has been granted access (activated). Provide an update function that allows the owner to manually mark a user as activated after confirming their 1 ICP payment.",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Add a query function to the backend that returns the owner's ICP payment address so the frontend can display it to users awaiting activation.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "status": "pending"
     }
   ],
-  "gameProjectType": "none",
   "projectName": "LivSpan",
   "clarification_mode": "instant",
   "clarification_rounds": 0

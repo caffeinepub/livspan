@@ -6,10 +6,9 @@ import Nat "mo:core/Nat";
 import Time "mo:core/Time";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
-import Migration "migration";
 
 // Use migration to add new fields
-(with migration = Migration.run)
+
 actor {
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
 import { queryKeys } from './queryKeys';
 import type { Principal } from '@dfinity/principal';
@@ -47,5 +47,47 @@ export function useGetIcpAddress() {
     retry: false,
     // Address rarely changes; cache for 5 minutes
     staleTime: 5 * 60 * 1000,
+  });
+}
+
+/**
+ * Hook to check if the current caller is an admin.
+ */
+export function useIsCallerAdmin() {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  const query = useQuery<boolean>({
+    queryKey: ['isCallerAdmin'],
+    queryFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.isCallerAdmin();
+    },
+    enabled: !!actor && !actorFetching,
+    retry: false,
+    staleTime: 60 * 1000,
+  });
+
+  return {
+    ...query,
+    isLoading: actorFetching || query.isLoading,
+    isFetched: !!actor && query.isFetched,
+  };
+}
+
+/**
+ * Mutation hook to set the ICP payment address (admin only).
+ */
+export function useSetIcpAddress() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, string>({
+    mutationFn: async (address: string) => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.setIcpAddress(address);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.icpAddress });
+    },
   });
 }
