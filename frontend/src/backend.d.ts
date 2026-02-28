@@ -71,9 +71,17 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     clearNutritionDay(dayTimestamp: Time): Promise<void>;
     clearSleepDay(dayTimestamp: Time): Promise<void>;
+    /**
+     * / Admin-only: confirms a user's activation status after verifying their 1 ICP payment.
+     */
+    confirmActivation(user: Principal): Promise<void>;
     getCallerFastingSchedule(): Promise<FastingSchedule | null>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    /**
+     * / Returns the owner ICP address. Public — no auth needed so users can see where to send payment.
+     */
+    getIcpAddress(): Promise<string>;
     getMovementDay(date: string): Promise<MovementDay | null>;
     getNutritionEntry(user: Principal, dayTimestamp: Time): Promise<NutritionDay | null>;
     getSleepEntry(user: Principal, dayTimestamp: Time): Promise<SleepDay | null>;
@@ -82,10 +90,19 @@ export interface backendInterface {
     getTodaySleepEntry(): Promise<SleepDay | null>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
+    /**
+     * / Checks if a given user is activated.
+     * / Admins can check any user; a user can check their own status; guests/others are denied.
+     */
+    isUserActivated(user: Principal): Promise<boolean>;
     saveCallerFastingSchedule(fastingSchedule: FastingSchedule): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     saveMovementDay(movementDay: MovementDay): Promise<void>;
     saveNutritionDayEntry(dayTimestamp: Time, entry: NutritionDay): Promise<void>;
     saveSleepDayEntry(dayTimestamp: Time, entry: SleepDay): Promise<void>;
     saveStressDay(stressDay: StressDay): Promise<void>;
+    /**
+     * / Admin-only: set the owner's ICP payment address.
+     */
+    setIcpAddress(address: string): Promise<void>;
 }

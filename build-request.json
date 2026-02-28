@@ -1,39 +1,115 @@
 {
   "kind": "build_request",
-  "title": "Remove 'Today', 'This Week', and 'Current Streak' from Fasting Evaluation Section",
+  "title": "One-time ICP payment gate for app access",
   "projectName": "LivSpan",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "In the IntermittentFastingPanel component, remove the three evaluation/metrics display items: 'Heute' (Today), 'Diese Woche' (This Week), and 'Aktuelle Serie' (Current Streak) from the fasting summary/evaluation section. The rest of the panel (live countdown timer, progress bar, fasting phase indicator, and FastingScheduleSettings) must remain intact.",
-      "target": "frontend",
+      "text": "Add an owner ICP account address field to the backend. The canister owner must be able to configure a target ICP wallet address (account identifier) to which users must send their payment. Store this address in stable state.",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-latest"
         ],
         "quotes": [
-          "Dashboard Fasten: Auswertung - Heute, Diese Woche, Aktuelle Serie entfernen."
+          "meinen Account mit einer ICP - Coin Adresse zu versehen"
         ]
       },
       "acceptanceCriteria": [
-        "The 'Heute' (Today) metric is no longer rendered in the IntermittentFastingPanel.",
-        "The 'Diese Woche' (This Week) metric is no longer rendered in the IntermittentFastingPanel.",
-        "The 'Aktuelle Serie' (Current Streak) metric is no longer rendered in the IntermittentFastingPanel.",
-        "The countdown timer, progress bar, fasting phase label, and schedule settings remain visible and functional.",
-        "No visual layout breaks or empty placeholder spaces remain where the removed items were."
+        "Backend stores a configurable owner ICP account identifier in stable storage.",
+        "Only the canister controller/owner principal can update this address."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add a per-user activation status to the backend. Track whether each user (by their Internet Identity principal) has been granted access (activated). Provide an update function that allows the owner to manually mark a user as activated after confirming their 1 ICP payment.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "Sobald der Betrag in der Wallet auf meinem Account eingegangen ist, die Freischaltung erfolgt"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend has a stable map from Principal to activation status (Boolean).",
+        "A query function `isActivated(principal)` returns whether the user is activated.",
+        "An update function `activateUser(principal)` can be called only by the canister owner to activate a user.",
+        "All existing authenticated endpoints respect the activation gate: non-activated users receive an appropriate error."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add a query function to the backend that returns the owner's ICP payment address so the frontend can display it to users awaiting activation.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "meinen Account mit einer ICP - Coin Adresse zu versehen"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes a public query `getPaymentAddress()` returning the configured ICP account identifier as Text.",
+        "Frontend can fetch and display this address without authentication."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add a payment gate screen to the frontend. When an authenticated user is not yet activated, show a dedicated full-screen payment gate (instead of the normal dashboard) that displays: (1) a clear message that a one-time fee of 1 ICP is required, (2) the owner's ICP wallet address fetched from the backend, (3) a copyable address field for easy transfer, and (4) instructions to send exactly 1 ICP and then wait for manual confirmation. The gate should re-check activation status periodically so access is granted automatically once the owner activates the account.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "eine Einmalige Gebühr von 1 ICP zahlen muss",
+          "Sobald der Betrag in der Wallet auf meinem Account eingegangen ist, die Freischaltung erfolgt"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Authenticated but non-activated users see the payment gate screen instead of StartDashboard.",
+        "The gate displays the owner ICP address from the backend.",
+        "A copy-to-clipboard button is present for the ICP address.",
+        "The gate clearly states the required amount (1 ICP) and explains the manual confirmation process.",
+        "The frontend polls the backend activation status (e.g., every 30 seconds) and automatically redirects to the dashboard upon activation.",
+        "Unauthenticated users see the normal login screen and are not shown the payment gate.",
+        "Already-activated users bypass the gate entirely and see StartDashboard."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Integrate the activation check into the existing ProfileOnboardingGate and App-level auth flow so that the payment gate is consistently enforced across the entire app. Non-activated users must not be able to navigate to any dashboard panel.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "für die Anmeldung zur App",
+          "die Freischaltung erfolgt"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The activation state is fetched once after login and cached via React Query.",
+        "Any attempt to access dashboard content while non-activated redirects to the payment gate.",
+        "The payment gate is styled consistently with the existing DNA helix / LivSpan design system."
       ]
     }
   ],
   "constraints": [
-    "Do not remove or alter the countdown timer, progress bar, fasting phase indicator, or FastingScheduleSettings.",
-    "Do not modify any backend files.",
-    "Do not modify files listed in frontend.immutablePaths."
+    "Do not modify frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or any file under frontend/src/components/ui.",
+    "Payment verification is manual (owner confirms receipt and calls activateUser); do not implement on-chain automated payment verification.",
+    "All Motoko logic must remain in the single backend/main.mo actor."
   ],
   "nonGoals": [
-    "Removing any other sections of the fasting panel.",
-    "Changes to other dashboard panels (Nutrition, Sleep, Movement, Stress).",
-    "Backend data model changes."
+    "Automated on-chain ICP transaction verification or ledger canister integration.",
+    "Recurring subscription payments or partial payment handling.",
+    "Admin UI panel for the owner; activation is done via direct canister calls.",
+    "Any changes to the fasting, nutrition, sleep, movement, or stress data models."
   ],
   "imageRequirements": {
     "required": [],

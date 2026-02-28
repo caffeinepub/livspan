@@ -72,6 +72,7 @@ export const idlService = IDL.Service({
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'clearNutritionDay' : IDL.Func([Time], [], []),
   'clearSleepDay' : IDL.Func([Time], [], []),
+  'confirmActivation' : IDL.Func([IDL.Principal], [], []),
   'getCallerFastingSchedule' : IDL.Func(
       [],
       [IDL.Opt(FastingSchedule)],
@@ -79,6 +80,7 @@ export const idlService = IDL.Service({
     ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getIcpAddress' : IDL.Func([], [IDL.Text], ['query']),
   'getMovementDay' : IDL.Func([IDL.Text], [IDL.Opt(MovementDay)], ['query']),
   'getNutritionEntry' : IDL.Func(
       [IDL.Principal, Time],
@@ -99,12 +101,14 @@ export const idlService = IDL.Service({
       ['query'],
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'isUserActivated' : IDL.Func([IDL.Principal], [IDL.Bool], ['query']),
   'saveCallerFastingSchedule' : IDL.Func([FastingSchedule], [], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'saveMovementDay' : IDL.Func([MovementDay], [], []),
   'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
   'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
   'saveStressDay' : IDL.Func([StressDay], [], []),
+  'setIcpAddress' : IDL.Func([IDL.Text], [], []),
 });
 
 export const idlInitArgs = [];
@@ -174,6 +178,7 @@ export const idlFactory = ({ IDL }) => {
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'clearNutritionDay' : IDL.Func([Time], [], []),
     'clearSleepDay' : IDL.Func([Time], [], []),
+    'confirmActivation' : IDL.Func([IDL.Principal], [], []),
     'getCallerFastingSchedule' : IDL.Func(
         [],
         [IDL.Opt(FastingSchedule)],
@@ -181,6 +186,7 @@ export const idlFactory = ({ IDL }) => {
       ),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getIcpAddress' : IDL.Func([], [IDL.Text], ['query']),
     'getMovementDay' : IDL.Func([IDL.Text], [IDL.Opt(MovementDay)], ['query']),
     'getNutritionEntry' : IDL.Func(
         [IDL.Principal, Time],
@@ -201,12 +207,14 @@ export const idlFactory = ({ IDL }) => {
         ['query'],
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'isUserActivated' : IDL.Func([IDL.Principal], [IDL.Bool], ['query']),
     'saveCallerFastingSchedule' : IDL.Func([FastingSchedule], [], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'saveMovementDay' : IDL.Func([MovementDay], [], []),
     'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
     'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
     'saveStressDay' : IDL.Func([StressDay], [], []),
+    'setIcpAddress' : IDL.Func([IDL.Text], [], []),
   });
 };
 

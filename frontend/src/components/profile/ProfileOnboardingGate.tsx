@@ -1,3 +1,14 @@
+/**
+ * ProfileOnboardingGate
+ *
+ * Handles two concerns:
+ * 1. Shows a login prompt when the user is not authenticated.
+ * 2. Shows a profile-setup modal when the user is authenticated but has no profile yet.
+ *
+ * NOTE: Activation (1 ICP payment gate) is verified upstream in App.tsx.
+ * By the time this component renders, the user is guaranteed to be both
+ * authenticated AND activated.
+ */
 import React, { useState, useEffect } from 'react';
 import { useInternetIdentity } from '@/hooks/useInternetIdentity';
 import { useGetCallerUserProfile, useSaveCallerUserProfile } from '@/hooks/useUserProfileQueries';

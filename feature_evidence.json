@@ -2,11 +2,13 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-in-the-intermittentfastingpanel-component-remove-the-three-evaluation-metrics-display-items-heute-today-diese-woche-this-week-and-aktuelle-serie-current-streak-from-the-fasting-summary-evaluation-section-the-rest-of-the-panel-live-countdown-timer-progress-bar-fasting-phase-indicator-and-fastingschedulesettings-must-remain-intact",
-      "featureTitle": "In the IntermittentFastingPanel component, remove the three evaluation/metrics display items: 'Heute' (Today), 'Diese Woche' (This Week), and 'Aktuelle Serie' (Current Streak) from the fasting summary/evaluation section. The rest of the panel (live countdown timer, progress bar, fasting phase indicator, and FastingScheduleSettings) must remain intact.",
+      "featureId": "feature-add-a-payment-gate-screen-to-the-frontend-when-an-authenticated-user-is-not-yet-activated-show-a-dedicated-full-screen-payment-gate-instead-of-the-normal-dashboard-that-displays-1-a-clear-message-that-a-one-time-fee-of-1-icp-is-required-2-the-owner-s-icp-wallet-address-fetched-from-the-backend-3-a-copyable-address-field-for-easy-transfer-and-4-instructions-to-send-exactly-1-icp-and-then-wait-for-manual-confirmation-the-gate-should-re-check-activation-status-periodically-so-access-is-granted-automatically-once-the-owner-activates-the-account",
+      "featureTitle": "Add a payment gate screen to the frontend. When an authenticated user is not yet activated, show a dedicated full-screen payment gate (instead of the normal dashboard) that displays: (1) a clear message that a one-time fee of 1 ICP is required, (2) the owner's ICP wallet address fetched from the backend, (3) a copyable address field for easy transfer, and (4) instructions to send exactly 1 ICP and then wait for manual confirmation. The gate should re-check activation status periodically so access is granted automatically once the owner activates the account.",
       "files": [
-        "frontend/src/components/dashboard/IntermittentFastingPanel.tsx",
-        "frontend/src/lib/fastingMetrics.ts"
+        "frontend/src/components/auth/PaymentGate.tsx",
+        "frontend/src/hooks/queryKeys.ts",
+        "frontend/src/hooks/useActivationQueries.ts",
+        "frontend/src/i18n/translations.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -17,7 +19,27 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-the-activation-check-into-the-existing-profileonboardinggate-and-app-level-auth-flow-so-that-the-payment-gate-is-consistently-enforced-across-the-entire-app-non-activated-users-must-not-be-able-to-navigate-to-any-dashboard-panel",
+      "featureTitle": "Integrate the activation check into the existing ProfileOnboardingGate and App-level auth flow so that the payment gate is consistently enforced across the entire app. Non-activated users must not be able to navigate to any dashboard panel.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/profile/ProfileOnboardingGate.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
       ],
       "confidence": "high"
     }

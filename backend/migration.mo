@@ -1,6 +1,7 @@
 import Map "mo:core/Map";
-import Time "mo:core/Time";
 import Principal "mo:core/Principal";
+import Time "mo:core/Time";
+import Text "mo:core/Text";
 
 module {
   type Gender = {
@@ -67,6 +68,8 @@ module {
     userFastingSchedule : Map.Map<Principal, FastingSchedule>;
     nutritionalDayEntries : Map.Map<Principal, Map.Map<Time.Time, NutritionDay>>;
     sleepDayEntries : Map.Map<Principal, Map.Map<Time.Time, SleepDay>>;
+    movementDayEntries : Map.Map<Principal, Map.Map<Text, MovementDay>>;
+    stressDayEntries : Map.Map<Principal, Map.Map<Text, StressDay>>;
   };
 
   type NewActor = {
@@ -76,16 +79,15 @@ module {
     sleepDayEntries : Map.Map<Principal, Map.Map<Time.Time, SleepDay>>;
     movementDayEntries : Map.Map<Principal, Map.Map<Text, MovementDay>>;
     stressDayEntries : Map.Map<Principal, Map.Map<Text, StressDay>>;
+    ownerIcpAddress : Text;
+    userActivationStatus : Map.Map<Principal, Bool>;
   };
 
   public func run(old : OldActor) : NewActor {
-    let movementDayEntries = Map.empty<Principal, Map.Map<Text, MovementDay>>();
-    let stressDayEntries = Map.empty<Principal, Map.Map<Text, StressDay>>();
-
     {
       old with
-      movementDayEntries;
-      stressDayEntries;
+      ownerIcpAddress = "";
+      userActivationStatus = Map.empty<Principal, Bool>();
     };
   };
 };

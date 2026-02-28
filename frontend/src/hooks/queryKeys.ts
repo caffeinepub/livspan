@@ -16,6 +16,10 @@ export const queryKeys = {
   stress: {
     day: (date: string) => ['stress', 'day', date] as const,
   },
+  activation: {
+    user: (principal: string) => ['userActivation', principal] as const,
+  },
+  icpAddress: ['icpAddress'] as const,
 } as const;
 
 export function movementDay(date: string) {

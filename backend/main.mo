@@ -4,13 +4,12 @@ import Principal "mo:core/Principal";
 import Runtime "mo:core/Runtime";
 import Nat "mo:core/Nat";
 import Time "mo:core/Time";
-
-
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
+import Migration "migration";
 
 // Use migration to add new fields
-
+(with migration = Migration.run)
 actor {
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
@@ -81,6 +80,43 @@ actor {
   // Per-user movement and stress entries: keyed by Principal -> (date -> entry)
   let movementDayEntries = Map.empty<Principal, Map.Map<Text, MovementDay>>();
   let stressDayEntries = Map.empty<Principal, Map.Map<Text, StressDay>>();
+
+  // Store the owner's ICP address
+  var ownerIcpAddress : Text = "";
+  let userActivationStatus = Map.empty<Principal, Bool>();
+
+  /// Returns the owner ICP address. Public — no auth needed so users can see where to send payment.
+  public query func getIcpAddress() : async Text {
+    ownerIcpAddress;
+  };
+
+  /// Admin-only: set the owner's ICP payment address.
+  public shared ({ caller }) func setIcpAddress(address : Text) : async () {
+    if (not (AccessControl.isAdmin(accessControlState, caller))) {
+      Runtime.trap("Unauthorized: Only admins can set the ICP address");
+    };
+    ownerIcpAddress := address;
+  };
+
+  /// Admin-only: confirms a user's activation status after verifying their 1 ICP payment.
+  public shared ({ caller }) func confirmActivation(user : Principal) : async () {
+    if (not (AccessControl.isAdmin(accessControlState, caller))) {
+      Runtime.trap("Unauthorized: Only admins can confirm activation");
+    };
+    userActivationStatus.add(user, true);
+  };
+
+  /// Checks if a given user is activated.
+  /// Admins can check any user; a user can check their own status; guests/others are denied.
+  public query ({ caller }) func isUserActivated(user : Principal) : async Bool {
+    if (caller != user and not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Can only check your own activation status");
+    };
+    switch (userActivationStatus.get(user)) {
+      case (null) { false };
+      case (?isActive) { isActive };
+    };
+  };
 
   // Profile management functions
   public query ({ caller }) func getCallerUserProfile() : async ?UserProfile {

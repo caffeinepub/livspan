@@ -59,9 +59,17 @@ export interface _SERVICE {
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'clearNutritionDay' : ActorMethod<[Time], undefined>,
   'clearSleepDay' : ActorMethod<[Time], undefined>,
+  /**
+   * / Admin-only: confirms a user's activation status after verifying their 1 ICP payment.
+   */
+  'confirmActivation' : ActorMethod<[Principal], undefined>,
   'getCallerFastingSchedule' : ActorMethod<[], [] | [FastingSchedule]>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  /**
+   * / Returns the owner ICP address. Public — no auth needed so users can see where to send payment.
+   */
+  'getIcpAddress' : ActorMethod<[], string>,
   'getMovementDay' : ActorMethod<[string], [] | [MovementDay]>,
   'getNutritionEntry' : ActorMethod<[Principal, Time], [] | [NutritionDay]>,
   'getSleepEntry' : ActorMethod<[Principal, Time], [] | [SleepDay]>,
@@ -70,12 +78,21 @@ export interface _SERVICE {
   'getTodaySleepEntry' : ActorMethod<[], [] | [SleepDay]>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
+  /**
+   * / Checks if a given user is activated.
+   * / Admins can check any user; a user can check their own status; guests/others are denied.
+   */
+  'isUserActivated' : ActorMethod<[Principal], boolean>,
   'saveCallerFastingSchedule' : ActorMethod<[FastingSchedule], undefined>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'saveMovementDay' : ActorMethod<[MovementDay], undefined>,
   'saveNutritionDayEntry' : ActorMethod<[Time, NutritionDay], undefined>,
   'saveSleepDayEntry' : ActorMethod<[Time, SleepDay], undefined>,
   'saveStressDay' : ActorMethod<[StressDay], undefined>,
+  /**
+   * / Admin-only: set the owner's ICP payment address.
+   */
+  'setIcpAddress' : ActorMethod<[string], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

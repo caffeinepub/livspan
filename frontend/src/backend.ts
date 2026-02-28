@@ -154,9 +154,17 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     clearNutritionDay(dayTimestamp: Time): Promise<void>;
     clearSleepDay(dayTimestamp: Time): Promise<void>;
+    /**
+     * / Admin-only: confirms a user's activation status after verifying their 1 ICP payment.
+     */
+    confirmActivation(user: Principal): Promise<void>;
     getCallerFastingSchedule(): Promise<FastingSchedule | null>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    /**
+     * / Returns the owner ICP address. Public — no auth needed so users can see where to send payment.
+     */
+    getIcpAddress(): Promise<string>;
     getMovementDay(date: string): Promise<MovementDay | null>;
     getNutritionEntry(user: Principal, dayTimestamp: Time): Promise<NutritionDay | null>;
     getSleepEntry(user: Principal, dayTimestamp: Time): Promise<SleepDay | null>;
@@ -165,12 +173,21 @@ export interface backendInterface {
     getTodaySleepEntry(): Promise<SleepDay | null>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
+    /**
+     * / Checks if a given user is activated.
+     * / Admins can check any user; a user can check their own status; guests/others are denied.
+     */
+    isUserActivated(user: Principal): Promise<boolean>;
     saveCallerFastingSchedule(fastingSchedule: FastingSchedule): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     saveMovementDay(movementDay: MovementDay): Promise<void>;
     saveNutritionDayEntry(dayTimestamp: Time, entry: NutritionDay): Promise<void>;
     saveSleepDayEntry(dayTimestamp: Time, entry: SleepDay): Promise<void>;
     saveStressDay(stressDay: StressDay): Promise<void>;
+    /**
+     * / Admin-only: set the owner's ICP payment address.
+     */
+    setIcpAddress(address: string): Promise<void>;
 }
 import type { FastingSchedule as _FastingSchedule, Gender as _Gender, MovementDay as _MovementDay, NutritionDay as _NutritionDay, SleepDay as _SleepDay, StressDay as _StressDay, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
@@ -231,6 +248,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async confirmActivation(arg0: Principal): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.confirmActivation(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.confirmActivation(arg0);
+            return result;
+        }
+    }
     async getCallerFastingSchedule(): Promise<FastingSchedule | null> {
         if (this.processError) {
             try {
@@ -271,6 +302,20 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getCallerUserRole();
             return from_candid_UserRole_n9(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getIcpAddress(): Promise<string> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getIcpAddress();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getIcpAddress();
+            return result;
         }
     }
     async getMovementDay(arg0: string): Promise<MovementDay | null> {
@@ -385,6 +430,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async isUserActivated(arg0: Principal): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.isUserActivated(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.isUserActivated(arg0);
+            return result;
+        }
+    }
     async saveCallerFastingSchedule(arg0: FastingSchedule): Promise<void> {
         if (this.processError) {
             try {
@@ -466,6 +525,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.saveStressDay(arg0);
+            return result;
+        }
+    }
+    async setIcpAddress(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.setIcpAddress(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.setIcpAddress(arg0);
             return result;
         }
     }

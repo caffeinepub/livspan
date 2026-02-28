@@ -78,6 +78,24 @@ export interface Translations {
       saving: string;
     };
   };
+  paymentGate: {
+    title: string;
+    subtitle: string;
+    feeLabel: string;
+    feeDescription: string;
+    addressLabel: string;
+    loadingAddress: string;
+    addressError: string;
+    addressNotSet: string;
+    copyButton: string;
+    copySuccess: string;
+    instructionsTitle: string;
+    step1: string;
+    step2: string;
+    step3: string;
+    pollingMessage: string;
+    manualConfirmNote: string;
+  };
   fastingSchedule: {
     title: string;
     description: string;
@@ -352,6 +370,24 @@ export const translations: Record<Language, Translations> = {
         saving: 'Saving...',
       },
     },
+    paymentGate: {
+      title: 'Access LivSpan',
+      subtitle: 'A one-time fee of 1 ICP is required to unlock full access to your longevity dashboard.',
+      feeLabel: 'One-Time Access Fee: 1 ICP',
+      feeDescription: 'Pay once, access forever. Your data stays private on the Internet Computer.',
+      addressLabel: 'Send 1 ICP to this address:',
+      loadingAddress: 'Loading payment address…',
+      addressError: 'Could not load the payment address. Please try again later.',
+      addressNotSet: 'Payment address not yet configured. Please contact support.',
+      copyButton: 'Copy address',
+      copySuccess: '✓ Address copied to clipboard!',
+      instructionsTitle: 'How to unlock access:',
+      step1: 'Copy the ICP account address above.',
+      step2: 'Send exactly 1 ICP from your wallet (e.g. NNS, Plug, or Stoic).',
+      step3: 'Wait for manual confirmation — this page will automatically unlock once your payment is verified.',
+      pollingMessage: 'Checking activation status every 30 seconds… This page will refresh automatically once your access is confirmed.',
+      manualConfirmNote: 'Payments are verified manually by the app owner. Confirmation typically takes a few hours. Thank you for your patience.',
+    },
     fastingSchedule: {
       title: 'Fasting Schedule',
       description: 'Customize your daily fasting window',
@@ -551,17 +587,17 @@ export const translations: Record<Language, Translations> = {
   de: {
     header: {
       title: 'LivSpan',
-      subtitle: 'LANGLEBIGKEITS-DASHBOARD',
+      subtitle: 'LONGEVITY DASHBOARD',
     },
     intro: {
-      heading: 'Dein Gesundheitsgenom',
+      heading: 'Dein Gesundheits-Genom',
       description:
         'Überwache die fünf grundlegenden Faktoren, die Langlebigkeit und Wohlbefinden beeinflussen. Jedes Element verbindet sich zu deinem einzigartigen Gesundheitsprofil.',
     },
     factors: {
       nutrition: {
         label: 'Ernährung',
-        description: 'Verfolge deine tägliche Nahrungsaufnahme und Balance',
+        description: 'Verfolge deine tägliche Nährstoffaufnahme und Balance',
       },
       sleep: {
         label: 'Schlaf',
@@ -569,19 +605,19 @@ export const translations: Record<Language, Translations> = {
       },
       movement: {
         label: 'Bewegung',
-        description: 'Verfolge deine körperliche Aktivität und Übungen',
+        description: 'Verfolge deine körperliche Aktivität und Sport',
       },
       stress: {
         label: 'Stress',
-        description: 'Manage Stresslevel und mentales Wohlbefinden',
+        description: 'Verwalte Stresslevel und mentales Wohlbefinden',
       },
       fasting: {
         label: 'Fasten',
-        description: 'Überwache deinen Intervallfasten-Zeitplan',
+        description: 'Überwache deinen intermittierenden Fastenplan',
       },
     },
     footer: {
-      builtWith: 'Mit Liebe erstellt mit',
+      builtWith: 'Mit Liebe gebaut mit',
       copyright: 'Alle Rechte vorbehalten',
     },
     languageSwitcher: {
@@ -596,12 +632,12 @@ export const translations: Record<Language, Translations> = {
       loginRequired: {
         title: 'Willkommen bei LivSpan',
         description:
-          'Bitte melde dich an, um auf dein personalisiertes Langlebigkeits-Dashboard zuzugreifen und deine Gesundheitsdaten zu verfolgen.',
+          'Bitte melde dich an, um auf dein personalisiertes Longevity-Dashboard zuzugreifen und deine Gesundheitsdaten zu verfolgen.',
       },
       setup: {
-        title: 'Vervollständige dein Profil',
+        title: 'Profil vervollständigen',
         description:
-          'Erzähle uns ein wenig über dich, um deine Gesundheitsverfolgung zu personalisieren.',
+          'Erzähl uns etwas über dich, um dein Gesundheits-Tracking zu personalisieren.',
       },
       fields: {
         name: 'Name',
@@ -610,7 +646,7 @@ export const translations: Record<Language, Translations> = {
         gender: 'Geschlecht',
       },
       placeholders: {
-        name: 'Gib deinen Namen ein',
+        name: 'Deinen Namen eingeben',
         birthYear: '1990',
         heightCm: '170',
       },
@@ -626,8 +662,26 @@ export const translations: Record<Language, Translations> = {
       },
       actions: {
         save: 'Profil speichern',
-        saving: 'Speichern...',
+        saving: 'Wird gespeichert...',
       },
+    },
+    paymentGate: {
+      title: 'LivSpan freischalten',
+      subtitle: 'Für den vollständigen Zugang zum Longevity-Dashboard ist eine einmalige Gebühr von 1 ICP erforderlich.',
+      feeLabel: 'Einmalige Zuganggebühr: 1 ICP',
+      feeDescription: 'Einmal zahlen, dauerhaft nutzen. Deine Daten bleiben privat auf dem Internet Computer.',
+      addressLabel: 'Sende 1 ICP an diese Adresse:',
+      loadingAddress: 'Zahlungsadresse wird geladen…',
+      addressError: 'Zahlungsadresse konnte nicht geladen werden. Bitte versuche es später erneut.',
+      addressNotSet: 'Zahlungsadresse noch nicht konfiguriert. Bitte kontaktiere den Support.',
+      copyButton: 'Adresse kopieren',
+      copySuccess: '✓ Adresse in die Zwischenablage kopiert!',
+      instructionsTitle: 'So schaltest du den Zugang frei:',
+      step1: 'Kopiere die ICP-Kontoadresse oben.',
+      step2: 'Sende genau 1 ICP aus deiner Wallet (z. B. NNS, Plug oder Stoic).',
+      step3: 'Warte auf die manuelle Bestätigung – diese Seite schaltet sich automatisch frei, sobald deine Zahlung verifiziert wurde.',
+      pollingMessage: 'Aktivierungsstatus wird alle 30 Sekunden geprüft… Diese Seite aktualisiert sich automatisch, sobald dein Zugang bestätigt wurde.',
+      manualConfirmNote: 'Zahlungen werden manuell vom App-Inhaber verifiziert. Die Bestätigung dauert in der Regel einige Stunden. Vielen Dank für deine Geduld.',
     },
     fastingSchedule: {
       title: 'Fastenplan',
@@ -637,36 +691,36 @@ export const translations: Record<Language, Translations> = {
         protocol: 'Protokoll',
       },
       fields: {
-        startHour: 'Fastenbeginn',
+        startHour: 'Fastenstart',
         endHour: 'Fastenende',
       },
       help: {
         crossMidnight:
-          'Dein Fastenfenster kann über Mitternacht gehen (z.B. 20:00 bis 12:00 am nächsten Tag).',
+          'Dein Fastenfenster kann Mitternacht überschreiten (z. B. 20:00 bis 12:00 am nächsten Tag).',
         protocol: 'Protokoll',
       },
       actions: {
         edit: 'Plan bearbeiten',
         save: 'Speichern',
-        saving: 'Speichern...',
+        saving: 'Wird gespeichert...',
         cancel: 'Abbrechen',
       },
     },
     fastingPanel: {
-      title: 'Intervallfasten',
+      title: 'Intermittierendes Fasten',
       subtitle: '16:8 PROTOKOLL',
       status: {
         label: 'Aktueller Status',
-        fasting: 'Fastenphase',
+        fasting: 'Fasten',
         eating: 'Essensfenster',
         fastingDesc: 'Dein Körper ist im Fettverbrennungsmodus',
         eatingDesc: 'Zeit, deinen Körper zu nähren',
       },
       timer: {
-        elapsed: 'Verstrichene Zeit',
+        elapsed: 'Vergangene Zeit',
         remaining: 'Verbleibende Zeit',
-        elapsedDesc: 'in aktueller Phase',
-        remainingDesc: 'bis Phasenende',
+        elapsedDesc: 'in der aktuellen Phase',
+        remainingDesc: 'bis zum Phasenende',
       },
       progress: {
         label: 'Phasenfortschritt',
@@ -674,12 +728,12 @@ export const translations: Record<Language, Translations> = {
       },
       daily: {
         label: 'Heute',
-        sessions: 'Sitzungen',
+        sessions: 'Einheiten',
         hours: 'Stunden',
       },
       weekly: {
         label: 'Diese Woche',
-        sessions: 'Sitzungen',
+        sessions: 'Einheiten',
         hours: 'Stunden',
       },
       streak: {
@@ -700,12 +754,12 @@ export const translations: Record<Language, Translations> = {
       authRequired: 'Bitte melde dich an, um deine tägliche Ernährung zu verfolgen.',
       fastingPhase: {
         label: 'Fastenphase',
-        fasting: 'Fastenphase',
+        fasting: 'Fasten',
         eating: 'Essensfenster',
         fastingTip:
           'Bleib während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
         eatingTip:
-          'Konzentriere dich auf Protein und Gemüse. Ziel: 1,8g Protein pro kg Körpergewicht und 400g Gemüse täglich.',
+          'Konzentriere dich auf Protein und Gemüse. Strebe 1,8 g Protein pro kg Körpergewicht und 400 g Gemüse täglich an.',
       },
       weight: {
         label: 'Körpergewicht',
@@ -714,13 +768,12 @@ export const translations: Record<Language, Translations> = {
       bmi: {
         label: 'Body-Mass-Index',
         unit: 'BMI',
-        heightMissing:
-          'Bitte vervollständige dein Profil mit der Körpergröße, um den BMI zu berechnen.',
+        heightMissing: 'Bitte vervollständige dein Profil mit deiner Größe, um den BMI zu berechnen.',
       },
       protein: {
-        label: 'Proteinzufuhr',
+        label: 'Proteinaufnahme',
         target: 'Tagesziel (1,8 g/kg)',
-        targetUnavailable: 'Gewicht eingeben für Ziel',
+        targetUnavailable: 'Gewicht eingeben, um Ziel zu sehen',
         consumed: 'Aufgenommen',
         progress: 'Fortschritt',
         targetReached: '✓ Tägliches Proteinziel erreicht!',
@@ -735,14 +788,14 @@ export const translations: Record<Language, Translations> = {
         remaining: '{amount} g verbleibend bis zum Ziel',
       },
       water: {
-        label: 'Wasserzufuhr',
+        label: 'Wasseraufnahme',
         goal: 'Ziel: 2,5 L',
         unit: 'L',
         progress: 'Fortschritt',
       },
       actions: {
         save: 'Heutige Ernährung speichern',
-        saving: 'Speichern...',
+        saving: 'Wird gespeichert...',
         saveSuccess: 'Ernährungsdaten erfolgreich gespeichert',
         saveError: 'Fehler beim Speichern der Ernährungsdaten',
       },
@@ -768,7 +821,7 @@ export const translations: Record<Language, Translations> = {
       },
       actions: {
         save: 'Heutigen Schlaf speichern',
-        saving: 'Speichern...',
+        saving: 'Wird gespeichert...',
         saveSuccess: 'Schlafdaten erfolgreich gespeichert',
         saveError: 'Fehler beim Speichern der Schlafdaten',
       },
@@ -785,10 +838,10 @@ export const translations: Record<Language, Translations> = {
         label: 'Aktivitätstyp',
       },
       activityTypes: {
-        walk: 'Spazieren',
+        walk: 'Gehen',
         run: 'Laufen',
         bike: 'Radfahren',
-        gym: 'Gym',
+        gym: 'Fitnessstudio',
       },
       intensity: {
         label: 'Intensität',
@@ -800,7 +853,7 @@ export const translations: Record<Language, Translations> = {
       },
       actions: {
         save: 'Heutige Bewegung speichern',
-        saving: 'Speichern...',
+        saving: 'Wird gespeichert...',
         saveSuccess: 'Bewegungsdaten erfolgreich gespeichert',
         saveError: 'Fehler beim Speichern der Bewegungsdaten',
       },
@@ -820,7 +873,7 @@ export const translations: Record<Language, Translations> = {
       },
       actions: {
         save: 'Heutige Vitalwerte speichern',
-        saving: 'Speichern...',
+        saving: 'Wird gespeichert...',
         saveSuccess: 'Vitalwerte erfolgreich gespeichert',
         saveError: 'Fehler beim Speichern der Vitalwerte',
       },

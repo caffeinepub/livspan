@@ -5,7 +5,10 @@ import StartDashboard from '@/pages/StartDashboard';
 import { useActor } from '@/hooks/useActor';
 import { useInternetIdentity } from '@/hooks/useInternetIdentity';
 import { useGetCallerUserProfile } from '@/hooks/useUserProfileQueries';
+import { useIsUserActivated } from '@/hooks/useActivationQueries';
+import PaymentGate from '@/components/auth/PaymentGate';
 import { Loader2 } from 'lucide-react';
+import { Principal } from '@dfinity/principal';
 
 function LoadingScreen() {
   return (
@@ -43,15 +46,42 @@ function LoadingScreen() {
 function AppContent() {
   const { isFetching: actorFetching } = useActor();
   const { identity, isInitializing } = useInternetIdentity();
-  const { isLoading: profileLoading, isFetched } = useGetCallerUserProfile();
+  const isAuthenticated = !!identity;
 
-  // Show loading screen during initialization
-  const isLoading = isInitializing || actorFetching || (!!identity && !isFetched);
+  // Derive principal for activation check
+  const principal: Principal | null = identity ? identity.getPrincipal() : null;
+
+  // Profile query — only runs when authenticated
+  const { isLoading: profileLoading, isFetched: profileFetched } = useGetCallerUserProfile();
+
+  // Activation query — only runs when authenticated
+  const {
+    data: isActivated,
+    isLoading: activationLoading,
+    isFetched: activationFetched,
+  } = useIsUserActivated(principal);
+
+  // Show loading screen during initialization or while fetching auth-dependent data
+  const isLoading =
+    isInitializing ||
+    actorFetching ||
+    (isAuthenticated && (!profileFetched || !activationFetched));
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
+  // Unauthenticated users go to StartDashboard which renders ProfileOnboardingGate (login prompt)
+  if (!isAuthenticated) {
+    return <StartDashboard />;
+  }
+
+  // Authenticated but not yet activated → show payment gate
+  if (!isActivated) {
+    return <PaymentGate />;
+  }
+
+  // Authenticated and activated → show full dashboard
   return <StartDashboard />;
 }
 
