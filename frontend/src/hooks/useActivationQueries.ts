@@ -41,7 +41,9 @@ export function useGetIcpAddress() {
     queryKey: queryKeys.icpAddress,
     queryFn: async () => {
       if (!actor) throw new Error('Actor not available');
-      return actor.getIcpAddress();
+      const address = await actor.getIcpAddress();
+      // Fall back to the default address if none is configured
+      return address || 'eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0';
     },
     enabled: !!actor && !actorFetching,
     retry: false,
@@ -88,6 +90,28 @@ export function useSetIcpAddress() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.icpAddress });
+    },
+  });
+}
+
+/**
+ * Mutation hook to verify payment on the ICP Ledger and automatically activate the caller's account.
+ * Returns true if payment was found and account is now activated, false if no qualifying payment found.
+ */
+export function useVerifyAndActivateMutation() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation<boolean, Error, void>({
+    mutationFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.verifyAndActivate();
+    },
+    onSuccess: (activated) => {
+      if (activated) {
+        // Invalidate all activation status queries so the gate dismisses immediately
+        queryClient.invalidateQueries({ queryKey: ['activation'] });
+      }
     },
   });
 }

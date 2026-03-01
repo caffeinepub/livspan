@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, CheckCircle2, Loader2, Coins, Clock, ShieldCheck, Settings, Save, X } from 'lucide-react';
-import { useGetIcpAddress, useIsCallerAdmin, useSetIcpAddress } from '@/hooks/useActivationQueries';
+import {
+  Copy,
+  CheckCircle2,
+  Loader2,
+  Coins,
+  Clock,
+  ShieldCheck,
+  Settings,
+  Save,
+  X,
+  Zap,
+  AlertCircle,
+} from 'lucide-react';
+import {
+  useGetIcpAddress,
+  useIsCallerAdmin,
+  useSetIcpAddress,
+  useVerifyAndActivateMutation,
+} from '@/hooks/useActivationQueries';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -19,10 +36,13 @@ export default function PaymentGate() {
   const { data: icpAddress, isLoading: addressLoading, isError: addressError } = useGetIcpAddress();
   const { data: isAdmin, isLoading: adminLoading } = useIsCallerAdmin();
   const setIcpAddressMutation = useSetIcpAddress();
+  const verifyAndActivateMutation = useVerifyAndActivateMutation();
 
   const [copied, setCopied] = useState(false);
   const [adminPanelOpen, setAdminPanelOpen] = useState(false);
   const [addressInput, setAddressInput] = useState('');
+  const [verifyError, setVerifyError] = useState<string | null>(null);
+  const [verifySuccess, setVerifySuccess] = useState(false);
 
   // Pre-fill input when address loads or admin panel opens
   useEffect(() => {
@@ -62,6 +82,23 @@ export default function PaymentGate() {
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Unbekannter Fehler';
       toast.error(`Fehler beim Speichern: ${message}`);
+    }
+  };
+
+  const handleVerifyPayment = async () => {
+    setVerifyError(null);
+    setVerifySuccess(false);
+    try {
+      const activated = await verifyAndActivateMutation.mutateAsync();
+      if (activated) {
+        setVerifySuccess(true);
+        toast.success(t.paymentGate.checkPaymentSuccess);
+      } else {
+        setVerifyError(t.paymentGate.checkPaymentError);
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      setVerifyError(`${t.paymentGate.checkPaymentError} (${message})`);
     }
   };
 
@@ -262,16 +299,62 @@ export default function PaymentGate() {
               </ol>
             </div>
 
+            {/* ── Automatic Payment Verification ── */}
+            <div className="space-y-3">
+              {/* Success state */}
+              {verifySuccess && (
+                <Alert className="border-helix-accent/50 bg-helix-accent/10">
+                  <CheckCircle2 className="w-4 h-4 text-helix-accent" />
+                  <AlertDescription className="text-helix-accent font-medium">
+                    {t.paymentGate.checkPaymentSuccess}
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {/* Error state */}
+              {verifyError && !verifySuccess && (
+                <Alert variant="destructive" className="border-destructive/50">
+                  <AlertCircle className="w-4 h-4" />
+                  <AlertDescription>{verifyError}</AlertDescription>
+                </Alert>
+              )}
+
+              {/* Check Payment button */}
+              <Button
+                onClick={handleVerifyPayment}
+                disabled={verifyAndActivateMutation.isPending || verifySuccess}
+                className="w-full bg-gradient-to-r from-helix-accent via-helix-strand to-helix-glow text-white hover:opacity-90 transition-opacity font-medium"
+                size="lg"
+              >
+                {verifyAndActivateMutation.isPending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    {t.paymentGate.checkPaymentChecking}
+                  </>
+                ) : verifySuccess ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4 mr-2" />
+                    {t.paymentGate.checkPaymentSuccess}
+                  </>
+                ) : (
+                  <>
+                    <Zap className="w-4 h-4 mr-2" />
+                    {t.paymentGate.checkPaymentButton}
+                  </>
+                )}
+              </Button>
+            </div>
+
             {/* Polling status */}
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border border-border/50">
               <Clock className="w-4 h-4 text-muted-foreground shrink-0 animate-pulse" />
               <p className="text-xs text-muted-foreground">{t.paymentGate.pollingMessage}</p>
             </div>
 
-            {/* Manual confirmation note */}
+            {/* Auto-verification note */}
             <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/20 border border-border/30">
               <ShieldCheck className="w-4 h-4 text-helix-glow shrink-0 mt-0.5" />
-              <p className="text-xs text-muted-foreground">{t.paymentGate.manualConfirmNote}</p>
+              <p className="text-xs text-muted-foreground">{t.paymentGate.autoVerifyNote}</p>
             </div>
 
             {/* Logout option */}

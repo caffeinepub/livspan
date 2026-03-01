@@ -1,28 +1,40 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Configure ICP payment address on the registration/login page",
+  "title": "Automatic ICP Ledger Payment Verification & Account Activation - Frontend",
   "requirements": [
     {
       "id": "REQ-2",
-      "summary": "Add an admin configuration panel on the PaymentGate screen that allows the canister owner to view and update the ICP payment wallet address, with appropriate access controls and validation",
+      "summary": "Update PaymentGate to trigger automatic payment verification via verifyAndActivate() with loading, success, and error states",
       "acceptanceCriteria": [
-        "The admin configuration UI is only visible to the canister owner when authenticated.",
-        "The current ICP payment address is pre-filled in the input field on load.",
-        "Saving a new address calls the backend `setIcpAddress` function and shows a success/error toast notification.",
-        "The PaymentGate screen immediately reflects the updated address after a successful save.",
-        "Non-owner users do not see the configuration UI on the PaymentGate screen."
+        "PaymentGate shows a 'Check Payment' button that calls the backend verifyAndActivate() function.",
+        "A spinner / loading indicator is displayed while the verification call is in flight.",
+        "On success (account activated), the gate disappears and the user is taken to the main dashboard.",
+        "On failure, a user-friendly English error message is shown explaining that no payment was detected yet.",
+        "The existing 30-second polling for activation status remains active so the UI also auto-unlocks if payment is verified by another trigger.",
+        "The ICP receiving address eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0 is displayed as the payment destination (used as default when no admin-configured address is set)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/auth/PaymentGate.tsx",
           "operation": "modify",
-          "description": "Add an admin-only configuration section to the PaymentGate component that displays when the authenticated user is an admin (using isCallerAdmin hook). The section should include a collapsible or inline panel with an input field pre-filled with the current ICP address from useIcpAddress hook, a save button that calls the setIcpAddress mutation, and success/error toast notifications using the shadcn-ui toast component. Position this admin UI visually distinct from the public payment display, using appropriate styling to indicate it's an administrative control. Ensure the component refetches the ICP address after a successful save to reflect the updated value immediately."
-        },
+          "description": "Add a 'Check Payment' button below the payment address display that triggers the verifyAndActivate mutation. Show a loading spinner while the mutation is in progress. On success, display a success message (the gate will auto-dismiss via the existing 30s polling). On error, show a user-friendly message like 'No payment found yet — please wait a moment and try again.' Use the useVerifyAndActivateMutation hook from useActivationQueries. The existing polling mechanism (useActivationStatus with refetchInterval: 30000) continues to work in parallel. Preserve the admin-only ICP address editor panel. Use the authorization component to guard admin-only features as required."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add verifyAndActivate React Query mutation to useActivationQueries for frontend components",
+      "acceptanceCriteria": [
+        "useActivationQueries.ts exports a useVerifyAndActivateMutation hook.",
+        "The mutation calls actor.verifyAndActivate() and invalidates the activation-status query on success.",
+        "TypeScript types are correctly inferred from the backend Candid interface."
+      ],
+      "file_operations": [
         {
           "path": "frontend/src/hooks/useActivationQueries.ts",
           "operation": "modify",
-          "description": "Add a new React Query mutation hook `useSetIcpAddress` that calls the backend actor's `setIcpAddress(address: string)` method. Include error handling for authorization failures (admin-only restriction) and network errors. On successful mutation, invalidate the ICP address query cache to trigger a refetch. Return the mutation state including loading, error, and success states for UI feedback. Also add a query hook `useIsCallerAdmin` that calls `isCallerAdmin()` on the backend actor to check if the current user is an admin, with appropriate caching strategy."
+          "description": "Export a new useVerifyAndActivateMutation hook using useMutation from @tanstack/react-query. The mutation should call actor.verifyAndActivate() and return the boolean result. On success, invalidate the queryKeys.activation.status query so the UI refetches activation state immediately. On error, return a descriptive error message. Import the backend actor via useActor and ensure the mutation is only enabled when the actor is available. Use toast notifications for user feedback (success or error)."
         }
       ]
     }

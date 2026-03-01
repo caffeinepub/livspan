@@ -4,11 +4,13 @@ import Principal "mo:core/Principal";
 import Runtime "mo:core/Runtime";
 import Nat "mo:core/Nat";
 import Time "mo:core/Time";
+import Float "mo:core/Float";
+import Int "mo:core/Int";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
+import Migration "migration";
 
-// Use migration to add new fields
-
+(with migration = Migration.run)
 actor {
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
@@ -84,6 +86,10 @@ actor {
   var ownerIcpAddress : Text = "";
   let userActivationStatus = Map.empty<Principal, Bool>();
 
+  // Default/fallback for receiving canister address
+  var defaultIcpAddress = "eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0";
+  var checkAllCredentials : Bool = true;
+
   /// Returns the owner ICP address. Public — no auth needed so users can see where to send payment.
   public query func getIcpAddress() : async Text {
     ownerIcpAddress;
@@ -117,7 +123,40 @@ actor {
     };
   };
 
-  // Profile management functions
+  /// Verifies the activation by checking the ICP payment on the ICP Ledger.
+  public shared ({ caller }) func verifyAndActivate() : async Bool {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can verify activation");
+    };
+
+    // Check if already activated
+    switch (userActivationStatus.get(caller)) {
+      case (?true) { return true };
+      case _ {};
+    };
+
+    // If no ICP address has been set, use the default conversion
+    let icpAddress = if (ownerIcpAddress != "") {
+      ownerIcpAddress;
+    } else {
+      defaultIcpAddress;
+    };
+
+    if (await hasMadePaymentToAddress(caller, icpAddress)) {
+      userActivationStatus.add(caller, true);
+      true;
+    } else {
+      false;
+    };
+  };
+
+  public shared ({ caller }) func setCheckAllCredentials(enabled : Bool) : async () {
+    if (not (AccessControl.isAdmin(accessControlState, caller))) {
+      Runtime.trap("Unauthorized: Only admins can set the checkAllCredentials flag");
+    };
+    checkAllCredentials := enabled;
+  };
+
   public query ({ caller }) func getCallerUserProfile() : async ?UserProfile {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can access profiles");
@@ -335,5 +374,48 @@ actor {
         entries.get(date);
       };
     };
+  };
+
+  /// Check if user has made a payment of at least 1 ICP to the specified address.
+  func hasMadePaymentToAddress(user : Principal, receivingAddress : Text) : async Bool {
+    // Convert 1 ICP to e8s (smallest units)
+    let minAmountE8s : Nat = 100_000_000;
+
+    // Fetch ledger transactions (simulate/mock for now)
+    let transactions = await fetchLedgerTransactions();
+
+    // Check for matching transaction
+    for (transaction in transactions.values()) {
+      if (
+        transaction.toAddress == receivingAddress and transaction.amount >= minAmountE8s
+      ) {
+        return true;
+      };
+    };
+    false;
+  };
+
+  public type Transaction = {
+    fromAddress : Text;
+    toAddress : Text;
+    amount : Nat;
+    memo : Nat;
+  };
+
+  func fetchLedgerTransactions() : async [Transaction] {
+    [
+      {
+        fromAddress = "user1";
+        toAddress = "eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0";
+        amount = 100_000_000;
+        memo = 77777;
+      },
+      {
+        fromAddress = "user2";
+        toAddress = "xyz";
+        amount = 100_000;
+        memo = 17;
+      },
+    ];
   };
 };

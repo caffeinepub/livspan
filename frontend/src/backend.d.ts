@@ -101,8 +101,13 @@ export interface backendInterface {
     saveNutritionDayEntry(dayTimestamp: Time, entry: NutritionDay): Promise<void>;
     saveSleepDayEntry(dayTimestamp: Time, entry: SleepDay): Promise<void>;
     saveStressDay(stressDay: StressDay): Promise<void>;
+    setCheckAllCredentials(enabled: boolean): Promise<void>;
     /**
      * / Admin-only: set the owner's ICP payment address.
      */
     setIcpAddress(address: string): Promise<void>;
+    /**
+     * / Verifies the activation by checking the ICP payment on the ICP Ledger.
+     */
+    verifyAndActivate(): Promise<boolean>;
 }

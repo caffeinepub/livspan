@@ -108,7 +108,9 @@ export const idlService = IDL.Service({
   'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
   'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
   'saveStressDay' : IDL.Func([StressDay], [], []),
+  'setCheckAllCredentials' : IDL.Func([IDL.Bool], [], []),
   'setIcpAddress' : IDL.Func([IDL.Text], [], []),
+  'verifyAndActivate' : IDL.Func([], [IDL.Bool], []),
 });
 
 export const idlInitArgs = [];
@@ -214,7 +216,9 @@ export const idlFactory = ({ IDL }) => {
     'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
     'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
     'saveStressDay' : IDL.Func([StressDay], [], []),
+    'setCheckAllCredentials' : IDL.Func([IDL.Bool], [], []),
     'setIcpAddress' : IDL.Func([IDL.Text], [], []),
+    'verifyAndActivate' : IDL.Func([], [IDL.Bool], []),
   });
 };
 

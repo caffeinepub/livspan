@@ -1,58 +1,78 @@
 {
   "kind": "build_request",
-  "title": "Configure ICP payment address on the registration/login page",
+  "title": "Automatic ICP Ledger Payment Verification & Account Activation",
   "projectName": "LivSpan",
-  "priority": "normal",
+  "priority": "high",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add a backend function that allows the canister owner/admin to set and update the ICP payment address (ownerIcpAddress) used for payment gating. This function should be restricted to the canister owner and persist the address in stable storage.",
+      "text": "Integrate the ICP Ledger canister in the backend to automatically verify incoming ICP payments. The backend actor must query the ICP Ledger (canister ID: ryjl3-tyaaa-aaaaa-aaaba-cai) to check whether a payment of at least 1 ICP has been received at the configured receiving address (eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0). Store this address as the default/fallback if none has been set by the admin. Expose a public function `verifyAndActivate()` that any authenticated user can call: it checks the Ledger for a transfer of ≥ 1 ICP to that address where the memo or source can be associated with the calling principal, and if found, marks the user as activated.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-recent-1"
         ],
         "quotes": [
-          "Bitte Zahlungsadresse auf der Anmeldung konfigurieren"
+          "automatische Ledger-Abfrageeinbauen, damit die Freischaltung wirklich automatisch nach Zahlungseingang passiert",
+          "eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0"
         ]
       },
       "acceptanceCriteria": [
-        "A callable function `setOwnerIcpAddress(address: Text)` exists in the backend actor restricted to the canister owner.",
-        "The address is persisted and returned correctly by the existing `getOwnerIcpAddress` query.",
-        "Calling the function as a non-owner returns an error or is rejected."
+        "Backend actor imports and calls the ICP Ledger canister (ryjl3-tyaaa-aaaaa-aaaba-cai) via inter-canister call.",
+        "The receiving address eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0 is stored as the default payment address if no admin-configured address exists.",
+        "A `verifyAndActivate()` function exists that queries the Ledger for transactions to the payment address and activates the calling user's account if a qualifying payment (≥ 1 ICP) is found.",
+        "If no qualifying payment is found, the function returns an informative error rather than silently failing.",
+        "Already-activated users calling `verifyAndActivate()` receive a no-op success response."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Add an admin configuration panel or modal accessible from the PaymentGate screen (or a separate admin-only route) that allows the owner to view and update the ICP payment wallet address. The panel should display the current configured address and provide an input field plus save button to update it. Only show this UI when the authenticated user is the canister owner.",
+      "text": "Update the PaymentGate frontend component to automatically poll or trigger `verifyAndActivate()` after the user copies the payment address or clicks a 'I have paid' / 'Check Payment' button. Display a loading state while verification is in progress, a success message when the account is activated, and a clear error message (e.g., 'No payment found yet — please wait a moment and try again') if no qualifying payment is detected. The existing 30-second activation status polling (useActivationQueries) should continue so the gate dismisses automatically once activation is confirmed.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-recent-1"
         ],
         "quotes": [
-          "Bitte Zahlungsadresse auf der Anmeldung konfigurieren"
+          "damit die Freischaltung wirklich automatisch nach Zahlungseingang passiert"
         ]
       },
       "acceptanceCriteria": [
-        "The admin configuration UI is only visible to the canister owner when authenticated.",
-        "The current ICP payment address is pre-filled in the input field on load.",
-        "Saving a new address calls the backend `setOwnerIcpAddress` function and shows a success/error toast notification.",
-        "The PaymentGate screen immediately reflects the updated address after a successful save.",
-        "Non-owner users do not see the configuration UI on the PaymentGate screen."
+        "PaymentGate shows a 'Check Payment' button that calls the backend `verifyAndActivate()` function.",
+        "A spinner / loading indicator is displayed while the verification call is in flight.",
+        "On success (account activated), the gate disappears and the user is taken to the main dashboard.",
+        "On failure, a user-friendly English error message is shown explaining that no payment was detected yet.",
+        "The existing 30-second polling for activation status remains active so the UI also auto-unlocks if payment is verified by another trigger.",
+        "The ICP receiving address eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0 is displayed as the payment destination (used as default when no admin-configured address is set)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add a `verifyAndActivate` method to the frontend actor interface and expose a corresponding React Query mutation in useActivationQueries.ts so components can call it without direct actor access.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "useActivationQueries.ts exports a `useVerifyAndActivateMutation` hook.",
+        "The mutation calls `actor.verifyAndActivate()` and invalidates the activation-status query on success.",
+        "TypeScript types are correctly inferred from the backend Candid interface."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files listed in frontend.immutablePaths.",
-    "Keep all Motoko logic in backend/main.mo.",
-    "Admin-only backend functions must be restricted to the canister owner principal.",
-    "Generate migration.mo if stable state fields are added or changed."
+    "The ICP receiving address eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0 must be preserved exactly as provided — do not alter or truncate it.",
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "All Motoko logic must remain in backend/main.mo (single-actor architecture).",
+    "Use the ICP Ledger canister ID ryjl3-tyaaa-aaaaa-aaaba-cai for mainnet Ledger calls."
   ],
   "nonGoals": [
-    "Changing the visual design or layout of the PaymentGate beyond adding the admin configuration UI.",
-    "Adding a separate admin dashboard or admin routing infrastructure.",
-    "Supporting multiple payment addresses."
+    "Manual admin activation workflow — the goal is fully automatic verification.",
+    "Support for payment tokens other than ICP.",
+    "Email or SMS notifications on payment receipt.",
+    "Refund processing or partial-payment handling."
   ],
   "imageRequirements": {
     "required": [],

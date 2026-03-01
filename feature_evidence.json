@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-an-admin-configuration-panel-or-modal-accessible-from-the-paymentgate-screen-or-a-separate-admin-only-route-that-allows-the-owner-to-view-and-update-the-icp-payment-wallet-address-the-panel-should-display-the-current-configured-address-and-provide-an-input-field-plus-save-button-to-update-it-only-show-this-ui-when-the-authenticated-user-is-the-canister-owner",
-      "featureTitle": "Add an admin configuration panel or modal accessible from the PaymentGate screen (or a separate admin-only route) that allows the owner to view and update the ICP payment wallet address. The panel should display the current configured address and provide an input field plus save button to update it. Only show this UI when the authenticated user is the canister owner.",
+      "featureId": "feature-update-the-paymentgate-frontend-component-to-automatically-poll-or-trigger-verifyandactivate-after-the-user-copies-the-payment-address-or-clicks-a-i-have-paid-check-payment-button-display-a-loading-state-while-verification-is-in-progress-a-success-message-when-the-account-is-activated-and-a-clear-error-message-e-g-no-payment-found-yet-please-wait-a-moment-and-try-again-if-no-qualifying-payment-is-detected-the-existing-30-second-activation-status-polling-useactivationqueries-should-continue-so-the-gate-dismisses-automatically-once-activation-is-confirmed",
+      "featureTitle": "Update the PaymentGate frontend component to automatically poll or trigger `verifyAndActivate()` after the user copies the payment address or clicks a 'I have paid' / 'Check Payment' button. Display a loading state while verification is in progress, a success message when the account is activated, and a clear error message (e.g., 'No payment found yet — please wait a moment and try again') if no qualifying payment is detected. The existing 30-second activation status polling (useActivationQueries) should continue so the gate dismisses automatically once activation is confirmed.",
       "files": [
-        "frontend/src/components/auth/PaymentGate.tsx",
-        "frontend/src/hooks/useActivationQueries.ts"
+        "frontend/src/components/auth/PaymentGate.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -18,6 +17,25 @@
       ],
       "testIds": [
         "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-verifyandactivate-method-to-the-frontend-actor-interface-and-expose-a-corresponding-react-query-mutation-in-useactivationqueries-ts-so-components-can-call-it-without-direct-actor-access",
+      "featureTitle": "Add a `verifyAndActivate` method to the frontend actor interface and expose a corresponding React Query mutation in useActivationQueries.ts so components can call it without direct actor access.",
+      "files": [
+        "frontend/src/hooks/useActivationQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
       ],
       "confidence": "high"
     }

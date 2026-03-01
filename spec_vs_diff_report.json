@@ -1,42 +1,50 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T09:02:29.507Z",
-  "summary": "The diff implements both REQ-1 and REQ-2 largely as specified. REQ-1 is addressed via a setIcpAddress backend function (admin-restricted) and a public getIcpAddress query in backend/main.mo. REQ-2 is addressed via an admin configuration panel in PaymentGate.tsx with pre-filled input, save button, toast notifications, and admin-only visibility. However, there are notable deviations: the backend function is named setIcpAddress instead of the specified setOwnerIcpAddress, and the query is getIcpAddress instead of getOwnerIcpAddress. Additionally, no migration.mo file was generated despite stable state fields being added, which violates the project constraints.",
+  "generatedAt": "2026-03-01T08:58:35.582Z",
+  "summary": "The diff implements most of the required features: backend verifyAndActivate() function, ICP Ledger integration attempt, default address storage, frontend PaymentGate updates with Check Payment button and loading/error states, and the useVerifyAndActivateMutation hook. However, the backend Ledger inter-canister call implementation is truncated and cannot be fully verified.",
   "missing_requirements": [
     {
       "id": "REQ-1",
-      "requirement": "A callable function setOwnerIcpAddress(address: Text) exists in the backend actor restricted to the canister owner.",
-      "reason": "The function is implemented as setIcpAddress rather than setOwnerIcpAddress. The acceptance criterion explicitly names setOwnerIcpAddress.",
+      "requirement": "Backend actor must query the ICP Ledger (canister ID: ryjl3-tyaaa-aaaaa-aaaba-cai) via inter-canister call to check for a transfer of >= 1 ICP to the payment address where the memo or source can be associated with the calling principal.",
+      "reason": "The backend/main.mo diff is truncated after the verifyAndActivate() function signature, so it cannot be confirmed that an actual inter-canister call to ryjl3-tyaaa-aaaaa-aaaba-cai is made. The Ledger canister import and the actual call to query transactions are not visible in the provided diff.",
       "evidence": [
-        "backend/main.mo",
-        "frontend/src/hooks/useActivationQueries.ts"
+        "backend/main.mo"
       ]
     },
     {
       "id": "REQ-1",
-      "requirement": "The address is persisted and returned correctly by the existing getOwnerIcpAddress query.",
-      "reason": "The query function is named getIcpAddress rather than getOwnerIcpAddress as specified in the acceptance criteria.",
-      "evidence": [
-        "backend/main.mo",
-        "frontend/src/hooks/useActivationQueries.ts"
-      ]
-    },
-    {
-      "requirement": "Generate migration.mo if stable state fields are added or changed (constraint).",
-      "reason": "The diff adds the ownerIcpAddress stable variable to backend/main.mo but no migration.mo file was generated, violating the explicit project constraint.",
+      "requirement": "Already-activated users calling verifyAndActivate() receive a no-op success response.",
+      "reason": "The verifyAndActivate() function body is truncated in the diff; it cannot be confirmed that there is a short-circuit path returning success for already-activated users.",
       "evidence": [
         "backend/main.mo"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.82,
+  "hallucinated_features": [
+    {
+      "description": "A migration module (backend/migration.mo) was added with a checkAllCredentials field and migration logic for schema versioning.",
+      "reason": "The build request does not mention any migration module, schema versioning, or a checkAllCredentials flag. This is extra functionality not requested.",
+      "evidence": [
+        "backend/migration.mo"
+      ]
+    },
+    {
+      "description": "A var checkAllCredentials : Bool = true state variable was added to the backend actor.",
+      "reason": "No such field was requested in any requirement. It appears to be an unrequested addition.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.62,
   "changed_files": [
     "backend/main.mo",
+    "backend/migration.mo",
     "frontend-file-summaries.txt",
     "frontend/src/components/auth/PaymentGate.tsx",
     "frontend/src/hooks/useActivationQueries.ts",
+    "frontend/src/i18n/translations.ts",
     "project_state.json"
   ]
 }

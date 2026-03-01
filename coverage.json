@@ -1,32 +1,41 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T09:02:29.510Z",
+  "generatedAt": "2026-03-01T08:58:35.584Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 2,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add a backend function that allows the canister owner/admin to set and update the ICP payment address (ownerIcpAddress) used for payment gating. This function should be restricted to the canister owner and persist the address in stable storage.",
+        "summary": "Integrate the ICP Ledger canister in the backend to automatically verify incoming ICP payments. The backend actor must query the ICP Ledger (canister ID: ryjl3-tyaaa-aaaaa-aaaba-cai) to check whether a payment of at least 1 ICP has been received at the configured receiving address (eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0). Store this address as the default/fallback if none has been set by the admin. Expose a public function `verifyAndActivate()` that any authenticated user can call: it checks the Ledger for a transfer of ≥ 1 ICP to that address where the memo or source can be associated with the calling principal, and if found, marks the user as activated.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-2",
-        "summary": "Add an admin configuration panel or modal accessible from the PaymentGate screen (or a separate admin-only route) that allows the owner to view and update the ICP payment wallet address. The panel should display the current configured address and provide an input field plus save button to update it. Only show this UI when the authenticated user is the canister owner.",
+        "summary": "Update the PaymentGate frontend component to automatically poll or trigger `verifyAndActivate()` after the user copies the payment address or clicks a 'I have paid' / 'Check Payment' button. Display a loading state while verification is in progress, a success message when the account is activated, and a clear error message (e.g., 'No payment found yet — please wait a moment and try again') if no qualifying payment is detected. The existing 30-second activation status polling (useActivationQueries) should continue so the gate dismisses automatically once activation is confirmed.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/auth/PaymentGate.tsx",
+          "frontend/src/components/auth/PaymentGate.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/auth/PaymentGate.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Add a `verifyAndActivate` method to the frontend actor interface and expose a corresponding React Query mutation in useActivationQueries.ts so components can call it without direct actor access.",
+        "status": "implemented",
+        "plannedFiles": [
           "frontend/src/hooks/useActivationQueries.ts"
         ],
         "matchedFiles": [
-          "frontend/src/components/auth/PaymentGate.tsx",
           "frontend/src/hooks/useActivationQueries.ts"
         ]
       }
@@ -34,12 +43,18 @@
   },
   "changedFiles": [
     "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
     "frontend/src/components/auth/PaymentGate.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
     "frontend/src/hooks/useActivationQueries.ts",
+    "frontend/src/i18n/translations.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

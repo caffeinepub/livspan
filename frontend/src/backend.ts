@@ -184,10 +184,15 @@ export interface backendInterface {
     saveNutritionDayEntry(dayTimestamp: Time, entry: NutritionDay): Promise<void>;
     saveSleepDayEntry(dayTimestamp: Time, entry: SleepDay): Promise<void>;
     saveStressDay(stressDay: StressDay): Promise<void>;
+    setCheckAllCredentials(enabled: boolean): Promise<void>;
     /**
      * / Admin-only: set the owner's ICP payment address.
      */
     setIcpAddress(address: string): Promise<void>;
+    /**
+     * / Verifies the activation by checking the ICP payment on the ICP Ledger.
+     */
+    verifyAndActivate(): Promise<boolean>;
 }
 import type { FastingSchedule as _FastingSchedule, Gender as _Gender, MovementDay as _MovementDay, NutritionDay as _NutritionDay, SleepDay as _SleepDay, StressDay as _StressDay, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
@@ -528,6 +533,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async setCheckAllCredentials(arg0: boolean): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.setCheckAllCredentials(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.setCheckAllCredentials(arg0);
+            return result;
+        }
+    }
     async setIcpAddress(arg0: string): Promise<void> {
         if (this.processError) {
             try {
@@ -539,6 +558,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.setIcpAddress(arg0);
+            return result;
+        }
+    }
+    async verifyAndActivate(): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.verifyAndActivate();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.verifyAndActivate();
             return result;
         }
     }

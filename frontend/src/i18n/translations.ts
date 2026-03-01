@@ -93,7 +93,13 @@ export interface Translations {
     step1: string;
     step2: string;
     step3: string;
+    checkPaymentButton: string;
+    checkPaymentChecking: string;
+    checkPaymentSuccess: string;
+    checkPaymentError: string;
     pollingMessage: string;
+    autoVerifyNote: string;
+    /** @deprecated kept for backwards compat */
     manualConfirmNote: string;
   };
   fastingSchedule: {
@@ -384,9 +390,14 @@ export const translations: Record<Language, Translations> = {
       instructionsTitle: 'How to unlock access:',
       step1: 'Copy the ICP account address above.',
       step2: 'Send exactly 1 ICP from your wallet (e.g. NNS, Plug, or Stoic).',
-      step3: 'Wait for manual confirmation — this page will automatically unlock once your payment is verified.',
-      pollingMessage: 'Checking activation status every 30 seconds… This page will refresh automatically once your access is confirmed.',
-      manualConfirmNote: 'Payments are verified manually by the app owner. Confirmation typically takes a few hours. Thank you for your patience.',
+      step3: 'After sending, click "Check Payment" below — your access will be unlocked automatically.',
+      checkPaymentButton: 'Check Payment',
+      checkPaymentChecking: 'Checking payment…',
+      checkPaymentSuccess: '✓ Payment confirmed! Your access is now unlocked.',
+      checkPaymentError: 'No payment found yet — please wait a moment and try again.',
+      pollingMessage: 'Checking activation status every 30 seconds… This page will also refresh automatically once your access is confirmed.',
+      autoVerifyNote: 'Payments are verified automatically on the ICP Ledger. Click "Check Payment" after sending 1 ICP to instantly unlock your access.',
+      manualConfirmNote: 'Payments are verified automatically on the ICP Ledger.',
     },
     fastingSchedule: {
       title: 'Fasting Schedule',
@@ -678,10 +689,15 @@ export const translations: Record<Language, Translations> = {
       copySuccess: '✓ Adresse in die Zwischenablage kopiert!',
       instructionsTitle: 'So schaltest du den Zugang frei:',
       step1: 'Kopiere die ICP-Kontoadresse oben.',
-      step2: 'Sende genau 1 ICP aus deiner Wallet (z. B. NNS, Plug oder Stoic).',
-      step3: 'Warte auf die manuelle Bestätigung – diese Seite schaltet sich automatisch frei, sobald deine Zahlung verifiziert wurde.',
+      step2: 'Sende genau 1 ICP von deiner Wallet (z. B. NNS, Plug oder Stoic).',
+      step3: 'Klicke nach dem Senden auf „Zahlung prüfen" — dein Zugang wird automatisch freigeschaltet.',
+      checkPaymentButton: 'Zahlung prüfen',
+      checkPaymentChecking: 'Zahlung wird geprüft…',
+      checkPaymentSuccess: '✓ Zahlung bestätigt! Dein Zugang ist jetzt freigeschaltet.',
+      checkPaymentError: 'Noch keine Zahlung gefunden — bitte warte einen Moment und versuche es erneut.',
       pollingMessage: 'Aktivierungsstatus wird alle 30 Sekunden geprüft… Diese Seite aktualisiert sich automatisch, sobald dein Zugang bestätigt wurde.',
-      manualConfirmNote: 'Zahlungen werden manuell vom App-Inhaber verifiziert. Die Bestätigung dauert in der Regel einige Stunden. Vielen Dank für deine Geduld.',
+      autoVerifyNote: 'Zahlungen werden automatisch über den ICP-Ledger verifiziert. Klicke auf „Zahlung prüfen", nachdem du 1 ICP gesendet hast, um deinen Zugang sofort freizuschalten.',
+      manualConfirmNote: 'Zahlungen werden automatisch über den ICP-Ledger verifiziert.',
     },
     fastingSchedule: {
       title: 'Fastenplan',
@@ -743,7 +759,7 @@ export const translations: Record<Language, Translations> = {
       insights: {
         label: 'Einblicke',
         fastingTip:
-          'Bleib während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
+          'Bleibe während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
         eatingTip:
           'Konzentriere dich auf nährstoffreiche Vollwertkost. Priorisiere Protein und Gemüse für optimale Gesundheit.',
       },
@@ -757,9 +773,9 @@ export const translations: Record<Language, Translations> = {
         fasting: 'Fasten',
         eating: 'Essensfenster',
         fastingTip:
-          'Bleib während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
+          'Bleibe während deines Fastenfensters hydratisiert. Wasser, schwarzer Kaffee und ungesüßter Tee sind erlaubt.',
         eatingTip:
-          'Konzentriere dich auf Protein und Gemüse. Strebe 1,8 g Protein pro kg Körpergewicht und 400 g Gemüse täglich an.',
+          'Konzentriere dich auf Protein und Gemüse. Ziele auf 1,8 g Protein pro kg Körpergewicht und 400 g Gemüse täglich.',
       },
       weight: {
         label: 'Körpergewicht',
@@ -777,7 +793,7 @@ export const translations: Record<Language, Translations> = {
         consumed: 'Aufgenommen',
         progress: 'Fortschritt',
         targetReached: '✓ Tägliches Proteinziel erreicht!',
-        remaining: '{amount} g verbleibend bis zum Ziel',
+        remaining: 'Noch {amount} g bis zum Ziel',
       },
       vegetables: {
         label: 'Gemüse & Obst',
@@ -785,7 +801,7 @@ export const translations: Record<Language, Translations> = {
         consumed: 'Aufgenommen',
         progress: 'Fortschritt',
         goalReached: '✓ Tägliches Gemüseziel erreicht!',
-        remaining: '{amount} g verbleibend bis zum Ziel',
+        remaining: 'Noch {amount} g bis zum Ziel',
       },
       water: {
         label: 'Wasseraufnahme',

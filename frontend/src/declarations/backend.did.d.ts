@@ -89,10 +89,15 @@ export interface _SERVICE {
   'saveNutritionDayEntry' : ActorMethod<[Time, NutritionDay], undefined>,
   'saveSleepDayEntry' : ActorMethod<[Time, SleepDay], undefined>,
   'saveStressDay' : ActorMethod<[StressDay], undefined>,
+  'setCheckAllCredentials' : ActorMethod<[boolean], undefined>,
   /**
    * / Admin-only: set the owner's ICP payment address.
    */
   'setIcpAddress' : ActorMethod<[string], undefined>,
+  /**
+   * / Verifies the activation by checking the ICP payment on the ICP Ledger.
+   */
+  'verifyAndActivate' : ActorMethod<[], boolean>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

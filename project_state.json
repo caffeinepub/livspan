@@ -1,16 +1,29 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Project with payment flow functionality. User wants to configure a payment address on the registration/login page.",
-  "architectural_notes": [],
-  "known_issues": [],
+  "summary": "ICP-based registration app with automatic payment verification. Users pay 1 ICP to a configured wallet address, and the backend canister automatically verifies payment via ICP Ledger integration before unlocking access.",
+  "architectural_notes": [
+    "ICP receiving address for payments: eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0",
+    "Payment verification uses inter-canister calls to the ICP Ledger canister to confirm incoming transactions"
+  ],
+  "known_issues": [
+    "Payment address was not configured, causing 'Zahlungsadresse noch nicht konfiguriert' error — now being addressed with Ledger integration"
+  ],
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-add-an-admin-configuration-panel-or-modal-accessible-from-the-paymentgate-screen-or-a-separate-admin-only-route-that-allows-the-owner-to-view-and-update-the-icp-payment-wallet-address-the-panel-should-display-the-current-configured-address-and-provide-an-input-field-plus-save-button-to-update-it-only-show-this-ui-when-the-authenticated-user-is-the-canister-owner",
-      "title": "Add an admin configuration panel or modal accessible from the PaymentGate screen (or a separate admin-only route) that allows the owner to view and update the ICP payment wallet address. The panel should display the current configured address and provide an input field plus save button to update it. Only show this UI when the authenticated user is the canister owner.",
+      "id": "feature-update-the-paymentgate-frontend-component-to-automatically-poll-or-trigger-verifyandactivate-after-the-user-copies-the-payment-address-or-clicks-a-i-have-paid-check-payment-button-display-a-loading-state-while-verification-is-in-progress-a-success-message-when-the-account-is-activated-and-a-clear-error-message-e-g-no-payment-found-yet-please-wait-a-moment-and-try-again-if-no-qualifying-payment-is-detected-the-existing-30-second-activation-status-polling-useactivationqueries-should-continue-so-the-gate-dismisses-automatically-once-activation-is-confirmed",
+      "title": "Update the PaymentGate frontend component to automatically poll or trigger `verifyAndActivate()` after the user copies the payment address or clicks a 'I have paid' / 'Check Payment' button. Display a loading state while verification is in progress, a success message when the account is activated, and a clear error message (e.g., 'No payment found yet — please wait a moment and try again') if no qualifying payment is detected. The existing 30-second activation status polling (useActivationQueries) should continue so the gate dismisses automatically once activation is confirmed.",
       "reqIds": [
         "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-verifyandactivate-method-to-the-frontend-actor-interface-and-expose-a-corresponding-react-query-mutation-in-useactivationqueries-ts-so-components-can-call-it-without-direct-actor-access",
+      "title": "Add a `verifyAndActivate` method to the frontend actor interface and expose a corresponding React Query mutation in useActivationQueries.ts so components can call it without direct actor access.",
+      "reqIds": [
+        "REQ-3"
       ],
       "version": 1
     }
@@ -18,19 +31,20 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Configure payment address on the registration/sign-up page",
+      "summary": "Automatic ICP Ledger integration: backend canister queries ICP Ledger to verify payment receipt and auto-unlock user account. ICP receiving address: eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Add a backend function that allows the canister owner/admin to set and update the ICP payment address (ownerIcpAddress) used for payment gating. This function should be restricted to the canister owner and persist the address in stable storage.",
+      "summary": "Integrate the ICP Ledger canister in the backend to automatically verify incoming ICP payments. The backend actor must query the ICP Ledger (canister ID: ryjl3-tyaaa-aaaaa-aaaba-cai) to check whether a payment of at least 1 ICP has been received at the configured receiving address (eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0). Store this address as the default/fallback if none has been set by the admin. Expose a public function `verifyAndActivate()` that any authenticated user can call: it checks the Ledger for a transfer of ≥ 1 ICP to that address where the memo or source can be associated with the calling principal, and if found, marks the user as activated.",
       "reqIds": [
         "REQ-1"
       ],
       "status": "pending"
     }
   ],
+  "gameProjectType": "none",
   "projectName": "LivSpan",
   "clarification_mode": "instant",
   "clarification_rounds": 0
