@@ -1,33 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import { useInternetIdentity } from '@/hooks/useInternetIdentity';
-import { useGetCallerUserProfile, useSaveCallerUserProfile } from '@/hooks/useUserProfileQueries';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, User } from 'lucide-react';
-import { useI18n } from '@/i18n/useI18n';
-import { Gender } from '@/backend';
-import LoginButton from '@/components/auth/LoginButton';
+import { Gender } from "@/backend";
+import LoginButton from "@/components/auth/LoginButton";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useInternetIdentity } from "@/hooks/useInternetIdentity";
+import {
+  useGetCallerUserProfile,
+  useSaveCallerUserProfile,
+} from "@/hooks/useUserProfileQueries";
+import { useI18n } from "@/i18n/useI18n";
+import { Loader2, User } from "lucide-react";
+/**
+ * ProfileOnboardingGate
+ *
+ * Handles two concerns:
+ * 1. Shows a login prompt when the user is not authenticated.
+ * 2. Shows a profile-setup modal when the user is authenticated but has no profile yet.
+ *
+ * NOTE: Activation (1 ICP payment gate) is verified upstream in App.tsx.
+ * By the time this component renders, the user is guaranteed to be both
+ * authenticated AND activated.
+ */
+import type React from "react";
+import { useEffect, useState } from "react";
 
 interface ProfileOnboardingGateProps {
   children: React.ReactNode;
 }
 
-export default function ProfileOnboardingGate({ children }: ProfileOnboardingGateProps) {
+export default function ProfileOnboardingGate({
+  children,
+}: ProfileOnboardingGateProps) {
   const { t } = useI18n();
   const { identity } = useInternetIdentity();
   const isAuthenticated = !!identity;
 
-  const { data: userProfile, isLoading: profileLoading, isFetched } = useGetCallerUserProfile();
+  const {
+    data: userProfile,
+    isLoading: profileLoading,
+    isFetched,
+  } = useGetCallerUserProfile();
   const saveMutation = useSaveCallerUserProfile();
 
-  const [name, setName] = useState('');
-  const [birthYear, setBirthYear] = useState('');
-  const [heightCm, setHeightCm] = useState('');
+  const [name, setName] = useState("");
+  const [birthYear, setBirthYear] = useState("");
+  const [heightCm, setHeightCm] = useState("");
   const [gender, setGender] = useState<Gender>(Gender.diverse);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -49,14 +82,14 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
       newErrors.name = t.profile.validation.nameRequired;
     }
 
-    const year = parseInt(birthYear);
+    const year = Number.parseInt(birthYear);
     const currentYear = new Date().getFullYear();
-    if (!birthYear || isNaN(year) || year < 1900 || year > currentYear) {
+    if (!birthYear || Number.isNaN(year) || year < 1900 || year > currentYear) {
       newErrors.birthYear = t.profile.validation.birthYearInvalid;
     }
 
-    const height = parseInt(heightCm);
-    if (!heightCm || isNaN(height) || height < 50 || height > 300) {
+    const height = Number.parseInt(heightCm);
+    if (!heightCm || Number.isNaN(height) || height < 50 || height > 300) {
       newErrors.heightCm = t.profile.validation.heightInvalid;
     }
 
@@ -69,8 +102,8 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
 
     const profile = {
       name: name.trim(),
-      birthYear: BigInt(parseInt(birthYear)),
-      heightCm: BigInt(parseInt(heightCm)),
+      birthYear: BigInt(Number.parseInt(birthYear)),
+      heightCm: BigInt(Number.parseInt(heightCm)),
       gender,
     };
 
@@ -85,13 +118,14 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: 'url(/assets/generated/dna-helix-bg.dim_1440x2560.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
+            backgroundImage:
+              "url(/assets/generated/dna-helix-bg.dim_1440x2560.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         />
-        
+
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 z-0 bg-black/60 backdrop-blur-[2px]" />
 
@@ -100,9 +134,9 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
           <CardHeader className="text-center">
             {/* Logo */}
             <div className="mx-auto mb-6">
-              <img 
-                src="/assets/IMG_8398-1.png" 
-                alt="LivSpan Token" 
+              <img
+                src="/assets/IMG_8398-1.png"
+                alt="LivSpan Token"
                 className="w-32 h-32 mx-auto"
               />
             </div>
@@ -122,12 +156,16 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
   }
 
   // Show profile setup when authenticated but profile is missing
-  const showProfileSetup = isAuthenticated && !profileLoading && isFetched && userProfile === null;
+  const showProfileSetup =
+    isAuthenticated && !profileLoading && isFetched && userProfile === null;
 
   if (showProfileSetup) {
     return (
       <Dialog open={true}>
-        <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
+        <DialogContent
+          className="sm:max-w-md"
+          onPointerDownOutside={(e) => e.preventDefault()}
+        >
           <DialogHeader>
             <DialogTitle className="text-xl font-light tracking-wide bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">
               {t.profile.setup.title}
@@ -140,7 +178,9 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
           <div className="space-y-4 py-4">
             {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-helix-accent">{t.profile.fields.name}</Label>
+              <Label htmlFor="name" className="text-helix-accent">
+                {t.profile.fields.name}
+              </Label>
               <Input
                 id="name"
                 value={name}
@@ -155,7 +195,9 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
 
             {/* Birth Year */}
             <div className="space-y-2">
-              <Label htmlFor="birthYear" className="text-helix-accent">{t.profile.fields.birthYear}</Label>
+              <Label htmlFor="birthYear" className="text-helix-accent">
+                {t.profile.fields.birthYear}
+              </Label>
               <Input
                 id="birthYear"
                 type="number"
@@ -173,7 +215,9 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
 
             {/* Height */}
             <div className="space-y-2">
-              <Label htmlFor="heightCm" className="text-helix-accent">{t.profile.fields.heightCm}</Label>
+              <Label htmlFor="heightCm" className="text-helix-accent">
+                {t.profile.fields.heightCm}
+              </Label>
               <Input
                 id="heightCm"
                 type="number"
@@ -191,7 +235,9 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
 
             {/* Gender */}
             <div className="space-y-2">
-              <Label className="text-helix-accent">{t.profile.fields.gender}</Label>
+              <Label className="text-helix-accent">
+                {t.profile.fields.gender}
+              </Label>
               <RadioGroup
                 value={gender}
                 onValueChange={(value) => setGender(value as Gender)}
@@ -205,13 +251,19 @@ export default function ProfileOnboardingGate({ children }: ProfileOnboardingGat
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value={Gender.female} id="female" />
-                  <Label htmlFor="female" className="font-normal cursor-pointer">
+                  <Label
+                    htmlFor="female"
+                    className="font-normal cursor-pointer"
+                  >
                     {t.profile.genderOptions.female}
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value={Gender.diverse} id="diverse" />
-                  <Label htmlFor="diverse" className="font-normal cursor-pointer">
+                  <Label
+                    htmlFor="diverse"
+                    className="font-normal cursor-pointer"
+                  >
                     {t.profile.genderOptions.diverse}
                   </Label>
                 </div>

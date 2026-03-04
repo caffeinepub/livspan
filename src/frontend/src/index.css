@@ -14,121 +14,121 @@
     --popover: oklch(100% 0 0);
     --popover-foreground: oklch(20% 0.02 120);
 
-    --primary: oklch(45% 0.15 150);
-    --primary-foreground: oklch(98% 0.01 150);
+    --primary: oklch(50% 0.18 185);
+    --primary-foreground: oklch(98% 0.01 185);
 
-    --secondary: oklch(92% 0.02 120);
-    --secondary-foreground: oklch(25% 0.02 120);
+    --secondary: oklch(92% 0.02 185);
+    --secondary-foreground: oklch(25% 0.02 185);
 
-    --muted: oklch(94% 0.01 120);
-    --muted-foreground: oklch(50% 0.02 120);
+    --muted: oklch(94% 0.01 185);
+    --muted-foreground: oklch(50% 0.02 185);
 
-    --accent: oklch(92% 0.02 120);
-    --accent-foreground: oklch(25% 0.02 120);
+    --accent: oklch(92% 0.02 185);
+    --accent-foreground: oklch(25% 0.02 185);
 
     --destructive: oklch(55% 0.22 25);
     --destructive-foreground: oklch(98% 0.01 25);
 
-    --border: oklch(88% 0.01 120);
-    --input: oklch(88% 0.01 120);
-    --ring: oklch(45% 0.15 150);
+    --border: oklch(88% 0.01 185);
+    --input: oklch(88% 0.01 185);
+    --ring: oklch(50% 0.18 185);
 
     --radius: 0.5rem;
 
-    /* Logo-inspired golden/amber palette */
-    --helix-strand: oklch(60% 0.15 70);
-    --helix-glow: oklch(70% 0.18 65);
-    --helix-accent: oklch(55% 0.16 75);
-    --helix-base: oklch(50% 0.14 80);
+    /* Green-blue gradient palette (emerald → teal → cyan → sky) */
+    --helix-strand: oklch(62% 0.17 175);
+    --helix-glow: oklch(72% 0.18 195);
+    --helix-accent: oklch(58% 0.19 180);
+    --helix-base: oklch(52% 0.16 185);
 
-    /* Sage/Earth tones for natural theme */
-    --sage-50: oklch(97% 0.01 140);
-    --sage-100: oklch(94% 0.02 140);
-    --sage-200: oklch(88% 0.03 140);
-    --sage-300: oklch(78% 0.05 140);
-    --sage-400: oklch(65% 0.08 140);
-    --sage-500: oklch(55% 0.10 145);
-    --sage-600: oklch(45% 0.12 150);
-    --sage-700: oklch(38% 0.10 150);
-    --sage-800: oklch(30% 0.08 150);
-    --sage-900: oklch(22% 0.05 150);
+    /* Teal/cyan tones for natural theme */
+    --sage-50: oklch(97% 0.01 185);
+    --sage-100: oklch(94% 0.02 185);
+    --sage-200: oklch(88% 0.04 185);
+    --sage-300: oklch(78% 0.07 185);
+    --sage-400: oklch(65% 0.11 185);
+    --sage-500: oklch(55% 0.14 185);
+    --sage-600: oklch(48% 0.17 185);
+    --sage-700: oklch(40% 0.14 185);
+    --sage-800: oklch(32% 0.1 185);
+    --sage-900: oklch(24% 0.06 185);
 
     /* Chart colors */
-    --chart-1: oklch(60% 0.15 150);
-    --chart-2: oklch(65% 0.12 180);
-    --chart-3: oklch(70% 0.10 210);
-    --chart-4: oklch(55% 0.08 240);
-    --chart-5: oklch(50% 0.12 270);
+    --chart-1: oklch(60% 0.18 165);
+    --chart-2: oklch(65% 0.16 195);
+    --chart-3: oklch(70% 0.14 215);
+    --chart-4: oklch(55% 0.12 240);
+    --chart-5: oklch(50% 0.14 155);
 
-    /* Gradient color stops for modern gradients */
-    --gradient-amber-start: oklch(75% 0.20 65);
-    --gradient-amber-mid: oklch(70% 0.19 75);
-    --gradient-amber-end: oklch(65% 0.16 80);
-    --gradient-sage-start: oklch(70% 0.10 145);
-    --gradient-sage-end: oklch(60% 0.12 150);
+    /* Gradient color stops - green-blue palette */
+    --gradient-gb-start: oklch(68% 0.2 160);
+    --gradient-gb-mid: oklch(62% 0.2 180);
+    --gradient-gb-end: oklch(58% 0.18 205);
+    --gradient-teal-start: oklch(65% 0.17 175);
+    --gradient-teal-end: oklch(58% 0.19 195);
   }
 
   .dark {
     /* OKLCH color system - Dark mode */
-    --background: oklch(15% 0.02 120);
-    --foreground: oklch(95% 0.01 120);
+    --background: oklch(15% 0.02 185);
+    --foreground: oklch(95% 0.01 185);
 
-    --card: oklch(18% 0.02 120);
-    --card-foreground: oklch(95% 0.01 120);
+    --card: oklch(18% 0.02 185);
+    --card-foreground: oklch(95% 0.01 185);
 
-    --popover: oklch(18% 0.02 120);
-    --popover-foreground: oklch(95% 0.01 120);
+    --popover: oklch(18% 0.02 185);
+    --popover-foreground: oklch(95% 0.01 185);
 
-    --primary: oklch(60% 0.18 150);
-    --primary-foreground: oklch(15% 0.02 150);
+    --primary: oklch(62% 0.2 175);
+    --primary-foreground: oklch(15% 0.02 175);
 
-    --secondary: oklch(25% 0.02 120);
-    --secondary-foreground: oklch(95% 0.01 120);
+    --secondary: oklch(25% 0.03 185);
+    --secondary-foreground: oklch(95% 0.01 185);
 
-    --muted: oklch(25% 0.02 120);
-    --muted-foreground: oklch(65% 0.02 120);
+    --muted: oklch(25% 0.03 185);
+    --muted-foreground: oklch(65% 0.03 185);
 
-    --accent: oklch(25% 0.02 120);
-    --accent-foreground: oklch(95% 0.01 120);
+    --accent: oklch(25% 0.03 185);
+    --accent-foreground: oklch(95% 0.01 185);
 
     --destructive: oklch(55% 0.22 25);
     --destructive-foreground: oklch(98% 0.01 25);
 
-    --border: oklch(28% 0.02 120);
-    --input: oklch(28% 0.02 120);
-    --ring: oklch(60% 0.18 150);
+    --border: oklch(28% 0.03 185);
+    --input: oklch(28% 0.03 185);
+    --ring: oklch(62% 0.2 175);
 
-    /* Logo-inspired golden/amber palette - Dark mode */
-    --helix-strand: oklch(65% 0.18 70);
-    --helix-glow: oklch(75% 0.20 65);
-    --helix-accent: oklch(70% 0.19 75);
-    --helix-base: oklch(60% 0.16 80);
+    /* Green-blue gradient palette - Dark mode */
+    --helix-strand: oklch(68% 0.2 175);
+    --helix-glow: oklch(76% 0.2 195);
+    --helix-accent: oklch(72% 0.21 180);
+    --helix-base: oklch(62% 0.18 185);
 
-    /* Sage/Earth tones for natural theme - Dark mode */
-    --sage-50: oklch(22% 0.05 150);
-    --sage-100: oklch(25% 0.06 150);
-    --sage-200: oklch(30% 0.08 150);
-    --sage-300: oklch(38% 0.10 150);
-    --sage-400: oklch(45% 0.12 150);
-    --sage-500: oklch(55% 0.14 145);
-    --sage-600: oklch(65% 0.16 140);
-    --sage-700: oklch(75% 0.14 140);
-    --sage-800: oklch(85% 0.10 140);
-    --sage-900: oklch(92% 0.05 140);
+    /* Teal/cyan tones - Dark mode */
+    --sage-50: oklch(24% 0.06 185);
+    --sage-100: oklch(28% 0.07 185);
+    --sage-200: oklch(33% 0.09 185);
+    --sage-300: oklch(40% 0.12 185);
+    --sage-400: oklch(48% 0.15 185);
+    --sage-500: oklch(56% 0.17 185);
+    --sage-600: oklch(64% 0.18 185);
+    --sage-700: oklch(72% 0.17 185);
+    --sage-800: oklch(82% 0.12 185);
+    --sage-900: oklch(92% 0.06 185);
 
     /* Chart colors - Dark mode */
-    --chart-1: oklch(65% 0.18 150);
-    --chart-2: oklch(70% 0.15 180);
-    --chart-3: oklch(75% 0.12 210);
-    --chart-4: oklch(60% 0.10 240);
-    --chart-5: oklch(55% 0.15 270);
+    --chart-1: oklch(65% 0.2 165);
+    --chart-2: oklch(70% 0.18 195);
+    --chart-3: oklch(75% 0.15 215);
+    --chart-4: oklch(60% 0.13 240);
+    --chart-5: oklch(55% 0.17 155);
 
-    /* Gradient color stops for modern gradients - Dark mode */
-    --gradient-amber-start: oklch(45% 0.16 65);
-    --gradient-amber-mid: oklch(40% 0.15 75);
-    --gradient-amber-end: oklch(35% 0.12 80);
-    --gradient-sage-start: oklch(40% 0.12 145);
-    --gradient-sage-end: oklch(30% 0.10 150);
+    /* Gradient color stops - green-blue palette - Dark mode */
+    --gradient-gb-start: oklch(42% 0.18 160);
+    --gradient-gb-mid: oklch(36% 0.17 180);
+    --gradient-gb-end: oklch(30% 0.14 205);
+    --gradient-teal-start: oklch(38% 0.15 175);
+    --gradient-teal-end: oklch(30% 0.16 195);
   }
 }
 
@@ -141,114 +141,233 @@
   }
 }
 
-/* Gradient text utilities - Logo-inspired golden/amber tones */
+/* Gradient text utilities - Green-blue tones */
 @layer utilities {
   .text-gradient-glow {
-    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(75% 0.20 65));
+    background: linear-gradient(135deg, oklch(72% 0.21 165), oklch(76% 0.2 200));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-timer {
-    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
+    background: linear-gradient(
+      135deg,
+      oklch(72% 0.21 165),
+      oklch(74% 0.19 205)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
+  /* Green-blue gradient text - used for headings */
   .gradient-green-glow {
-    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(75% 0.20 65));
+    background: linear-gradient(135deg, oklch(72% 0.21 155), oklch(76% 0.2 200));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .gradient-green-blue {
-    background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
+    background: linear-gradient(
+      135deg,
+      oklch(72% 0.21 165),
+      oklch(74% 0.19 205)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* Modern gradient backgrounds */
+  /* Modern gradient backgrounds - green-blue palette */
   .gradient-card-amber {
-    background: linear-gradient(135deg, 
-      var(--gradient-amber-start) 0%, 
-      var(--gradient-amber-mid) 50%, 
-      var(--gradient-amber-end) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--gradient-gb-start) 0%,
+      var(--gradient-gb-mid) 50%,
+      var(--gradient-gb-end) 100%
+    );
   }
 
   .gradient-card-amber-subtle {
-    background: linear-gradient(135deg, 
-      color-mix(in oklch, var(--gradient-amber-start), transparent 85%) 0%, 
-      color-mix(in oklch, var(--gradient-amber-mid), transparent 90%) 50%, 
-      color-mix(in oklch, var(--gradient-amber-end), transparent 92%) 100%);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 85%) 0%,
+      color-mix(in oklch, var(--gradient-gb-mid), transparent 90%) 50%,
+      color-mix(in oklch, var(--gradient-gb-end), transparent 92%) 100%
+    );
   }
 
   .gradient-card-sage {
-    background: linear-gradient(135deg, 
-      var(--gradient-sage-start) 0%, 
-      var(--gradient-sage-end) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--gradient-teal-start) 0%,
+      var(--gradient-teal-end) 100%
+    );
   }
 
   .gradient-card-sage-subtle {
-    background: linear-gradient(135deg, 
-      color-mix(in oklch, var(--gradient-sage-start), transparent 85%) 0%, 
-      color-mix(in oklch, var(--gradient-sage-end), transparent 90%) 100%);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--gradient-teal-start), transparent 85%) 0%,
+      color-mix(in oklch, var(--gradient-teal-end), transparent 90%) 100%
+    );
   }
 
   .gradient-card-radial-amber {
-    background: radial-gradient(ellipse at top left, 
-      color-mix(in oklch, var(--gradient-amber-start), transparent 80%) 0%, 
-      color-mix(in oklch, var(--gradient-amber-mid), transparent 90%) 50%, 
-      transparent 100%);
+    background: radial-gradient(
+      ellipse at top left,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 78%) 0%,
+      color-mix(in oklch, var(--gradient-gb-mid), transparent 88%) 50%,
+      transparent 100%
+    );
   }
 
   .gradient-card-radial-sage {
-    background: radial-gradient(ellipse at bottom right, 
-      color-mix(in oklch, var(--gradient-sage-start), transparent 85%) 0%, 
-      color-mix(in oklch, var(--gradient-sage-end), transparent 92%) 50%, 
-      transparent 100%);
+    background: radial-gradient(
+      ellipse at bottom right,
+      color-mix(in oklch, var(--gradient-teal-start), transparent 82%) 0%,
+      color-mix(in oklch, var(--gradient-teal-end), transparent 90%) 50%,
+      transparent 100%
+    );
   }
 
   .gradient-panel-amber {
-    background: linear-gradient(to bottom right, 
-      color-mix(in oklch, var(--gradient-amber-start), transparent 75%) 0%, 
-      color-mix(in oklch, var(--gradient-amber-end), transparent 85%) 100%);
+    background: linear-gradient(
+      to bottom right,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 72%) 0%,
+      color-mix(in oklch, var(--gradient-gb-end), transparent 84%) 100%
+    );
   }
 
   .gradient-panel-sage {
-    background: linear-gradient(to bottom right, 
-      color-mix(in oklch, var(--gradient-sage-start), transparent 80%) 0%, 
-      color-mix(in oklch, var(--gradient-sage-end), transparent 88%) 100%);
+    background: linear-gradient(
+      to bottom right,
+      color-mix(in oklch, var(--gradient-teal-start), transparent 78%) 0%,
+      color-mix(in oklch, var(--gradient-teal-end), transparent 86%) 100%
+    );
   }
 
   .gradient-hover-amber {
-    background: linear-gradient(135deg, 
-      color-mix(in oklch, var(--gradient-amber-start), transparent 70%) 0%, 
-      color-mix(in oklch, var(--gradient-amber-mid), transparent 80%) 50%, 
-      color-mix(in oklch, var(--gradient-amber-end), transparent 85%) 100%);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--gradient-gb-start), transparent 68%) 0%,
+      color-mix(in oklch, var(--gradient-gb-mid), transparent 78%) 50%,
+      color-mix(in oklch, var(--gradient-gb-end), transparent 83%) 100%
+    );
+  }
+
+  /* Green-blue card gradient for selected state */
+  .gradient-card-gb-selected {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, oklch(68% 0.2 160), transparent 70%) 0%,
+      color-mix(in oklch, oklch(62% 0.2 180), transparent 78%) 50%,
+      color-mix(in oklch, oklch(58% 0.18 205), transparent 82%) 100%
+    );
+  }
+
+  /* Green-blue card gradient for unselected/hover state */
+  .gradient-card-gb-muted {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, oklch(68% 0.2 160), transparent 88%) 0%,
+      color-mix(in oklch, oklch(62% 0.2 180), transparent 92%) 50%,
+      color-mix(in oklch, oklch(58% 0.18 205), transparent 94%) 100%
+    );
+  }
+
+  /* Radial overlay for selected green-blue */
+  .gradient-card-radial-gb {
+    background: radial-gradient(
+      ellipse at top left,
+      color-mix(in oklch, oklch(72% 0.21 165), transparent 75%) 0%,
+      color-mix(in oklch, oklch(62% 0.2 185), transparent 87%) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Radial overlay for muted green-blue */
+  .gradient-card-radial-gb-muted {
+    background: radial-gradient(
+      ellipse at bottom right,
+      color-mix(in oklch, oklch(65% 0.17 175), transparent 85%) 0%,
+      color-mix(in oklch, oklch(58% 0.19 195), transparent 92%) 50%,
+      transparent 100%
+    );
   }
 }
 
-/* Custom slider styling with golden gradient */
-.slider-helix input[type='range']::-webkit-slider-thumb {
-  background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
+/* ── Custom Slider Styling — green-blue gradient thumb ── */
+
+/* Webkit thumb */
+.slider-helix::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, oklch(72% 0.17 160), oklch(58% 0.18 210));
+  border: 2px solid oklch(95% 0.01 185 / 0.9);
+  box-shadow: 0 0 6px oklch(65% 0.15 185 / 0.6);
+  cursor: pointer;
+  margin-top: -8px;
+  transition: box-shadow 0.15s ease;
 }
 
-.slider-helix input[type='range']::-moz-range-thumb {
-  background: linear-gradient(135deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
+.slider-helix::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 10px oklch(65% 0.15 185 / 0.85);
 }
 
-/* Progress bar with golden gradient */
-.progress-helix [data-state='complete'] {
-  background: linear-gradient(90deg, oklch(70% 0.19 75), oklch(72% 0.18 60));
+/* Firefox thumb */
+.slider-helix::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, oklch(72% 0.17 160), oklch(58% 0.18 210));
+  border: 2px solid oklch(95% 0.01 185 / 0.9);
+  box-shadow: 0 0 6px oklch(65% 0.15 185 / 0.6);
+  cursor: pointer;
+}
+
+/* Webkit track — transparent so the custom gradient div shows through */
+.slider-helix::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+  border-radius: 9999px;
+}
+
+/* Firefox track */
+.slider-helix::-moz-range-track {
+  height: 2px;
+  background: transparent;
+  border-radius: 9999px;
+}
+
+/* Focus ring */
+.slider-helix:focus-visible {
+  outline: none;
+}
+
+.slider-helix:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px oklch(65% 0.15 185 / 0.4);
+}
+
+/* Progress bar with green-blue gradient */
+.progress-helix [data-state="complete"] {
+  background: linear-gradient(
+    90deg,
+    oklch(68% 0.2 160),
+    oklch(62% 0.2 180),
+    oklch(58% 0.18 205)
+  );
 }
 
 /* DNA Helix Animation Keyframes */
 @keyframes bg-breathe {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     filter: blur(40px);
   }
@@ -259,7 +378,8 @@
 }
 
 @keyframes bg-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.2;
     transform: scale(1);
   }
@@ -270,7 +390,8 @@
 }
 
 @keyframes bg-glow {
-  0%, 100% {
+  0%,
+  100% {
     filter: brightness(1) blur(30px);
   }
   50% {
@@ -279,7 +400,8 @@
 }
 
 @keyframes breathe {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
     transform: scale(1);
   }
@@ -290,7 +412,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
   }
   50% {

@@ -1,11 +1,28 @@
-# Specification
+# LivSpan – Subaccount Payment System
 
-## Summary
-**Goal:** Implement automatic ICP Ledger payment verification so that user accounts are activated immediately and automatically after a qualifying ICP payment is detected.
+## Current State
 
-**Planned changes:**
-- Backend: Integrate the ICP Ledger canister (`ryjl3-tyaaa-aaaaa-aaaba-cai`) via inter-canister call; store the default receiving address (`eadaef90a0208bf42e25d15b9d99b767e72ed66ed1fab5b66a7799bfe88283c0`); add a `verifyAndActivate()` public function that checks for a payment of ≥ 1 ICP to that address from the calling principal and marks the account as activated if found.
-- Frontend: Add `verifyAndActivate` to the actor interface and expose a `useVerifyAndActivateMutation` hook in `useActivationQueries.ts` that calls the backend method and invalidates the activation-status query on success.
-- Frontend: Update the `PaymentGate` component to show a "Check Payment" button that triggers `verifyAndActivate()`, display a loading spinner during the call, show a success state on activation, show a friendly error message if no payment is found yet, and keep the existing 30-second activation polling active.
+The app has a payment gate that shows all users the same static OISY wallet address. The `verifyAndActivate()` function uses a hardcoded mock that never checks the real ICP Ledger. No real payment can be detected automatically.
 
-**User-visible outcome:** After sending ICP to the displayed payment address, users can click "Check Payment" in the PaymentGate to instantly verify and activate their account. The gate also auto-dismisses when activation is confirmed via background polling.
+## Requested Changes (Diff)
+
+### Add
+- `getUserPaymentAddress() : async Text` — returns the caller's unique ICP account-ID (hex). Derived from canister principal + caller's subaccount (caller principal zero-padded to 32 bytes). Uses SHA-224 + CRC32 per ICP account-ID spec.
+- Real ICP Ledger inter-canister call to `ryjl3-tyaaa-aaaaa-aaaba-cai` `account_balance` query
+- Frontend: display the user's personal subaccount address with clear instructions
+
+### Modify
+- `verifyAndActivate()`: replace mock with real Ledger `account_balance` call on caller's subaccount. If balance >= 100_000_000 e8s (1 ICP), activate and return true.
+- `PaymentGate.tsx`: call `getUserPaymentAddress()` instead of `getIcpAddress()` to show the user their personal payment address
+
+### Remove
+- Mock `fetchLedgerTransactions()` function
+- Mock `hasMadePaymentToAddress()` function
+- `checkAllCredentials` flag
+
+## Implementation Plan
+
+1. Generate new backend with real Ledger integration and subaccount derivation
+2. Update frontend PaymentGate to use `getUserPaymentAddress()` hook
+3. Add `useGetUserPaymentAddress` hook
+4. Deploy

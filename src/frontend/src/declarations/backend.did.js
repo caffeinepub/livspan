@@ -29,22 +29,50 @@ export const UserProfile = IDL.Record({
   'name' : IDL.Text,
   'gender' : Gender,
 });
+export const MovementDay = IDL.Record({
+  'activeMinutes' : IDL.Nat,
+  'activityType' : IDL.Variant({
+    'gym' : IDL.Null,
+    'run' : IDL.Null,
+    'bike' : IDL.Null,
+    'walk' : IDL.Null,
+  }),
+  'date' : IDL.Text,
+  'intensity' : IDL.Variant({
+    'intense' : IDL.Null,
+    'light' : IDL.Null,
+    'medium' : IDL.Null,
+  }),
+});
 export const NutritionDay = IDL.Record({
   'fat' : IDL.Float64,
   'caloriesConsumed' : IDL.Nat,
   'waterMl' : IDL.Nat,
   'carbs' : IDL.Float64,
   'bodyWeightKg' : IDL.Opt(IDL.Float64),
+  'waterLiters' : IDL.Float64,
   'vegetableGrams' : IDL.Opt(IDL.Nat),
   'caloriesBurned' : IDL.Nat,
   'proteinGrams' : IDL.Opt(IDL.Nat),
   'protein' : IDL.Float64,
+});
+export const SleepDay = IDL.Record({
+  'durationHours' : IDL.Float64,
+  'qualityScore' : IDL.Int,
+});
+export const StressDay = IDL.Record({
+  'date' : IDL.Text,
+  'systolic' : IDL.Nat,
+  'diastolic' : IDL.Nat,
+  'pulse' : IDL.Nat,
 });
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'clearNutritionDay' : IDL.Func([Time], [], []),
+  'clearSleepDay' : IDL.Func([Time], [], []),
+  'confirmActivation' : IDL.Func([IDL.Principal], [], []),
   'getCallerFastingSchedule' : IDL.Func(
       [],
       [IDL.Opt(FastingSchedule)],
@@ -52,21 +80,37 @@ export const idlService = IDL.Service({
     ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getIcpAddress' : IDL.Func([], [IDL.Text], ['query']),
+  'getMovementDay' : IDL.Func([IDL.Text], [IDL.Opt(MovementDay)], ['query']),
   'getNutritionEntry' : IDL.Func(
       [IDL.Principal, Time],
       [IDL.Opt(NutritionDay)],
       ['query'],
     ),
+  'getSleepEntry' : IDL.Func(
+      [IDL.Principal, Time],
+      [IDL.Opt(SleepDay)],
+      ['query'],
+    ),
+  'getStressDay' : IDL.Func([IDL.Text], [IDL.Opt(StressDay)], ['query']),
   'getTodayNutritionEntry' : IDL.Func([], [IDL.Opt(NutritionDay)], ['query']),
+  'getTodaySleepEntry' : IDL.Func([], [IDL.Opt(SleepDay)], ['query']),
+  'getUserPaymentAddress' : IDL.Func([], [IDL.Principal], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
       [IDL.Opt(UserProfile)],
       ['query'],
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'isUserActivated' : IDL.Func([IDL.Principal], [IDL.Bool], ['query']),
   'saveCallerFastingSchedule' : IDL.Func([FastingSchedule], [], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'saveMovementDay' : IDL.Func([MovementDay], [], []),
   'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
+  'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
+  'saveStressDay' : IDL.Func([StressDay], [], []),
+  'setIcpAddress' : IDL.Func([IDL.Text], [], []),
+  'verifyAndActivate' : IDL.Func([], [IDL.Bool], []),
 });
 
 export const idlInitArgs = [];
@@ -93,22 +137,50 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
     'gender' : Gender,
   });
+  const MovementDay = IDL.Record({
+    'activeMinutes' : IDL.Nat,
+    'activityType' : IDL.Variant({
+      'gym' : IDL.Null,
+      'run' : IDL.Null,
+      'bike' : IDL.Null,
+      'walk' : IDL.Null,
+    }),
+    'date' : IDL.Text,
+    'intensity' : IDL.Variant({
+      'intense' : IDL.Null,
+      'light' : IDL.Null,
+      'medium' : IDL.Null,
+    }),
+  });
   const NutritionDay = IDL.Record({
     'fat' : IDL.Float64,
     'caloriesConsumed' : IDL.Nat,
     'waterMl' : IDL.Nat,
     'carbs' : IDL.Float64,
     'bodyWeightKg' : IDL.Opt(IDL.Float64),
+    'waterLiters' : IDL.Float64,
     'vegetableGrams' : IDL.Opt(IDL.Nat),
     'caloriesBurned' : IDL.Nat,
     'proteinGrams' : IDL.Opt(IDL.Nat),
     'protein' : IDL.Float64,
+  });
+  const SleepDay = IDL.Record({
+    'durationHours' : IDL.Float64,
+    'qualityScore' : IDL.Int,
+  });
+  const StressDay = IDL.Record({
+    'date' : IDL.Text,
+    'systolic' : IDL.Nat,
+    'diastolic' : IDL.Nat,
+    'pulse' : IDL.Nat,
   });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'clearNutritionDay' : IDL.Func([Time], [], []),
+    'clearSleepDay' : IDL.Func([Time], [], []),
+    'confirmActivation' : IDL.Func([IDL.Principal], [], []),
     'getCallerFastingSchedule' : IDL.Func(
         [],
         [IDL.Opt(FastingSchedule)],
@@ -116,21 +188,37 @@ export const idlFactory = ({ IDL }) => {
       ),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getIcpAddress' : IDL.Func([], [IDL.Text], ['query']),
+    'getMovementDay' : IDL.Func([IDL.Text], [IDL.Opt(MovementDay)], ['query']),
     'getNutritionEntry' : IDL.Func(
         [IDL.Principal, Time],
         [IDL.Opt(NutritionDay)],
         ['query'],
       ),
+    'getSleepEntry' : IDL.Func(
+        [IDL.Principal, Time],
+        [IDL.Opt(SleepDay)],
+        ['query'],
+      ),
+    'getStressDay' : IDL.Func([IDL.Text], [IDL.Opt(StressDay)], ['query']),
     'getTodayNutritionEntry' : IDL.Func([], [IDL.Opt(NutritionDay)], ['query']),
+    'getTodaySleepEntry' : IDL.Func([], [IDL.Opt(SleepDay)], ['query']),
+    'getUserPaymentAddress' : IDL.Func([], [IDL.Principal], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
         [IDL.Opt(UserProfile)],
         ['query'],
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'isUserActivated' : IDL.Func([IDL.Principal], [IDL.Bool], ['query']),
     'saveCallerFastingSchedule' : IDL.Func([FastingSchedule], [], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'saveMovementDay' : IDL.Func([MovementDay], [], []),
     'saveNutritionDayEntry' : IDL.Func([Time, NutritionDay], [], []),
+    'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
+    'saveStressDay' : IDL.Func([StressDay], [], []),
+    'setIcpAddress' : IDL.Func([IDL.Text], [], []),
+    'verifyAndActivate' : IDL.Func([], [IDL.Bool], []),
   });
 };
 

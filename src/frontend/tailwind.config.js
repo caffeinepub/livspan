@@ -50,10 +50,23 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
+        /* Green-blue helix palette (emerald → teal → cyan → sky) */
         'helix-strand': 'oklch(var(--helix-strand))',
         'helix-glow': 'oklch(var(--helix-glow))',
         'helix-accent': 'oklch(var(--helix-accent))',
         'helix-base': 'oklch(var(--helix-base))',
+        teal: {
+          50: 'oklch(var(--sage-50))',
+          100: 'oklch(var(--sage-100))',
+          200: 'oklch(var(--sage-200))',
+          300: 'oklch(var(--sage-300))',
+          400: 'oklch(var(--sage-400))',
+          500: 'oklch(var(--sage-500))',
+          600: 'oklch(var(--sage-600))',
+          700: 'oklch(var(--sage-700))',
+          800: 'oklch(var(--sage-800))',
+          900: 'oklch(var(--sage-900))',
+        },
         sage: {
           50: 'oklch(var(--sage-50))',
           100: 'oklch(var(--sage-100))',

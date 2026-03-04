@@ -14,16 +14,35 @@ export interface FastingSchedule { 'endHour' : number, 'startHour' : number }
 export type Gender = { 'female' : null } |
   { 'male' : null } |
   { 'diverse' : null };
+export interface MovementDay {
+  'activeMinutes' : bigint,
+  'activityType' : { 'gym' : null } |
+    { 'run' : null } |
+    { 'bike' : null } |
+    { 'walk' : null },
+  'date' : string,
+  'intensity' : { 'intense' : null } |
+    { 'light' : null } |
+    { 'medium' : null },
+}
 export interface NutritionDay {
   'fat' : number,
   'caloriesConsumed' : bigint,
   'waterMl' : bigint,
   'carbs' : number,
   'bodyWeightKg' : [] | [number],
+  'waterLiters' : number,
   'vegetableGrams' : [] | [bigint],
   'caloriesBurned' : bigint,
   'proteinGrams' : [] | [bigint],
   'protein' : number,
+}
+export interface SleepDay { 'durationHours' : number, 'qualityScore' : bigint }
+export interface StressDay {
+  'date' : string,
+  'systolic' : bigint,
+  'diastolic' : bigint,
+  'pulse' : bigint,
 }
 export type Time = bigint;
 export interface UserProfile {
@@ -39,16 +58,30 @@ export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'clearNutritionDay' : ActorMethod<[Time], undefined>,
+  'clearSleepDay' : ActorMethod<[Time], undefined>,
+  'confirmActivation' : ActorMethod<[Principal], undefined>,
   'getCallerFastingSchedule' : ActorMethod<[], [] | [FastingSchedule]>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getIcpAddress' : ActorMethod<[], string>,
+  'getMovementDay' : ActorMethod<[string], [] | [MovementDay]>,
   'getNutritionEntry' : ActorMethod<[Principal, Time], [] | [NutritionDay]>,
+  'getSleepEntry' : ActorMethod<[Principal, Time], [] | [SleepDay]>,
+  'getStressDay' : ActorMethod<[string], [] | [StressDay]>,
   'getTodayNutritionEntry' : ActorMethod<[], [] | [NutritionDay]>,
+  'getTodaySleepEntry' : ActorMethod<[], [] | [SleepDay]>,
+  'getUserPaymentAddress' : ActorMethod<[], Principal>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
+  'isUserActivated' : ActorMethod<[Principal], boolean>,
   'saveCallerFastingSchedule' : ActorMethod<[FastingSchedule], undefined>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'saveMovementDay' : ActorMethod<[MovementDay], undefined>,
   'saveNutritionDayEntry' : ActorMethod<[Time, NutritionDay], undefined>,
+  'saveSleepDayEntry' : ActorMethod<[Time, SleepDay], undefined>,
+  'saveStressDay' : ActorMethod<[StressDay], undefined>,
+  'setIcpAddress' : ActorMethod<[string], undefined>,
+  'verifyAndActivate' : ActorMethod<[], boolean>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

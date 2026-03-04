@@ -1,19 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Settings, Info } from 'lucide-react';
-import { useI18n } from '@/i18n/useI18n';
-import { useGetCallerFastingSchedule, useSaveCallerFastingSchedule } from '@/hooks/useFastingScheduleQueries';
-import type { FastingSchedule } from '@/backend';
+import type { FastingSchedule } from "@/backend";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  useGetCallerFastingSchedule,
+  useSaveCallerFastingSchedule,
+} from "@/hooks/useFastingScheduleQueries";
+import { useI18n } from "@/i18n/useI18n";
+import { Info, Loader2, Settings } from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 interface FastingScheduleSettingsProps {
   onScheduleChange?: (schedule: FastingSchedule | null) => void;
 }
 
-export default function FastingScheduleSettings({ onScheduleChange }: FastingScheduleSettingsProps) {
+export default function FastingScheduleSettings({
+  onScheduleChange,
+}: FastingScheduleSettingsProps) {
   const { t } = useI18n();
   const { data: savedSchedule, isLoading } = useGetCallerFastingSchedule();
   const saveMutation = useSaveCallerFastingSchedule();
@@ -64,9 +81,8 @@ export default function FastingScheduleSettings({ onScheduleChange }: FastingSch
   const calculateDuration = () => {
     if (endHour > startHour) {
       return endHour - startHour;
-    } else {
-      return (24 - startHour) + endHour;
     }
+    return 24 - startHour + endHour;
   };
 
   const duration = calculateDuration();
@@ -100,13 +116,18 @@ export default function FastingScheduleSettings({ onScheduleChange }: FastingSch
           <>
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">{t.fastingSchedule.current.label}</span>
+                <span className="text-muted-foreground">
+                  {t.fastingSchedule.current.label}
+                </span>
                 <span className="font-mono tabular-nums text-foreground">
-                  {String(startHour).padStart(2, '0')}:00 - {String(endHour).padStart(2, '0')}:00
+                  {String(startHour).padStart(2, "0")}:00 -{" "}
+                  {String(endHour).padStart(2, "0")}:00
                 </span>
               </div>
               <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">{t.fastingSchedule.current.protocol}</span>
+                <span className="text-muted-foreground">
+                  {t.fastingSchedule.current.protocol}
+                </span>
                 <span className="font-mono tabular-nums text-helix-accent">
                   {duration}:{eatingDuration}
                 </span>
@@ -130,7 +151,9 @@ export default function FastingScheduleSettings({ onScheduleChange }: FastingSch
                 </Label>
                 <Select
                   value={startHour.toString()}
-                  onValueChange={(value) => setStartHour(parseInt(value))}
+                  onValueChange={(value) =>
+                    setStartHour(Number.parseInt(value))
+                  }
                   disabled={saveMutation.isPending}
                 >
                   <SelectTrigger id="startHour" className="font-mono">
@@ -138,8 +161,12 @@ export default function FastingScheduleSettings({ onScheduleChange }: FastingSch
                   </SelectTrigger>
                   <SelectContent>
                     {hours.map((hour) => (
-                      <SelectItem key={hour} value={hour.toString()} className="font-mono">
-                        {String(hour).padStart(2, '0')}:00
+                      <SelectItem
+                        key={hour}
+                        value={hour.toString()}
+                        className="font-mono"
+                      >
+                        {String(hour).padStart(2, "0")}:00
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -152,7 +179,7 @@ export default function FastingScheduleSettings({ onScheduleChange }: FastingSch
                 </Label>
                 <Select
                   value={endHour.toString()}
-                  onValueChange={(value) => setEndHour(parseInt(value))}
+                  onValueChange={(value) => setEndHour(Number.parseInt(value))}
                   disabled={saveMutation.isPending}
                 >
                   <SelectTrigger id="endHour" className="font-mono">
@@ -160,8 +187,12 @@ export default function FastingScheduleSettings({ onScheduleChange }: FastingSch
                   </SelectTrigger>
                   <SelectContent>
                     {hours.map((hour) => (
-                      <SelectItem key={hour} value={hour.toString()} className="font-mono">
-                        {String(hour).padStart(2, '0')}:00
+                      <SelectItem
+                        key={hour}
+                        value={hour.toString()}
+                        className="font-mono"
+                      >
+                        {String(hour).padStart(2, "0")}:00
                       </SelectItem>
                     ))}
                   </SelectContent>

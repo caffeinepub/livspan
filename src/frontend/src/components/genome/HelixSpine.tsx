@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 interface HelixSpineProps {
   children: ReactNode;
@@ -15,17 +15,42 @@ export default function HelixSpine({ children }: HelixSpineProps) {
         className="absolute inset-0 w-full h-full pointer-events-none"
         style={{ zIndex: 0 }}
         preserveAspectRatio="none"
+        aria-hidden="true"
       >
         <defs>
           <linearGradient id="helixGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.15" />
-            <stop offset="50%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="oklch(var(--helix-strand))" stopOpacity="0.15" />
+            <stop
+              offset="0%"
+              stopColor="oklch(var(--helix-strand))"
+              stopOpacity="0.15"
+            />
+            <stop
+              offset="50%"
+              stopColor="oklch(var(--helix-strand))"
+              stopOpacity="0.25"
+            />
+            <stop
+              offset="100%"
+              stopColor="oklch(var(--helix-strand))"
+              stopOpacity="0.15"
+            />
           </linearGradient>
           <linearGradient id="helixGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.12" />
-            <stop offset="50%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="oklch(var(--helix-accent))" stopOpacity="0.12" />
+            <stop
+              offset="0%"
+              stopColor="oklch(var(--helix-accent))"
+              stopOpacity="0.12"
+            />
+            <stop
+              offset="50%"
+              stopColor="oklch(var(--helix-accent))"
+              stopOpacity="0.22"
+            />
+            <stop
+              offset="100%"
+              stopColor="oklch(var(--helix-accent))"
+              stopOpacity="0.12"
+            />
           </linearGradient>
         </defs>
 
@@ -53,15 +78,15 @@ export default function HelixSpine({ children }: HelixSpineProps) {
 
         {/* Connecting base pairs - evenly distributed along helix for scientific appearance */}
         <g className="motion-safe:animate-helix-pulse motion-reduce:animate-none">
-          {Array.from({ length: 20 }).map((_, i) => {
+          {Array.from({ length: 20 }, (_, i) => {
             const y = (i / 19) * 100;
             const phase = (i / 19) * Math.PI * 2;
             const leftX = 30 + Math.sin(phase) * 10;
             const rightX = 70 - Math.sin(phase) * 10;
-            
+            const key = `bp-pair-pos-${(y * 100).toFixed(0)}`;
             return (
               <line
-                key={i}
+                key={key}
                 x1={`${leftX}%`}
                 y1={`${y}%`}
                 x2={`${rightX}%`}

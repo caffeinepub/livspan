@@ -1,8 +1,8 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { FastingSchedule } from '@/backend';
-import { toast } from 'sonner';
-import { queryKeys } from './queryKeys';
+import type { FastingSchedule } from "@/backend";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { queryKeys } from "./queryKeys";
+import { useActor } from "./useActor";
 
 /**
  * Hook to fetch the current user's fasting schedule
@@ -13,7 +13,7 @@ export function useGetCallerFastingSchedule() {
   const query = useQuery<FastingSchedule | null>({
     queryKey: queryKeys.fastingSchedule,
     queryFn: async () => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.getCallerFastingSchedule();
     },
     enabled: !!actor && !actorFetching,
@@ -35,16 +35,16 @@ export function useSaveCallerFastingSchedule() {
 
   return useMutation({
     mutationFn: async (schedule: FastingSchedule) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       await actor.saveCallerFastingSchedule(schedule);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.fastingSchedule });
-      toast.success('Fasting schedule saved successfully');
+      toast.success("Fasting schedule saved successfully");
     },
     onError: (error: any) => {
-      console.error('Failed to save fasting schedule:', error);
-      toast.error('Failed to save fasting schedule');
+      console.error("Failed to save fasting schedule:", error);
+      toast.error("Failed to save fasting schedule");
     },
   });
 }

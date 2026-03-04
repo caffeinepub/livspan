@@ -1,15 +1,18 @@
-import { useState } from 'react';
-import HelixSpine from '@/components/genome/HelixSpine';
-import FactorMarker from '@/components/dashboard/FactorMarker';
-import AnimatedHelixBackground from '@/components/genome/AnimatedHelixBackground';
-import LanguageSwitcher from '@/components/i18n/LanguageSwitcher';
-import LoginButton from '@/components/auth/LoginButton';
-import ProfileOnboardingGate from '@/components/profile/ProfileOnboardingGate';
-import IntermittentFastingPanel from '@/components/dashboard/IntermittentFastingPanel';
-import NutritionPanel from '@/components/dashboard/NutritionPanel';
-import { useI18n } from '@/i18n/useI18n';
+import LoginButton from "@/components/auth/LoginButton";
+import FactorMarker from "@/components/dashboard/FactorMarker";
+import IntermittentFastingPanel from "@/components/dashboard/IntermittentFastingPanel";
+import MovementPanel from "@/components/dashboard/MovementPanel";
+import NutritionPanel from "@/components/dashboard/NutritionPanel";
+import SleepPanel from "@/components/dashboard/SleepPanel";
+import StressPanel from "@/components/dashboard/StressPanel";
+import AnimatedHelixBackground from "@/components/genome/AnimatedHelixBackground";
+import HelixSpine from "@/components/genome/HelixSpine";
+import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
+import ProfileOnboardingGate from "@/components/profile/ProfileOnboardingGate";
+import { useI18n } from "@/i18n/useI18n";
+import { useState } from "react";
 
-type FactorType = 'nutrition' | 'sleep' | 'movement' | 'stress' | 'fasting';
+type FactorType = "nutrition" | "sleep" | "movement" | "stress" | "fasting";
 
 interface Factor {
   id: FactorType;
@@ -17,11 +20,11 @@ interface Factor {
 }
 
 const factors: Factor[] = [
-  { id: 'nutrition', position: 0 },
-  { id: 'sleep', position: 1 },
-  { id: 'movement', position: 2 },
-  { id: 'stress', position: 3 },
-  { id: 'fasting', position: 4 },
+  { id: "nutrition", position: 0 },
+  { id: "sleep", position: 1 },
+  { id: "movement", position: 2 },
+  { id: "stress", position: 3 },
+  { id: "fasting", position: 4 },
 ];
 
 export default function StartDashboard() {
@@ -39,10 +42,11 @@ export default function StartDashboard() {
         <div
           className="fixed inset-0 z-0"
           style={{
-            backgroundImage: 'url(/assets/generated/dna-helix-bg.dim_1440x2560.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
+            backgroundImage:
+              "url(/assets/generated/dna-helix-bg.dim_1440x2560.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         />
 
@@ -58,9 +62,10 @@ export default function StartDashboard() {
         <div
           className="fixed inset-0 z-0 opacity-[0.015] pointer-events-none"
           style={{
-            backgroundImage: 'url(/assets/generated/livspan-bio-texture.dim_1440x2560.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundImage:
+              "url(/assets/generated/livspan-bio-texture.dim_1440x2560.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
 
@@ -70,9 +75,9 @@ export default function StartDashboard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 {/* Logo - matching login page */}
-                <img 
-                  src="/assets/IMG_8398-1.png" 
-                  alt="LivSpan Logo" 
+                <img
+                  src="/assets/IMG_8398-1.png"
+                  alt="LivSpan Logo"
                   className="w-12 h-12"
                 />
                 <div>
@@ -112,56 +117,38 @@ export default function StartDashboard() {
           </section>
 
           {/* Factor-specific panels */}
-          {selectedFactor === 'fasting' && (
+          {selectedFactor === "fasting" && (
             <section className="max-w-4xl mx-auto">
               <IntermittentFastingPanel />
             </section>
           )}
 
-          {selectedFactor === 'nutrition' && (
+          {selectedFactor === "nutrition" && (
             <section className="max-w-4xl mx-auto">
               <NutritionPanel />
             </section>
           )}
 
-          {selectedFactor === 'sleep' && (
+          {selectedFactor === "sleep" && (
             <section className="max-w-4xl mx-auto">
               <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
-                <h2 className="text-xl font-light mb-2 gradient-green-glow">{t.factors.sleep.label}</h2>
-                <p className="text-sm text-muted-foreground">
-                  {t.factors.sleep.description}
-                </p>
-                <p className="text-xs text-muted-foreground mt-4 italic">
-                  Coming soon...
-                </p>
+                <SleepPanel />
               </div>
             </section>
           )}
 
-          {selectedFactor === 'movement' && (
+          {selectedFactor === "movement" && (
             <section className="max-w-4xl mx-auto">
               <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
-                <h2 className="text-xl font-light mb-2 gradient-green-glow">{t.factors.movement.label}</h2>
-                <p className="text-sm text-muted-foreground">
-                  {t.factors.movement.description}
-                </p>
-                <p className="text-xs text-muted-foreground mt-4 italic">
-                  Coming soon...
-                </p>
+                <MovementPanel />
               </div>
             </section>
           )}
 
-          {selectedFactor === 'stress' && (
+          {selectedFactor === "stress" && (
             <section className="max-w-4xl mx-auto">
               <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
-                <h2 className="text-xl font-light mb-2 gradient-green-glow">{t.factors.stress.label}</h2>
-                <p className="text-sm text-muted-foreground">
-                  {t.factors.stress.description}
-                </p>
-                <p className="text-xs text-muted-foreground mt-4 italic">
-                  Coming soon...
-                </p>
+                <StressPanel />
               </div>
             </section>
           )}
@@ -170,21 +157,25 @@ export default function StartDashboard() {
         {/* Footer */}
         <footer className="relative z-10 border-t border-helix-strand/30 backdrop-blur-md bg-background/70 mt-16">
           <div className="container mx-auto px-4 py-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-              <p>© {new Date().getFullYear()} LivSpan. {t.footer.copyright}</p>
-              <p>
-                {t.footer.builtWith}{' '}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+              <span>
+                © {new Date().getFullYear()} LivSpan — {t.footer.copyright}
+              </span>
+              <span>
+                {t.footer.builtWith}{" "}
                 <a
                   href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
-                    typeof window !== 'undefined' ? window.location.hostname : 'livspan-app'
+                    typeof window !== "undefined"
+                      ? window.location.hostname
+                      : "livspan",
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline hover:text-helix-accent transition-colors"
+                  className="text-helix-accent hover:text-helix-glow transition-colors"
                 >
                   caffeine.ai
                 </a>
-              </p>
+              </span>
             </div>
           </div>
         </footer>

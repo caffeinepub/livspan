@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { NutritionDay } from '@/backend';
-import { queryKeys } from './queryKeys';
+import type { NutritionDay } from "@/backend";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "./queryKeys";
+import { useActor } from "./useActor";
 
 /**
  * Hook to fetch today's nutrition entry for the authenticated user
@@ -12,7 +12,7 @@ export function useGetTodayNutrition() {
   const query = useQuery<NutritionDay | null>({
     queryKey: queryKeys.nutrition.today,
     queryFn: async () => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.getTodayNutritionEntry();
     },
     enabled: !!actor && !actorFetching,
@@ -36,11 +36,11 @@ export function useSaveNutritionEntry() {
 
   return useMutation({
     mutationFn: async (entry: NutritionDay) => {
-      if (!actor) throw new Error('Actor not available');
-      
+      if (!actor) throw new Error("Actor not available");
+
       // Calculate today's timestamp (in days since epoch)
       const today = BigInt(Math.floor(Date.now() / 86400000));
-      
+
       await actor.saveNutritionDayEntry(today, entry);
     },
     onSuccess: () => {

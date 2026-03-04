@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
-import { Language, Translations, translations } from './translations';
+import { type ReactNode, createContext, useEffect, useState } from "react";
+import { type Language, type Translations, translations } from "./translations";
 
 interface LanguageContextValue {
   language: Language;
@@ -7,24 +7,26 @@ interface LanguageContextValue {
   t: Translations;
 }
 
-export const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+export const LanguageContext = createContext<LanguageContextValue | undefined>(
+  undefined,
+);
 
-const STORAGE_KEY = 'livspan-language';
+const STORAGE_KEY = "livspan-language";
 
 function getBrowserLanguage(): Language {
-  if (typeof window === 'undefined') return 'en';
-  
+  if (typeof window === "undefined") return "en";
+
   const browserLang = navigator.language.toLowerCase();
-  if (browserLang.startsWith('de')) return 'de';
-  return 'en';
+  if (browserLang.startsWith("de")) return "de";
+  return "en";
 }
 
 function getInitialLanguage(): Language {
-  if (typeof window === 'undefined') return 'en';
-  
+  if (typeof window === "undefined") return "en";
+
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'en' || stored === 'de') return stored;
-  
+  if (stored === "en" || stored === "de") return stored;
+
   return getBrowserLanguage();
 }
 
@@ -49,5 +51,9 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     t: translations[language],
   };
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
 }

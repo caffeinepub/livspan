@@ -5,17 +5,30 @@ export default function AnimatedHelixBackground() {
         className="absolute inset-0 w-full h-full"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <defs>
           {/* Green to blue gradient for main helix - scientific palette */}
-          <linearGradient id="helixMainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient
+            id="helixMainGradient"
+            x1="0%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
             <stop offset="0%" stopColor="oklch(0.62 0.15 150)" />
             <stop offset="50%" stopColor="oklch(0.58 0.14 175)" />
             <stop offset="100%" stopColor="oklch(0.55 0.13 200)" />
           </linearGradient>
 
           {/* Secondary gradient with slight offset */}
-          <linearGradient id="helixSecondaryGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient
+            id="helixSecondaryGradient"
+            x1="0%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
             <stop offset="0%" stopColor="oklch(0.60 0.14 155)" />
             <stop offset="50%" stopColor="oklch(0.56 0.13 180)" />
             <stop offset="100%" stopColor="oklch(0.53 0.12 205)" />
@@ -66,15 +79,15 @@ export default function AnimatedHelixBackground() {
 
         {/* Connecting base pairs - scientific appearance with even distribution */}
         <g className="motion-safe:animate-helix-bg-pulse motion-reduce:opacity-25">
-          {Array.from({ length: 24 }).map((_, i) => {
+          {Array.from({ length: 24 }, (_, i) => {
             const y = (i / 23) * 100;
             const phase = (i / 23) * Math.PI * 4;
             const leftX = 35 + Math.sin(phase) * 10;
             const rightX = 65 - Math.sin(phase) * 10;
-
+            const key = `bg-pair-pos-${(y * 100).toFixed(0)}`;
             return (
               <line
-                key={i}
+                key={key}
                 x1={`${leftX}%`}
                 y1={`${y}%`}
                 x2={`${rightX}%`}
@@ -91,15 +104,16 @@ export default function AnimatedHelixBackground() {
 
         {/* Subtle accent nodes along the helix for scientific detail */}
         <g className="motion-safe:animate-helix-bg-glow motion-reduce:hidden">
-          {Array.from({ length: 12 }).map((_, i) => {
+          {Array.from({ length: 12 }, (_, i) => {
             const y = (i / 11) * 100;
             const phase = (i / 11) * Math.PI * 4;
             const leftX = 35 + Math.sin(phase) * 10;
             const rightX = 65 - Math.sin(phase) * 10;
             const hue = 150 + (i / 11) * 50; // Green to blue transition
+            const key = `bg-node-pos-${(y * 100).toFixed(0)}`;
 
             return (
-              <g key={i}>
+              <g key={key}>
                 <circle
                   cx={`${leftX}%`}
                   cy={`${y}%`}

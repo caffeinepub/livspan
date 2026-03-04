@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 interface FastingWindowState {
-  phase: 'fasting' | 'eating';
+  phase: "fasting" | "eating";
   elapsed: number;
   remaining: number;
   progress: number;
@@ -15,11 +15,15 @@ interface FastingSchedule {
 /**
  * Hook that computes the current fasting/eating phase, elapsed/remaining time,
  * and progress for the current window. Updates once per second while mounted.
- * 
+ *
  * @param schedule Optional custom schedule. If not provided, defaults to 16:8 (20:00-12:00)
  */
-export function useFastingWindowTimer(schedule?: FastingSchedule | null): FastingWindowState {
-  const [state, setState] = useState<FastingWindowState>(() => calculateState(schedule));
+export function useFastingWindowTimer(
+  schedule?: FastingSchedule | null,
+): FastingWindowState {
+  const [state, setState] = useState<FastingWindowState>(() =>
+    calculateState(schedule),
+  );
 
   useEffect(() => {
     // Update every second
@@ -47,11 +51,11 @@ function calculateState(schedule?: FastingSchedule | null): FastingWindowState {
   const fastingDurationHours =
     fastingEndHour > fastingStartHour
       ? fastingEndHour - fastingStartHour
-      : (24 - fastingStartHour) + fastingEndHour;
-  
+      : 24 - fastingStartHour + fastingEndHour;
+
   const eatingDurationHours = 24 - fastingDurationHours;
 
-  let phase: 'fasting' | 'eating';
+  let phase: "fasting" | "eating";
   let elapsed: number;
   let remaining: number;
   let progress: number;
@@ -64,8 +68,8 @@ function calculateState(schedule?: FastingSchedule | null): FastingWindowState {
 
   if (isInFastingWindow) {
     // Fasting phase
-    phase = 'fasting';
-    
+    phase = "fasting";
+
     // Calculate elapsed time in fasting window
     let elapsedHours: number;
     if (fastingStartHour < fastingEndHour) {
@@ -76,17 +80,17 @@ function calculateState(schedule?: FastingSchedule | null): FastingWindowState {
       if (currentHour >= fastingStartHour) {
         elapsedHours = currentHour - fastingStartHour;
       } else {
-        elapsedHours = (24 - fastingStartHour) + currentHour;
+        elapsedHours = 24 - fastingStartHour + currentHour;
       }
     }
-    
-    elapsed = (elapsedHours * 3600) + (currentMinute * 60) + currentSecond;
-    remaining = (fastingDurationHours * 3600) - elapsed;
+
+    elapsed = elapsedHours * 3600 + currentMinute * 60 + currentSecond;
+    remaining = fastingDurationHours * 3600 - elapsed;
     progress = (elapsed / (fastingDurationHours * 3600)) * 100;
   } else {
     // Eating phase
-    phase = 'eating';
-    
+    phase = "eating";
+
     // Calculate elapsed time in eating window
     let elapsedHours: number;
     if (fastingStartHour < fastingEndHour) {
@@ -96,15 +100,15 @@ function calculateState(schedule?: FastingSchedule | null): FastingWindowState {
       } else if (currentHour >= fastingEndHour) {
         elapsedHours = currentHour - fastingEndHour;
       } else {
-        elapsedHours = (24 - fastingEndHour) + currentHour;
+        elapsedHours = 24 - fastingEndHour + currentHour;
       }
     } else {
       // Eating window is same-day
       elapsedHours = currentHour - fastingEndHour;
     }
-    
-    elapsed = (elapsedHours * 3600) + (currentMinute * 60) + currentSecond;
-    remaining = (eatingDurationHours * 3600) - elapsed;
+
+    elapsed = elapsedHours * 3600 + currentMinute * 60 + currentSecond;
+    remaining = eatingDurationHours * 3600 - elapsed;
     progress = (elapsed / (eatingDurationHours * 3600)) * 100;
   }
 

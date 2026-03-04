@@ -5,12 +5,19 @@ interface MacroInput {
   carbs: number;
 }
 
-export type GuidanceKey = 'balanced' | 'proteinLow' | 'proteinHigh' | 'fatDominant' | 'carbDominant' | 'caloriesMismatch' | 'noData';
+export type GuidanceKey =
+  | "balanced"
+  | "proteinLow"
+  | "proteinHigh"
+  | "fatDominant"
+  | "carbDominant"
+  | "caloriesMismatch"
+  | "noData";
 
 /**
  * Deterministic guidance utility that analyzes macro distribution
  * and returns a guidance key for i18n lookup.
- * 
+ *
  * This is non-medical and purely informational.
  */
 export function getNutrientGuidance(input: MacroInput): GuidanceKey {
@@ -18,7 +25,7 @@ export function getNutrientGuidance(input: MacroInput): GuidanceKey {
 
   // No data entered
   if (calories === 0 && protein === 0 && fat === 0 && carbs === 0) {
-    return 'noData';
+    return "noData";
   }
 
   // Calculate calories from macros (protein: 4 kcal/g, fat: 9 kcal/g, carbs: 4 kcal/g)
@@ -31,9 +38,9 @@ export function getNutrientGuidance(input: MacroInput): GuidanceKey {
   if (calories > 0 && totalMacroCalories > 0) {
     const difference = Math.abs(calories - totalMacroCalories);
     const percentDifference = (difference / calories) * 100;
-    
+
     if (percentDifference > 20) {
-      return 'caloriesMismatch';
+      return "caloriesMismatch";
     }
   }
 
@@ -45,28 +52,28 @@ export function getNutrientGuidance(input: MacroInput): GuidanceKey {
 
     // Check for very low protein (< 10%)
     if (proteinPercent < 10) {
-      return 'proteinLow';
+      return "proteinLow";
     }
 
     // Check for very high protein (> 40%)
     if (proteinPercent > 40) {
-      return 'proteinHigh';
+      return "proteinHigh";
     }
 
     // Check for fat dominance (> 50%)
     if (fatPercent > 50) {
-      return 'fatDominant';
+      return "fatDominant";
     }
 
     // Check for carb dominance (> 60%)
     if (carbPercent > 60) {
-      return 'carbDominant';
+      return "carbDominant";
     }
 
     // Otherwise, distribution seems balanced
-    return 'balanced';
+    return "balanced";
   }
 
   // Default to no data if we can't determine
-  return 'noData';
+  return "noData";
 }
