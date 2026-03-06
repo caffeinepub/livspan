@@ -144,14 +144,35 @@ export default function SleepPanel() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-md bg-helix-glow/20 border border-helix-accent/40">
-          <Moon className="w-5 h-5 text-helix-accent" strokeWidth={1.5} />
+        <div
+          className="p-2 rounded-md"
+          style={{
+            background: "rgba(0, 232, 122, 0.15)",
+            border: "1px solid rgba(0, 255, 120, 0.3)",
+          }}
+        >
+          <Moon
+            className="w-5 h-5"
+            style={{ color: "#00e87a" }}
+            strokeWidth={1.5}
+          />
         </div>
         <div>
-          <h3 className="text-xl font-light tracking-wide gradient-green-glow">
+          <h3
+            className="text-xl font-light tracking-wide"
+            style={{
+              background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             {t.sleepPanel.title}
           </h3>
-          <p className="text-xs text-muted-foreground font-mono">
+          <p
+            className="text-xs font-mono"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
             {t.sleepPanel.subtitle}
           </p>
         </div>
@@ -168,17 +189,36 @@ export default function SleepPanel() {
 
       {/* Summary display */}
       {isAuthenticated && (
-        <div className="flex items-center justify-center gap-3 py-3 px-4 rounded-lg border border-helix-strand/30 bg-helix-glow/5">
-          <Moon className="w-4 h-4 text-helix-accent" strokeWidth={1.5} />
-          <span className="text-sm font-mono text-foreground tabular-nums">
+        <div
+          className="flex items-center justify-center gap-3 py-3 px-4 rounded-lg flex-wrap"
+          style={{
+            background: "rgba(0, 30, 15, 0.4)",
+            border: "1px solid rgba(0, 255, 120, 0.2)",
+          }}
+        >
+          <Moon
+            className="w-4 h-4"
+            style={{ color: "#00e87a" }}
+            strokeWidth={1.5}
+          />
+          <span
+            className="text-sm font-mono tabular-nums"
+            style={{ color: "#7effc0" }}
+          >
             {durationHours.toFixed(1)} {t.sleepPanel.duration.unit}
           </span>
-          <span className="text-muted-foreground">·</span>
+          <span style={{ color: "rgba(100, 220, 160, 0.5)" }}>·</span>
           <Star className="w-4 h-4 text-helix-glow" strokeWidth={1.5} />
-          <span className="text-sm font-mono text-foreground tabular-nums">
+          <span
+            className="text-sm font-mono tabular-nums"
+            style={{ color: "#7effc0" }}
+          >
             {t.sleepPanel.quality.label} {qualityScore}/10
           </span>
-          <span className="text-xs text-muted-foreground">
+          <span
+            className="text-xs"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
             — {getQualityLabel(qualityScore, t)}
           </span>
         </div>
@@ -186,18 +226,26 @@ export default function SleepPanel() {
 
       {/* Sleep Duration Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Moon className="w-4 h-4" strokeWidth={1.5} />
               {t.sleepPanel.duration.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
-            <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+          <CardContent className="space-y-4">
+            <div
+              className="flex items-center justify-between text-xs mb-1"
+              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            >
               <span>{t.sleepPanel.duration.recommended}</span>
-              <span className="font-mono tabular-nums text-foreground">
+              <span
+                className="font-mono tabular-nums"
+                style={{ color: "#00ffaa" }}
+              >
                 {durationHours.toFixed(1)} {t.sleepPanel.duration.unit}
               </span>
             </div>
@@ -211,7 +259,10 @@ export default function SleepPanel() {
             />
             <div className="space-y-1">
               <GradientProgressBar percent={durationProgress} />
-              <div className="text-xs text-muted-foreground text-right">
+              <div
+                className="text-xs text-right"
+                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              >
                 {Math.round(Math.min(100, durationProgress))}% —{" "}
                 {t.sleepPanel.duration.progress}
               </div>
@@ -222,18 +273,26 @@ export default function SleepPanel() {
 
       {/* Sleep Quality Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-panel-amber opacity-40" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Star className="w-4 h-4" strokeWidth={1.5} />
               {t.sleepPanel.quality.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
-            <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+          <CardContent className="space-y-4">
+            <div
+              className="flex items-center justify-between text-xs mb-1"
+              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            >
               <span>{t.sleepPanel.quality.scale}: 1–10</span>
-              <span className="font-mono tabular-nums text-foreground">
+              <span
+                className="font-mono tabular-nums"
+                style={{ color: "#00ffaa" }}
+              >
                 {qualityScore}/10 — {getQualityLabel(qualityScore, t)}
               </span>
             </div>
@@ -246,7 +305,10 @@ export default function SleepPanel() {
               onChange={setQualityScore}
             />
             {/* Quality scale labels */}
-            <div className="flex justify-between text-xs text-muted-foreground">
+            <div
+              className="flex justify-between text-xs"
+              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            >
               <span>{t.sleepPanel.quality.poor}</span>
               <span>{t.sleepPanel.quality.fair}</span>
               <span>{t.sleepPanel.quality.good}</span>

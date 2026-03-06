@@ -70,23 +70,23 @@
 
   .dark {
     /* OKLCH color system - Dark mode */
-    --background: oklch(15% 0.02 185);
-    --foreground: oklch(95% 0.01 185);
+    --background: oklch(10% 0.03 170);
+    --foreground: oklch(88% 0.14 160);
 
-    --card: oklch(18% 0.02 185);
-    --card-foreground: oklch(95% 0.01 185);
+    --card: oklch(12% 0.05 160 / 0.28);
+    --card-foreground: oklch(88% 0.18 160);
 
-    --popover: oklch(18% 0.02 185);
-    --popover-foreground: oklch(95% 0.01 185);
+    --popover: oklch(8% 0.04 165 / 0.92);
+    --popover-foreground: oklch(88% 0.14 160);
 
     --primary: oklch(62% 0.2 175);
-    --primary-foreground: oklch(15% 0.02 175);
+    --primary-foreground: oklch(10% 0.03 170);
 
-    --secondary: oklch(25% 0.03 185);
-    --secondary-foreground: oklch(95% 0.01 185);
+    --secondary: oklch(20% 0.06 165);
+    --secondary-foreground: oklch(88% 0.14 160);
 
-    --muted: oklch(25% 0.03 185);
-    --muted-foreground: oklch(65% 0.03 185);
+    --muted: oklch(20% 0.06 165);
+    --muted-foreground: oklch(72% 0.14 165);
 
     --accent: oklch(25% 0.03 185);
     --accent-foreground: oklch(95% 0.01 185);
@@ -94,8 +94,8 @@
     --destructive: oklch(55% 0.22 25);
     --destructive-foreground: oklch(98% 0.01 25);
 
-    --border: oklch(28% 0.03 185);
-    --input: oklch(28% 0.03 185);
+    --border: oklch(30% 0.08 165);
+    --input: oklch(22% 0.07 165);
     --ring: oklch(62% 0.2 175);
 
     /* Green-blue gradient palette - Dark mode */
@@ -139,6 +139,92 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ── Glassmorphism card — used throughout the app ── */
+.glass-card {
+  background: rgba(0, 20, 10, 0.3) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border: 1px solid rgba(0, 255, 120, 0.15) !important;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0, 255, 100, 0.08), 0 1px 0
+    rgba(255, 255, 255, 0.04) inset;
+}
+
+/* ── Make all shadcn Card components transparent/glass in dark mode ── */
+.dark [data-slot="card"] {
+  background: rgba(0, 20, 10, 0.3) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border: 1px solid rgba(0, 255, 120, 0.15) !important;
+}
+
+/* ── SelectContent / popovers / dropdowns — glass style ── */
+.dark [data-radix-select-content],
+.dark [data-radix-popper-content-wrapper] > div {
+  background: rgba(0, 15, 8, 0.9) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(0, 255, 120, 0.2) !important;
+  border-radius: 12px !important;
+}
+
+/* ── Glass input fields ── */
+.glass-input {
+  background: rgba(0, 30, 15, 0.5) !important;
+  border-color: rgba(0, 255, 120, 0.25) !important;
+  color: #a8ffce !important;
+}
+
+.glass-input::placeholder {
+  color: rgba(100, 220, 160, 0.5) !important;
+}
+
+.glass-input:focus {
+  border-color: rgba(0, 255, 120, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(0, 255, 120, 0.15) !important;
+}
+
+/* ── Glass button ── */
+.glass-button {
+  background: rgba(0, 30, 15, 0.5);
+  border: 1px solid rgba(0, 255, 120, 0.3);
+  color: #a8ffce;
+}
+
+.glass-button:hover {
+  background: rgba(0, 50, 25, 0.6);
+  border-color: rgba(0, 255, 120, 0.5);
+}
+
+/* ── Green text token classes ── */
+.text-bio-primary {
+  color: #7effc0;
+}
+
+.text-bio-secondary {
+  color: rgba(93, 255, 170, 0.8);
+}
+
+.text-bio-muted {
+  color: rgba(100, 220, 160, 0.6);
+}
+
+.text-bio-value {
+  color: #00ffaa;
+}
+
+.text-bio-accent {
+  color: #00e87a;
+}
+
+/* Gradient text in bio green tones */
+.text-bio-gradient {
+  background: linear-gradient(135deg, #a8ffce, #4fffb0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Gradient text utilities - Green-blue tones */

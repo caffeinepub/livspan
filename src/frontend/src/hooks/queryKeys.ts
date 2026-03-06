@@ -20,6 +20,9 @@ export const queryKeys = {
     user: (principal: string) => ["userActivation", principal] as const,
   },
   icpAddress: ["icpAddress"] as const,
+  diary: {
+    entries: ["diary", "entries"] as const,
+  },
 } as const;
 
 export function movementDay(date: string) {

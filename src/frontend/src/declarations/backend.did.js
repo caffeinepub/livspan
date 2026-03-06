@@ -29,6 +29,12 @@ export const UserProfile = IDL.Record({
   'name' : IDL.Text,
   'gender' : Gender,
 });
+export const DiaryEntry = IDL.Record({
+  'id' : IDL.Text,
+  'title' : IDL.Text,
+  'content' : IDL.Text,
+  'timestamp' : Time,
+});
 export const MovementDay = IDL.Record({
   'activeMinutes' : IDL.Nat,
   'activityType' : IDL.Variant({
@@ -69,10 +75,12 @@ export const StressDay = IDL.Record({
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addDiaryEntry' : IDL.Func([IDL.Text, IDL.Text], [IDL.Text], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'clearNutritionDay' : IDL.Func([Time], [], []),
   'clearSleepDay' : IDL.Func([Time], [], []),
   'confirmActivation' : IDL.Func([IDL.Principal], [], []),
+  'deleteDiaryEntry' : IDL.Func([IDL.Text], [IDL.Bool], []),
   'getCallerFastingSchedule' : IDL.Func(
       [],
       [IDL.Opt(FastingSchedule)],
@@ -80,6 +88,7 @@ export const idlService = IDL.Service({
     ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getDiaryEntries' : IDL.Func([], [IDL.Vec(DiaryEntry)], ['query']),
   'getIcpAddress' : IDL.Func([], [IDL.Text], ['query']),
   'getMovementDay' : IDL.Func([IDL.Text], [IDL.Opt(MovementDay)], ['query']),
   'getNutritionEntry' : IDL.Func(
@@ -110,6 +119,7 @@ export const idlService = IDL.Service({
   'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
   'saveStressDay' : IDL.Func([StressDay], [], []),
   'setIcpAddress' : IDL.Func([IDL.Text], [], []),
+  'updateDiaryEntry' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [IDL.Bool], []),
   'verifyAndActivate' : IDL.Func([], [IDL.Bool], []),
 });
 
@@ -136,6 +146,12 @@ export const idlFactory = ({ IDL }) => {
     'birthYear' : IDL.Nat,
     'name' : IDL.Text,
     'gender' : Gender,
+  });
+  const DiaryEntry = IDL.Record({
+    'id' : IDL.Text,
+    'title' : IDL.Text,
+    'content' : IDL.Text,
+    'timestamp' : Time,
   });
   const MovementDay = IDL.Record({
     'activeMinutes' : IDL.Nat,
@@ -177,10 +193,12 @@ export const idlFactory = ({ IDL }) => {
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addDiaryEntry' : IDL.Func([IDL.Text, IDL.Text], [IDL.Text], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'clearNutritionDay' : IDL.Func([Time], [], []),
     'clearSleepDay' : IDL.Func([Time], [], []),
     'confirmActivation' : IDL.Func([IDL.Principal], [], []),
+    'deleteDiaryEntry' : IDL.Func([IDL.Text], [IDL.Bool], []),
     'getCallerFastingSchedule' : IDL.Func(
         [],
         [IDL.Opt(FastingSchedule)],
@@ -188,6 +206,7 @@ export const idlFactory = ({ IDL }) => {
       ),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getDiaryEntries' : IDL.Func([], [IDL.Vec(DiaryEntry)], ['query']),
     'getIcpAddress' : IDL.Func([], [IDL.Text], ['query']),
     'getMovementDay' : IDL.Func([IDL.Text], [IDL.Opt(MovementDay)], ['query']),
     'getNutritionEntry' : IDL.Func(
@@ -218,6 +237,11 @@ export const idlFactory = ({ IDL }) => {
     'saveSleepDayEntry' : IDL.Func([Time, SleepDay], [], []),
     'saveStressDay' : IDL.Func([StressDay], [], []),
     'setIcpAddress' : IDL.Func([IDL.Text], [], []),
+    'updateDiaryEntry' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Bool],
+        [],
+      ),
     'verifyAndActivate' : IDL.Func([], [IDL.Bool], []),
   });
 };

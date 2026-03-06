@@ -92,22 +92,31 @@ export default function FastingScheduleSettings({
 
   if (isLoading) {
     return (
-      <Card className="border-helix-strand/30">
+      <Card className="glass-card border-0">
         <CardContent className="py-6 flex justify-center">
-          <Loader2 className="w-5 h-5 animate-spin text-helix-accent" />
+          <Loader2
+            className="w-5 h-5 animate-spin"
+            style={{ color: "#00e87a" }}
+          />
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <Card className="border-helix-strand/30">
+    <Card className="glass-card border-0">
       <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2">
-          <Settings className="w-4 h-4 text-helix-accent" strokeWidth={1.5} />
+        <CardTitle
+          className="text-sm font-light tracking-wide flex items-center gap-2"
+          style={{ color: "#00e87a" }}
+        >
+          <Settings className="w-4 h-4" strokeWidth={1.5} />
           {t.fastingSchedule.title}
         </CardTitle>
-        <CardDescription className="text-xs">
+        <CardDescription
+          className="text-xs"
+          style={{ color: "rgba(100, 220, 160, 0.6)" }}
+        >
           {t.fastingSchedule.description}
         </CardDescription>
       </CardHeader>
@@ -116,19 +125,25 @@ export default function FastingScheduleSettings({
           <>
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">
+                <span style={{ color: "rgba(100, 220, 160, 0.6)" }}>
                   {t.fastingSchedule.current.label}
                 </span>
-                <span className="font-mono tabular-nums text-foreground">
+                <span
+                  className="font-mono tabular-nums"
+                  style={{ color: "#7effc0" }}
+                >
                   {String(startHour).padStart(2, "0")}:00 -{" "}
                   {String(endHour).padStart(2, "0")}:00
                 </span>
               </div>
               <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">
+                <span style={{ color: "rgba(100, 220, 160, 0.6)" }}>
                   {t.fastingSchedule.current.protocol}
                 </span>
-                <span className="font-mono tabular-nums text-helix-accent">
+                <span
+                  className="font-mono tabular-nums"
+                  style={{ color: "#00e87a" }}
+                >
                   {duration}:{eatingDuration}
                 </span>
               </div>
@@ -138,6 +153,11 @@ export default function FastingScheduleSettings({
               variant="outline"
               size="sm"
               className="w-full"
+              style={{
+                background: "rgba(0, 30, 15, 0.5)",
+                borderColor: "rgba(0, 255, 120, 0.3)",
+                color: "#a8ffce",
+              }}
             >
               {t.fastingSchedule.actions.edit}
             </Button>
@@ -146,7 +166,11 @@ export default function FastingScheduleSettings({
           <>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="startHour" className="text-xs">
+                <Label
+                  htmlFor="startHour"
+                  className="text-xs"
+                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                >
                   {t.fastingSchedule.fields.startHour}
                 </Label>
                 <Select
@@ -156,7 +180,15 @@ export default function FastingScheduleSettings({
                   }
                   disabled={saveMutation.isPending}
                 >
-                  <SelectTrigger id="startHour" className="font-mono">
+                  <SelectTrigger
+                    id="startHour"
+                    className="font-mono"
+                    style={{
+                      background: "rgba(0, 30, 15, 0.5)",
+                      borderColor: "rgba(0, 255, 120, 0.25)",
+                      color: "#a8ffce",
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -174,7 +206,11 @@ export default function FastingScheduleSettings({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="endHour" className="text-xs">
+                <Label
+                  htmlFor="endHour"
+                  className="text-xs"
+                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                >
                   {t.fastingSchedule.fields.endHour}
                 </Label>
                 <Select
@@ -182,7 +218,15 @@ export default function FastingScheduleSettings({
                   onValueChange={(value) => setEndHour(Number.parseInt(value))}
                   disabled={saveMutation.isPending}
                 >
-                  <SelectTrigger id="endHour" className="font-mono">
+                  <SelectTrigger
+                    id="endHour"
+                    className="font-mono"
+                    style={{
+                      background: "rgba(0, 30, 15, 0.5)",
+                      borderColor: "rgba(0, 255, 120, 0.25)",
+                      color: "#a8ffce",
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -200,12 +244,23 @@ export default function FastingScheduleSettings({
               </div>
             </div>
 
-            <Alert className="border-helix-strand/30 bg-helix-glow/5">
-              <Info className="w-4 h-4 text-helix-accent" />
-              <AlertDescription className="text-xs text-muted-foreground">
+            <Alert
+              style={{
+                background: "rgba(0, 232, 122, 0.05)",
+                borderColor: "rgba(0, 255, 120, 0.25)",
+              }}
+            >
+              <Info className="w-4 h-4" style={{ color: "#00e87a" }} />
+              <AlertDescription
+                className="text-xs"
+                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              >
                 {t.fastingSchedule.help.crossMidnight}
                 <br />
-                <span className="font-mono text-foreground mt-1 inline-block">
+                <span
+                  className="font-mono mt-1 inline-block"
+                  style={{ color: "#7effc0" }}
+                >
                   {t.fastingSchedule.help.protocol}: {duration}:{eatingDuration}
                 </span>
               </AlertDescription>
@@ -216,7 +271,7 @@ export default function FastingScheduleSettings({
                 onClick={handleSave}
                 disabled={saveMutation.isPending}
                 size="sm"
-                className="flex-1"
+                className="flex-1 bg-gradient-to-r from-helix-accent via-helix-strand to-helix-glow text-background font-medium hover:opacity-90"
               >
                 {saveMutation.isPending ? (
                   <>
@@ -233,6 +288,11 @@ export default function FastingScheduleSettings({
                 variant="outline"
                 size="sm"
                 className="flex-1"
+                style={{
+                  background: "rgba(0, 30, 15, 0.5)",
+                  borderColor: "rgba(0, 255, 120, 0.3)",
+                  color: "#a8ffce",
+                }}
               >
                 {t.fastingSchedule.actions.cancel}
               </Button>

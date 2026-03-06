@@ -24,6 +24,12 @@ export interface SleepDay {
     qualityScore: bigint;
 }
 export type Time = bigint;
+export interface DiaryEntry {
+    id: string;
+    title: string;
+    content: string;
+    timestamp: Time;
+}
 export interface StressDay {
     date: string;
     systolic: bigint;
@@ -68,13 +74,16 @@ export enum Variant_intense_light_medium {
     medium = "medium"
 }
 export interface backendInterface {
+    addDiaryEntry(title: string, content: string): Promise<string>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     clearNutritionDay(dayTimestamp: Time): Promise<void>;
     clearSleepDay(dayTimestamp: Time): Promise<void>;
     confirmActivation(user: Principal): Promise<void>;
+    deleteDiaryEntry(id: string): Promise<boolean>;
     getCallerFastingSchedule(): Promise<FastingSchedule | null>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getDiaryEntries(): Promise<Array<DiaryEntry>>;
     getIcpAddress(): Promise<string>;
     getMovementDay(date: string): Promise<MovementDay | null>;
     getNutritionEntry(user: Principal, dayTimestamp: Time): Promise<NutritionDay | null>;
@@ -93,5 +102,6 @@ export interface backendInterface {
     saveSleepDayEntry(dayTimestamp: Time, entry: SleepDay): Promise<void>;
     saveStressDay(stressDay: StressDay): Promise<void>;
     setIcpAddress(address: string): Promise<void>;
+    updateDiaryEntry(id: string, title: string, content: string): Promise<boolean>;
     verifyAndActivate(): Promise<boolean>;
 }

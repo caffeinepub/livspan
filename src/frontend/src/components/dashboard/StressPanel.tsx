@@ -45,7 +45,11 @@ function NumericInputField({
 
   return (
     <div className="flex items-center justify-between gap-4">
-      <label htmlFor={inputId} className="text-sm text-muted-foreground flex-1">
+      <label
+        htmlFor={inputId}
+        className="text-sm flex-1"
+        style={{ color: "rgba(100, 220, 160, 0.6)" }}
+      >
         {label}
       </label>
       <div className="flex items-center gap-2">
@@ -57,9 +61,19 @@ function NumericInputField({
           value={value || ""}
           placeholder={placeholder}
           onChange={handleChange}
-          className="w-24 text-right bg-transparent border border-helix-strand/40 rounded-md px-3 py-2 text-sm font-mono text-foreground focus:outline-none focus:border-helix-accent/60 focus:ring-1 focus:ring-helix-accent/30"
+          className="w-24 text-right rounded-md px-3 py-2 text-sm font-mono focus:outline-none"
+          style={{
+            background: "rgba(0, 30, 15, 0.5)",
+            border: "1px solid rgba(0, 255, 120, 0.25)",
+            color: "#a8ffce",
+          }}
         />
-        <span className="text-xs text-muted-foreground w-10">{unit}</span>
+        <span
+          className="text-xs w-10"
+          style={{ color: "rgba(100, 220, 160, 0.6)" }}
+        >
+          {unit}
+        </span>
       </div>
     </div>
   );
@@ -79,17 +93,37 @@ function BloodPressureDisplay({
   const hasPulse = pulse > 0;
 
   return (
-    <div className="flex items-center justify-center gap-4 py-3 px-4 rounded-lg border border-helix-strand/30 bg-helix-glow/5 flex-wrap">
-      <Heart className="w-4 h-4 text-helix-accent" strokeWidth={1.5} />
-      <span className="text-sm font-mono text-foreground tabular-nums">
+    <div
+      className="flex items-center justify-center gap-4 py-3 px-4 rounded-lg flex-wrap"
+      style={{
+        background: "rgba(0, 30, 15, 0.4)",
+        border: "1px solid rgba(0, 255, 120, 0.2)",
+      }}
+    >
+      <Heart
+        className="w-4 h-4"
+        style={{ color: "#00e87a" }}
+        strokeWidth={1.5}
+      />
+      <span
+        className="text-sm font-mono tabular-nums"
+        style={{ color: "#7effc0" }}
+      >
         {hasBP ? `${systolic}/${diastolic}` : "—/—"}{" "}
-        <span className="text-xs text-muted-foreground">mmHg</span>
+        <span className="text-xs" style={{ color: "rgba(100, 220, 160, 0.6)" }}>
+          mmHg
+        </span>
       </span>
-      <span className="text-muted-foreground">·</span>
+      <span style={{ color: "rgba(100, 220, 160, 0.5)" }}>·</span>
       <Activity className="w-4 h-4 text-helix-glow" strokeWidth={1.5} />
-      <span className="text-sm font-mono text-foreground tabular-nums">
+      <span
+        className="text-sm font-mono tabular-nums"
+        style={{ color: "#7effc0" }}
+      >
         {hasPulse ? pulse : "—"}{" "}
-        <span className="text-xs text-muted-foreground">bpm</span>
+        <span className="text-xs" style={{ color: "rgba(100, 220, 160, 0.6)" }}>
+          bpm
+        </span>
       </span>
     </div>
   );
@@ -142,14 +176,35 @@ export default function StressPanel() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-md bg-helix-glow/20 border border-helix-accent/40">
-          <Heart className="w-5 h-5 text-helix-accent" strokeWidth={1.5} />
+        <div
+          className="p-2 rounded-md"
+          style={{
+            background: "rgba(0, 232, 122, 0.15)",
+            border: "1px solid rgba(0, 255, 120, 0.3)",
+          }}
+        >
+          <Heart
+            className="w-5 h-5"
+            style={{ color: "#00e87a" }}
+            strokeWidth={1.5}
+          />
         </div>
         <div>
-          <h3 className="text-xl font-light tracking-wide gradient-green-glow">
+          <h3
+            className="text-xl font-light tracking-wide"
+            style={{
+              background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             {t.stressPanel.title}
           </h3>
-          <p className="text-xs text-muted-foreground font-mono">
+          <p
+            className="text-xs font-mono"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
             {t.stressPanel.subtitle}
           </p>
         </div>
@@ -175,15 +230,17 @@ export default function StressPanel() {
 
       {/* Blood Pressure Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Heart className="w-4 h-4" strokeWidth={1.5} />
               {t.stressPanel.bloodPressure.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
+          <CardContent className="space-y-4">
             <NumericInputField
               label={t.stressPanel.bloodPressure.systolic}
               value={systolic}
@@ -193,7 +250,10 @@ export default function StressPanel() {
               max={300}
               placeholder="120"
             />
-            <div className="border-t border-helix-strand/20" />
+            <div
+              className="border-t"
+              style={{ borderColor: "rgba(0, 255, 120, 0.15)" }}
+            />
             <NumericInputField
               label={t.stressPanel.bloodPressure.diastolic}
               value={diastolic}
@@ -205,8 +265,14 @@ export default function StressPanel() {
             />
             {/* BP display */}
             {(systolic > 0 || diastolic > 0) && (
-              <div className="text-center text-xs text-muted-foreground pt-1">
-                <span className="font-mono text-foreground text-sm">
+              <div
+                className="text-center text-xs pt-1"
+                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              >
+                <span
+                  className="font-mono text-sm"
+                  style={{ color: "#00ffaa" }}
+                >
                   {systolic}/{diastolic}
                 </span>{" "}
                 mmHg
@@ -218,15 +284,17 @@ export default function StressPanel() {
 
       {/* Pulse Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-panel-amber opacity-40" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Activity className="w-4 h-4" strokeWidth={1.5} />
               {t.stressPanel.pulse.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10">
+          <CardContent>
             <NumericInputField
               label={t.stressPanel.pulse.description}
               value={pulse}

@@ -26,49 +26,48 @@ export default function FactorMarker({
         )}
       />
 
-      {/* Factor card with green-blue gradient background */}
+      {/* Factor card with glassmorphism */}
       <Card
         onClick={onClick}
         className={cn(
-          "ml-12 cursor-pointer transition-all duration-300 hover:scale-105 relative overflow-hidden",
-          "backdrop-blur-md shadow-lg border",
-          isSelected
-            ? "shadow-helix-accent/40 shadow-xl scale-105 border-helix-accent/70"
-            : "hover:shadow-helix-glow/25 border-helix-strand/30",
+          "ml-12 cursor-pointer transition-all duration-300 hover:scale-105 relative overflow-hidden border-0",
         )}
+        style={{
+          background: isSelected
+            ? "rgba(0, 30, 15, 0.5)"
+            : "rgba(0, 20, 10, 0.35)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          border: isSelected
+            ? "1px solid rgba(0, 255, 120, 0.4)"
+            : "1px solid rgba(0, 255, 120, 0.15)",
+          borderRadius: "16px",
+          boxShadow: isSelected
+            ? "0 4px 32px rgba(0, 255, 100, 0.18), 0 1px 0 rgba(255,255,255,0.04) inset"
+            : "0 4px 32px rgba(0, 255, 100, 0.08), 0 1px 0 rgba(255,255,255,0.04) inset",
+        }}
       >
-        {/* Gradient background layer */}
-        <div
-          className={cn(
-            "absolute inset-0 transition-opacity duration-300",
-            isSelected
-              ? "gradient-card-gb-selected opacity-100"
-              : "gradient-card-gb-muted opacity-60 hover:opacity-80",
-          )}
-        />
-
-        {/* Radial gradient overlay for depth */}
-        <div
-          className={cn(
-            "absolute inset-0 transition-opacity duration-300",
-            isSelected
-              ? "gradient-card-radial-gb opacity-70"
-              : "gradient-card-radial-gb-muted opacity-40 hover:opacity-60",
-          )}
-        />
-
-        <CardContent className="p-4 relative z-10">
+        <CardContent className="p-4">
           <h3
             className={cn(
               "text-base font-light tracking-wide mb-1 transition-colors",
-              isSelected
-                ? "bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent drop-shadow-sm"
-                : "text-foreground",
             )}
+            style={{
+              background: isSelected
+                ? "linear-gradient(135deg, #a8ffce, #4fffb0)"
+                : undefined,
+              WebkitBackgroundClip: isSelected ? "text" : undefined,
+              backgroundClip: isSelected ? "text" : undefined,
+              WebkitTextFillColor: isSelected ? "transparent" : undefined,
+              color: isSelected ? undefined : "#7effc0",
+            }}
           >
             {label}
           </h3>
-          <p className="text-xs text-muted-foreground leading-relaxed">
+          <p
+            className="text-xs leading-relaxed"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
             {description}
           </p>
         </CardContent>

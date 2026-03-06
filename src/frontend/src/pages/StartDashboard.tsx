@@ -1,4 +1,5 @@
 import LoginButton from "@/components/auth/LoginButton";
+import DiaryPanel from "@/components/dashboard/DiaryPanel";
 import FactorMarker from "@/components/dashboard/FactorMarker";
 import IntermittentFastingPanel from "@/components/dashboard/IntermittentFastingPanel";
 import MovementPanel from "@/components/dashboard/MovementPanel";
@@ -12,7 +13,13 @@ import ProfileOnboardingGate from "@/components/profile/ProfileOnboardingGate";
 import { useI18n } from "@/i18n/useI18n";
 import { useState } from "react";
 
-type FactorType = "nutrition" | "sleep" | "movement" | "stress" | "fasting";
+type FactorType =
+  | "nutrition"
+  | "sleep"
+  | "movement"
+  | "stress"
+  | "fasting"
+  | "diary";
 
 interface Factor {
   id: FactorType;
@@ -25,6 +32,7 @@ const factors: Factor[] = [
   { id: "movement", position: 2 },
   { id: "stress", position: 3 },
   { id: "fasting", position: 4 },
+  { id: "diary", position: 5 },
 ];
 
 export default function StartDashboard() {
@@ -70,7 +78,14 @@ export default function StartDashboard() {
         />
 
         {/* Header */}
-        <header className="relative z-10 border-b border-helix-strand/30 backdrop-blur-md bg-background/70">
+        <header
+          className="relative z-10 border-b border-helix-strand/30 backdrop-blur-md"
+          style={{
+            background: "rgba(0, 15, 8, 0.55)",
+            backdropFilter: "blur(20px)",
+            borderBottomColor: "rgba(0, 255, 120, 0.18)",
+          }}
+        >
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -131,7 +146,7 @@ export default function StartDashboard() {
 
           {selectedFactor === "sleep" && (
             <section className="max-w-4xl mx-auto">
-              <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
+              <div className="p-8 glass-card">
                 <SleepPanel />
               </div>
             </section>
@@ -139,7 +154,7 @@ export default function StartDashboard() {
 
           {selectedFactor === "movement" && (
             <section className="max-w-4xl mx-auto">
-              <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
+              <div className="p-8 glass-card">
                 <MovementPanel />
               </div>
             </section>
@@ -147,15 +162,30 @@ export default function StartDashboard() {
 
           {selectedFactor === "stress" && (
             <section className="max-w-4xl mx-auto">
-              <div className="p-8 rounded-lg border border-helix-strand/40 bg-card/90 backdrop-blur-md shadow-xl">
+              <div className="p-8 glass-card">
                 <StressPanel />
+              </div>
+            </section>
+          )}
+
+          {selectedFactor === "diary" && (
+            <section className="max-w-4xl mx-auto">
+              <div className="p-8 glass-card">
+                <DiaryPanel />
               </div>
             </section>
           )}
         </main>
 
         {/* Footer */}
-        <footer className="relative z-10 border-t border-helix-strand/30 backdrop-blur-md bg-background/70 mt-16">
+        <footer
+          className="relative z-10 border-t border-helix-strand/30 backdrop-blur-md mt-16"
+          style={{
+            background: "rgba(0, 15, 8, 0.55)",
+            backdropFilter: "blur(20px)",
+            borderTopColor: "rgba(0, 255, 120, 0.18)",
+          }}
+        >
           <div className="container mx-auto px-4 py-6">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
               <span>

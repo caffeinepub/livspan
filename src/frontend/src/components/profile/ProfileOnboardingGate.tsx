@@ -129,8 +129,19 @@ export default function ProfileOnboardingGate({
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 z-0 bg-black/60 backdrop-blur-[2px]" />
 
-        {/* Login card with enhanced backdrop */}
-        <Card className="relative z-10 max-w-md w-full border-helix-strand/40 bg-card/95 backdrop-blur-md shadow-2xl">
+        {/* Login card with glassmorphism */}
+        <Card
+          className="relative z-10 max-w-md w-full border-0 shadow-2xl"
+          style={{
+            background: "rgba(0, 20, 10, 0.55)",
+            backdropFilter: "blur(20px) saturate(180%)",
+            WebkitBackdropFilter: "blur(20px) saturate(180%)",
+            border: "1px solid rgba(0, 255, 120, 0.2)",
+            borderRadius: "20px",
+            boxShadow:
+              "0 8px 40px rgba(0, 255, 100, 0.12), 0 1px 0 rgba(255,255,255,0.04) inset",
+          }}
+        >
           <CardHeader className="text-center">
             {/* Logo */}
             <div className="mx-auto mb-6">
@@ -140,10 +151,18 @@ export default function ProfileOnboardingGate({
                 className="w-32 h-32 mx-auto"
               />
             </div>
-            <CardTitle className="text-2xl font-light tracking-wide bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">
+            <CardTitle
+              className="text-2xl font-light tracking-wide"
+              style={{
+                background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               {t.profile.loginRequired.title}
             </CardTitle>
-            <CardDescription className="text-muted-foreground">
+            <CardDescription style={{ color: "rgba(100, 220, 160, 0.6)" }}>
               {t.profile.loginRequired.description}
             </CardDescription>
           </CardHeader>
@@ -163,14 +182,30 @@ export default function ProfileOnboardingGate({
     return (
       <Dialog open={true}>
         <DialogContent
-          className="sm:max-w-md"
+          className="sm:max-w-md border-0"
+          style={{
+            background: "rgba(0, 20, 10, 0.85)",
+            backdropFilter: "blur(24px) saturate(180%)",
+            WebkitBackdropFilter: "blur(24px) saturate(180%)",
+            border: "1px solid rgba(0, 255, 120, 0.2)",
+            borderRadius: "20px",
+            boxShadow: "0 8px 40px rgba(0, 255, 100, 0.12)",
+          }}
           onPointerDownOutside={(e) => e.preventDefault()}
         >
           <DialogHeader>
-            <DialogTitle className="text-xl font-light tracking-wide bg-gradient-to-r from-helix-accent to-helix-glow bg-clip-text text-transparent">
+            <DialogTitle
+              className="text-xl font-light tracking-wide"
+              style={{
+                background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               {t.profile.setup.title}
             </DialogTitle>
-            <DialogDescription className="text-muted-foreground">
+            <DialogDescription style={{ color: "rgba(100, 220, 160, 0.6)" }}>
               {t.profile.setup.description}
             </DialogDescription>
           </DialogHeader>
@@ -178,7 +213,7 @@ export default function ProfileOnboardingGate({
           <div className="space-y-4 py-4">
             {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-helix-accent">
+              <Label htmlFor="name" style={{ color: "#00e87a" }}>
                 {t.profile.fields.name}
               </Label>
               <Input
@@ -187,6 +222,11 @@ export default function ProfileOnboardingGate({
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.profile.placeholders.name}
                 disabled={saveMutation.isPending}
+                style={{
+                  background: "rgba(0, 30, 15, 0.5)",
+                  borderColor: "rgba(0, 255, 120, 0.25)",
+                  color: "#a8ffce",
+                }}
               />
               {errors.name && (
                 <p className="text-xs text-destructive">{errors.name}</p>
@@ -195,7 +235,7 @@ export default function ProfileOnboardingGate({
 
             {/* Birth Year */}
             <div className="space-y-2">
-              <Label htmlFor="birthYear" className="text-helix-accent">
+              <Label htmlFor="birthYear" style={{ color: "#00e87a" }}>
                 {t.profile.fields.birthYear}
               </Label>
               <Input
@@ -207,6 +247,11 @@ export default function ProfileOnboardingGate({
                 onChange={(e) => setBirthYear(e.target.value)}
                 placeholder={t.profile.placeholders.birthYear}
                 disabled={saveMutation.isPending}
+                style={{
+                  background: "rgba(0, 30, 15, 0.5)",
+                  borderColor: "rgba(0, 255, 120, 0.25)",
+                  color: "#a8ffce",
+                }}
               />
               {errors.birthYear && (
                 <p className="text-xs text-destructive">{errors.birthYear}</p>
@@ -215,7 +260,7 @@ export default function ProfileOnboardingGate({
 
             {/* Height */}
             <div className="space-y-2">
-              <Label htmlFor="heightCm" className="text-helix-accent">
+              <Label htmlFor="heightCm" style={{ color: "#00e87a" }}>
                 {t.profile.fields.heightCm}
               </Label>
               <Input
@@ -227,6 +272,11 @@ export default function ProfileOnboardingGate({
                 onChange={(e) => setHeightCm(e.target.value)}
                 placeholder={t.profile.placeholders.heightCm}
                 disabled={saveMutation.isPending}
+                style={{
+                  background: "rgba(0, 30, 15, 0.5)",
+                  borderColor: "rgba(0, 255, 120, 0.25)",
+                  color: "#a8ffce",
+                }}
               />
               {errors.heightCm && (
                 <p className="text-xs text-destructive">{errors.heightCm}</p>
@@ -235,7 +285,7 @@ export default function ProfileOnboardingGate({
 
             {/* Gender */}
             <div className="space-y-2">
-              <Label className="text-helix-accent">
+              <Label style={{ color: "#00e87a" }}>
                 {t.profile.fields.gender}
               </Label>
               <RadioGroup
@@ -245,7 +295,11 @@ export default function ProfileOnboardingGate({
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value={Gender.male} id="male" />
-                  <Label htmlFor="male" className="font-normal cursor-pointer">
+                  <Label
+                    htmlFor="male"
+                    className="font-normal cursor-pointer"
+                    style={{ color: "#7effc0" }}
+                  >
                     {t.profile.genderOptions.male}
                   </Label>
                 </div>
@@ -254,6 +308,7 @@ export default function ProfileOnboardingGate({
                   <Label
                     htmlFor="female"
                     className="font-normal cursor-pointer"
+                    style={{ color: "#7effc0" }}
                   >
                     {t.profile.genderOptions.female}
                   </Label>
@@ -263,6 +318,7 @@ export default function ProfileOnboardingGate({
                   <Label
                     htmlFor="diverse"
                     className="font-normal cursor-pointer"
+                    style={{ color: "#7effc0" }}
                   >
                     {t.profile.genderOptions.diverse}
                   </Label>

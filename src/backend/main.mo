@@ -1,17 +1,18 @@
 import Map "mo:core/Map";
 import Iter "mo:core/Iter";
 import Principal "mo:core/Principal";
+import Time "mo:core/Time";
 import Runtime "mo:core/Runtime";
 import Nat "mo:core/Nat";
-import Time "mo:core/Time";
+import Text "mo:core/Text";
 import Float "mo:core/Float";
 import Int "mo:core/Int";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
 import OutCall "http-outcalls/outcall";
-import Migration "migration";
 
-(with migration = Migration.run)
+
+
 actor {
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
@@ -75,6 +76,13 @@ actor {
     pulse : Nat;
   };
 
+  public type DiaryEntry = {
+    id : Text;
+    timestamp : Time.Time;
+    title : Text;
+    content : Text;
+  };
+
   let userProfiles = Map.empty<Principal, UserProfile>();
   let userFastingSchedule = Map.empty<Principal, FastingSchedule>();
   let nutritionalDayEntries = Map.empty<Principal, Map.Map<Time.Time, NutritionDay>>();
@@ -85,10 +93,10 @@ actor {
   var defaultIcpReceiveAddress = "5677f79bb400519598c0e75be936cafc391a930d21268d6fcf1eee3cb5c9d582";
   let userActivationStatus = Map.empty<Principal, Bool>();
 
+  let diaryEntries = Map.empty<Principal, Map.Map<Text, DiaryEntry>>();
+
   public query ({ caller }) func getUserPaymentAddress() : async Principal {
-    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
-      Runtime.trap("Unauthorized: Only users can request payment address");
-    };
+    checkPrivilegeUser(caller);
     caller;
   };
 
@@ -289,6 +297,79 @@ actor {
       case (null) { null };
       case (?entries) {
         entries.get(date);
+      };
+    };
+  };
+
+  // Diary Entry Functions
+
+  public shared ({ caller }) func addDiaryEntry(title : Text, content : Text) : async Text {
+    checkPrivilegeUser(caller);
+
+    let id = Time.now().toText();
+    let entry : DiaryEntry = {
+      id;
+      timestamp = Time.now();
+      title;
+      content;
+    };
+
+    let userEntries = switch (diaryEntries.get(caller)) {
+      case (null) {
+        let newMap = Map.empty<Text, DiaryEntry>();
+        diaryEntries.add(caller, newMap);
+        newMap;
+      };
+      case (?entries) { entries };
+    };
+
+    userEntries.add(id, entry);
+    id;
+  };
+
+  public shared ({ caller }) func updateDiaryEntry(id : Text, title : Text, content : Text) : async Bool {
+    checkPrivilegeUser(caller);
+
+    switch (diaryEntries.get(caller)) {
+      case (null) { return false };
+      case (?entries) {
+        switch (entries.get(id)) {
+          case (null) { return false };
+          case (?_oldEntry) {
+            let updatedEntry : DiaryEntry = {
+              id;
+              title;
+              content;
+              timestamp = Time.now();
+            };
+            entries.add(id, updatedEntry);
+            return true;
+          };
+        };
+      };
+    };
+  };
+
+  public shared ({ caller }) func deleteDiaryEntry(id : Text) : async Bool {
+    checkPrivilegeUser(caller);
+
+    switch (diaryEntries.get(caller)) {
+      case (null) { return false };
+      case (?entries) {
+        let existed = entries.containsKey(id);
+        entries.remove(id);
+        existed;
+      };
+    };
+  };
+
+  public query ({ caller }) func getDiaryEntries() : async [DiaryEntry] {
+    checkPrivilegeUser(caller);
+
+    switch (diaryEntries.get(caller)) {
+      case (null) { [] };
+      case (?entries) {
+        entries.values().toArray();
       };
     };
   };

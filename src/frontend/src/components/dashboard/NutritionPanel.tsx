@@ -213,14 +213,35 @@ export default function NutritionPanel() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-md bg-helix-glow/20 border border-helix-accent/40">
-          <Utensils className="w-5 h-5 text-helix-accent" strokeWidth={1.5} />
+        <div
+          className="p-2 rounded-md"
+          style={{
+            background: "rgba(0, 232, 122, 0.15)",
+            border: "1px solid rgba(0, 255, 120, 0.3)",
+          }}
+        >
+          <Utensils
+            className="w-5 h-5"
+            style={{ color: "#00e87a" }}
+            strokeWidth={1.5}
+          />
         </div>
         <div>
-          <h3 className="text-xl font-light tracking-wide gradient-green-glow">
+          <h3
+            className="text-xl font-light tracking-wide text-bio-gradient"
+            style={{
+              background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             {t.nutritionPanel.title}
           </h3>
-          <p className="text-xs text-muted-foreground font-mono">
+          <p
+            className="text-xs font-mono"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
             {t.nutritionPanel.subtitle}
           </p>
         </div>
@@ -237,15 +258,17 @@ export default function NutritionPanel() {
 
       {/* Fasting Phase Status */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-panel-sage opacity-40" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2 text-bio-accent"
+              style={{ color: "#00e87a" }}
+            >
               <Clock className="w-4 h-4" strokeWidth={1.5} />
               {t.nutritionPanel.fastingPhase.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10">
+          <CardContent>
             <div className="flex items-center gap-2 mb-2">
               <div
                 className={cn(
@@ -253,13 +276,16 @@ export default function NutritionPanel() {
                   phase === "fasting" ? "bg-helix-accent" : "bg-helix-glow",
                 )}
               />
-              <span className="text-sm font-mono text-foreground">
+              <span className="text-sm font-mono" style={{ color: "#7effc0" }}>
                 {phase === "fasting"
                   ? t.nutritionPanel.fastingPhase.fasting
                   : t.nutritionPanel.fastingPhase.eating}
               </span>
             </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p
+              className="text-xs leading-relaxed"
+              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            >
               {phase === "fasting"
                 ? t.nutritionPanel.fastingPhase.fastingTip
                 : t.nutritionPanel.fastingPhase.eatingTip}
@@ -270,18 +296,23 @@ export default function NutritionPanel() {
 
       {/* Body Weight Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-amber-subtle opacity-50" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Scale className="w-4 h-4" strokeWidth={1.5} />
               {t.nutritionPanel.weight.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
+          <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex-1">
-                <Label className="text-xs text-muted-foreground mb-1 block">
+                <Label
+                  className="text-xs mb-1 block"
+                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                >
                   {t.nutritionPanel.weight.unit}
                 </Label>
                 <Input
@@ -289,7 +320,12 @@ export default function NutritionPanel() {
                   value={bodyWeight}
                   onChange={(e) => setBodyWeight(e.target.value)}
                   placeholder="70.0"
-                  className="border-helix-strand/30 bg-transparent focus:border-helix-accent/60 focus:ring-helix-accent/20"
+                  className="glass-input border-helix-strand/30 focus:border-helix-accent/60 focus:ring-helix-accent/20"
+                  style={{
+                    background: "rgba(0, 30, 15, 0.5)",
+                    borderColor: "rgba(0, 255, 120, 0.25)",
+                    color: "#a8ffce",
+                  }}
                   min="30"
                   max="300"
                   step="0.1"
@@ -297,25 +333,37 @@ export default function NutritionPanel() {
               </div>
               {bmi !== null && (
                 <div className="text-right">
-                  <div className="text-xs text-muted-foreground mb-1">
+                  <div
+                    className="text-xs mb-1"
+                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  >
                     {t.nutritionPanel.bmi.label}
                   </div>
                   <div className="text-2xl font-light tabular-nums gradient-green-glow">
                     {formatBMI(bmi)}
                   </div>
-                  <div className="text-xs text-muted-foreground">
+                  <div
+                    className="text-xs"
+                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  >
                     {t.nutritionPanel.bmi.unit}
                   </div>
                 </div>
               )}
             </div>
             {bmi !== null && (
-              <div className="text-xs text-muted-foreground">
+              <div
+                className="text-xs"
+                style={{ color: "rgba(93, 255, 170, 0.8)" }}
+              >
                 {getBmiCategory(bmi)}
               </div>
             )}
             {heightCm === 0 && currentWeight > 0 && (
-              <div className="text-xs text-muted-foreground italic">
+              <div
+                className="text-xs italic"
+                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              >
                 {t.nutritionPanel.bmi.heightMissing}
               </div>
             )}
@@ -325,23 +373,31 @@ export default function NutritionPanel() {
 
       {/* Protein Intake Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Activity className="w-4 h-4" strokeWidth={1.5} />
               {t.nutritionPanel.protein.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
+          <CardContent className="space-y-4">
             {proteinTarget !== null ? (
               <>
-                <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+                <div
+                  className="flex items-center justify-between text-xs mb-1"
+                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                >
                   <span>
                     {t.nutritionPanel.protein.target}:{" "}
                     {formatProteinTarget(proteinTarget)}
                   </span>
-                  <span className="font-mono tabular-nums text-foreground">
+                  <span
+                    className="font-mono tabular-nums"
+                    style={{ color: "#00ffaa" }}
+                  >
                     {proteinGrams}g
                   </span>
                 </div>
@@ -355,7 +411,10 @@ export default function NutritionPanel() {
                 />
                 <div className="space-y-1">
                   <GradientProgressBar percent={proteinProgress} />
-                  <div className="text-xs text-muted-foreground text-right">
+                  <div
+                    className="text-xs text-right"
+                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  >
                     {Math.round(proteinProgress)}% —{" "}
                     {t.nutritionPanel.protein.progress}
                   </div>
@@ -371,7 +430,10 @@ export default function NutritionPanel() {
                   step={5}
                   onChange={setProteinGrams}
                 />
-                <p className="text-xs text-muted-foreground">
+                <p
+                  className="text-xs"
+                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                >
                   {t.nutritionPanel.protein.targetUnavailable}
                 </p>
               </>
@@ -382,20 +444,28 @@ export default function NutritionPanel() {
 
       {/* Vegetables & Fruit Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-panel-amber opacity-40" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Leaf className="w-4 h-4" strokeWidth={1.5} />
               {t.nutritionPanel.vegetables.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
-            <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+          <CardContent className="space-y-4">
+            <div
+              className="flex items-center justify-between text-xs mb-1"
+              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            >
               <span>
                 {t.nutritionPanel.vegetables.goal}: {vegetableGoal}g
               </span>
-              <span className="font-mono tabular-nums text-foreground">
+              <span
+                className="font-mono tabular-nums"
+                style={{ color: "#00ffaa" }}
+              >
                 {vegetableGrams}g
               </span>
             </div>
@@ -409,7 +479,10 @@ export default function NutritionPanel() {
             />
             <div className="space-y-1">
               <GradientProgressBar percent={vegetableProgress} />
-              <div className="text-xs text-muted-foreground text-right">
+              <div
+                className="text-xs text-right"
+                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              >
                 {Math.round(vegetableProgress)}% —{" "}
                 {t.nutritionPanel.vegetables.progress}
               </div>
@@ -420,18 +493,26 @@ export default function NutritionPanel() {
 
       {/* Water Intake Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Droplets className="w-4 h-4" strokeWidth={1.5} />
               {t.nutritionPanel.water.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 relative z-10">
-            <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+          <CardContent className="space-y-4">
+            <div
+              className="flex items-center justify-between text-xs mb-1"
+              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            >
               <span>{t.nutritionPanel.water.goal}</span>
-              <span className="font-mono tabular-nums text-foreground">
+              <span
+                className="font-mono tabular-nums"
+                style={{ color: "#00ffaa" }}
+              >
                 {waterLiters.toFixed(1)} {t.nutritionPanel.water.unit}
               </span>
             </div>
@@ -445,7 +526,10 @@ export default function NutritionPanel() {
             />
             <div className="space-y-1">
               <GradientProgressBar percent={waterProgress} />
-              <div className="text-xs text-muted-foreground text-right">
+              <div
+                className="text-xs text-right"
+                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              >
                 {Math.round(waterProgress)}% — {t.nutritionPanel.water.progress}
               </div>
             </div>

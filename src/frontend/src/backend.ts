@@ -106,6 +106,12 @@ export interface SleepDay {
     qualityScore: bigint;
 }
 export type Time = bigint;
+export interface DiaryEntry {
+    id: string;
+    title: string;
+    content: string;
+    timestamp: Time;
+}
 export interface StressDay {
     date: string;
     systolic: bigint;
@@ -151,13 +157,16 @@ export enum Variant_intense_light_medium {
 }
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
+    addDiaryEntry(title: string, content: string): Promise<string>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     clearNutritionDay(dayTimestamp: Time): Promise<void>;
     clearSleepDay(dayTimestamp: Time): Promise<void>;
     confirmActivation(user: Principal): Promise<void>;
+    deleteDiaryEntry(id: string): Promise<boolean>;
     getCallerFastingSchedule(): Promise<FastingSchedule | null>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getDiaryEntries(): Promise<Array<DiaryEntry>>;
     getIcpAddress(): Promise<string>;
     getMovementDay(date: string): Promise<MovementDay | null>;
     getNutritionEntry(user: Principal, dayTimestamp: Time): Promise<NutritionDay | null>;
@@ -176,6 +185,7 @@ export interface backendInterface {
     saveSleepDayEntry(dayTimestamp: Time, entry: SleepDay): Promise<void>;
     saveStressDay(stressDay: StressDay): Promise<void>;
     setIcpAddress(address: string): Promise<void>;
+    updateDiaryEntry(id: string, title: string, content: string): Promise<boolean>;
     verifyAndActivate(): Promise<boolean>;
 }
 import type { FastingSchedule as _FastingSchedule, Gender as _Gender, MovementDay as _MovementDay, NutritionDay as _NutritionDay, SleepDay as _SleepDay, StressDay as _StressDay, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
@@ -192,6 +202,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor._initializeAccessControlWithSecret(arg0);
+            return result;
+        }
+    }
+    async addDiaryEntry(arg0: string, arg1: string): Promise<string> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addDiaryEntry(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addDiaryEntry(arg0, arg1);
             return result;
         }
     }
@@ -251,6 +275,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async deleteDiaryEntry(arg0: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteDiaryEntry(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteDiaryEntry(arg0);
+            return result;
+        }
+    }
     async getCallerFastingSchedule(): Promise<FastingSchedule | null> {
         if (this.processError) {
             try {
@@ -291,6 +329,20 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getCallerUserRole();
             return from_candid_UserRole_n9(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getDiaryEntries(): Promise<Array<DiaryEntry>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getDiaryEntries();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getDiaryEntries();
+            return result;
         }
     }
     async getIcpAddress(): Promise<string> {
@@ -542,6 +594,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.setIcpAddress(arg0);
+            return result;
+        }
+    }
+    async updateDiaryEntry(arg0: string, arg1: string, arg2: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateDiaryEntry(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateDiaryEntry(arg0, arg1, arg2);
             return result;
         }
     }

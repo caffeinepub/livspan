@@ -30,6 +30,10 @@ export interface Translations {
       label: string;
       description: string;
     };
+    diary: {
+      label: string;
+      description: string;
+    };
   };
   footer: {
     builtWith: string;
@@ -293,6 +297,24 @@ export interface Translations {
       saveError: string;
     };
   };
+  diary: {
+    title: string;
+    subtitle: string;
+    addButton: string;
+    editButton: string;
+    deleteButton: string;
+    confirmDelete: string;
+    confirmDeleteYes: string;
+    confirmDeleteNo: string;
+    titleLabel: string;
+    contentLabel: string;
+    titlePlaceholder: string;
+    contentPlaceholder: string;
+    saveButton: string;
+    savingButton: string;
+    emptyState: string;
+    loadingError: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -326,6 +348,10 @@ export const translations: Record<Language, Translations> = {
       fasting: {
         label: "Fasting",
         description: "Monitor your intermittent fasting schedule",
+      },
+      diary: {
+        label: "Diary",
+        description: "Write and manage your personal journal entries",
       },
     },
     footer: {
@@ -606,6 +632,24 @@ export const translations: Record<Language, Translations> = {
         saveError: "Failed to save vitals",
       },
     },
+    diary: {
+      title: "Diary",
+      subtitle: "PERSONAL JOURNAL",
+      addButton: "New Entry",
+      editButton: "Edit",
+      deleteButton: "Delete",
+      confirmDelete: "Delete this entry?",
+      confirmDeleteYes: "Delete",
+      confirmDeleteNo: "Cancel",
+      titleLabel: "Title",
+      contentLabel: "Content",
+      titlePlaceholder: "Entry title...",
+      contentPlaceholder: "Write your thoughts...",
+      saveButton: "Save",
+      savingButton: "Saving...",
+      emptyState: "No diary entries yet. Write your first entry.",
+      loadingError: "Could not load diary entries.",
+    },
   },
   de: {
     header: {
@@ -637,6 +681,11 @@ export const translations: Record<Language, Translations> = {
       fasting: {
         label: "Fasten",
         description: "Überwache deinen intermittierenden Fastenplan",
+      },
+      diary: {
+        label: "Tagebuch",
+        description:
+          "Schreibe und verwalte deine persönlichen Tagebucheinträge",
       },
     },
     footer: {
@@ -922,6 +971,25 @@ export const translations: Record<Language, Translations> = {
         saveSuccess: "Vitalwerte erfolgreich gespeichert",
         saveError: "Fehler beim Speichern der Vitalwerte",
       },
+    },
+    diary: {
+      title: "Tagebuch",
+      subtitle: "PERSÖNLICHES JOURNAL",
+      addButton: "Neuer Eintrag",
+      editButton: "Bearbeiten",
+      deleteButton: "Löschen",
+      confirmDelete: "Diesen Eintrag löschen?",
+      confirmDeleteYes: "Löschen",
+      confirmDeleteNo: "Abbrechen",
+      titleLabel: "Titel",
+      contentLabel: "Inhalt",
+      titlePlaceholder: "Eintragstitel...",
+      contentPlaceholder: "Deine Gedanken...",
+      saveButton: "Speichern",
+      savingButton: "Speichern...",
+      emptyState:
+        "Noch keine Tagebucheinträge. Schreibe deinen ersten Eintrag.",
+      loadingError: "Tagebucheinträge konnten nicht geladen werden.",
     },
   },
 };

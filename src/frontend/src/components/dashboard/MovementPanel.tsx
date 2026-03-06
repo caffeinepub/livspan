@@ -140,7 +140,9 @@ function ActiveMinutesInput({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{label}</span>
+        <span className="text-xs" style={{ color: "rgba(100, 220, 160, 0.6)" }}>
+          {label}
+        </span>
         <div className="flex items-center gap-2">
           <input
             type="number"
@@ -148,9 +150,19 @@ function ActiveMinutesInput({
             max={300}
             value={value}
             onChange={handleChange}
-            className="w-20 text-right bg-transparent border border-helix-strand/40 rounded-md px-2 py-1 text-sm font-mono text-foreground focus:outline-none focus:border-helix-accent/60 focus:ring-1 focus:ring-helix-accent/30"
+            className="w-20 text-right rounded-md px-2 py-1 text-sm font-mono focus:outline-none"
+            style={{
+              background: "rgba(0, 30, 15, 0.5)",
+              border: "1px solid rgba(0, 255, 120, 0.25)",
+              color: "#a8ffce",
+            }}
           />
-          <span className="text-xs text-muted-foreground">min</span>
+          <span
+            className="text-xs"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
+            min
+          </span>
         </div>
       </div>
       {/* Progress bar toward 60 min goal */}
@@ -237,14 +249,35 @@ export default function MovementPanel() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-md bg-helix-glow/20 border border-helix-accent/40">
-          <Activity className="w-5 h-5 text-helix-accent" strokeWidth={1.5} />
+        <div
+          className="p-2 rounded-md"
+          style={{
+            background: "rgba(0, 232, 122, 0.15)",
+            border: "1px solid rgba(0, 255, 120, 0.3)",
+          }}
+        >
+          <Activity
+            className="w-5 h-5"
+            style={{ color: "#00e87a" }}
+            strokeWidth={1.5}
+          />
         </div>
         <div>
-          <h3 className="text-xl font-light tracking-wide gradient-green-glow">
+          <h3
+            className="text-xl font-light tracking-wide"
+            style={{
+              background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             {t.movementPanel.title}
           </h3>
-          <p className="text-xs text-muted-foreground font-mono">
+          <p
+            className="text-xs font-mono"
+            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+          >
             {t.movementPanel.subtitle}
           </p>
         </div>
@@ -261,19 +294,32 @@ export default function MovementPanel() {
 
       {/* Summary display */}
       {isAuthenticated && (
-        <div className="flex items-center justify-center gap-3 py-3 px-4 rounded-lg border border-helix-strand/30 bg-helix-glow/5 flex-wrap">
-          <Timer className="w-4 h-4 text-helix-accent" strokeWidth={1.5} />
-          <span className="text-sm font-mono text-foreground tabular-nums">
+        <div
+          className="flex items-center justify-center gap-3 py-3 px-4 rounded-lg flex-wrap"
+          style={{
+            background: "rgba(0, 30, 15, 0.4)",
+            border: "1px solid rgba(0, 255, 120, 0.2)",
+          }}
+        >
+          <Timer
+            className="w-4 h-4"
+            style={{ color: "#00e87a" }}
+            strokeWidth={1.5}
+          />
+          <span
+            className="text-sm font-mono tabular-nums"
+            style={{ color: "#7effc0" }}
+          >
             {activeMinutes} min
           </span>
-          <span className="text-muted-foreground">·</span>
+          <span style={{ color: "rgba(100, 220, 160, 0.5)" }}>·</span>
           <Activity className="w-4 h-4 text-helix-glow" strokeWidth={1.5} />
-          <span className="text-sm font-mono text-foreground">
+          <span className="text-sm font-mono" style={{ color: "#7effc0" }}>
             {activityLabels[activityType]}
           </span>
-          <span className="text-muted-foreground">·</span>
+          <span style={{ color: "rgba(100, 220, 160, 0.5)" }}>·</span>
           <Zap className="w-4 h-4 text-helix-strand" strokeWidth={1.5} />
-          <span className="text-sm font-mono text-foreground">
+          <span className="text-sm font-mono" style={{ color: "#7effc0" }}>
             {intensityLabels[intensity]}
           </span>
         </div>
@@ -281,15 +327,17 @@ export default function MovementPanel() {
 
       {/* Active Minutes Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-sage-subtle opacity-60" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Timer className="w-4 h-4" strokeWidth={1.5} />
               {t.movementPanel.activeMinutes.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10">
+          <CardContent>
             <ActiveMinutesInput
               value={activeMinutes}
               onChange={setActiveMinutes}
@@ -301,15 +349,17 @@ export default function MovementPanel() {
 
       {/* Activity Type Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-panel-amber opacity-40" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Activity className="w-4 h-4" strokeWidth={1.5} />
               {t.movementPanel.activityType.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10">
+          <CardContent>
             <ActivityTypeSelector
               value={activityType}
               onChange={setActivityType}
@@ -321,15 +371,17 @@ export default function MovementPanel() {
 
       {/* Intensity Card */}
       {isAuthenticated && (
-        <Card className="border-helix-strand/30 relative overflow-hidden">
-          <div className="absolute inset-0 gradient-card-sage-subtle opacity-40" />
-          <CardHeader className="pb-3 relative z-10">
-            <CardTitle className="text-sm font-light tracking-wide flex items-center gap-2 text-helix-accent">
+        <Card className="glass-card relative overflow-hidden border-0">
+          <CardHeader className="pb-3">
+            <CardTitle
+              className="text-sm font-light tracking-wide flex items-center gap-2"
+              style={{ color: "#00e87a" }}
+            >
               <Zap className="w-4 h-4" strokeWidth={1.5} />
               {t.movementPanel.intensity.label}
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10">
+          <CardContent>
             <IntensityToggle
               value={intensity}
               onChange={setIntensity}

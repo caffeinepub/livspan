@@ -10,6 +10,12 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface DiaryEntry {
+  'id' : string,
+  'title' : string,
+  'content' : string,
+  'timestamp' : Time,
+}
 export interface FastingSchedule { 'endHour' : number, 'startHour' : number }
 export type Gender = { 'female' : null } |
   { 'male' : null } |
@@ -56,13 +62,16 @@ export type UserRole = { 'admin' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addDiaryEntry' : ActorMethod<[string, string], string>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'clearNutritionDay' : ActorMethod<[Time], undefined>,
   'clearSleepDay' : ActorMethod<[Time], undefined>,
   'confirmActivation' : ActorMethod<[Principal], undefined>,
+  'deleteDiaryEntry' : ActorMethod<[string], boolean>,
   'getCallerFastingSchedule' : ActorMethod<[], [] | [FastingSchedule]>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getDiaryEntries' : ActorMethod<[], Array<DiaryEntry>>,
   'getIcpAddress' : ActorMethod<[], string>,
   'getMovementDay' : ActorMethod<[string], [] | [MovementDay]>,
   'getNutritionEntry' : ActorMethod<[Principal, Time], [] | [NutritionDay]>,
@@ -81,6 +90,7 @@ export interface _SERVICE {
   'saveSleepDayEntry' : ActorMethod<[Time, SleepDay], undefined>,
   'saveStressDay' : ActorMethod<[StressDay], undefined>,
   'setIcpAddress' : ActorMethod<[string], undefined>,
+  'updateDiaryEntry' : ActorMethod<[string, string, string], boolean>,
   'verifyAndActivate' : ActorMethod<[], boolean>,
 }
 export declare const idlService: IDL.ServiceClass;
