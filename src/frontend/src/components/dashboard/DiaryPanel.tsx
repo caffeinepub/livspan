@@ -178,7 +178,7 @@ function EntryFormDialog({
               variant="ghost"
               data-ocid="diary.cancel_button"
               onClick={() => onOpenChange(false)}
-              className="text-muted-foreground hover:text-foreground"
+              style={{ color: "rgba(100, 220, 160, 0.65)" }}
             >
               {t.diary.confirmDeleteNo}
             </Button>
@@ -241,7 +241,11 @@ function DeleteConfirmDialog({
         <AlertDialogFooter className="gap-2">
           <AlertDialogCancel
             data-ocid="diary.cancel_delete_button"
-            className="border-helix-strand/30 text-muted-foreground hover:text-foreground"
+            className="border-helix-strand/30"
+            style={{
+              background: "rgba(0, 30, 15, 0.5)",
+              color: "rgba(100, 220, 160, 0.7)",
+            }}
           >
             {t.diary.confirmDeleteNo}
           </AlertDialogCancel>
@@ -488,7 +492,10 @@ export default function DiaryPanel() {
       {/* Auth Required */}
       {!isAuthenticated && (
         <Alert className="border-helix-strand/30 bg-helix-glow/5">
-          <AlertDescription className="text-sm text-muted-foreground">
+          <AlertDescription
+            className="text-sm"
+            style={{ color: "rgba(100, 220, 160, 0.65)" }}
+          >
             {t.profile.loginRequired.description}
           </AlertDescription>
         </Alert>
@@ -498,7 +505,8 @@ export default function DiaryPanel() {
       {isAuthenticated && isLoading && (
         <div
           data-ocid="diary.loading_state"
-          className="flex items-center justify-center py-12 gap-3 text-muted-foreground"
+          className="flex items-center justify-center py-12 gap-3"
+          style={{ color: "rgba(100, 220, 160, 0.65)" }}
         >
           <Loader2 className="w-5 h-5 animate-spin text-helix-accent" />
           <span className="text-sm">Loading…</span>
@@ -537,7 +545,10 @@ export default function DiaryPanel() {
               strokeWidth={1}
             />
           </div>
-          <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
+          <p
+            className="text-sm max-w-xs leading-relaxed"
+            style={{ color: "rgba(100, 220, 160, 0.65)" }}
+          >
             {t.diary.emptyState}
           </p>
           <Button

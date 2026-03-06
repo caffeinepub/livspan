@@ -15,7 +15,8 @@ export default function LanguageSwitcher() {
       variant="ghost"
       size="sm"
       onClick={toggleLanguage}
-      className="gap-2 text-muted-foreground hover:text-helix-accent transition-colors"
+      className="gap-2 hover:text-helix-accent transition-colors"
+      style={{ color: "rgba(100, 220, 160, 0.65)" }}
       aria-label="Switch language"
     >
       <Languages className="w-4 h-4" />

@@ -71,22 +71,22 @@
   .dark {
     /* OKLCH color system - Dark mode */
     --background: oklch(10% 0.03 170);
-    --foreground: oklch(88% 0.14 160);
+    --foreground: oklch(88% 0.12 160);
 
     --card: oklch(12% 0.05 160 / 0.28);
-    --card-foreground: oklch(88% 0.18 160);
+    --card-foreground: oklch(85% 0.14 160);
 
     --popover: oklch(8% 0.04 165 / 0.92);
-    --popover-foreground: oklch(88% 0.14 160);
+    --popover-foreground: oklch(85% 0.14 160);
 
     --primary: oklch(62% 0.2 175);
     --primary-foreground: oklch(10% 0.03 170);
 
     --secondary: oklch(20% 0.06 165);
-    --secondary-foreground: oklch(88% 0.14 160);
+    --secondary-foreground: oklch(85% 0.12 160);
 
     --muted: oklch(20% 0.06 165);
-    --muted-foreground: oklch(72% 0.14 165);
+    --muted-foreground: oklch(70% 0.14 165);
 
     --accent: oklch(25% 0.03 185);
     --accent-foreground: oklch(95% 0.01 185);
@@ -162,12 +162,50 @@
 
 /* ── SelectContent / popovers / dropdowns — glass style ── */
 .dark [data-radix-select-content],
-.dark [data-radix-popper-content-wrapper] > div {
-  background: rgba(0, 15, 8, 0.9) !important;
+.dark [data-radix-popper-content-wrapper] > div,
+[data-radix-select-content],
+[data-radix-popper-content-wrapper] > div {
+  background: rgba(0, 15, 8, 0.92) !important;
   backdrop-filter: blur(20px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1px solid rgba(0, 255, 120, 0.2) !important;
+  border: 1px solid rgba(0, 255, 120, 0.22) !important;
   border-radius: 12px !important;
+}
+
+/* ── SelectItem text color ── */
+.dark [role="option"],
+[role="option"] {
+  color: #a8ffce !important;
+}
+
+.dark [role="option"]:focus,
+.dark [role="option"]:hover,
+[role="option"]:focus,
+[role="option"]:hover {
+  background: rgba(0, 255, 120, 0.12) !important;
+  color: #4fffb0 !important;
+}
+
+/* ── Dialog / Alert Dialog glass ── */
+.dark [role="dialog"],
+.dark [role="alertdialog"] {
+  background: rgba(0, 20, 10, 0.9) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(0, 255, 120, 0.2) !important;
+}
+
+/* ── Alert component glass ── */
+.dark [role="alert"] {
+  background: rgba(0, 20, 10, 0.5) !important;
+  border-color: rgba(0, 255, 120, 0.2) !important;
+}
+
+/* ── Alert.destructive keeps red border ── */
+.dark [role="alert"].border-destructive\/50,
+.dark [role="alert"].border-red-500\/30 {
+  background: rgba(30, 0, 0, 0.5) !important;
+  border-color: rgba(255, 80, 80, 0.35) !important;
 }
 
 /* ── Glass input fields ── */
@@ -505,6 +543,34 @@
   50% {
     opacity: 0.8;
   }
+}
+
+/* ── Global: ensure all Radix UI content popups use glass styling ── */
+[data-radix-dropdown-menu-content],
+[data-radix-context-menu-content],
+[data-radix-menubar-content],
+[data-radix-navigation-menu-content],
+[data-radix-tooltip-content] {
+  background: rgba(0, 15, 8, 0.92) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(0, 255, 120, 0.2) !important;
+  border-radius: 10px !important;
+  color: #a8ffce !important;
+}
+
+/* ── Ensure all [cmdk-item] and similar items get green text ── */
+[cmdk-item],
+[data-radix-dropdown-menu-item],
+[data-radix-context-menu-item] {
+  color: #a8ffce !important;
+}
+
+[cmdk-item][aria-selected="true"],
+[data-radix-dropdown-menu-item]:focus,
+[data-radix-context-menu-item]:focus {
+  background: rgba(0, 255, 120, 0.12) !important;
+  color: #4fffb0 !important;
 }
 
 /* Respect reduced motion preferences */

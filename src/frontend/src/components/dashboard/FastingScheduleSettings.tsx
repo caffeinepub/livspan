@@ -191,12 +191,21 @@ export default function FastingScheduleSettings({
                   >
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent
+                    style={{
+                      background: "rgba(0, 15, 8, 0.95)",
+                      backdropFilter: "blur(20px) saturate(180%)",
+                      WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                      border: "1px solid rgba(0, 255, 120, 0.25)",
+                      borderRadius: "10px",
+                    }}
+                  >
                     {hours.map((hour) => (
                       <SelectItem
                         key={hour}
                         value={hour.toString()}
                         className="font-mono"
+                        style={{ color: "#a8ffce" }}
                       >
                         {String(hour).padStart(2, "0")}:00
                       </SelectItem>
@@ -229,12 +238,21 @@ export default function FastingScheduleSettings({
                   >
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent
+                    style={{
+                      background: "rgba(0, 15, 8, 0.95)",
+                      backdropFilter: "blur(20px) saturate(180%)",
+                      WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                      border: "1px solid rgba(0, 255, 120, 0.25)",
+                      borderRadius: "10px",
+                    }}
+                  >
                     {hours.map((hour) => (
                       <SelectItem
                         key={hour}
                         value={hour.toString()}
                         className="font-mono"
+                        style={{ color: "#a8ffce" }}
                       >
                         {String(hour).padStart(2, "0")}:00
                       </SelectItem>

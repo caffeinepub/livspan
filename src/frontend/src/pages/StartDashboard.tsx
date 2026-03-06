@@ -99,7 +99,10 @@ export default function StartDashboard() {
                   <h1 className="text-2xl font-light tracking-wide gradient-green-glow">
                     {t.header.title}
                   </h1>
-                  <p className="text-xs text-muted-foreground font-light">
+                  <p
+                    className="text-xs font-light"
+                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  >
                     {t.header.subtitle}
                   </p>
                 </div>
@@ -187,7 +190,10 @@ export default function StartDashboard() {
           }}
         >
           <div className="container mx-auto px-4 py-6">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+            <div
+              className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+              style={{ color: "rgba(100, 220, 160, 0.55)" }}
+            >
               <span>
                 © {new Date().getFullYear()} LivSpan — {t.footer.copyright}
               </span>

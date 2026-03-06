@@ -181,7 +181,10 @@ export default function SleepPanel() {
       {/* Auth Required Message */}
       {!isAuthenticated && (
         <Alert className="border-helix-strand/30 bg-helix-glow/5">
-          <AlertDescription className="text-sm text-muted-foreground">
+          <AlertDescription
+            className="text-sm"
+            style={{ color: "rgba(100, 220, 160, 0.65)" }}
+          >
             {t.sleepPanel.authRequired}
           </AlertDescription>
         </Alert>

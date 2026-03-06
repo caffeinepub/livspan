@@ -328,8 +328,14 @@ export default function ProfileOnboardingGate({
 
             {/* Error message */}
             {saveMutation.isError && (
-              <Alert variant="destructive">
-                <AlertDescription>
+              <Alert
+                variant="destructive"
+                style={{
+                  background: "rgba(30, 0, 0, 0.5)",
+                  borderColor: "rgba(255, 80, 80, 0.35)",
+                }}
+              >
+                <AlertDescription style={{ color: "#ff8080" }}>
                   Failed to save profile. Please try again.
                 </AlertDescription>
               </Alert>

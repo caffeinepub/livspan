@@ -39,7 +39,13 @@ function ActivityTypeSelector({
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-2">
+    <div
+      className="grid grid-cols-4 gap-2 p-2 rounded-lg"
+      style={{
+        background: "rgba(0, 20, 10, 0.3)",
+        border: "1px solid rgba(0, 255, 120, 0.12)",
+      }}
+    >
       {options.map((option) => {
         const isSelected = value === option;
         return (
@@ -52,9 +58,10 @@ function ActivityTypeSelector({
               ${
                 isSelected
                   ? "border-helix-accent/70 bg-helix-accent/20 text-helix-accent shadow-sm"
-                  : "border-helix-strand/30 bg-helix-glow/5 text-muted-foreground hover:border-helix-strand/50 hover:text-foreground"
+                  : "border-helix-strand/30 bg-helix-glow/5 hover:border-helix-strand/50"
               }
             `}
+            style={isSelected ? {} : { color: "rgba(100, 220, 160, 0.65)" }}
           >
             {labels[option]}
           </button>
@@ -88,7 +95,10 @@ function IntensityToggle({ value, onChange, labels }: IntensityToggleProps) {
   };
 
   return (
-    <div className="flex rounded-lg overflow-hidden border border-helix-strand/30">
+    <div
+      className="flex rounded-lg overflow-hidden border border-helix-strand/30"
+      style={{ background: "rgba(0, 20, 10, 0.3)" }}
+    >
       {options.map((option, idx) => {
         const isSelected = value === option;
         return (
@@ -101,10 +111,11 @@ function IntensityToggle({ value, onChange, labels }: IntensityToggleProps) {
               ${idx > 0 ? "border-l border-helix-strand/30" : ""}
               ${
                 isSelected
-                  ? `bg-gradient-to-r ${gradients[option]} text-foreground`
-                  : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-helix-glow/5"
+                  ? `bg-gradient-to-r ${gradients[option]} text-helix-accent`
+                  : "bg-transparent hover:bg-helix-glow/5"
               }
             `}
+            style={isSelected ? {} : { color: "rgba(100, 220, 160, 0.65)" }}
           >
             {labels[option]}
           </button>
@@ -286,7 +297,10 @@ export default function MovementPanel() {
       {/* Auth Required Message */}
       {!isAuthenticated && (
         <Alert className="border-helix-strand/30 bg-helix-glow/5">
-          <AlertDescription className="text-sm text-muted-foreground">
+          <AlertDescription
+            className="text-sm"
+            style={{ color: "rgba(100, 220, 160, 0.65)" }}
+          >
             {t.movementPanel.authRequired}
           </AlertDescription>
         </Alert>
