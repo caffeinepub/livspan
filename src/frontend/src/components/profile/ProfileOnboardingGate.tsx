@@ -129,44 +129,42 @@ export default function ProfileOnboardingGate({
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 z-0 bg-black/60 backdrop-blur-[2px]" />
 
-        {/* Login card with glassmorphism */}
+        {/* Login card — futuristic HUD style */}
         <Card
-          className="relative z-10 max-w-md w-full border-0 shadow-2xl"
+          className="relative z-10 max-w-md w-full border-0 shadow-2xl futuristic-card"
           style={{
-            background: "rgba(0, 20, 10, 0.55)",
-            backdropFilter: "blur(20px) saturate(180%)",
-            WebkitBackdropFilter: "blur(20px) saturate(180%)",
-            border: "1px solid rgba(0, 255, 120, 0.2)",
-            borderRadius: "20px",
-            boxShadow:
-              "0 8px 40px rgba(0, 255, 100, 0.12), 0 1px 0 rgba(255,255,255,0.04) inset",
+            borderRadius: "16px",
           }}
         >
-          <CardHeader className="text-center">
-            {/* Logo */}
-            <div className="mx-auto mb-6">
+          <CardHeader className="text-center pt-8">
+            {/* Logo with neon ring */}
+            <div className="mx-auto mb-6 relative inline-block">
               <img
-                src="/assets/IMG_8398-1.png"
+                src="/assets/uploads/IMG_8864-1.png"
                 alt="LivSpan Token"
-                className="w-32 h-32 mx-auto"
+                className="w-28 h-28 mx-auto"
+                style={{
+                  filter: "drop-shadow(0 0 16px rgba(0, 255, 180, 0.5))",
+                }}
               />
             </div>
             <CardTitle
-              className="text-2xl font-light tracking-wide"
-              style={{
-                background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="text-2xl font-semibold tracking-wide neon-text"
+              style={{ fontFamily: "Sora, sans-serif" }}
             >
               {t.profile.loginRequired.title}
             </CardTitle>
-            <CardDescription style={{ color: "rgba(100, 220, 160, 0.6)" }}>
+            <CardDescription
+              className="text-xs tracking-wider uppercase mt-1"
+              style={{
+                color: "rgba(0, 245, 255, 0.5)",
+                fontFamily: "Sora, sans-serif",
+              }}
+            >
               {t.profile.loginRequired.description}
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex justify-center">
+          <CardContent className="flex justify-center pb-8">
             <LoginButton />
           </CardContent>
         </Card>
@@ -182,30 +180,20 @@ export default function ProfileOnboardingGate({
     return (
       <Dialog open={true}>
         <DialogContent
-          className="sm:max-w-md border-0"
+          className="sm:max-w-md border-0 futuristic-card"
           style={{
-            background: "rgba(0, 20, 10, 0.85)",
-            backdropFilter: "blur(24px) saturate(180%)",
-            WebkitBackdropFilter: "blur(24px) saturate(180%)",
-            border: "1px solid rgba(0, 255, 120, 0.2)",
-            borderRadius: "20px",
-            boxShadow: "0 8px 40px rgba(0, 255, 100, 0.12)",
+            borderRadius: "16px",
           }}
           onPointerDownOutside={(e) => e.preventDefault()}
         >
           <DialogHeader>
             <DialogTitle
-              className="text-xl font-light tracking-wide"
-              style={{
-                background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="text-xl font-semibold tracking-wide neon-text"
+              style={{ fontFamily: "Sora, sans-serif" }}
             >
               {t.profile.setup.title}
             </DialogTitle>
-            <DialogDescription style={{ color: "rgba(100, 220, 160, 0.6)" }}>
+            <DialogDescription style={{ color: "rgba(0, 245, 255, 0.5)" }}>
               {t.profile.setup.description}
             </DialogDescription>
           </DialogHeader>
@@ -213,33 +201,50 @@ export default function ProfileOnboardingGate({
           <div className="space-y-4 py-4">
             {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" style={{ color: "#00e87a" }}>
+              <Label
+                htmlFor="name"
+                className="text-xs uppercase tracking-widest"
+                style={{
+                  color: "rgba(0, 245, 255, 0.7)",
+                  fontFamily: "Sora, sans-serif",
+                }}
+              >
                 {t.profile.fields.name}
               </Label>
               <Input
                 id="name"
+                data-ocid="profile.input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.profile.placeholders.name}
                 disabled={saveMutation.isPending}
-                style={{
-                  background: "rgba(0, 30, 15, 0.5)",
-                  borderColor: "rgba(0, 255, 120, 0.25)",
-                  color: "#a8ffce",
-                }}
+                className="hud-input"
               />
               {errors.name && (
-                <p className="text-xs text-destructive">{errors.name}</p>
+                <p
+                  className="text-xs text-destructive"
+                  data-ocid="profile.name_error"
+                >
+                  {errors.name}
+                </p>
               )}
             </div>
 
             {/* Birth Year */}
             <div className="space-y-2">
-              <Label htmlFor="birthYear" style={{ color: "#00e87a" }}>
+              <Label
+                htmlFor="birthYear"
+                className="text-xs uppercase tracking-widest"
+                style={{
+                  color: "rgba(0, 245, 255, 0.7)",
+                  fontFamily: "Sora, sans-serif",
+                }}
+              >
                 {t.profile.fields.birthYear}
               </Label>
               <Input
                 id="birthYear"
+                data-ocid="profile.input"
                 type="number"
                 min="1900"
                 max={new Date().getFullYear()}
@@ -247,24 +252,33 @@ export default function ProfileOnboardingGate({
                 onChange={(e) => setBirthYear(e.target.value)}
                 placeholder={t.profile.placeholders.birthYear}
                 disabled={saveMutation.isPending}
-                style={{
-                  background: "rgba(0, 30, 15, 0.5)",
-                  borderColor: "rgba(0, 255, 120, 0.25)",
-                  color: "#a8ffce",
-                }}
+                className="hud-input"
               />
               {errors.birthYear && (
-                <p className="text-xs text-destructive">{errors.birthYear}</p>
+                <p
+                  className="text-xs text-destructive"
+                  data-ocid="profile.error_state"
+                >
+                  {errors.birthYear}
+                </p>
               )}
             </div>
 
             {/* Height */}
             <div className="space-y-2">
-              <Label htmlFor="heightCm" style={{ color: "#00e87a" }}>
+              <Label
+                htmlFor="heightCm"
+                className="text-xs uppercase tracking-widest"
+                style={{
+                  color: "rgba(0, 245, 255, 0.7)",
+                  fontFamily: "Sora, sans-serif",
+                }}
+              >
                 {t.profile.fields.heightCm}
               </Label>
               <Input
                 id="heightCm"
+                data-ocid="profile.input"
                 type="number"
                 min="50"
                 max="300"
@@ -272,20 +286,27 @@ export default function ProfileOnboardingGate({
                 onChange={(e) => setHeightCm(e.target.value)}
                 placeholder={t.profile.placeholders.heightCm}
                 disabled={saveMutation.isPending}
-                style={{
-                  background: "rgba(0, 30, 15, 0.5)",
-                  borderColor: "rgba(0, 255, 120, 0.25)",
-                  color: "#a8ffce",
-                }}
+                className="hud-input"
               />
               {errors.heightCm && (
-                <p className="text-xs text-destructive">{errors.heightCm}</p>
+                <p
+                  className="text-xs text-destructive"
+                  data-ocid="profile.error_state"
+                >
+                  {errors.heightCm}
+                </p>
               )}
             </div>
 
             {/* Gender */}
             <div className="space-y-2">
-              <Label style={{ color: "#00e87a" }}>
+              <Label
+                className="text-xs uppercase tracking-widest"
+                style={{
+                  color: "rgba(0, 245, 255, 0.7)",
+                  fontFamily: "Sora, sans-serif",
+                }}
+              >
                 {t.profile.fields.gender}
               </Label>
               <RadioGroup
@@ -294,31 +315,43 @@ export default function ProfileOnboardingGate({
                 disabled={saveMutation.isPending}
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value={Gender.male} id="male" />
+                  <RadioGroupItem
+                    value={Gender.male}
+                    id="male"
+                    data-ocid="profile.radio"
+                  />
                   <Label
                     htmlFor="male"
                     className="font-normal cursor-pointer"
-                    style={{ color: "#7effc0" }}
+                    style={{ color: "#00f5ff" }}
                   >
                     {t.profile.genderOptions.male}
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value={Gender.female} id="female" />
+                  <RadioGroupItem
+                    value={Gender.female}
+                    id="female"
+                    data-ocid="profile.radio"
+                  />
                   <Label
                     htmlFor="female"
                     className="font-normal cursor-pointer"
-                    style={{ color: "#7effc0" }}
+                    style={{ color: "#00f5ff" }}
                   >
                     {t.profile.genderOptions.female}
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value={Gender.diverse} id="diverse" />
+                  <RadioGroupItem
+                    value={Gender.diverse}
+                    id="diverse"
+                    data-ocid="profile.radio"
+                  />
                   <Label
                     htmlFor="diverse"
                     className="font-normal cursor-pointer"
-                    style={{ color: "#7effc0" }}
+                    style={{ color: "#00f5ff" }}
                   >
                     {t.profile.genderOptions.diverse}
                   </Label>
@@ -330,6 +363,7 @@ export default function ProfileOnboardingGate({
             {saveMutation.isError && (
               <Alert
                 variant="destructive"
+                data-ocid="profile.error_state"
                 style={{
                   background: "rgba(30, 0, 0, 0.5)",
                   borderColor: "rgba(255, 80, 80, 0.35)",
@@ -345,7 +379,15 @@ export default function ProfileOnboardingGate({
             <Button
               onClick={handleSave}
               disabled={saveMutation.isPending}
-              className="w-full bg-gradient-to-r from-helix-accent to-helix-glow hover:from-helix-glow hover:to-helix-accent"
+              data-ocid="profile.submit_button"
+              className="w-full font-semibold tracking-wider"
+              style={{
+                background: "rgba(0, 10, 6, 0.5)",
+                border: "1px solid rgba(0, 245, 255, 0.4)",
+                color: "#00f5ff",
+                fontFamily: "Sora, sans-serif",
+                transition: "all 0.2s ease",
+              }}
             >
               {saveMutation.isPending ? (
                 <>

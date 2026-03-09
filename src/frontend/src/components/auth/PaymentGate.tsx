@@ -154,28 +154,25 @@ export default function PaymentGate() {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <div className="absolute inset-0 z-0 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 z-0 bg-black/75" />
+      <div className="scan-overlay" />
 
       <div className="relative z-10 w-full max-w-lg flex flex-col gap-4">
         {/* Admin Configuration Panel */}
         {showAdminPanel && (
           <Card
-            className="border-0 shadow-xl"
+            className="border-0 shadow-xl futuristic-card"
             style={{
-              background: "rgba(0, 20, 10, 0.55)",
-              backdropFilter: "blur(16px) saturate(180%)",
-              WebkitBackdropFilter: "blur(16px) saturate(180%)",
-              border: "1px solid rgba(0, 255, 120, 0.25)",
-              borderRadius: "16px",
+              borderRadius: "14px",
             }}
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" style={{ color: "#00e87a" }} />
+                  <Settings className="w-4 h-4" style={{ color: "#00f5ff" }} />
                   <CardTitle
-                    className="text-sm font-medium"
-                    style={{ color: "#00e87a" }}
+                    className="text-sm font-semibold tracking-widest uppercase"
+                    style={{ color: "#00f5ff", fontFamily: "Sora, sans-serif" }}
                   >
                     Admin: Zahlungsadresse konfigurieren
                   </CardTitle>
@@ -184,7 +181,7 @@ export default function PaymentGate() {
                   variant="ghost"
                   size="icon"
                   className="h-7 w-7"
-                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  style={{ color: "rgba(0, 245, 255, 0.6)" }}
                   onClick={() => setAdminPanelOpen((v) => !v)}
                   title={adminPanelOpen ? "Schließen" : "Öffnen"}
                 >
@@ -198,7 +195,7 @@ export default function PaymentGate() {
               {!adminPanelOpen && (
                 <CardDescription
                   className="text-xs mt-1"
-                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  style={{ color: "rgba(0, 245, 255, 0.5)" }}
                 >
                   Klicke auf das Symbol, um die ICP-Zahlungsadresse zu
                   bearbeiten.
@@ -211,8 +208,11 @@ export default function PaymentGate() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="icp-address-input"
-                    className="text-sm"
-                    style={{ color: "#a8ffce" }}
+                    className="text-xs uppercase tracking-widest"
+                    style={{
+                      color: "rgba(0, 245, 255, 0.7)",
+                      fontFamily: "Sora, sans-serif",
+                    }}
                   >
                     ICP-Zahlungsadresse
                   </Label>
@@ -221,17 +221,12 @@ export default function PaymentGate() {
                     value={addressInput}
                     onChange={(e) => setAddressInput(e.target.value)}
                     placeholder="ICP Account-Adresse eingeben…"
-                    className="font-mono text-xs"
-                    style={{
-                      background: "rgba(0, 30, 15, 0.5)",
-                      borderColor: "rgba(0, 255, 120, 0.25)",
-                      color: "#a8ffce",
-                    }}
+                    className="hud-input font-mono text-xs"
                     disabled={setIcpAddressMutation.isPending}
                   />
                   <p
                     className="text-xs"
-                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                    style={{ color: "rgba(0, 245, 255, 0.5)" }}
                   >
                     Diese Adresse wird Nutzern auf der Anmeldeseite angezeigt,
                     damit sie 1 ICP senden können.
@@ -268,9 +263,9 @@ export default function PaymentGate() {
                     }}
                     disabled={setIcpAddressMutation.isPending}
                     style={{
-                      background: "rgba(0, 30, 15, 0.5)",
-                      borderColor: "rgba(0, 255, 120, 0.3)",
-                      color: "#a8ffce",
+                      background: "rgba(0, 8, 5, 0.5)",
+                      borderColor: "rgba(0, 245, 255, 0.25)",
+                      color: "#00f5ff",
                     }}
                   >
                     Abbrechen
@@ -283,41 +278,33 @@ export default function PaymentGate() {
 
         {/* Payment card */}
         <Card
-          className="border-0 shadow-2xl"
+          className="border-0 shadow-2xl futuristic-card"
           style={{
-            background: "rgba(0, 20, 10, 0.55)",
-            backdropFilter: "blur(20px) saturate(180%)",
-            WebkitBackdropFilter: "blur(20px) saturate(180%)",
-            border: "1px solid rgba(0, 255, 120, 0.2)",
             borderRadius: "20px",
-            boxShadow:
-              "0 8px 40px rgba(0, 255, 100, 0.12), 0 1px 0 rgba(255,255,255,0.04) inset",
           }}
         >
-          <CardHeader className="text-center pb-4">
-            {/* Logo */}
-            <div className="mx-auto mb-4">
+          <CardHeader className="text-center pb-4 pt-8">
+            {/* Logo with neon glow */}
+            <div className="mx-auto mb-4 relative inline-block">
               <img
-                src="/assets/IMG_8398-1.png"
+                src="/assets/uploads/IMG_8864-1.png"
                 alt="LivSpan Token"
-                className="w-24 h-24 mx-auto"
+                className="w-28 h-28 mx-auto"
+                style={{
+                  filter: "drop-shadow(0 0 16px rgba(0, 255, 180, 0.5))",
+                }}
               />
             </div>
 
             <CardTitle
-              className="text-2xl font-light tracking-wide"
-              style={{
-                background: "linear-gradient(135deg, #a8ffce, #4fffb0)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="text-2xl font-semibold tracking-wide neon-text"
+              style={{ fontFamily: "Sora, sans-serif" }}
             >
               {t.paymentGate.title}
             </CardTitle>
             <CardDescription
-              className="mt-2"
-              style={{ color: "rgba(100, 220, 160, 0.6)" }}
+              className="mt-2 text-xs tracking-wider"
+              style={{ color: "rgba(0, 245, 255, 0.5)" }}
             >
               {t.paymentGate.subtitle}
             </CardDescription>
@@ -328,21 +315,24 @@ export default function PaymentGate() {
             <div
               className="flex items-center gap-3 p-4 rounded-lg"
               style={{
-                background: "rgba(0, 232, 122, 0.1)",
-                border: "1px solid rgba(0, 232, 122, 0.3)",
+                background: "rgba(0, 245, 255, 0.06)",
+                border: "1px solid rgba(0, 245, 255, 0.2)",
               }}
             >
               <Coins
                 className="w-6 h-6 shrink-0"
-                style={{ color: "#00e87a" }}
+                style={{ color: "#00f5ff" }}
               />
               <div>
-                <p className="text-sm font-medium" style={{ color: "#00e87a" }}>
+                <p
+                  className="text-sm font-semibold tracking-wide"
+                  style={{ color: "#00f5ff", fontFamily: "Sora, sans-serif" }}
+                >
                   {t.paymentGate.feeLabel}
                 </p>
                 <p
                   className="text-xs mt-0.5"
-                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  style={{ color: "rgba(0, 245, 255, 0.5)" }}
                 >
                   {t.paymentGate.feeDescription}
                 </p>
@@ -351,18 +341,21 @@ export default function PaymentGate() {
 
             {/* ICP Address — user's personal subaccount address */}
             <div className="space-y-2">
-              <p className="text-sm font-medium" style={{ color: "#00e87a" }}>
+              <p
+                className="text-sm font-semibold tracking-wider uppercase"
+                style={{ color: "#00f5ff", fontFamily: "Sora, sans-serif" }}
+              >
                 {t.paymentGate.addressLabel}
               </p>
 
               {userAddressLoading && (
                 <div
                   className="flex items-center gap-2 text-sm py-3"
-                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  style={{ color: "rgba(0, 245, 255, 0.6)" }}
                 >
                   <Loader2
                     className="w-4 h-4 animate-spin"
-                    style={{ color: "#00e87a" }}
+                    style={{ color: "#00f5ff" }}
                   />
                   <span>{t.paymentGate.loadingAddress}</span>
                 </div>
@@ -384,9 +377,9 @@ export default function PaymentGate() {
                       <div
                         className="flex-1 min-w-0 px-3 py-2 rounded-lg font-mono text-xs break-all leading-relaxed"
                         style={{
-                          background: "rgba(0, 30, 15, 0.5)",
-                          border: "1px solid rgba(0, 255, 120, 0.2)",
-                          color: "#a8ffce",
+                          background: "rgba(0, 8, 5, 0.6)",
+                          border: "1px solid rgba(0, 245, 255, 0.2)",
+                          color: "#00f5ff",
                         }}
                       >
                         {userPaymentAddress}
@@ -396,18 +389,18 @@ export default function PaymentGate() {
                         size="icon"
                         onClick={handleCopy}
                         data-ocid="payment.secondary_button"
-                        className="shrink-0 transition-colors"
+                        className="shrink-0 transition-all"
                         style={{
-                          background: "rgba(0, 30, 15, 0.5)",
-                          borderColor: "rgba(0, 255, 120, 0.3)",
-                          color: "#a8ffce",
+                          background: "rgba(0, 8, 5, 0.5)",
+                          borderColor: "rgba(0, 245, 255, 0.3)",
+                          color: "#00f5ff",
                         }}
                         title={t.paymentGate.copyButton}
                       >
                         {copied ? (
                           <CheckCircle2
                             className="w-4 h-4"
-                            style={{ color: "#00e87a" }}
+                            style={{ color: "#00ff88" }}
                           />
                         ) : (
                           <Copy className="w-4 h-4" />
@@ -416,7 +409,7 @@ export default function PaymentGate() {
                     </div>
                     <p
                       className="text-xs italic"
-                      style={{ color: "rgba(100, 220, 160, 0.5)" }}
+                      style={{ color: "rgba(0, 245, 255, 0.4)" }}
                     >
                       Diese Adresse ist einzigartig für deinen Account / This
                       address is unique to your account
@@ -429,14 +422,14 @@ export default function PaymentGate() {
                 !userPaymentAddress && (
                   <p
                     className="text-sm italic"
-                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                    style={{ color: "rgba(0, 245, 255, 0.5)" }}
                   >
                     {t.paymentGate.addressNotSet}
                   </p>
                 )}
 
               {copied && (
-                <p className="text-xs" style={{ color: "#00e87a" }}>
+                <p className="text-xs" style={{ color: "#00ff88" }}>
                   {t.paymentGate.copySuccess}
                 </p>
               )}
@@ -444,7 +437,10 @@ export default function PaymentGate() {
 
             {/* Instructions */}
             <div className="space-y-3">
-              <p className="text-sm font-medium" style={{ color: "#7effc0" }}>
+              <p
+                className="text-sm font-semibold tracking-widest uppercase"
+                style={{ color: "#00f5ff", fontFamily: "Sora, sans-serif" }}
+              >
                 {t.paymentGate.instructionsTitle}
               </p>
               <ol className="space-y-2">
@@ -456,14 +452,15 @@ export default function PaymentGate() {
                   <li
                     key={`payment-step-${num}`}
                     className="flex items-start gap-3 text-sm"
-                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                    style={{ color: "rgba(0, 245, 255, 0.6)" }}
                   >
                     <span
-                      className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium mt-0.5"
+                      className="shrink-0 w-5 h-5 flex items-center justify-center text-xs font-medium mt-0.5"
                       style={{
-                        background: "rgba(0, 232, 122, 0.15)",
-                        border: "1px solid rgba(0, 232, 122, 0.4)",
-                        color: "#00e87a",
+                        background: "rgba(0, 245, 255, 0.08)",
+                        border: "1px solid rgba(0, 245, 255, 0.35)",
+                        color: "#00f5ff",
+                        borderRadius: "2px",
                       }}
                     >
                       {num}
@@ -535,24 +532,24 @@ export default function PaymentGate() {
             <div
               className="flex items-center gap-3 p-3 rounded-lg"
               style={{
-                background: "rgba(0, 30, 15, 0.4)",
-                border: "1px solid rgba(0, 255, 120, 0.15)",
+                background: "rgba(0, 8, 5, 0.5)",
+                border: "1px solid rgba(0, 245, 255, 0.12)",
               }}
             >
               {pollFetching ? (
                 <RefreshCw
                   className="w-4 h-4 shrink-0 animate-spin"
-                  style={{ color: "#00e87a" }}
+                  style={{ color: "#00f5ff" }}
                 />
               ) : (
                 <Clock
-                  className="w-4 h-4 shrink-0 animate-pulse"
-                  style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                  className="w-4 h-4 shrink-0 animate-data-pulse"
+                  style={{ color: "rgba(0, 245, 255, 0.5)" }}
                 />
               )}
               <p
                 className="text-xs"
-                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                style={{ color: "rgba(0, 245, 255, 0.5)" }}
               >
                 {pollFetching
                   ? t.paymentGate.pollingChecking
@@ -564,14 +561,17 @@ export default function PaymentGate() {
             <div
               className="flex items-start gap-3 p-3 rounded-lg"
               style={{
-                background: "rgba(0, 20, 10, 0.3)",
-                border: "1px solid rgba(0, 255, 120, 0.1)",
+                background: "rgba(0, 8, 5, 0.4)",
+                border: "1px solid rgba(0, 245, 255, 0.08)",
               }}
             >
-              <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5 text-helix-glow" />
+              <ShieldCheck
+                className="w-4 h-4 shrink-0 mt-0.5"
+                style={{ color: "rgba(0, 245, 255, 0.6)" }}
+              />
               <p
                 className="text-xs"
-                style={{ color: "rgba(100, 220, 160, 0.6)" }}
+                style={{ color: "rgba(0, 245, 255, 0.45)" }}
               >
                 {t.paymentGate.autoVerifyNote}
               </p>

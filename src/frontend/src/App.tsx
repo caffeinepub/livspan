@@ -7,7 +7,6 @@ import { useGetCallerUserProfile } from "@/hooks/useUserProfileQueries";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import StartDashboard from "@/pages/StartDashboard";
 import type { Principal } from "@dfinity/principal";
-import { Loader2 } from "lucide-react";
 import { ThemeProvider } from "next-themes";
 
 function LoadingScreen() {
@@ -26,18 +25,53 @@ function LoadingScreen() {
       />
 
       {/* Dark overlay for better contrast */}
-      <div className="absolute inset-0 z-0 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 z-0 bg-black/75" />
+
+      {/* Scan overlay */}
+      <div className="scan-overlay" />
 
       {/* Loading content */}
-      <div className="relative z-10 flex flex-col items-center gap-6">
-        <img
-          src="/assets/IMG_8398-1.png"
-          alt="LivSpan Token"
-          className="w-32 h-32 animate-pulse"
-        />
-        <div className="flex items-center gap-3">
-          <Loader2 className="w-6 h-6 animate-spin text-helix-accent" />
-          <p className="text-lg font-light text-helix-glow">Loading...</p>
+      <div className="relative z-10 flex flex-col items-center gap-8">
+        {/* Logo with neon glow ring */}
+        <div className="relative">
+          <div
+            className="absolute inset-0 rounded-full animate-neon-glow-pulse"
+            style={{
+              boxShadow:
+                "0 0 20px rgba(0, 255, 180, 0.4), 0 0 50px rgba(0, 245, 255, 0.2)",
+              borderRadius: "50%",
+            }}
+          />
+          <img
+            src="/assets/uploads/IMG_8864-1.png"
+            alt="LivSpan Token"
+            className="w-24 h-24 relative z-10"
+            style={{
+              filter: "drop-shadow(0 0 16px rgba(0, 255, 180, 0.5))",
+            }}
+          />
+        </div>
+
+        {/* HUD-style title */}
+        <div className="text-center space-y-1">
+          <p
+            className="text-xs font-medium tracking-[0.3em] uppercase"
+            style={{ color: "rgba(0, 245, 255, 0.5)" }}
+          >
+            SYSTEM INITIALIZING
+          </p>
+        </div>
+
+        {/* HUD loading bar */}
+        <div
+          className="w-48 rounded-full overflow-hidden"
+          style={{
+            background: "rgba(0, 245, 255, 0.08)",
+            border: "1px solid rgba(0, 245, 255, 0.15)",
+            height: "3px",
+          }}
+        >
+          <div className="hud-loading-bar h-full" />
         </div>
       </div>
     </div>

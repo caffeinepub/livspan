@@ -22,11 +22,16 @@ export default function FactorMarker({
       <div
         className={cn(
           "absolute left-1/2 top-1/2 -translate-y-1/2 w-8 h-px transition-all duration-300",
-          isSelected ? "bg-helix-strand/50" : "bg-helix-strand/20",
         )}
+        style={{
+          background: isSelected
+            ? "linear-gradient(to right, rgba(0, 245, 255, 0.6), rgba(0, 255, 136, 0.4))"
+            : "rgba(0, 245, 255, 0.15)",
+          boxShadow: isSelected ? "0 0 4px rgba(0, 245, 255, 0.5)" : undefined,
+        }}
       />
 
-      {/* Factor card with glassmorphism */}
+      {/* Factor card with HUD glassmorphism */}
       <Card
         onClick={onClick}
         className={cn(
@@ -34,39 +39,44 @@ export default function FactorMarker({
         )}
         style={{
           background: isSelected
-            ? "rgba(0, 30, 15, 0.5)"
-            : "rgba(0, 20, 10, 0.35)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+            ? "rgba(255, 255, 255, 0.12)"
+            : "rgba(255, 255, 255, 0.06)",
+          backdropFilter: "blur(18px) saturate(200%)",
+          WebkitBackdropFilter: "blur(18px) saturate(200%)",
           border: isSelected
-            ? "1px solid rgba(0, 255, 120, 0.4)"
-            : "1px solid rgba(0, 255, 120, 0.15)",
-          borderRadius: "16px",
+            ? "1px solid rgba(0, 245, 255, 0.4)"
+            : "1px solid rgba(255, 255, 255, 0.1)",
+          borderTop: isSelected
+            ? "2px solid rgba(0, 255, 180, 0.55)"
+            : "1px solid rgba(255, 255, 255, 0.18)",
+          borderRadius: "10px",
           boxShadow: isSelected
-            ? "0 4px 32px rgba(0, 255, 100, 0.18), 0 1px 0 rgba(255,255,255,0.04) inset"
-            : "0 4px 32px rgba(0, 255, 100, 0.08), 0 1px 0 rgba(255,255,255,0.04) inset",
+            ? "0 4px 24px rgba(0, 245, 255, 0.2), 0 0 40px rgba(0, 255, 136, 0.1), 0 1px 0 rgba(255,255,255,0.04) inset"
+            : "0 4px 16px rgba(0, 245, 255, 0.05), 0 1px 0 rgba(255,255,255,0.02) inset",
         }}
       >
         <CardContent className="p-4">
           <h3
-            className={cn(
-              "text-base font-light tracking-wide mb-1 transition-colors",
-            )}
+            className="text-base font-semibold tracking-wide mb-1 transition-colors"
             style={{
+              fontFamily: "Sora, sans-serif",
               background: isSelected
-                ? "linear-gradient(135deg, #a8ffce, #4fffb0)"
+                ? "linear-gradient(135deg, #00f5ff, #00ff88)"
                 : undefined,
               WebkitBackgroundClip: isSelected ? "text" : undefined,
               backgroundClip: isSelected ? "text" : undefined,
               WebkitTextFillColor: isSelected ? "transparent" : undefined,
-              color: isSelected ? undefined : "#7effc0",
+              color: isSelected ? undefined : "rgba(0, 245, 255, 0.7)",
+              filter: isSelected
+                ? "drop-shadow(0 0 6px rgba(0, 245, 255, 0.4))"
+                : undefined,
             }}
           >
             {label}
           </h3>
           <p
             className="text-xs leading-relaxed"
-            style={{ color: "rgba(100, 220, 160, 0.6)" }}
+            style={{ color: "rgba(0, 245, 255, 0.4)" }}
           >
             {description}
           </p>

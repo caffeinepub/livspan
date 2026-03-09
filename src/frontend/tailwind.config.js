@@ -81,7 +81,13 @@ export default {
         },
       },
       fontFamily: {
+        display: [
+          'Sora',
+          'system-ui',
+          'sans-serif',
+        ],
         sans: [
+          'Sora',
           'Inter',
           'system-ui',
           '-apple-system',
@@ -100,6 +106,35 @@ export default {
         ],
       },
       keyframes: {
+        'scan-line': {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '10%': { opacity: '0.6' },
+          '90%': { opacity: '0.6' },
+          '100%': { transform: 'translateY(100vh)', opacity: '0' },
+        },
+        'data-pulse': {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '1.0' },
+        },
+        'hud-flicker': {
+          '0%, 100%': { opacity: '0.97' },
+          '25%': { opacity: '1.0' },
+          '50%': { opacity: '0.98' },
+          '75%': { opacity: '1.0' },
+        },
+        'neon-glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 8px rgba(0,245,255,0.3), 0 0 20px rgba(0,255,136,0.15)' },
+          '50%': { boxShadow: '0 0 16px rgba(0,245,255,0.6), 0 0 40px rgba(0,255,136,0.3)' },
+        },
+        'status-blink': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.2' },
+        },
+        'hud-load': {
+          '0%': { width: '0%', opacity: '0.6' },
+          '20%': { opacity: '1' },
+          '100%': { width: '100%', opacity: '1' },
+        },
         'helix-bg-breathe': {
           '0%, 100%': {
             opacity: '0.35',
@@ -153,6 +188,12 @@ export default {
         'helix-breathe': 'helix-breathe 6s ease-in-out infinite',
         'helix-breathe-alt': 'helix-breathe 6.5s ease-in-out infinite 0.5s',
         'helix-pulse': 'helix-pulse 8s ease-in-out infinite',
+        'scan-line': 'scan-line 8s linear infinite',
+        'data-pulse': 'data-pulse 2s ease-in-out infinite',
+        'hud-flicker': 'hud-flicker 3s ease-in-out infinite',
+        'neon-glow-pulse': 'neon-glow-pulse 3s ease-in-out infinite',
+        'status-blink': 'status-blink 2s ease-in-out infinite',
+        'hud-load': 'hud-load 2.5s ease-out infinite',
       },
     },
   },

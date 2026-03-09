@@ -34,6 +34,10 @@ export interface Translations {
       label: string;
       description: string;
     };
+    routines: {
+      label: string;
+      description: string;
+    };
   };
   footer: {
     builtWith: string;
@@ -315,6 +319,26 @@ export interface Translations {
     emptyState: string;
     loadingError: string;
   };
+  routinesPanel: {
+    title: string;
+    subtitle: string;
+    addButton: string;
+    editButton: string;
+    deleteButton: string;
+    confirmDelete: string;
+    confirmDeleteYes: string;
+    confirmDeleteNo: string;
+    namePlaceholder: string;
+    nameLabel: string;
+    frequencyLabel: string;
+    frequencyDaily: string;
+    frequencyWeekly: string;
+    saveButton: string;
+    savingButton: string;
+    emptyState: string;
+    completedToday: string;
+    notCompleted: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -352,6 +376,10 @@ export const translations: Record<Language, Translations> = {
       diary: {
         label: "Diary",
         description: "Write and manage your personal journal entries",
+      },
+      routines: {
+        label: "Routines",
+        description: "Track your daily and weekly habits",
       },
     },
     footer: {
@@ -650,6 +678,26 @@ export const translations: Record<Language, Translations> = {
       emptyState: "No diary entries yet. Write your first entry.",
       loadingError: "Could not load diary entries.",
     },
+    routinesPanel: {
+      title: "Routines",
+      subtitle: "DAILY & WEEKLY HABITS",
+      addButton: "Add Routine",
+      editButton: "Edit",
+      deleteButton: "Delete",
+      confirmDelete: "Delete this routine?",
+      confirmDeleteYes: "Delete",
+      confirmDeleteNo: "Cancel",
+      namePlaceholder: "e.g. Morning meditation...",
+      nameLabel: "Routine Name",
+      frequencyLabel: "Frequency",
+      frequencyDaily: "Daily",
+      frequencyWeekly: "Weekly",
+      saveButton: "Save",
+      savingButton: "Saving...",
+      emptyState: "No routines yet. Add your first daily or weekly habit.",
+      completedToday: "Completed",
+      notCompleted: "Mark as done",
+    },
   },
   de: {
     header: {
@@ -686,6 +734,10 @@ export const translations: Record<Language, Translations> = {
         label: "Tagebuch",
         description:
           "Schreibe und verwalte deine persönlichen Tagebucheinträge",
+      },
+      routines: {
+        label: "Routinen",
+        description: "Verfolge deine täglichen und wöchentlichen Gewohnheiten",
       },
     },
     footer: {
@@ -990,6 +1042,27 @@ export const translations: Record<Language, Translations> = {
       emptyState:
         "Noch keine Tagebucheinträge. Schreibe deinen ersten Eintrag.",
       loadingError: "Tagebucheinträge konnten nicht geladen werden.",
+    },
+    routinesPanel: {
+      title: "Routinen",
+      subtitle: "TÄGLICHE & WÖCHENTLICHE GEWOHNHEITEN",
+      addButton: "Routine hinzufügen",
+      editButton: "Bearbeiten",
+      deleteButton: "Löschen",
+      confirmDelete: "Diese Routine löschen?",
+      confirmDeleteYes: "Löschen",
+      confirmDeleteNo: "Abbrechen",
+      namePlaceholder: "z. B. Morgenmeditation...",
+      nameLabel: "Routine Name",
+      frequencyLabel: "Häufigkeit",
+      frequencyDaily: "Täglich",
+      frequencyWeekly: "Wöchentlich",
+      saveButton: "Speichern",
+      savingButton: "Speichern...",
+      emptyState:
+        "Noch keine Routinen. Füge deine erste tägliche oder wöchentliche Gewohnheit hinzu.",
+      completedToday: "Erledigt",
+      notCompleted: "Als erledigt markieren",
     },
   },
 };

@@ -1,28 +1,33 @@
-# LivSpan – Subaccount Payment System
+# Creator
 
 ## Current State
-
-The app has a payment gate that shows all users the same static OISY wallet address. The `verifyAndActivate()` function uses a hardcoded mock that never checks the real ICP Ledger. No real payment can be detected automatically.
+Dashboard has 6 factor markers: Nutrition, Sleep, Movement, Stress, Fasting, Diary. Each opens a panel below the helix. Header and footer use a near-black glass style (`rgba(0, 8, 5, 0.65)`). Tiles (FactorMarker cards and sub-panels) use a dark-tinted glass style. All text is already using green-blue color tones.
 
 ## Requested Changes (Diff)
 
 ### Add
-- `getUserPaymentAddress() : async Text` — returns the caller's unique ICP account-ID (hex). Derived from canister principal + caller's subaccount (caller principal zero-padded to 32 bytes). Uses SHA-224 + CRC32 per ICP account-ID spec.
-- Real ICP Ledger inter-canister call to `ryjl3-tyaaa-aaaaa-aaaba-cai` `account_balance` query
-- Frontend: display the user's personal subaccount address with clear instructions
+- New `RoutinesPanel` component for daily/weekly routine tracking with add, edit, delete functionality (stored locally in state, no backend required — routines are frontend-only checklists)
+- New `routines` factor type added to `factors` array in `StartDashboard` with position 6
+- Translations for `routines` factor label/description and `routinesPanel` strings in both `en` and `de`
 
 ### Modify
-- `verifyAndActivate()`: replace mock with real Ledger `account_balance` call on caller's subaccount. If balance >= 100_000_000 e8s (1 ICP), activate and return true.
-- `PaymentGate.tsx`: call `getUserPaymentAddress()` instead of `getIcpAddress()` to show the user their personal payment address
+- Header (`<header>`): Change background from near-black `rgba(0, 8, 5, 0.65)` to true frosted milkglass: `rgba(255, 255, 255, 0.08)` with `backdrop-filter: blur(24px) saturate(200%)`, border `rgba(255,255,255,0.15)`. Text must NOT be black — keep existing neon-text gradient classes.
+- Footer (`<footer>`): Same milkglass treatment. Text color stays in green-blue tones, not black.
+- FactorMarker cards: Update both selected and unselected states to use true frosted milkglass (`rgba(255,255,255,0.07)` unselected, `rgba(255,255,255,0.13)` selected), with white/teal border highlights.
+- Sub-panel wrapper `glass-card` class in `index.css`: Update to true frosted milkglass: `rgba(255,255,255,0.07)` background, `blur(24px) saturate(200%)`, border `rgba(255,255,255,0.15)`.
+- `.dark [data-slot="card"]` in `index.css`: Update to same milkglass values.
+- `futuristic-card` class: Same milkglass update.
+- All section wrappers in `StartDashboard` that use `glass-card` should keep using `glass-card` (the CSS class will be updated).
 
 ### Remove
-- Mock `fetchLedgerTransactions()` function
-- Mock `hasMadePaymentToAddress()` function
-- `checkAllCredentials` flag
+- Nothing removed
 
 ## Implementation Plan
-
-1. Generate new backend with real Ledger integration and subaccount derivation
-2. Update frontend PaymentGate to use `getUserPaymentAddress()` hook
-3. Add `useGetUserPaymentAddress` hook
-4. Deploy
+1. Add `routines` to `FactorType` union and `factors` array in `StartDashboard.tsx`
+2. Add translations for `routines` factor and `routinesPanel` in `translations.ts` (both `en` and `de`) and update `Translations` interface
+3. Create `src/frontend/src/components/dashboard/RoutinesPanel.tsx` — a checklist/routine manager with add, edit, delete, and daily completion toggle. Routines are stored in `localStorage` for persistence. Each routine has: `id`, `name`, `frequency` (daily/weekly), `completedToday` flag.
+4. Add import and render of `RoutinesPanel` in `StartDashboard.tsx` for `selectedFactor === "routines"`
+5. Update `index.css`: change `.glass-card`, `.dark [data-slot="card"]`, and `.futuristic-card` to frosted milkglass values
+6. Update `StartDashboard.tsx` header and footer inline styles to frosted milkglass
+7. Update `FactorMarker.tsx` card styles to frosted milkglass
+8. Validate (typecheck + build)

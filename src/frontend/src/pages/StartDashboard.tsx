@@ -4,6 +4,7 @@ import FactorMarker from "@/components/dashboard/FactorMarker";
 import IntermittentFastingPanel from "@/components/dashboard/IntermittentFastingPanel";
 import MovementPanel from "@/components/dashboard/MovementPanel";
 import NutritionPanel from "@/components/dashboard/NutritionPanel";
+import RoutinesPanel from "@/components/dashboard/RoutinesPanel";
 import SleepPanel from "@/components/dashboard/SleepPanel";
 import StressPanel from "@/components/dashboard/StressPanel";
 import AnimatedHelixBackground from "@/components/genome/AnimatedHelixBackground";
@@ -19,7 +20,8 @@ type FactorType =
   | "movement"
   | "stress"
   | "fasting"
-  | "diary";
+  | "diary"
+  | "routines";
 
 interface Factor {
   id: FactorType;
@@ -33,6 +35,7 @@ const factors: Factor[] = [
   { id: "stress", position: 3 },
   { id: "fasting", position: 4 },
   { id: "diary", position: 5 },
+  { id: "routines", position: 6 },
 ];
 
 export default function StartDashboard() {
@@ -79,32 +82,47 @@ export default function StartDashboard() {
 
         {/* Header */}
         <header
-          className="relative z-10 border-b border-helix-strand/30 backdrop-blur-md"
+          className="relative z-10 backdrop-blur-xl"
           style={{
-            background: "rgba(0, 15, 8, 0.55)",
-            backdropFilter: "blur(20px)",
-            borderBottomColor: "rgba(0, 255, 120, 0.18)",
+            background: "rgba(255, 255, 255, 0.07)",
+            backdropFilter: "blur(28px) saturate(200%)",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
-          <div className="container mx-auto px-4 py-6">
+          {/* Neon accent top line */}
+          <div className="hud-accent-line" />
+
+          <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                {/* Logo - matching login page */}
+              <div className="flex items-center gap-3">
+                {/* Logo */}
                 <img
-                  src="/assets/IMG_8398-1.png"
+                  src="/assets/uploads/IMG_8864-1.png"
                   alt="LivSpan Logo"
                   className="w-12 h-12"
+                  style={{
+                    filter: "drop-shadow(0 0 8px rgba(0, 255, 180, 0.35))",
+                  }}
                 />
                 <div>
-                  <h1 className="text-2xl font-light tracking-wide gradient-green-glow">
+                  <h1
+                    className="text-2xl font-semibold tracking-wide neon-text animate-hud-flicker"
+                    style={{ fontFamily: "Sora, sans-serif" }}
+                  >
                     {t.header.title}
                   </h1>
-                  <p
-                    className="text-xs font-light"
-                    style={{ color: "rgba(100, 220, 160, 0.6)" }}
-                  >
-                    {t.header.subtitle}
-                  </p>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="status-dot-active" />
+                    <p
+                      className="text-xs font-light tracking-widest uppercase"
+                      style={{
+                        color: "rgba(0, 245, 255, 0.5)",
+                        fontFamily: "Sora, sans-serif",
+                      }}
+                    >
+                      {t.header.subtitle}
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -114,6 +132,12 @@ export default function StartDashboard() {
             </div>
           </div>
         </header>
+
+        {/* Subtle scan-line overlay on content area — pointer-events-none */}
+        <div
+          className="scan-overlay pointer-events-none"
+          style={{ zIndex: 2, opacity: 0.3 }}
+        />
 
         {/* Main content */}
         <main className="relative z-10 container mx-auto px-4 py-8">
@@ -178,15 +202,23 @@ export default function StartDashboard() {
               </div>
             </section>
           )}
+
+          {selectedFactor === "routines" && (
+            <section className="max-w-4xl mx-auto">
+              <div className="p-8 glass-card">
+                <RoutinesPanel />
+              </div>
+            </section>
+          )}
         </main>
 
         {/* Footer */}
         <footer
-          className="relative z-10 border-t border-helix-strand/30 backdrop-blur-md mt-16"
+          className="relative z-10 backdrop-blur-xl mt-16"
           style={{
-            background: "rgba(0, 15, 8, 0.55)",
-            backdropFilter: "blur(20px)",
-            borderTopColor: "rgba(0, 255, 120, 0.18)",
+            background: "rgba(255, 255, 255, 0.07)",
+            backdropFilter: "blur(28px) saturate(200%)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
           <div className="container mx-auto px-4 py-6">

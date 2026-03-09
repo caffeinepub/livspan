@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Sora variable font ── */
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora-VariableFont_wght.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     /* OKLCH color system - Light mode */
@@ -143,21 +152,25 @@
 
 /* ── Glassmorphism card — used throughout the app ── */
 .glass-card {
-  background: rgba(0, 20, 10, 0.3) !important;
-  backdrop-filter: blur(18px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
-  border: 1px solid rgba(0, 255, 120, 0.15) !important;
-  border-radius: 16px;
-  box-shadow: 0 4px 32px rgba(0, 255, 100, 0.08), 0 1px 0
-    rgba(255, 255, 255, 0.04) inset;
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 245, 255, 0.06), 0 0 40px
+    rgba(0, 255, 136, 0.03), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
 }
 
 /* ── Make all shadcn Card components transparent/glass in dark mode ── */
 .dark [data-slot="card"] {
-  background: rgba(0, 20, 10, 0.3) !important;
-  backdrop-filter: blur(18px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
-  border: 1px solid rgba(0, 255, 120, 0.15) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 32px rgba(0, 245, 255, 0.05), 0 0 40px
+    rgba(0, 255, 136, 0.025) !important;
 }
 
 /* ── SelectContent / popovers / dropdowns — glass style ── */
@@ -487,6 +500,243 @@
     oklch(58% 0.18 205)
   );
 }
+
+/* ── Futuristic HUD Animations ── */
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes data-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1.0;
+  }
+}
+
+@keyframes hud-flicker {
+  0%,
+  100% {
+    opacity: 0.97;
+  }
+  25% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.98;
+  }
+  75% {
+    opacity: 1.0;
+  }
+}
+
+@keyframes neon-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(0, 245, 255, 0.3), 0 0 20px rgba(0, 255, 136, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(0, 245, 255, 0.6), 0 0 40px rgba(0, 255, 136, 0.3);
+  }
+}
+
+@keyframes status-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes hud-load {
+  0% {
+    width: 0%;
+    opacity: 0.5;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    width: 100%;
+    opacity: 1;
+  }
+  92% {
+    width: 100%;
+    opacity: 0;
+  }
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
+}
+
+/* ── Futuristic card utility ── */
+.futuristic-card {
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-top: 2px solid rgba(0, 255, 180, 0.45) !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 245, 255, 0.08), 0 0 60px
+    rgba(0, 255, 136, 0.04), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  position: relative;
+}
+
+.futuristic-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid rgba(0, 245, 255, 0.8);
+  border-left: 2px solid rgba(0, 245, 255, 0.8);
+  border-radius: 2px 0 0 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.futuristic-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid rgba(0, 245, 255, 0.8);
+  border-right: 2px solid rgba(0, 245, 255, 0.8);
+  border-radius: 0 0 2px 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Neon text utility ── */
+.neon-text {
+  background: linear-gradient(135deg, #00f5ff, #00ff88);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.4));
+}
+
+/* ── Scan overlay ── */
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.scan-overlay::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 245, 255, 0.08) 20%,
+    rgba(0, 255, 136, 0.12) 50%,
+    rgba(0, 245, 255, 0.08) 80%,
+    transparent 100%
+  );
+  animation: scan-line 8s linear infinite;
+}
+
+/* ── HUD glowing neon button ── */
+.hud-button {
+  background: rgba(0, 10, 6, 0.4);
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  color: #00f5ff;
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
+  font-family: "Sora", sans-serif;
+}
+
+.hud-button:hover {
+  background: rgba(0, 245, 255, 0.08);
+  border-color: rgba(0, 245, 255, 0.7);
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.3), inset 0 0 8px
+    rgba(0, 245, 255, 0.05);
+  color: #7af5ff;
+}
+
+/* ── Futuristic input ── */
+.hud-input {
+  background: rgba(0, 8, 5, 0.6) !important;
+  border: 1px solid rgba(0, 245, 255, 0.2) !important;
+  color: #a8ffce !important;
+  font-family: "Sora", sans-serif !important;
+  transition: all 0.2s ease !important;
+}
+
+.hud-input::placeholder {
+  color: rgba(0, 245, 255, 0.35) !important;
+}
+
+.hud-input:focus {
+  border-color: rgba(0, 245, 255, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.12), 0 0 12px
+    rgba(0, 245, 255, 0.15) !important;
+  outline: none !important;
+}
+
+/* ── HUD top accent line ── */
+.hud-accent-line {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 245, 255, 0.4) 20%,
+    rgba(0, 255, 136, 0.6) 50%,
+    rgba(0, 245, 255, 0.4) 80%,
+    transparent
+  );
+  width: 100%;
+}
+
+/* ── Status dot blink ── */
+.status-dot-active {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 6px rgba(0, 255, 136, 0.8);
+  animation: status-blink 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* ── HUD loading bar ── */
+.hud-loading-bar {
+  height: 2px;
+  background: linear-gradient(to right, #00ff88, #00f5ff);
+  border-radius: 2px;
+  animation: hud-load 2.5s ease-out infinite;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.5);
+}
+
+/* ── Update glass-card to also include neon glow ── */
 
 /* DNA Helix Animation Keyframes */
 @keyframes bg-breathe {
